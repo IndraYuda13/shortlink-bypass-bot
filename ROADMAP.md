@@ -87,7 +87,13 @@
   - command bot terpasang: `/bypass`, `/adlink`, `/help`
   - UX update baru:
     - bot sekarang kirim ack cepat saat command masuk
-    - untuk proses lama, bot mengedit pesan status yang sama tiap ~20 detik agar user bisa lihat tahap aktif tanpa spam pesan baru
+    - untuk proses lama, bot mengedit pesan status yang sama tiap ~8 detik agar user bisa lihat tahap aktif tanpa spam pesan baru
+- Packaging milestone:
+  - repo lokal sudah dirapikan untuk publish
+  - dependency live-helper sekarang ikut didaftarkan di `requirements.txt`
+  - helper Adlink sekarang default ke interpreter aktif, jadi tidak hardcode lagi ke path workspace Rawon
+  - file deploy contoh dipisah ke `systemd/shortlink-bypass-bot.service.example`
+  - repo GitHub sudah dibuat di `IndraLawliet13/shortlink-bypass-bot` dengan visibility `private`
 - Turnstile solver ops milestone:
   - public repo `IndraLawliet13/turnstile-solver-api` sudah di-clone ke `tmp-gh/turnstile-solver-api`
   - solver API sudah hidup sebagai systemd service `turnstile-solver-api.service`
