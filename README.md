@@ -1,30 +1,89 @@
 # shortlink-bypass-bot
 
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-active--development-orange)
+
 Telegram bot and Python engine for analyzing and bypassing selected shortlink families.
+
+## Why this repo exists
+
+Some shortlink families are cheap to inspect with plain HTTP. Others hide the real result behind Cloudflare, browser-only state, timed hops, and downstream redirect chains. This project keeps those lanes separated so supported targets can escalate only when needed.
+
+## Use cases
+
+- Analyze a shortlink family before writing custom automation
+- Run `/bypass` or `/adlink` from Telegram and get live progress updates
+- Reuse the family handler structure to add more supported hosts
+- Document findings and success oracles for tricky shortlink chains
 
 ## Current support
 
-- `link.adlink.click`
-  - Live browser lane implemented
-  - Fast lane: Cloudflare/session bootstrap, then direct extraction from `blog.adlink.click/<alias>`
-  - Fallback lane retained for slower intermediate hops when needed
-- `oii.la`
-  - Static analysis and flow mapping
-- `shrinkme.click`
-  - Static analysis and flow mapping
+| Family | Status | Notes |
+| --- | --- | --- |
+| `link.adlink.click` | Live bypass | Uses a live Chromium lane for Cloudflare and final extraction |
+| `oii.la` | Analysis only | Static mapping and downstream extraction |
+| `shrinkme.click` | Analysis only | Static mapping and flow inspection |
 
-## What this project does
+## How it works
 
-- Accepts `/bypass <url>` and `/adlink <url>` from Telegram
-- Detects the shortlink family from the host
-- Extracts useful runtime facts such as hidden fields, timers, captcha hints, and downstream URLs
-- Uses a live Chromium helper for Adlink when plain HTTP is blocked by Cloudflare
-- Sends immediate progress feedback in Telegram and edits the same message until the job finishes
+- `bot.py` receives Telegram commands and edits the same status message while work is running
+- `engine.py` detects the target family and chooses the right handler
+- `adlink_live_browser.py` runs the Adlink browser lane when plain HTTP is blocked
+- `references/` and `ROADMAP.md` keep technical notes and current implementation status
+
+Flow docs:
+
+- [`docs/FLOWS.md`](docs/FLOWS.md)
+
+## Quick start
+
+```bash
+git clone https://github.com/IndraLawliet13/shortlink-bypass-bot.git
+cd shortlink-bypass-bot
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python3 engine.py https://link.adlink.click/SfRi --pretty
+```
+
+## Run the Telegram bot
+
+```bash
+source .venv/bin/activate
+export TELEGRAM_BOT_TOKEN='your_bot_token'
+python3 bot.py
+```
+
+Available commands:
+
+- `/bypass <url>`
+- `/adlink <url>`
+- `/help`
+
+## Example result
+
+```json
+{
+  "status": 1,
+  "family": "link.adlink.click",
+  "message": "LIVE_BROWSER_CHAIN_BYPASS_OK",
+  "stage": "blog-fast-final",
+  "bypass_url": "https://earn-pepe.com/member/shortlinks/verify/ca7c179027eb04abfb79"
+}
+```
 
 ## Why Adlink uses a real browser
 
 For `link.adlink.click`, plain `requests` is not enough from a cold session in this environment.
-Both the entry URL and the blog hop return Cloudflare `403 Just a moment...` pages unless a real browser session solves the challenge first.
+
+Observed behavior:
+
+- `GET https://link.adlink.click/<alias>` returns Cloudflare `403 Just a moment...`
+- `GET https://blog.adlink.click/<alias>` also returns Cloudflare `403`
+- Reusing cookies inside a plain `requests.Session` was still not enough to render the final blog target reliably
+
+Because of that, the current winning lane is a live Chromium session under `xvfb-run`, followed by direct extraction from the rendered Adlink blog page.
 
 ## Requirements
 
@@ -40,28 +99,9 @@ Python packages:
 pip install -r requirements.txt
 ```
 
-## Quick start
+## Configuration
 
-```bash
-git clone <your-repo-url>
-cd shortlink-bypass-bot
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python3 engine.py https://link.adlink.click/SfRi --pretty
-```
-
-## Run the Telegram bot
-
-```bash
-cp .env.example .env
-# fill TELEGRAM_BOT_TOKEN in your shell or env file
-source .venv/bin/activate
-export TELEGRAM_BOT_TOKEN='your_bot_token'
-python3 bot.py
-```
-
-## Optional environment variables
+Environment variables:
 
 - `TELEGRAM_BOT_TOKEN`
 - `SHORTLINK_BYPASS_ADLINK_BROWSER_TIMEOUT`
@@ -71,9 +111,13 @@ python3 bot.py
 
 Defaults are chosen so the helper runs with the current Python interpreter unless overridden.
 
-## Deploy with systemd
+A starter env file is included at:
 
-Example unit file:
+- `.env.example`
+
+## Deployment
+
+A sample systemd unit is included at:
 
 - `systemd/shortlink-bypass-bot.service.example`
 
@@ -83,10 +127,24 @@ Example unit file:
 - `engine.py` - family detection and orchestration
 - `adlink_live_browser.py` - live Chromium helper for Adlink
 - `references/` - technical notes
+- `docs/` - flow documentation
 - `ROADMAP.md` - current implementation tracker
 
-## Current limitations
+## Public roadmap
 
-- Only Adlink has an implemented live bypass lane at the moment
-- Other families still return structured analysis rather than full bypass execution
-- Fast-lane reliability across more Adlink aliases still needs broader validation
+- [x] Implement live Adlink browser lane
+- [x] Add Telegram progress updates with same-message edits
+- [x] Publish a cleaned public repo with deployment examples
+- [ ] Validate the Adlink fast lane across more aliases
+- [ ] Add deeper live support for `shrinkme.click`
+- [ ] Add broader examples and regression checks for supported families
+
+## Security and sanitization notes
+
+- This repo does not ship a real bot token or deployment env file
+- Live logs, local virtualenv contents, and host-specific runtime artifacts are excluded from the repository
+- Public docs keep examples sanitized and focused on flow behavior rather than sensitive runtime state
+
+## License
+
+MIT
