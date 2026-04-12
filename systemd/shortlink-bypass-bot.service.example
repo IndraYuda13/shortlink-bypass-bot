@@ -1,0 +1,18 @@
+[Unit]
+Description=Shortlink Bypass Telegram Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/shortlink-bypass-bot
+EnvironmentFile=/opt/shortlink-bypass-bot/.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/shortlink-bypass-bot/.venv/bin/python /opt/shortlink-bypass-bot/bot.py
+Restart=always
+RestartSec=3
+StandardOutput=append:/var/log/shortlink-bypass-bot.log
+StandardError=append:/var/log/shortlink-bypass-bot.log
+
+[Install]
+WantedBy=multi-user.target

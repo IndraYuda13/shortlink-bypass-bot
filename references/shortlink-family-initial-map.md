@@ -1,0 +1,208 @@
+# Shortlink Family Initial Map
+
+## Scope covered
+- `link.adlink.click`
+- `shrinkme.click`
+- `oii.la`
+- foundation inventory for reusable solver/browser components
+
+## What is already proven
+### shrinkme.click
+- Sample checked: `https://shrinkme.click/kVJMw`
+- First response is `200 OK`, not an HTTP redirect.
+- Initial cookies observed:
+  - `AppSession`
+  - `refkVJMw` with `Max-Age=300`
+  - `csrfToken`
+  - `app_visitor`
+- Active captcha is **Google reCAPTCHA checkbox**.
+- Sitekey observed in DOM:
+  - `6LfFeLErAAAAAHYOQfqM3-7BpopXCbBQPAMEeh4B`
+- JS config exposes:
+  - `captcha_type: "recaptcha"`
+  - `counter_value: 12`
+  - `counter_start: "DOMContentLoaded"`
+- Continue flow is custom and depends on `recaptchaCallback()` in the DOM, but server-side replay for the next hop is narrower than expected.
+- After callback, the page rewrites `#div-human-verification` toward:
+  - `https://themezon.net/link.php?link=kVJMw`
+- Extra click monetization exists on `#invisibleCaptchaShortlink`.
+- Popup/ad URL observed:
+  - `https://crn77.com/4/4834392`
+- `targetClickCount: 2`
+- External hop sets cookie `tp=kVJMw` with `Max-Age=180`.
+- Proven narrower lane on sample `kVJMw`:
+  - `GET https://themezon.net/link.php?link=kVJMw` succeeds without a captcha token when sent with `Referer: https://shrinkme.click/kVJMw`
+  - wrong referer returns `Invalid Access, Go to the shorten page.(https://shrinke.me/alias)`
+  - success response yields a JS redirect to either a Google wrapper whose `url=` is a ThemeZon article, or to `https://themezon.net/?redirect_to=random` which then `307`s to a ThemeZon article
+- Observed ThemeZon article targets include:
+  - `https://themezon.net/what-is-linux-managed-vps/`
+  - `https://themezon.net/host-my-website/`
+- Current success oracle for this lane is therefore: extracting a ThemeZon article URL from the JS redirect or follow-up `307 Location`, not proving a solved reCAPTCHA state.
+
+### oii.la
+- Samples checked:
+  - `https://oii.la/TaVOKJleNN`
+  - `https://oii.la/FOT3p2HAVb`
+- First response is `200 OK`, not an HTTP redirect.
+- Initial cookie pattern observed:
+  - `ref<alias>` with `Max-Age=300`
+- Landing form posts to:
+  - `https://advertisingcamps.com/taboola2/landing/`
+- Hidden params observed:
+  - `url=https://oii.la/<alias>`
+  - `token=...`
+  - `mysite=clk.sh`
+  - `c_d=<yyyymmdd>`
+  - `c_t=<epoch-like value>`
+  - `alias=<alias>`
+- Token tail decodes to downstream targets proven on tested samples:
+  - `TaVOKJleNN` -> `https://99faucet.com/links/back/SNcKa7f52qRk4xiA1gl6`
+  - `FOT3p2HAVb` -> `https://claimcrypto.cc/links/back/wvCF7sRItpKGM2XrhoOj`
+- Active captcha config is **Cloudflare Turnstile**.
+- Sitekey observed:
+  - `0x4AAAAAABatM0GOBpAxBoeD`
+- JS config exposes:
+  - `captcha_type: "turnstile"`
+  - `captcha_shortlink: "yes"`
+  - `counter_value: 15`
+  - `counter_start: "load"`
+- Live browser DOM proof:
+  - widget injects hidden input `name="cf-turnstile-response"` inside the form
+  - Continue button starts disabled and is enabled by the Turnstile callback only on the client side
+- Important server-side finding from tested samples:
+  - POST to `https://advertisingcamps.com/taboola2/landing/` returned the same `302 -> https://www.taboola.com` both with and without captcha fields
+  - so this POST currently looks like an ad handoff, not the real success oracle for the downstream `links/back/...` URL
+- Page also contains stale inline `grecaptcha` helpers, but active runtime config is Turnstile.
+- Adblock gate exists via fetch to:
+  - `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js`
+
+### link.adlink.click
+- Samples checked:
+  - `https://link.adlink.click/CBuahny8kxt`
+  - `https://link.adlink.click/SfRi`
+  - `https://link.adlink.click/VnLS`
+  - `https://link.adlink.click/Zy6W`
+  - `https://link.adlink.click/6Omf`
+- HTTP entry normalizes `http -> https` via `301`.
+- Static/raw-request entry is blocked by **Cloudflare managed challenge** before site-specific shortlink logic is visible.
+- Proven pre-origin facts from raw request:
+  - response status `403`
+  - page title `Just a moment...`
+  - header `Cf-Mitigated: challenge`
+  - challenge bootstrap hits `/cdn-cgi/challenge-platform/.../orchestrate/chl_page/...`
+  - ephemeral params observed: `__cf_chl_tk`, `__cf_chl_f_tk`, `__cf_chl_rt_tk`
+- New live-browser proof for multiple samples:
+  - one-shot FlareSolverr HTTP API on this VPS timed out at `60s` and `120s`
+  - direct browser lane using `undetected-chromedriver` + `xvfb-run` + `page_load_strategy=none` **did** get out of `link.adlink.click`
+  - samples live-tested successfully:
+    - `6Omf`
+    - `VnLS`
+    - `SfRi`
+    - `CBuahny8kxt`
+  - first visible redirect after Cloudflare matches this pattern:
+    - `https://www.maqal360.com/secure.php?id=<alias>&site=adlink.click`
+  - `maqal360` is an interstitial chain, not the final success oracle
+  - proven fast lane for sample `SfRi`:
+    1. pass Cloudflare until the browser leaves `link.adlink.click`
+    2. once the shared browser session is alive, jump directly to `https://blog.adlink.click/<alias>`
+    3. wait for the AdLinkFly page to render
+    4. extract `a.get-link`
+  - benchmark from local probe:
+    - `SfRi` can reach the final `earn-pepe` verify URL in about `13s`
+  - slower fallback lane still exists if the fast lane ever fails:
+    1. wait around `10s` on each `maqal360` article page
+    2. call same-origin `verify.php`
+    3. if JSON returns `{"status":"ok","url":"..."}`, navigate to that next URL
+    4. repeat until final gate `GO NEXT 7/7`
+    5. final `verify.php` may return `{"status":"error"}` even though the flow is still recoverable
+    6. from that final `maqal360` page, navigate in the same browser session to `https://blog.adlink.click/<alias>`
+    7. wait for the AdLinkFly page to fully render, then extract `a.get-link`
+  - proven DOM oracle on `https://blog.adlink.click/SfRi`:
+    - page title `adlink`
+    - `form action="/links/go"`
+    - hidden input `name="ad_form_data"`
+    - anchor text `Get Link`
+    - anchor href `https://earn-pepe.com/member/shortlinks/verify/ca7c179027eb04abfb79`
+- Important interpretation:
+  - for this family on Rawon, the blocker was not that the lane is impossible
+  - the blocker was that raw HTTP and one-shot FlareSolverr API calls were the wrong execution lane for this sample
+  - the earlier bot bug came from stopping at the first visible `maqal360` article instead of continuing the interstitial chain through the shared browser session
+
+### Reusable workspace components
+- Best solver/browser base:
+  - `projects/hcaptcha-challenger-codex`
+- Best Cloudflare/session helper:
+  - `state/flaresolverr-exp/src`
+- Current gap:
+  - no site-family runner yet that chains shortlink entry -> cookie/session -> timer -> captcha -> verify/back -> downstream reward confirmation.
+
+## Likely failure reasons already narrowed
+### shrinkme.click
+- `TIMEOUT`
+  - reCAPTCHA callback never fires, so continue anchor is never generated
+  - short-lived cookies (`ref*`, `tp`) expire before the flow finishes
+- `ERROR_CAPTCHA_UNSOLVABLE`
+  - real browser-context reCAPTCHA expectations are not satisfied
+
+### oii.la
+- `ERROR_CAPTCHA_UNSOLVABLE`
+  - solver may target stale reCAPTCHA helpers while the active challenge is Turnstile
+- `TIMEOUT`
+  - Turnstile never enables `#continue`
+  - cookie/token fields go stale
+  - adblock gate or blocked scripts stop the page from progressing
+
+### link.adlink.click
+- `TIMEOUT`
+  - Cloudflare challenge is never cleared, so origin flow never starts
+- `ERROR_CAPTCHA_UNSOLVABLE`
+  - very possible if a bypass bot treats this like an origin captcha problem while the real first gate is Cloudflare managed challenge
+
+## Boundary catalog
+- `entry shortlink`
+  - adlink: narrowed only up to Cloudflare challenge page
+  - shrinkme: closed enough for sample `kVJMw`
+  - oii: closed enough for sample `TaVOKJleNN`
+- `redirect/session cookie gate`
+  - adlink: primary, Cloudflare clearance
+  - shrinkme: primary
+  - oii: primary
+- `timer/wait gate`
+  - adlink: narrowed, `maqal360` needs about 10s before `verify.php` returns the next URL
+  - shrinkme: narrowed, 12s DOMContentLoaded-based counter
+  - oii: narrowed, 15s load-based counter
+- `captcha gate`
+  - adlink: primary at entry because of Cloudflare managed challenge, but `maqal360` chain for `SfRi` was proven to advance by timed `verify.php` and did not need solving the visible image captcha on steps 1-6
+  - shrinkme: primary, reCAPTCHA checkbox
+  - oii: primary, Turnstile
+- `final verify/back endpoint`
+  - adlink: narrowed enough for sample `SfRi`, with proven extracted downstream verify URL at `earn-pepe.com/member/shortlinks/verify/...`
+  - shrinkme: narrowed one step further, reproducible oracle is ThemeZon article extraction via `themezon.net/link.php?link=...`, but final reward endpoint is still open
+  - oii: narrowed, probable downstream `99faucet.com/links/back/...`
+- `downstream reward-site callback/state mutation`
+  - open for all three families
+
+## New implementation milestone
+- Core analyzer scaffold now exists at:
+  - `projects/shortlink-bypass-bot/engine.py`
+- Telegram wrapper scaffold now exists at:
+  - `projects/shortlink-bypass-bot/bot.py`
+- Current honest engine behavior:
+  - can classify family by host
+  - can detect Cloudflare-gated `adlink.click` entry state
+  - can extract `oii.la` token-decoded downstream URL when it is embedded in hidden payload
+  - can extract `shrinkme.click` continue hint `themezon.net/link.php?link=<alias>`
+  - can extract entry-page facts, hidden inputs, timer/captcha hints, and embedded target URLs when they are statically recoverable
+  - does **not** yet claim live bypass if the flow still depends on timer/captcha/verify execution
+
+## What is not yet proven
+- Exact POST/XHR behind AdLinkFly `/links/go` is still not replayed directly. Current oracle is extracted DOM target, not a manual reimplementation of that submit.
+- Whether the final `blog.adlink.click` gate can always be recovered by direct alias navigation for all aliases, or only for some samples like `SfRi`.
+- Final reward-site success oracle per family beyond URL extraction.
+- Broader post-Cloudflare origin flow coverage for more `link.adlink.click` samples beyond the current tested set.
+
+## Next best action
+1. Generalize the proven live-browser lane for `link.adlink.click` beyond sample `6Omf` and verify whether the same redirect pattern repeats.
+2. Compare all three families for shared AdLinkFly-like boundaries versus custom wrappers.
+3. Keep `oii.la` as the next high-value lane because token decoding already yields a downstream reward URL and Turnstile solver is ready locally.
+4. Build a modular runner with pluggable captcha handler and strict success oracles.
