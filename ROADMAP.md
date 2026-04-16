@@ -102,15 +102,21 @@
 - Deployment milestone:
   - bot sudah dideploy sebagai systemd service `shortlink-bypass-bot.service`
   - username bot terverifikasi: `@OfficialWafferBot`
-  - command bot terpasang: `/bypass`, `/adlink`, `/help`
+  - command bot terpasang: `/start`, `/help`, `/status`, `/ping`, `/bypass`, `/adlink`
   - UX update baru:
     - bot sekarang kirim ack cepat saat command masuk
+    - plain URL sekarang otomatis diperlakukan seperti `/bypass URL`
     - untuk proses lama, bot mengedit pesan status yang sama tiap ~8 detik agar user bisa lihat tahap aktif tanpa spam pesan baru
+  - access gate baru:
+    - user wajib join grup `Cari Garapan` dulu sebelum bot melayani command
+    - gate diverifikasi pakai `getChatMember` ke supergroup `-1003843116263`
+    - blocked user dapat tombol `Join Cari Garapan` dan `Sudah join, cek lagi`
 - Packaging milestone:
   - repo lokal sudah dirapikan untuk publish
   - dependency live-helper dan TLS impersonation sekarang ikut didaftarkan di `requirements.txt`
   - helper Adlink sekarang default ke interpreter aktif, jadi tidak hardcode lagi ke path workspace Rawon
   - file deploy contoh dipisah ke `systemd/shortlink-bypass-bot.service.example`
+  - starter env sekarang juga mencakup gate config untuk grup wajib join
   - repo GitHub sudah dibuat di `IndraLawliet13/shortlink-bypass-bot` dengan visibility `private`
 - Turnstile solver ops milestone:
   - public repo `IndraLawliet13/turnstile-solver-api` sudah di-clone ke `tmp-gh/turnstile-solver-api`

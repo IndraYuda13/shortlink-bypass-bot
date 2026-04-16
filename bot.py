@@ -14,6 +14,7 @@ from engine import ShortlinkBypassEngine
 API_BASE = "https://api.telegram.org"
 POLL_TIMEOUT = 30
 PROGRESS_UPDATE_SECONDS = 8
+ALLOWED_MEMBER_STATUSES = {"member", "administrator", "creator"}
 
 
 class TelegramShortlinkBot:
@@ -22,6 +23,9 @@ class TelegramShortlinkBot:
         self.base_url = f"{API_BASE}/bot{token}"
         self.session = requests.Session()
         self.offset = 0
+        self.required_join_chat_id = int(os.environ.get("SHORTLINK_REQUIRED_JOIN_CHAT_ID", "-1003843116263"))
+        self.required_join_title = os.environ.get("SHORTLINK_REQUIRED_JOIN_TITLE", "Cari Garapan").strip() or "Cari Garapan"
+        self.required_join_link = os.environ.get("SHORTLINK_REQUIRED_JOIN_LINK", "https://t.me/+Vfpap1m10v5iODA1").strip()
 
     def api(self, method: str, **kwargs):
         response = self.session.post(f"{self.base_url}/{method}", json=kwargs, timeout=60)
@@ -31,7 +35,13 @@ class TelegramShortlinkBot:
             raise RuntimeError(data)
         return data["result"]
 
-    def send_message(self, chat_id: int, text: str, reply_to_message_id: int | None = None):
+    def send_message(
+        self,
+        chat_id: int,
+        text: str,
+        reply_to_message_id: int | None = None,
+        reply_markup: dict | None = None,
+    ):
         payload = {
             "chat_id": chat_id,
             "text": text,
@@ -40,9 +50,11 @@ class TelegramShortlinkBot:
         }
         if reply_to_message_id:
             payload["reply_parameters"] = {"message_id": reply_to_message_id}
+        if reply_markup:
+            payload["reply_markup"] = reply_markup
         return self.api("sendMessage", **payload)
 
-    def edit_message(self, chat_id: int, message_id: int, text: str):
+    def edit_message(self, chat_id: int, message_id: int, text: str, reply_markup: dict | None = None):
         payload = {
             "chat_id": chat_id,
             "message_id": message_id,
@@ -50,17 +62,152 @@ class TelegramShortlinkBot:
             "parse_mode": "HTML",
             "disable_web_page_preview": True,
         }
+        if reply_markup:
+            payload["reply_markup"] = reply_markup
         return self.api("editMessageText", **payload)
 
-    def safe_edit_message(self, chat_id: int, message_id: int, text: str) -> bool:
+    def answer_callback_query(self, callback_query_id: str, text: str | None = None, show_alert: bool = False):
+        payload = {"callback_query_id": callback_query_id}
+        if text:
+            payload["text"] = text
+        if show_alert:
+            payload["show_alert"] = True
+        return self.api("answerCallbackQuery", **payload)
+
+    def safe_edit_message(self, chat_id: int, message_id: int, text: str, reply_markup: dict | None = None) -> bool:
         try:
-            self.edit_message(chat_id, message_id, text)
+            self.edit_message(chat_id, message_id, text, reply_markup=reply_markup)
             return True
         except Exception as exc:
             if "message is not modified" in str(exc).lower():
                 return True
             print(f"edit_message error: {exc}", flush=True)
             return False
+
+    def required_join_keyboard(self) -> dict:
+        return {
+            "inline_keyboard": [[
+                {"text": "Join Cari Garapan", "url": self.required_join_link},
+                {"text": "Sudah join, cek lagi", "callback_data": "check_join"},
+            ]]
+        }
+
+    def required_join_text(self) -> str:
+        return "\n".join([
+            "<b>Akses bot dikunci dulu.</b>",
+            f"Buat pakai bot ini, kamu wajib join grup <b>{escape(self.required_join_title)}</b> dulu.",
+            "",
+            "Setelah join, pencet tombol <b>Sudah join, cek lagi</b> di bawah.",
+        ])
+
+    def help_text(self) -> str:
+        return "\n".join([
+            "<b>Shortlink Bypass Bot</b>",
+            "",
+            "<b>Command utama:</b>",
+            "<code>/bypass URL</code> , deteksi family otomatis lalu coba ambil hasil final",
+            "<code>/adlink URL</code> , paksa jalur Adlink kalau targetnya keluarga adlink",
+            "<code>/status</code> , lihat status singkat bot dan family yang lagi disupport",
+            "<code>/ping</code> , cek bot masih nyala atau tidak",
+            "<code>/help</code> , tampilkan bantuan ini lagi",
+            "",
+            "<b>Tips:</b>",
+            "- Bisa kirim plain URL langsung, bot bakal anggap itu sama seperti <code>/bypass URL</code>",
+            "- Hasil final cuma dianggap valid kalau memang sudah keluar URL downstream, bukan interstitial doang",
+            "- Kalau proses agak lama, bot update status di pesan yang sama biar gak spam",
+            "",
+            "<b>Contoh:</b>",
+            "<code>/bypass https://shrinkme.click/ZTvkQYPJ</code>",
+            "<code>/bypass https://link.adlink.click/CBr27fn4of3</code>",
+        ])
+
+    def start_text(self) -> str:
+        return "\n".join([
+            "<b>Siap, bot bypass aktif.</b>",
+            f"Akses dipakai lewat bot ini, tapi user tetap wajib join grup <b>{escape(self.required_join_title)}</b> dulu.",
+            "Kalau aksesmu sudah kebuka, tinggal kirim <code>/bypass URL</code> atau langsung kirim URL-nya.",
+            "",
+            self.help_text(),
+        ])
+
+    def status_text(self) -> str:
+        return "\n".join([
+            "<b>Status bot:</b> online",
+            "",
+            "<b>Family saat ini:</b>",
+            "- <code>link.adlink.click</code> , live bypass",
+            "- <code>shrinkme.click</code> , live bypass",
+            "- <code>oii.la</code> , analysis only",
+            "",
+            "<b>Belum ada handler:</b>",
+            "- <code>linkcut.pro</code>",
+            "- <code>aii.sh</code>",
+            "- <code>tpi.li</code>",
+            "- <code>lnbz.la</code>",
+        ])
+
+    def is_plain_url(self, text: str) -> bool:
+        value = text.strip()
+        if not value.lower().startswith(("http://", "https://")):
+            return False
+        parsed = urlparse(value)
+        return bool(parsed.scheme and parsed.netloc)
+
+    def parse_command(self, text: str) -> tuple[str, str]:
+        raw = text.strip()
+        if self.is_plain_url(raw):
+            return "/bypass", raw
+        parts = raw.split(maxsplit=1)
+        raw_command = parts[0].strip() if parts else ""
+        command = raw_command.split("@", 1)[0].lower()
+        arg = parts[1].strip() if len(parts) > 1 else ""
+        return command, arg
+
+    def member_has_access(self, status: str | None) -> bool:
+        return (status or "").lower() in ALLOWED_MEMBER_STATUSES
+
+    def ensure_join_access(self, user_id: int | None) -> tuple[bool, str | None]:
+        if not user_id:
+            return False, "missing-user-id"
+        try:
+            member = self.api("getChatMember", chat_id=self.required_join_chat_id, user_id=user_id)
+        except Exception as exc:
+            print(f"getChatMember error: {exc}", flush=True)
+            return False, f"cek membership gagal: {exc}"
+        status = str(member.get("status") or "")
+        if self.member_has_access(status):
+            return True, None
+        return False, status or "not-member"
+
+    def send_join_gate(self, chat_id: int, message_id: int | None = None):
+        return self.send_message(
+            chat_id,
+            self.required_join_text(),
+            reply_to_message_id=message_id,
+            reply_markup=self.required_join_keyboard(),
+        )
+
+    def handle_callback(self, callback_query: dict):
+        data = (callback_query.get("data") or "").strip()
+        query_id = callback_query.get("id")
+        from_user = callback_query.get("from") or {}
+        message = callback_query.get("message") or {}
+        chat = message.get("chat") or {}
+        chat_id = chat.get("id")
+        message_id = message.get("message_id")
+        user_id = from_user.get("id")
+
+        if data != "check_join" or not query_id or not chat_id or not message_id or not user_id:
+            return
+
+        allowed, _detail = self.ensure_join_access(user_id)
+        if allowed:
+            self.answer_callback_query(query_id, "Sip, aksesmu udah kebuka.")
+            self.safe_edit_message(chat_id, message_id, self.start_text())
+            return
+
+        self.answer_callback_query(query_id, "Masih belum kebaca join-nya. Coba join dulu lalu pencet lagi.")
+        self.safe_edit_message(chat_id, message_id, self.required_join_text(), reply_markup=self.required_join_keyboard())
 
     def progress_profile(self, url: str, elapsed: int) -> tuple[str, str, str]:
         host = urlparse(url).netloc.lower()
@@ -73,21 +220,21 @@ class TelegramShortlinkBot:
                 stage = "ambil link final dari blog adlink"
             else:
                 stage = "fallback ke rantai maqal360"
-            note = "Normalnya 10 sampai 20 detik. Kalau fast-lane gagal, bot turun ke fallback yang lebih lama."
+            note = "Normalnya 5 sampai 20 detik. Kalau fast-lane gagal, bot turun ke fallback yang lebih lama."
             return host, stage, note
         if host == "oii.la" or host.endswith(".oii.la"):
             if elapsed < 15:
                 stage = "cek token dan config captcha"
             else:
                 stage = "analisis lane bypass"
-            note = "Kalau token/redirect bisa diekstrak cepat, hasil biasanya keluar lebih singkat."
+            note = "Kalau token atau redirect bisa diekstrak cepat, hasil biasanya keluar lebih singkat."
             return host, stage, note
         if host == "shrinkme.click" or host.endswith(".shrinkme.click"):
-            if elapsed < 15:
+            if elapsed < 12:
                 stage = "cek entry page dan timer"
             else:
-                stage = "analisis captcha dan next hop"
-            note = "Family ini masih cenderung lebih berat kalau captcha gate aktif."
+                stage = "analisis next hop final"
+            note = "Family ini masih punya timer downstream yang cukup keras."
             return host, stage, note
         return host or url, "analisis target", "Bot lagi map alur link dulu."
 
@@ -131,28 +278,41 @@ class TelegramShortlinkBot:
                 lines.append(f"- {escape(item)}")
         return "\n".join(lines)
 
-    def handle_text(self, chat_id: int, message_id: int, text: str):
-        parts = text.strip().split(maxsplit=1)
-        raw_command = parts[0].strip()
-        command = raw_command.split("@", 1)[0].lower()
-        arg = parts[1].strip() if len(parts) > 1 else ""
-        print(f"handle_text chat_id={chat_id} raw_command={raw_command} command={command} arg={arg[:120]}", flush=True)
+    def handle_text(self, chat_id: int, message_id: int, user_id: int | None, chat_type: str, text: str):
+        command, arg = self.parse_command(text)
+        print(f"handle_text chat_id={chat_id} chat_type={chat_type} command={command} arg={arg[:120]}", flush=True)
+
+        allowed, _detail = self.ensure_join_access(user_id)
+        if not allowed:
+            self.send_join_gate(chat_id, message_id)
+            return
 
         if command in {"/start", "/help"}:
-            self.send_message(
-                chat_id,
-                "<b>Perintah:</b>\n"
-                "<code>/bypass URL</code>\n"
-                "<code>/adlink URL</code>\n\n"
-                "Bot sekarang kasih ack cepat lalu update status berkala di pesan yang sama kalau prosesnya lama.",
-                reply_to_message_id=message_id,
-            )
+            text_out = self.start_text() if command == "/start" else self.help_text()
+            self.send_message(chat_id, text_out, reply_to_message_id=message_id)
+            return
+
+        if command == "/status":
+            self.send_message(chat_id, self.status_text(), reply_to_message_id=message_id)
+            return
+
+        if command == "/ping":
+            self.send_message(chat_id, "<b>Pong.</b> Bot aktif dan siap kerja.", reply_to_message_id=message_id)
             return
 
         if command not in {"/bypass", "/adlink"}:
+            self.send_message(
+                chat_id,
+                "Command belum dikenal. Coba <code>/help</code> buat lihat cara pakainya, atau langsung kirim URL shortlink.",
+                reply_to_message_id=message_id,
+            )
             return
         if not arg:
-            self.send_message(chat_id, "Format: <code>/bypass URL</code>", reply_to_message_id=message_id)
+            self.send_message(
+                chat_id,
+                "Format yang benar:\n<code>/bypass URL</code>\n\nAtau kirim URL langsung tanpa command juga boleh.",
+                reply_to_message_id=message_id,
+            )
             return
 
         status_message_id = None
@@ -166,7 +326,7 @@ class TelegramShortlinkBot:
         except Exception as exc:
             print(f"initial status send error: {exc}", flush=True)
 
-        box = {}
+        box: dict[str, object] = {}
 
         def worker():
             try:
@@ -207,20 +367,32 @@ class TelegramShortlinkBot:
                     "getUpdates",
                     timeout=POLL_TIMEOUT,
                     offset=self.offset,
-                    allowed_updates=["message"],
+                    allowed_updates=["message", "callback_query"],
                 )
                 for update in updates:
                     self.offset = update["update_id"] + 1
+                    callback_query = update.get("callback_query") or {}
+                    if callback_query:
+                        self.handle_callback(callback_query)
+                        continue
+
                     message = update.get("message") or {}
                     text = message.get("text")
                     chat = message.get("chat") or {}
+                    from_user = message.get("from") or {}
                     print(
                         f"update update_id={update.get('update_id')} chat_id={chat.get('id')} chat_type={chat.get('type')} text={repr(text)[:240]}",
                         flush=True,
                     )
                     if not text:
                         continue
-                    self.handle_text(chat.get("id"), message.get("message_id"), text)
+                    self.handle_text(
+                        chat.get("id"),
+                        message.get("message_id"),
+                        from_user.get("id"),
+                        chat.get("type") or "",
+                        text,
+                    )
             except KeyboardInterrupt:
                 raise
             except Exception as exc:

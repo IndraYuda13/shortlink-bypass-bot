@@ -27,7 +27,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 
 ## How it works
 
-- `bot.py` receives Telegram commands and edits the same status message while work is running
+- `bot.py` receives Telegram commands, enforces the required join gate, and edits the same status message while work is running
 - `engine.py` detects the target family and chooses the right handler
 - `adlink_live_browser.py` stays as Adlink fallback when the faster browserless lane is not enough
 - `references/` and `ROADMAP.md` keep technical notes and current implementation status
@@ -57,9 +57,28 @@ python3 bot.py
 
 Available commands:
 
+- `/start`
+- `/help`
+- `/status`
+- `/ping`
 - `/bypass <url>`
 - `/adlink <url>`
-- `/help`
+- plain `https://...` URL messages also work and are treated like `/bypass <url>`
+
+## Access gate
+
+This bot can enforce a required Telegram group membership before letting someone use the bypass commands.
+
+Current intended gate:
+
+- required group: `Cari Garapan`
+- invite link shown to blocked users: `https://t.me/+Vfpap1m10v5iODA1`
+
+When a user is not in the required group, the bot replies with:
+
+- a short locked-access message
+- a `Join Cari Garapan` button
+- a `Sudah join, cek lagi` button
 
 ## Example result
 
@@ -117,6 +136,9 @@ pip install -r requirements.txt
 Environment variables:
 
 - `TELEGRAM_BOT_TOKEN`
+- `SHORTLINK_REQUIRED_JOIN_CHAT_ID`
+- `SHORTLINK_REQUIRED_JOIN_CHAT_TITLE`
+- `SHORTLINK_REQUIRED_JOIN_LINK`
 - `SHORTLINK_BYPASS_ADLINK_BROWSER_TIMEOUT`
 - `SHORTLINK_BYPASS_ADLINK_IMPERSONATE`
 - `SHORTLINK_BYPASS_ADLINK_HELPER`

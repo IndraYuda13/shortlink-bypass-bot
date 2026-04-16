@@ -73,3 +73,28 @@
 ### Guardrail
 - Do not regress Adlink back to browser-only as the default unless TLS impersonation stops working on live samples.
 - Do not assume `ad_form_data` can be replayed across sessions for ShrinkMe. The speed win comes from same-session early fetch plus tighter wait windows, not from cross-session blob reuse.
+
+### Telegram access gate and command UX
+- Added a required-join gate in `bot.py` so users must join the Telegram group `Cari Garapan` before they can use the bot.
+- Added inline button flow for the gate:
+  - `Join Cari Garapan`
+  - `Sudah join, cek lagi`
+- Added better command UX:
+  - `/start`
+  - `/help`
+  - `/status`
+  - `/ping`
+  - plain URL messages now auto-route to `/bypass`
+- Synced `.env.example` and live env usage so the required group can be configured with:
+  - `SHORTLINK_REQUIRED_JOIN_CHAT_ID`
+  - `SHORTLINK_REQUIRED_JOIN_CHAT_TITLE`
+  - `SHORTLINK_REQUIRED_JOIN_LINK`
+- Added `tests/test_bot.py` for join-gate and command parsing coverage.
+
+### Why this exists
+- Boskuu moved the bot into a private usage flow and wants every user forced through the `Cari Garapan` group first.
+- The older bot UX was still too bare: only minimal commands and no proper membership gate.
+
+### Guardrail
+- Keep the join requirement enforced through real `getChatMember` checks, not just a text warning.
+- Do not silently remove the group gate from `bot.py` without replacing it with an equally strict membership check.
