@@ -23,7 +23,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | --- | --- | --- |
 | `link.adlink.click` | Live bypass | Uses a live Chromium lane for Cloudflare and final extraction |
 | `oii.la` | Analysis only | Static mapping and downstream extraction |
-| `shrinkme.click` | Analysis only | Static mapping and flow inspection |
+| `shrinkme.click` | Live bypass | Replays `ThemeZon -> MrProBlogger -> /links/go` and waits the final timer over plain HTTP |
 
 ## How it works
 
@@ -136,7 +136,8 @@ A sample systemd unit is included at:
 - [x] Add Telegram progress updates with same-message edits
 - [x] Publish a cleaned public repo with deployment examples
 - [ ] Validate the Adlink fast lane across more aliases
-- [ ] Add deeper live support for `shrinkme.click`
+- [x] Add live `shrinkme.click` chain support for sampled alias flow
+- [ ] Validate the `shrinkme.click` chain across more aliases
 - [ ] Add broader examples and regression checks for supported families
 
 ## Security and sanitization notes

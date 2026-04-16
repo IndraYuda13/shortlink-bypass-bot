@@ -6,11 +6,12 @@ import os
 import re
 import subprocess
 import sys
+import time
 from dataclasses import asdict, dataclass, field
 from html import unescape
 from pathlib import Path
 from typing import Any
-from urllib.parse import unquote, urlparse
+from urllib.parse import unquote, urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -177,18 +178,45 @@ class ShortlinkBypassEngine:
             if article_url and article_url not in embedded_urls:
                 embedded_urls.append(article_url)
                 facts["embedded_urls"] = embedded_urls
+            mrproblogger = self._resolve_shrinkme_mrproblogger(
+                input_url=url,
+                continue_hint=continue_hint,
+                article_url=article_url,
+            )
+            if mrproblogger:
+                facts["mrproblogger"] = mrproblogger
+                if mrproblogger.get("bypass_url"):
+                    return BypassResult(
+                        status=1,
+                        input_url=url,
+                        family="shrinkme.click",
+                        message="THEMEZON_MRPROBLOGGER_CHAIN_OK",
+                        bypass_url=mrproblogger.get("bypass_url"),
+                        stage="themezon-mrproblogger",
+                        facts=facts,
+                        notes=[
+                            "shrinkme direplay lewat continue hint ThemeZon lalu final form /links/go di MrProBlogger",
+                            f"timer mrproblogger ditunggu {mrproblogger.get('waited_seconds', 0)} detik sebelum submit final form",
+                        ],
+                    )
             if article_url:
+                blockers = [
+                    "hasil yang ditemukan baru article/interstitial ThemeZon, belum downstream reward URL final",
+                ]
+                if mrproblogger and mrproblogger.get("message"):
+                    blockers.append(f"mrproblogger lane belum selesai: {mrproblogger['message']}")
                 return BypassResult(
-                    status=1,
+                    status=0,
                     input_url=url,
                     family="shrinkme.click",
                     message="THEMEZON_ARTICLE_EXTRACTED",
                     bypass_url=article_url,
                     stage="themezon-hop",
                     facts=facts,
+                    blockers=blockers,
                     notes=[
                         "themezon hop berhasil direplay via HTTP dengan referer shrinkme yang benar",
-                        "hasil ini masih article/interstitial target, bukan downstream reward-site final oracle",
+                        "bypass_url disimpan sebagai petunjuk intermediate, jangan diperlakukan sebagai hasil bypass final",
                     ],
                 )
 
@@ -560,6 +588,128 @@ class ShortlinkBypassEngine:
                     result["article_url"] = self._clean_url(follow.headers["location"])
             except Exception as exc:
                 result["follow_message"] = str(exc)
+        return result
+
+    def _resolve_shrinkme_mrproblogger(
+        self,
+        input_url: str,
+        continue_hint: str | None,
+        article_url: str | None,
+    ) -> dict[str, Any] | None:
+        alias = urlparse(input_url).path.strip("/")
+        if not alias or not article_url:
+            return None
+
+        result: dict[str, Any] = {
+            "alias": alias,
+            "article_url": article_url,
+        }
+
+        try:
+            article_response = self.session.get(
+                article_url,
+                headers={"Referer": continue_hint or input_url},
+                timeout=self.timeout,
+                allow_redirects=True,
+            )
+        except Exception as exc:
+            result["message"] = str(exc)
+            return result
+
+        result["article_status"] = article_response.status_code
+        result["article_final_url"] = article_response.url
+        result["cookie_names_after_article"] = self._cookie_names()
+
+        try:
+            themezon_next = self.session.post(
+                "https://themezon.net/?redirect_to=random",
+                data={"newwpsafelink": alias},
+                headers={
+                    "Referer": article_response.url,
+                    "Origin": "https://themezon.net",
+                },
+                timeout=self.timeout,
+                allow_redirects=False,
+            )
+            result["themezon_next_status"] = themezon_next.status_code
+            next_location = self._clean_url(themezon_next.headers.get("Location", "")) or None
+            result["themezon_next_url"] = next_location
+        except Exception as exc:
+            result["message"] = f"themezon next hop gagal: {exc}"
+            return result
+
+        mrproblogger_url = f"https://en.mrproblogger.com/{alias}"
+        mrproblogger_referer = result.get("themezon_next_url") or article_response.url
+        result["mrproblogger_url"] = mrproblogger_url
+        result["mrproblogger_referer"] = mrproblogger_referer
+
+        try:
+            mrproblogger_response = self.session.get(
+                mrproblogger_url,
+                headers={"Referer": mrproblogger_referer},
+                timeout=self.timeout,
+                allow_redirects=True,
+            )
+        except Exception as exc:
+            result["message"] = f"mrproblogger page gagal: {exc}"
+            return result
+
+        mrproblogger_soup = BeautifulSoup(mrproblogger_response.text, "html.parser")
+        result["mrproblogger_status"] = mrproblogger_response.status_code
+        result["mrproblogger_final_url"] = mrproblogger_response.url
+        result["cookie_names_after_mrproblogger"] = self._cookie_names()
+        runtime = self._extract_runtime_config(mrproblogger_response.text)
+        result["mrproblogger_runtime"] = runtime
+
+        form = mrproblogger_soup.select_one("form#go-link")
+        if not form:
+            result["message"] = "mrproblogger go-link form tidak ditemukan"
+            return result
+
+        hidden = self._extract_hidden_inputs(form)
+        action = urljoin(mrproblogger_response.url, form.get("action") or "/links/go")
+        result["form_action"] = action
+        result["hidden_names"] = sorted(hidden)
+
+        try:
+            wait_seconds = max(1, int(runtime.get("counter_value") or 12) + 1)
+        except Exception:
+            wait_seconds = 13
+        result["waited_seconds"] = wait_seconds
+        time.sleep(wait_seconds)
+
+        try:
+            submit = self.session.post(
+                action,
+                data=hidden,
+                headers={
+                    "Referer": mrproblogger_response.url,
+                    "Origin": f"{urlparse(mrproblogger_response.url).scheme}://{urlparse(mrproblogger_response.url).netloc}",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Accept": "application/json, text/javascript, */*; q=0.01",
+                },
+                timeout=self.timeout,
+                allow_redirects=True,
+            )
+        except Exception as exc:
+            result["message"] = f"mrproblogger submit gagal: {exc}"
+            return result
+
+        result["submit_status"] = submit.status_code
+        try:
+            payload = submit.json()
+        except Exception:
+            payload = {"raw": submit.text[:400]}
+        result["submit_payload"] = payload
+
+        final_url = self._clean_url(str(payload.get("url") or "")) if isinstance(payload, dict) else None
+        if final_url:
+            result["status"] = 1
+            result["bypass_url"] = final_url
+            result["message"] = str(payload.get("message") or "OK")
+            return result
+
+        result["message"] = str(payload.get("message") or "mrproblogger submit tidak mengembalikan url final") if isinstance(payload, dict) else "mrproblogger submit tidak valid"
         return result
 
     def _is_cloudflare_challenge(self, response: requests.Response) -> bool:

@@ -9,6 +9,7 @@
 ## What is already proven
 ### shrinkme.click
 - Sample checked: `https://shrinkme.click/kVJMw`
+- Sample checked: `https://shrinkme.click/ZTvkQYPJ`
 - First response is `200 OK`, not an HTTP redirect.
 - Initial cookies observed:
   - `AppSession`
@@ -37,7 +38,15 @@
 - Observed ThemeZon article targets include:
   - `https://themezon.net/what-is-linux-managed-vps/`
   - `https://themezon.net/host-my-website/`
-- Current success oracle for this lane is therefore: extracting a ThemeZon article URL from the JS redirect or follow-up `307 Location`, not proving a solved reCAPTCHA state.
+- New replay proof for sample `ZTvkQYPJ`:
+  - load `https://themezon.net/link.php?link=ZTvkQYPJ` with `Referer: https://shrinkme.click/ZTvkQYPJ`
+  - extract ThemeZon article URL from the JS redirect / `307 Location`
+  - advance ThemeZon once with `POST https://themezon.net/?redirect_to=random` and `newwpsafelink=ZTvkQYPJ`
+  - final external hop resolves as `https://en.mrproblogger.com/ZTvkQYPJ`
+  - `GET` to that page works when the referer is the ThemeZon article chain, and the page exposes hidden form `id="go-link"` with `action="/links/go"`
+  - after the observed `12s` timer, `POST /links/go` returns JSON success with:
+    - `https://claimcoin.in/links/back/kPw2COhFxD0pfQuGrXUz`
+- Current success oracle for this lane is now: a successful `MrProBlogger /links/go` response that returns a downstream `.../links/back/...` URL. ThemeZon article extraction alone is only intermediate evidence.
 
 ### oii.la
 - Samples checked:
@@ -177,7 +186,7 @@
   - oii: primary, Turnstile
 - `final verify/back endpoint`
   - adlink: narrowed enough for sample `SfRi`, with proven extracted downstream verify URL at `earn-pepe.com/member/shortlinks/verify/...`
-  - shrinkme: narrowed one step further, reproducible oracle is ThemeZon article extraction via `themezon.net/link.php?link=...`, but final reward endpoint is still open
+  - shrinkme: narrowed enough for sample `ZTvkQYPJ`, with proven downstream URL at `claimcoin.in/links/back/...` after `MrProBlogger /links/go`
   - oii: narrowed, probable downstream `99faucet.com/links/back/...`
 - `downstream reward-site callback/state mutation`
   - open for all three families
@@ -191,9 +200,9 @@
   - can classify family by host
   - can detect Cloudflare-gated `adlink.click` entry state
   - can extract `oii.la` token-decoded downstream URL when it is embedded in hidden payload
-  - can extract `shrinkme.click` continue hint `themezon.net/link.php?link=<alias>`
+  - can replay the verified `shrinkme.click` chain through `ThemeZon` and `MrProBlogger` for sampled aliases
   - can extract entry-page facts, hidden inputs, timer/captcha hints, and embedded target URLs when they are statically recoverable
-  - does **not** yet claim live bypass if the flow still depends on timer/captcha/verify execution
+  - still keeps strict success oracles, so intermediate ThemeZon articles are not promoted as final bypass URLs anymore
 
 ## What is not yet proven
 - Exact POST/XHR behind AdLinkFly `/links/go` is still not replayed directly. Current oracle is extracted DOM target, not a manual reimplementation of that submit.

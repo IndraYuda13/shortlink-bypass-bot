@@ -35,6 +35,13 @@
   - sitekey = `6LfFeLErAAAAAHYOQfqM3-7BpopXCbBQPAMEeh4B`
   - counter = `12`
   - continue clue = `https://themezon.net/link.php?link=kVJMw`
+- `shrinkme.click` sample `ZTvkQYPJ` sekarang sudah punya lane final yang terverifikasi:
+  - continue hint = `https://themezon.net/link.php?link=ZTvkQYPJ`
+  - `ThemeZon` hop bisa direplay dengan referer shrinkme yang benar lalu di-advance lewat POST `newwpsafelink=<alias>` ke `https://themezon.net/?redirect_to=random`
+  - next hop final yang valid = `https://en.mrproblogger.com/ZTvkQYPJ`
+  - page `mrproblogger` memuat hidden form `action=/links/go` + `ad_form_data`
+  - setelah timer `12s` lewat, POST AJAX ke `/links/go` mengembalikan final URL:
+    - `https://claimcoin.in/links/back/kPw2COhFxD0pfQuGrXUz`
 - `oii.la` sample set sekarang sudah cukup kuat secara static/lane evidence:
   - `TaVOKJleNN` token tail decode = `https://99faucet.com/links/back/SNcKa7f52qRk4xiA1gl6`
   - `FOT3p2HAVb` token tail decode = `https://claimcrypto.cc/links/back/wvCF7sRItpKGM2XrhoOj`
@@ -79,7 +86,7 @@
   - engine saat ini sudah bisa:
     - deteksi `adlink.click` sebagai `CLOUDFLARE_CHALLENGE`
     - extract `oii.la` token-decoded downstream target
-    - extract `shrinkme.click` continue hint `themezon.net/link.php?link=<alias>`
+    - replay `shrinkme.click` chain `ThemeZon -> MrProBlogger -> /links/go` untuk sampel yang sudah terverifikasi
     - bedain hasil `embedded target extracted` vs `captcha/timer flow belum replayed`
 - Deployment milestone:
   - bot sudah dideploy sebagai systemd service `shortlink-bypass-bot.service`
@@ -117,6 +124,7 @@
 - Pertahankan lane `oii.la` berbasis hidden-token decode sebagai lane utama yang paling murah dan paling reproducible.
 - Jika riset `oii.la` dilanjut, fokuskan ke success oracle setelah URL `links/back/...`, bukan ke POST `advertisingcamps` yang saat ini terbukti hanya ad handoff.
 - Lanjutkan live browser lane buat `shrinkme.click`.
+- Untuk `shrinkme.click`, fokus lanjutan sekarang bukan lagi proof-of-concept, tapi validasi apakah lane `ThemeZon -> MrProBlogger` konsisten di alias lain juga.
 
 ## Boundary catalog
 - `entry shortlink` -> status: narrowed
