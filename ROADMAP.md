@@ -42,6 +42,12 @@
   - page `mrproblogger` memuat hidden form `action=/links/go` + `ad_form_data`
   - setelah timer `12s` lewat, POST AJAX ke `/links/go` mengembalikan final URL:
     - `https://claimcoin.in/links/back/kPw2COhFxD0pfQuGrXUz`
+  - shortcut yang lebih cepat sekarang juga terbukti untuk sampel ini:
+    1. langsung `GET https://en.mrproblogger.com/ZTvkQYPJ`
+    2. pakai `Referer: https://themezon.net/`
+    3. parse form `#go-link`
+    4. submit final sekitar `11.2s` sampai `11.6s` setelah page load
+  - artinya lower bound praktis sekarang bukan lagi `12-13s` full chain, tapi sekitar `11.4s+` dari page MrProBlogger, dengan margin aman implementasi `11.6s`
 - `oii.la` sample set sekarang sudah cukup kuat secara static/lane evidence:
   - `TaVOKJleNN` token tail decode = `https://99faucet.com/links/back/SNcKa7f52qRk4xiA1gl6`
   - `FOT3p2HAVb` token tail decode = `https://claimcrypto.cc/links/back/wvCF7sRItpKGM2XrhoOj`
@@ -79,7 +85,12 @@
     - `GET https://link.adlink.click/SfRi` -> `403 Just a moment...`
     - `GET https://blog.adlink.click/SfRi` -> `403 Just a moment...`
     - bahkan setelah cookie browser disalin ke `requests.Session`, request HTTP ke `blog.adlink.click` masih kena `403`
-  - hasil benchmark lokal setelah memangkas wait internal yang tidak perlu turun ke sekitar `11s` untuk `SfRi`
+  - lane browserless baru sekarang sudah terbukti untuk sampel `CBr27fn4of3` dan sampel lain yang dites:
+    1. skip Selenium
+    2. pakai `curl_cffi` impersonation langsung ke `https://blog.adlink.click/<alias>`
+    3. parse `form#go-link`
+    4. submit final sekitar `4.0s` setelah page load
+  - benchmark lokal untuk `CBr27fn4of3` sekarang turun ke sekitar `5.6s` sampai `5.9s` end-to-end di engine
 - New implementation milestone:
   - `projects/shortlink-bypass-bot/engine.py` sekarang sudah ada sebagai core analyzer modular per family
   - `projects/shortlink-bypass-bot/bot.py` sudah ada sebagai wrapper Telegram sederhana untuk `/bypass` dan `/adlink`
@@ -97,7 +108,7 @@
     - untuk proses lama, bot mengedit pesan status yang sama tiap ~8 detik agar user bisa lihat tahap aktif tanpa spam pesan baru
 - Packaging milestone:
   - repo lokal sudah dirapikan untuk publish
-  - dependency live-helper sekarang ikut didaftarkan di `requirements.txt`
+  - dependency live-helper dan TLS impersonation sekarang ikut didaftarkan di `requirements.txt`
   - helper Adlink sekarang default ke interpreter aktif, jadi tidak hardcode lagi ke path workspace Rawon
   - file deploy contoh dipisah ke `systemd/shortlink-bypass-bot.service.example`
   - repo GitHub sudah dibuat di `IndraLawliet13/shortlink-bypass-bot` dengan visibility `private`
@@ -121,10 +132,10 @@
 
 ### Next best action
 - Pertahankan lane live `adlink.click` yang sekarang sudah proven di beberapa sampel, lalu rapikan supaya stabil untuk dipanggil bot.
+- Jadikan lane browserless `curl_cffi -> blog.adlink.click -> /links/go` sebagai default utama untuk `link.adlink.click`, lalu simpan Chromium sebagai fallback saja.
 - Pertahankan lane `oii.la` berbasis hidden-token decode sebagai lane utama yang paling murah dan paling reproducible.
 - Jika riset `oii.la` dilanjut, fokuskan ke success oracle setelah URL `links/back/...`, bukan ke POST `advertisingcamps` yang saat ini terbukti hanya ad handoff.
-- Lanjutkan live browser lane buat `shrinkme.click`.
-- Untuk `shrinkme.click`, fokus lanjutan sekarang bukan lagi proof-of-concept, tapi validasi apakah lane `ThemeZon -> MrProBlogger` konsisten di alias lain juga.
+- Untuk `shrinkme.click`, fokus lanjutan sekarang bukan lagi proof-of-concept, tapi validasi apakah lane direct `MrProBlogger` dengan ThemeZon referer ini konsisten di alias lain juga.
 
 ## Boundary catalog
 - `entry shortlink` -> status: narrowed

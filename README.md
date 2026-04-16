@@ -21,15 +21,15 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 
 | Family | Status | Notes |
 | --- | --- | --- |
-| `link.adlink.click` | Live bypass | Uses a live Chromium lane for Cloudflare and final extraction |
+| `link.adlink.click` | Live bypass | Uses browserless TLS impersonation against `blog.adlink.click`, with live Chromium kept as fallback |
 | `oii.la` | Analysis only | Static mapping and downstream extraction |
-| `shrinkme.click` | Live bypass | Replays `ThemeZon -> MrProBlogger -> /links/go` and waits the final timer over plain HTTP |
+| `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
 
 ## How it works
 
 - `bot.py` receives Telegram commands and edits the same status message while work is running
 - `engine.py` detects the target family and chooses the right handler
-- `adlink_live_browser.py` runs the Adlink browser lane when plain HTTP is blocked
+- `adlink_live_browser.py` stays as Adlink fallback when the faster browserless lane is not enough
 - `references/` and `ROADMAP.md` keep technical notes and current implementation status
 
 Flow docs:
@@ -67,23 +67,36 @@ Available commands:
 {
   "status": 1,
   "family": "link.adlink.click",
-  "message": "LIVE_BROWSER_CHAIN_BYPASS_OK",
-  "stage": "blog-fast-final",
-  "bypass_url": "https://earn-pepe.com/member/shortlinks/verify/ca7c179027eb04abfb79"
+  "message": "HTTP_IMPERSONATION_BYPASS_OK",
+  "stage": "blog-http-fast",
+  "bypass_url": "https://bitcointricks.com/shortlink.php?short_key=fu8dbowmwyx1q1f9et8qmao3o9r5wfu4"
 }
 ```
 
-## Why Adlink uses a real browser
+## Why Adlink now prefers browserless HTTP
 
-For `link.adlink.click`, plain `requests` is not enough from a cold session in this environment.
+For `link.adlink.click`, plain `requests` is still not enough from a cold session in this environment.
 
 Observed behavior:
 
 - `GET https://link.adlink.click/<alias>` returns Cloudflare `403 Just a moment...`
 - `GET https://blog.adlink.click/<alias>` also returns Cloudflare `403`
 - Reusing cookies inside a plain `requests.Session` was still not enough to render the final blog target reliably
+- `curl_cffi` with browser impersonation can open `https://blog.adlink.click/<alias>` directly, wait the internal timer, and post `/links/go` without Selenium
 
-Because of that, the current winning lane is a live Chromium session under `xvfb-run`, followed by direct extraction from the rendered Adlink blog page.
+Because of that, the current winning lane is:
+
+1. try browserless `curl_cffi` impersonation against `blog.adlink.click`
+2. post `/links/go` after the real timer boundary
+3. fall back to the live Chromium helper only if the browserless lane fails
+
+## Why ShrinkMe is still not instant
+
+For the verified sample lane, the useful shortcut is not decoding ThemeZon deeper. The real gate is the downstream MrProBlogger timer.
+
+- direct `GET https://en.mrproblogger.com/<alias>` works when the request carries a ThemeZon-flavored referer
+- safe final submit boundary is around `11.6s` after the MrProBlogger page load, not the older `13s` sleep
+- the engine still keeps the longer ThemeZon replay as evidence-backed fallback, but the fast lane now starts from MrProBlogger directly
 
 ## Requirements
 
@@ -105,6 +118,7 @@ Environment variables:
 
 - `TELEGRAM_BOT_TOKEN`
 - `SHORTLINK_BYPASS_ADLINK_BROWSER_TIMEOUT`
+- `SHORTLINK_BYPASS_ADLINK_IMPERSONATE`
 - `SHORTLINK_BYPASS_ADLINK_HELPER`
 - `SHORTLINK_BYPASS_HELPER_PYTHON`
 - `SHORTLINK_BYPASS_HELPER_PYTHONPATH`
@@ -133,10 +147,12 @@ A sample systemd unit is included at:
 ## Public roadmap
 
 - [x] Implement live Adlink browser lane
+- [x] Implement browserless Adlink fast lane with TLS impersonation
 - [x] Add Telegram progress updates with same-message edits
 - [x] Publish a cleaned public repo with deployment examples
 - [ ] Validate the Adlink fast lane across more aliases
 - [x] Add live `shrinkme.click` chain support for sampled alias flow
+- [x] Add direct `MrProBlogger` shortcut for the verified shrinkme sample
 - [ ] Validate the `shrinkme.click` chain across more aliases
 - [ ] Add broader examples and regression checks for supported families
 

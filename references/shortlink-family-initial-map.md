@@ -46,6 +46,13 @@
   - `GET` to that page works when the referer is the ThemeZon article chain, and the page exposes hidden form `id="go-link"` with `action="/links/go"`
   - after the observed `12s` timer, `POST /links/go` returns JSON success with:
     - `https://claimcoin.in/links/back/kPw2COhFxD0pfQuGrXUz`
+- Timer boundary narrowed harder for sample `ZTvkQYPJ`:
+  - fresh-session direct `GET https://en.mrproblogger.com/ZTvkQYPJ` with forged `Referer: https://themezon.net/` is enough to expose the `go-link` form, even without touching `shrinkme.click`, `themezon.net/link.php`, or `themezon.net/?redirect_to=random`
+  - non-ThemeZon referers like `https://google.com/` or `https://en.mrproblogger.com/anything` bounce back to `https://shrinkme.click/ZTvkQYPJ`
+  - server-side lower bound is not a hard 12-13s wall: controlled replays showed `11.3s` after MrProBlogger page load still fails with `{"status":"error","message":"Bad Request."}` while `11.4s` to `11.5s+` can already succeed, with some jitter around the boundary
+  - practical safe wait for raw HTTP replay is about `11.6s` from successful MrProBlogger page fetch, not `13s`
+  - hidden `ad_form_data` is not worth decoding for speed: cross-session replay of the blob fails with `CSRF token mismatch`, so the useful trick is obtaining a fresh same-session form early, not reverse-engineering the blob
+  - same-session repeated submit after the timer succeeds more than once, so the gate is mainly session timer + CSRF, not one-time nonce burn
 - Current success oracle for this lane is now: a successful `MrProBlogger /links/go` response that returns a downstream `.../links/back/...` URL. ThemeZon article extraction alone is only intermediate evidence.
 
 ### oii.la
@@ -118,6 +125,25 @@
     4. extract `a.get-link`
   - benchmark from local probe:
     - `SfRi` can reach the final `earn-pepe` verify URL in about `13s`
+- New browserless proof on this VPS with TLS impersonation:
+  - after installing `curl_cffi` and `cloudscraper` into the repo venv, both libraries can hit `https://link.adlink.click/<alias>` without Selenium and receive normal `302` redirects instead of Cloudflare `403`
+  - proven redirect chain for sample `CBr27fn4of3`:
+    1. `GET https://link.adlink.click/CBr27fn4of3`
+    2. `302 -> https://www.maqal360.com/secure.php?id=CBr27fn4of3&site=adlink.click`
+    3. `302 -> https://www.google.com/url?...url=https://www.maqal360.com/single-post.php?id=advice-for-successful-trading-of-cryptocurrencies`
+  - stronger shortcut: cold `GET https://blog.adlink.click/<alias>` works browserlessly too **if** the request uses TLS impersonation and a `Referer` on `https://www.maqal360.com/`
+  - plain `requests` and plain `curl` still fail there with `403 Just a moment...`, so the delta is not just headers or cookies, it is the client fingerprint / challenge handling path
+  - browserless direct-blog samples proven with `curl_cffi impersonate='chrome136'`:
+    - `SfRi` -> `POST https://blog.adlink.click/links/go` after ~`6s` returns `https://earn-pepe.com/member/shortlinks/verify/ca7c179027eb04abfb79`
+    - `VnLS` -> same pattern returns `https://99faucet.com/links/back/mfEPnvjHl5JOaZSRLD4M`
+    - `CBr27fn4of3` -> same pattern returns `https://bitcointricks.com/shortlink.php?short_key=fu8dbowmwyx1q1f9et8qmao3o9r5wfu4`
+  - required page facts on `blog.adlink.click/<alias>`:
+    - title `adlink`
+    - form action `/links/go`
+    - hidden `ad_form_data`
+    - runtime `counter_value = 5`
+    - runtime `captcha_type = securimage`
+  - on the proven samples above, `/links/go` succeeded without solving any extra captcha field, as long as the session came from impersonated HTTP and the wait budget exceeded the 5 second timer
   - slower fallback lane still exists if the fast lane ever fails:
     1. wait around `10s` on each `maqal360` article page
     2. call same-origin `verify.php`
@@ -199,19 +225,20 @@
 - Current honest engine behavior:
   - can classify family by host
   - can detect Cloudflare-gated `adlink.click` entry state
+  - can bypass sampled `link.adlink.click` aliases browserlessly by hitting `blog.adlink.click/<alias>` with TLS impersonation and replaying `/links/go`
   - can extract `oii.la` token-decoded downstream URL when it is embedded in hidden payload
+  - can shortcut sampled `shrinkme.click` aliases directly through `MrProBlogger` with ThemeZon-style referer spoof
   - can replay the verified `shrinkme.click` chain through `ThemeZon` and `MrProBlogger` for sampled aliases
   - can extract entry-page facts, hidden inputs, timer/captcha hints, and embedded target URLs when they are statically recoverable
   - still keeps strict success oracles, so intermediate ThemeZon articles are not promoted as final bypass URLs anymore
 
 ## What is not yet proven
-- Exact POST/XHR behind AdLinkFly `/links/go` is still not replayed directly. Current oracle is extracted DOM target, not a manual reimplementation of that submit.
-- Whether the final `blog.adlink.click` gate can always be recovered by direct alias navigation for all aliases, or only for some samples like `SfRi`.
+- Whether the final `blog.adlink.click` gate can always be recovered by direct alias navigation for all aliases, or only for the tested samples.
 - Final reward-site success oracle per family beyond URL extraction.
 - Broader post-Cloudflare origin flow coverage for more `link.adlink.click` samples beyond the current tested set.
 
 ## Next best action
-1. Generalize the proven live-browser lane for `link.adlink.click` beyond sample `6Omf` and verify whether the same redirect pattern repeats.
+1. Generalize the proven browserless `curl_cffi -> blog.adlink.click -> /links/go` lane across more `link.adlink.click` aliases and keep the live browser as fallback only.
 2. Compare all three families for shared AdLinkFly-like boundaries versus custom wrappers.
 3. Keep `oii.la` as the next high-value lane because token decoding already yields a downstream reward URL and Turnstile solver is ready locally.
 4. Build a modular runner with pluggable captcha handler and strict success oracles.

@@ -177,6 +177,107 @@ def wait_for_blog_target(driver, end_at: float, timeline: list[dict], started_at
     }
 
 
+def submit_blog_form(driver) -> dict:
+    return driver.execute_async_script(
+        """
+        const done = arguments[0];
+        const form = document.querySelector('form#go-link');
+        if (!form) {
+          return done({status: 0, message: 'blog form missing'});
+        }
+        const fd = new FormData(form);
+        fetch(form.action, {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json, text/javascript, */*; q=0.01',
+          },
+          body: new URLSearchParams(fd),
+        }).then(async response => {
+          const text = await response.text();
+          let data = null;
+          try { data = JSON.parse(text); } catch (error) {}
+          done({status: response.status, text, data});
+        }).catch(error => done({status: 0, message: String(error)}));
+        """
+    )
+
+
+def attempt_blog_form_submit(
+    driver,
+    end_at: float,
+    timeline: list[dict],
+    started_at: float,
+    blog_wait_seconds: float = 4.0,
+) -> dict | None:
+    lane_end = min(end_at, time.time() + 8)
+    lane_started = time.time()
+    last_meta = None
+
+    while time.time() < lane_end:
+        append_timeline(driver, timeline, started_at)
+        meta = driver.execute_script(
+            """
+            const form = document.querySelector('form#go-link');
+            const link = document.querySelector('a.get-link');
+            return {
+              current_url: window.location.href,
+              title: document.title || '',
+              form_action: form ? form.getAttribute('action') : null,
+              ad_form_data_present: !!(form && form.querySelector('input[name="ad_form_data"]')),
+              target_url: link ? link.href : null,
+              target_text: link ? (link.textContent || '').trim() : null,
+            };
+            """
+        )
+        last_meta = meta
+        target_url = (meta.get("target_url") or "").strip()
+        if target_url.startswith("http://") or target_url.startswith("https://"):
+            return {
+                "status": 1,
+                "stage": "blog-fast-final",
+                "final_url": meta.get("current_url") or decode_google_redirect(driver.current_url),
+                "final_title": meta.get("title") or driver.title or "",
+                "bypass_url": target_url,
+                "target_text": meta.get("target_text"),
+                "blog_form_action": meta.get("form_action"),
+                "blog_ad_form_data_present": meta.get("ad_form_data_present"),
+                "fast_lane": "direct-blog-anchor",
+            }
+
+        if meta.get("ad_form_data_present") and time.time() - lane_started >= blog_wait_seconds:
+            submit = submit_blog_form(driver)
+            data = submit.get("data") if isinstance(submit.get("data"), dict) else {}
+            bypass_url = (data.get("url") or "").strip() if isinstance(data, dict) else ""
+            if bypass_url.startswith("http://") or bypass_url.startswith("https://"):
+                return {
+                    "status": 1,
+                    "stage": "blog-form-submit",
+                    "final_url": meta.get("current_url") or decode_google_redirect(driver.current_url),
+                    "final_title": meta.get("title") or driver.title or "",
+                    "bypass_url": bypass_url,
+                    "target_text": meta.get("target_text") or data.get("message") or "Get Link",
+                    "blog_form_action": meta.get("form_action"),
+                    "blog_ad_form_data_present": meta.get("ad_form_data_present"),
+                    "fast_lane": "direct-blog-submit",
+                    "blog_submit_payload": data,
+                }
+        time.sleep(0.5)
+
+    if last_meta:
+        return {
+            "status": 0,
+            "stage": "blog-form-submit-timeout",
+            "final_url": last_meta.get("current_url") or decode_google_redirect(driver.current_url),
+            "final_title": last_meta.get("title") or driver.title or "",
+            "target_text": last_meta.get("target_text"),
+            "blog_form_action": last_meta.get("form_action"),
+            "blog_ad_form_data_present": last_meta.get("ad_form_data_present"),
+        }
+    return None
+
+
 def attempt_fast_blog_lane(
     driver,
     end_at: float,
@@ -187,11 +288,15 @@ def attempt_fast_blog_lane(
     if not blog_url:
         return None
     navigate_in_page(driver, blog_url)
-    target = wait_for_blog_target(driver, min(end_at, time.time() + 10), timeline, started_at)
+    fast_submit = attempt_blog_form_submit(driver, end_at, timeline, started_at)
+    if fast_submit and fast_submit.get("status") == 1 and fast_submit.get("bypass_url"):
+        return fast_submit
+
+    target = wait_for_blog_target(driver, min(end_at, time.time() + 6), timeline, started_at)
     target_url = (target.get("target_url") or "").strip()
     valid_target = target_url.startswith("http://") or target_url.startswith("https://")
     if not valid_target:
-        return None
+        return fast_submit
     return {
         "status": 1,
         "stage": "blog-fast-final",

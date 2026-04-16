@@ -16,9 +16,15 @@ from urllib.parse import unquote, urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 
+try:
+    from curl_cffi import requests as curl_requests
+except Exception:
+    curl_requests = None
+
 PROJECT_ROOT = Path(__file__).resolve().parent
 DEFAULT_TIMEOUT = 30
 ADLINK_BROWSER_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_ADLINK_BROWSER_TIMEOUT", "240"))
+ADLINK_HTTP_IMPERSONATE = os.getenv("SHORTLINK_BYPASS_ADLINK_IMPERSONATE", "chrome136")
 ADLINK_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_ADLINK_HELPER", str(PROJECT_ROOT / "adlink_live_browser.py"))
 HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_HELPER_PYTHON", sys.executable)
 HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_HELPER_PYTHONPATH", "")
@@ -171,6 +177,24 @@ class ShortlinkBypassEngine:
         facts["embedded_urls"] = embedded_urls
         facts["continue_hint"] = continue_hint
 
+        direct_mrproblogger = self._resolve_shrinkme_direct_mrproblogger(url)
+        if direct_mrproblogger:
+            facts["mrproblogger_direct"] = direct_mrproblogger
+            if direct_mrproblogger.get("bypass_url"):
+                return BypassResult(
+                    status=1,
+                    input_url=url,
+                    family="shrinkme.click",
+                    message="MRPROBLOGGER_DIRECT_CHAIN_OK",
+                    bypass_url=direct_mrproblogger.get("bypass_url"),
+                    stage="mrproblogger-direct",
+                    facts=facts,
+                    notes=[
+                        "shortcut cepat: alias shrinkme langsung dibuka ke MrProBlogger dengan referer ThemeZon, tanpa replay penuh ThemeZon article chain",
+                        f"timer mrproblogger ditunggu {direct_mrproblogger.get('waited_seconds', 0)} detik sebelum submit final form",
+                    ],
+                )
+
         themezon = self._resolve_shrinkme_themezon(url, continue_hint)
         if themezon:
             facts["themezon"] = themezon
@@ -275,6 +299,24 @@ class ShortlinkBypassEngine:
             facts["challenge_type"] = "managed"
             facts["cf_ray"] = response.headers.get("cf-ray")
             facts["cf_mitigated"] = response.headers.get("cf-mitigated")
+
+            http_fast = self._resolve_adlink_http(url)
+            facts["http_impersonation"] = http_fast
+            if http_fast.get("status") == 1 and http_fast.get("bypass_url"):
+                notes = [
+                    "hasil ini diambil tanpa Selenium, lewat HTTP TLS impersonation langsung ke blog.adlink.click",
+                    "plain requests tetap kena Cloudflare, jadi lane cepat ini bergantung pada fingerprint client yang lebih mirip browser asli",
+                ]
+                return BypassResult(
+                    status=1,
+                    input_url=url,
+                    family="link.adlink.click",
+                    message="HTTP_IMPERSONATION_BYPASS_OK",
+                    bypass_url=http_fast.get("bypass_url"),
+                    stage=http_fast.get("stage") or "blog-http-fast",
+                    facts=facts,
+                    notes=notes,
+                )
 
             live = self._resolve_adlink_live(url)
             facts["live_runner"] = "undetected-chromedriver-xvfb"
@@ -415,6 +457,140 @@ class ShortlinkBypassEngine:
         if proc.returncode != 0 and not payload.get("message"):
             payload["message"] = f"helper exit {proc.returncode}"
         return payload
+
+    def _resolve_adlink_http(self, url: str) -> dict[str, Any]:
+        alias = urlparse(url).path.strip("/")
+        if not alias:
+            return {"status": 0, "message": "alias adlink kosong"}
+        if curl_requests is None:
+            return {"status": 0, "message": "curl_cffi tidak tersedia"}
+
+        blog_url = f"https://blog.adlink.click/{alias}"
+        result: dict[str, Any] = {
+            "status": 0,
+            "alias": alias,
+            "blog_url": blog_url,
+            "session_type": "curl_cffi",
+            "impersonate": ADLINK_HTTP_IMPERSONATE,
+        }
+        session = curl_requests.Session(impersonate=ADLINK_HTTP_IMPERSONATE)
+        session.headers.update(DEFAULT_HEADERS)
+
+        def fetch_blog() -> requests.Response:
+            return session.get(
+                blog_url,
+                headers={"Referer": "https://www.maqal360.com/"},
+                timeout=self.timeout,
+                allow_redirects=True,
+            )
+
+        try:
+            response = fetch_blog()
+        except Exception as exc:
+            result["message"] = f"direct blog fetch gagal: {exc}"
+            return result
+
+        result["blog_status"] = response.status_code
+        result["blog_final_url"] = response.url
+        result["cookie_names"] = sorted(session.cookies.keys())
+
+        if response.status_code >= 400 and "just a moment" in response.text.lower():
+            try:
+                entry = session.get(url, timeout=self.timeout, allow_redirects=True)
+                result["entry_status"] = entry.status_code
+                result["entry_final_url"] = entry.url
+            except Exception as exc:
+                result["entry_message"] = str(exc)
+            try:
+                response = fetch_blog()
+                result["blog_retry_status"] = response.status_code
+                result["blog_retry_final_url"] = response.url
+                result["cookie_names"] = sorted(session.cookies.keys())
+            except Exception as exc:
+                result["message"] = f"blog retry gagal: {exc}"
+                return result
+
+        soup = BeautifulSoup(response.text, "html.parser")
+        runtime = self._extract_runtime_config(response.text)
+        result["runtime"] = runtime
+        result["title"] = soup.title.get_text(strip=True) if soup.title else ""
+        form = soup.select_one("form#go-link")
+        target = soup.select_one("a.get-link")
+        result["target_text"] = target.get_text(" ", strip=True) if target else None
+        if not form:
+            result["message"] = "form blog adlink tidak ditemukan"
+            return result
+
+        hidden = self._extract_hidden_inputs(form)
+        action = urljoin(response.url, form.get("action") or "/links/go")
+        result["form_action"] = action
+        result["hidden_names"] = sorted(hidden)
+        result["ad_form_data_present"] = bool(hidden.get("ad_form_data"))
+
+        try:
+            counter_value = float(runtime.get("counter_value") or 5)
+        except Exception:
+            counter_value = 5.0
+
+        first_wait_seconds = max(1.0, counter_value - 1.0)
+        retry_interval_seconds = 0.5
+        retry_deadline = time.time() + first_wait_seconds + 2.0
+        result["submit_attempts"] = []
+        time.sleep(first_wait_seconds)
+
+        submit = None
+        payload: dict[str, Any] | None = None
+        while time.time() <= retry_deadline:
+            waited_seconds = round(first_wait_seconds + max(0.0, time.time() - (retry_deadline - 2.0)), 2)
+            try:
+                submit = session.post(
+                    action,
+                    data=hidden,
+                    headers={
+                        "Referer": blog_url,
+                        "Origin": "https://blog.adlink.click",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Accept": "application/json, text/javascript, */*; q=0.01",
+                    },
+                    timeout=self.timeout,
+                    allow_redirects=True,
+                )
+            except Exception as exc:
+                result["message"] = f"submit blog adlink gagal: {exc}"
+                return result
+
+            try:
+                payload = submit.json()
+            except Exception:
+                payload = {"raw": submit.text[:400]}
+
+            final_url = self._clean_url(str(payload.get("url") or "")) if isinstance(payload, dict) else None
+            attempt_row = {
+                "waited_seconds": waited_seconds,
+                "status_code": submit.status_code,
+                "payload_status": payload.get("status") if isinstance(payload, dict) else None,
+                "payload_message": payload.get("message") if isinstance(payload, dict) else None,
+                "payload_url": final_url,
+            }
+            result["submit_attempts"].append(attempt_row)
+            if final_url:
+                result["status"] = 1
+                result["stage"] = "blog-http-fast"
+                result["waited_seconds"] = waited_seconds
+                result["submit_status"] = submit.status_code
+                result["submit_payload"] = payload
+                result["bypass_url"] = final_url
+                result["message"] = str(payload.get("message") or "OK")
+                return result
+            if time.time() + retry_interval_seconds > retry_deadline:
+                break
+            time.sleep(retry_interval_seconds)
+
+        result["waited_seconds"] = result["submit_attempts"][-1]["waited_seconds"] if result["submit_attempts"] else first_wait_seconds
+        result["submit_status"] = submit.status_code if submit is not None else None
+        result["submit_payload"] = payload or {}
+        result["message"] = str(payload.get("message") or "blog adlink submit tidak mengembalikan url final") if isinstance(payload, dict) else "blog adlink submit tidak valid"
+        return result
 
     def _extract_runtime_config(self, html: str) -> dict[str, Any]:
         facts: dict[str, Any] = {}
@@ -590,6 +766,110 @@ class ShortlinkBypassEngine:
                 result["follow_message"] = str(exc)
         return result
 
+    def _resolve_shrinkme_direct_mrproblogger(self, input_url: str) -> dict[str, Any] | None:
+        alias = urlparse(input_url).path.strip("/")
+        if not alias:
+            return None
+
+        result: dict[str, Any] = {
+            "alias": alias,
+            "mode": "direct-mrproblogger",
+        }
+        mrproblogger_url = f"https://en.mrproblogger.com/{alias}"
+        result["mrproblogger_url"] = mrproblogger_url
+
+        try:
+            response = self.session.get(
+                mrproblogger_url,
+                headers={"Referer": "https://themezon.net/"},
+                timeout=self.timeout,
+                allow_redirects=True,
+            )
+        except Exception as exc:
+            result["message"] = f"mrproblogger direct page gagal: {exc}"
+            return result
+
+        soup = BeautifulSoup(response.text, "html.parser")
+        runtime = self._extract_runtime_config(response.text)
+        result["mrproblogger_status"] = response.status_code
+        result["mrproblogger_final_url"] = response.url
+        result["cookie_names_after_mrproblogger"] = self._cookie_names()
+        result["mrproblogger_runtime"] = runtime
+
+        form = soup.select_one("form#go-link")
+        if not form:
+            result["message"] = "mrproblogger direct form tidak ditemukan"
+            return result
+
+        hidden = self._extract_hidden_inputs(form)
+        action = urljoin(response.url, form.get("action") or "/links/go")
+        result["form_action"] = action
+        result["hidden_names"] = sorted(hidden)
+
+        try:
+            counter_value = float(runtime.get("counter_value") or 12)
+        except Exception:
+            counter_value = 12.0
+
+        first_wait_seconds = max(1.0, counter_value - 0.8)
+        retry_interval_seconds = 0.5
+        retry_deadline = time.time() + first_wait_seconds + 2.0
+        result["submit_attempts"] = []
+        time.sleep(first_wait_seconds)
+
+        submit = None
+        payload: dict[str, Any] | None = None
+        while time.time() <= retry_deadline:
+            waited_seconds = round(first_wait_seconds + max(0.0, time.time() - (retry_deadline - 2.0)), 2)
+            try:
+                submit = self.session.post(
+                    action,
+                    data=hidden,
+                    headers={
+                        "Referer": response.url,
+                        "Origin": f"{urlparse(response.url).scheme}://{urlparse(response.url).netloc}",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Accept": "application/json, text/javascript, */*; q=0.01",
+                    },
+                    timeout=self.timeout,
+                    allow_redirects=True,
+                )
+            except Exception as exc:
+                result["message"] = f"mrproblogger direct submit gagal: {exc}"
+                return result
+
+            try:
+                payload = submit.json()
+            except Exception:
+                payload = {"raw": submit.text[:400]}
+
+            final_url = self._clean_url(str(payload.get("url") or "")) if isinstance(payload, dict) else None
+            attempt_row = {
+                "waited_seconds": waited_seconds,
+                "status_code": submit.status_code,
+                "payload_status": payload.get("status") if isinstance(payload, dict) else None,
+                "payload_message": payload.get("message") if isinstance(payload, dict) else None,
+                "payload_url": final_url,
+            }
+            result["submit_attempts"].append(attempt_row)
+            if final_url:
+                result["status"] = 1
+                result["waited_seconds"] = waited_seconds
+                result["submit_status"] = submit.status_code
+                result["submit_payload"] = payload
+                result["bypass_url"] = final_url
+                result["message"] = str(payload.get("message") or "OK")
+                return result
+            if time.time() + retry_interval_seconds > retry_deadline:
+                break
+            time.sleep(retry_interval_seconds)
+
+        result["waited_seconds"] = result["submit_attempts"][-1]["waited_seconds"] if result["submit_attempts"] else first_wait_seconds
+        result["submit_status"] = submit.status_code if submit is not None else None
+        result["submit_payload"] = payload or {}
+        result["message"] = str(payload.get("message") or "mrproblogger direct submit tidak mengembalikan url final") if isinstance(payload, dict) else "mrproblogger direct submit tidak valid"
+        return result
+
     def _resolve_shrinkme_mrproblogger(
         self,
         input_url: str,
@@ -605,27 +885,17 @@ class ShortlinkBypassEngine:
             "article_url": article_url,
         }
 
-        try:
-            article_response = self.session.get(
-                article_url,
-                headers={"Referer": continue_hint or input_url},
-                timeout=self.timeout,
-                allow_redirects=True,
-            )
-        except Exception as exc:
-            result["message"] = str(exc)
-            return result
-
-        result["article_status"] = article_response.status_code
-        result["article_final_url"] = article_response.url
+        result["article_status"] = "skipped"
+        result["article_final_url"] = article_url
         result["cookie_names_after_article"] = self._cookie_names()
+        themezon_referer = continue_hint or article_url or input_url
 
         try:
             themezon_next = self.session.post(
                 "https://themezon.net/?redirect_to=random",
                 data={"newwpsafelink": alias},
                 headers={
-                    "Referer": article_response.url,
+                    "Referer": themezon_referer,
                     "Origin": "https://themezon.net",
                 },
                 timeout=self.timeout,
@@ -639,7 +909,7 @@ class ShortlinkBypassEngine:
             return result
 
         mrproblogger_url = f"https://en.mrproblogger.com/{alias}"
-        mrproblogger_referer = result.get("themezon_next_url") or article_response.url
+        mrproblogger_referer = result.get("themezon_next_url") or themezon_referer
         result["mrproblogger_url"] = mrproblogger_url
         result["mrproblogger_referer"] = mrproblogger_referer
 
@@ -672,43 +942,66 @@ class ShortlinkBypassEngine:
         result["hidden_names"] = sorted(hidden)
 
         try:
-            wait_seconds = max(1, int(runtime.get("counter_value") or 12) + 1)
+            counter_value = int(runtime.get("counter_value") or 12)
         except Exception:
-            wait_seconds = 13
-        result["waited_seconds"] = wait_seconds
-        time.sleep(wait_seconds)
+            counter_value = 12
 
-        try:
-            submit = self.session.post(
-                action,
-                data=hidden,
-                headers={
-                    "Referer": mrproblogger_response.url,
-                    "Origin": f"{urlparse(mrproblogger_response.url).scheme}://{urlparse(mrproblogger_response.url).netloc}",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "Accept": "application/json, text/javascript, */*; q=0.01",
-                },
-                timeout=self.timeout,
-                allow_redirects=True,
-            )
-        except Exception as exc:
-            result["message"] = f"mrproblogger submit gagal: {exc}"
-            return result
+        first_wait_seconds = max(1.0, float(counter_value) - 1.0)
+        retry_interval_seconds = 0.5
+        retry_deadline = time.time() + first_wait_seconds + 4.0
+        result["submit_attempts"] = []
+        time.sleep(first_wait_seconds)
 
-        result["submit_status"] = submit.status_code
-        try:
-            payload = submit.json()
-        except Exception:
-            payload = {"raw": submit.text[:400]}
-        result["submit_payload"] = payload
+        submit = None
+        payload: dict[str, Any] | None = None
+        while time.time() <= retry_deadline:
+            waited_seconds = round(first_wait_seconds + max(0.0, time.time() - (retry_deadline - 4.0)), 2)
+            try:
+                submit = self.session.post(
+                    action,
+                    data=hidden,
+                    headers={
+                        "Referer": mrproblogger_response.url,
+                        "Origin": f"{urlparse(mrproblogger_response.url).scheme}://{urlparse(mrproblogger_response.url).netloc}",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Accept": "application/json, text/javascript, */*; q=0.01",
+                    },
+                    timeout=self.timeout,
+                    allow_redirects=True,
+                )
+            except Exception as exc:
+                result["message"] = f"mrproblogger submit gagal: {exc}"
+                return result
 
-        final_url = self._clean_url(str(payload.get("url") or "")) if isinstance(payload, dict) else None
-        if final_url:
-            result["status"] = 1
-            result["bypass_url"] = final_url
-            result["message"] = str(payload.get("message") or "OK")
-            return result
+            try:
+                payload = submit.json()
+            except Exception:
+                payload = {"raw": submit.text[:400]}
 
+            final_url = self._clean_url(str(payload.get("url") or "")) if isinstance(payload, dict) else None
+            attempt_row = {
+                "waited_seconds": waited_seconds,
+                "status_code": submit.status_code,
+                "payload_status": payload.get("status") if isinstance(payload, dict) else None,
+                "payload_message": payload.get("message") if isinstance(payload, dict) else None,
+                "payload_url": final_url,
+            }
+            result["submit_attempts"].append(attempt_row)
+            if final_url:
+                result["waited_seconds"] = waited_seconds
+                result["submit_status"] = submit.status_code
+                result["submit_payload"] = payload
+                result["status"] = 1
+                result["bypass_url"] = final_url
+                result["message"] = str(payload.get("message") or "OK")
+                return result
+            if time.time() + retry_interval_seconds > retry_deadline:
+                break
+            time.sleep(retry_interval_seconds)
+
+        result["waited_seconds"] = result["submit_attempts"][-1]["waited_seconds"] if result.get("submit_attempts") else first_wait_seconds
+        result["submit_status"] = submit.status_code if submit is not None else None
+        result["submit_payload"] = payload or {}
         result["message"] = str(payload.get("message") or "mrproblogger submit tidak mengembalikan url final") if isinstance(payload, dict) else "mrproblogger submit tidak valid"
         return result
 

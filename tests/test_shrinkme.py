@@ -5,6 +5,39 @@ from engine import BypassResult, ShortlinkBypassEngine
 
 
 class ShrinkmeTests(unittest.TestCase):
+    def test_shrinkme_direct_mrproblogger_shortcut_is_preferred_when_final(self):
+        engine = ShortlinkBypassEngine()
+
+        html = '<html><head><title>ShrinkMe.io</title></head><body>https://themezon.net/link.php?link=ZTvkQYPJ</body></html>'
+
+        with (
+            patch.object(engine, '_get') as mock_get,
+            patch.object(engine, '_resolve_shrinkme_direct_mrproblogger') as mock_direct_mrproblogger,
+            patch.object(engine, '_resolve_shrinkme_themezon') as mock_themezon,
+            patch.object(engine, '_resolve_shrinkme_mrproblogger') as mock_mrproblogger,
+        ):
+            mock_get.return_value = type('Resp', (), {
+                'text': html,
+                'url': 'https://shrinkme.click/ZTvkQYPJ',
+                'status_code': 200,
+                'headers': {},
+            })()
+            mock_direct_mrproblogger.return_value = {
+                'status': 1,
+                'waited_seconds': 11.2,
+                'bypass_url': 'https://claimcoin.in/links/back/kPw2COhFxD0pfQuGrXUz',
+            }
+
+            result = engine.analyze('https://shrinkme.click/ZTvkQYPJ')
+
+        self.assertEqual(result.family, 'shrinkme.click')
+        self.assertEqual(result.message, 'MRPROBLOGGER_DIRECT_CHAIN_OK')
+        self.assertEqual(result.bypass_url, 'https://claimcoin.in/links/back/kPw2COhFxD0pfQuGrXUz')
+        self.assertEqual(result.status, 1)
+        self.assertEqual(result.stage, 'mrproblogger-direct')
+        mock_themezon.assert_not_called()
+        mock_mrproblogger.assert_not_called()
+
     def test_themezon_article_is_not_reported_as_final_bypass(self):
         engine = ShortlinkBypassEngine()
 
@@ -12,9 +45,11 @@ class ShrinkmeTests(unittest.TestCase):
 
         with (
             patch.object(engine, '_get') as mock_get,
+            patch.object(engine, '_resolve_shrinkme_direct_mrproblogger') as mock_direct_mrproblogger,
             patch.object(engine, '_resolve_shrinkme_themezon') as mock_themezon,
             patch.object(engine, '_resolve_shrinkme_mrproblogger') as mock_mrproblogger,
         ):
+            mock_direct_mrproblogger.return_value = {'message': 'direct lane not ready'}
             mock_get.return_value = type('Resp', (), {
                 'text': html,
                 'url': 'https://shrinkme.click/ZTvkQYPJ',
@@ -45,9 +80,11 @@ class ShrinkmeTests(unittest.TestCase):
 
         with (
             patch.object(engine, '_get') as mock_get,
+            patch.object(engine, '_resolve_shrinkme_direct_mrproblogger') as mock_direct_mrproblogger,
             patch.object(engine, '_resolve_shrinkme_themezon') as mock_themezon,
             patch.object(engine, '_resolve_shrinkme_mrproblogger') as mock_mrproblogger,
         ):
+            mock_direct_mrproblogger.return_value = {'message': 'direct lane not ready'}
             mock_get.return_value = type('Resp', (), {
                 'text': html,
                 'url': 'https://shrinkme.click/ZTvkQYPJ',
