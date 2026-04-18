@@ -102,9 +102,15 @@
     - `captchaProvider = iconcaptcha`
     - `iconcaptchaEndpoint = /cwsafelinkphp/sl-iconcaptcha-request.php`
     - `verifyUrl = /cwsafelinkphp/sl-iconcaptcha-verify.php`
+  - contract load Step 1 sekarang sudah terverifikasi lebih dalam:
+    - browser mengirim `X-Requested-With: XMLHttpRequest`
+    - browser juga mengirim `X-IconCaptcha-Token` yang nilainya sama dengan hidden `_iconcaptcha-token`
+    - browser session punya cookie path-scoped `CWSLSESSID` di `/cwsafelinkphp/`
+    - replay HTTP di luar browser sekarang bisa memuat challenge lagi kalau pakai cookie penuh + `X-IconCaptcha-Token`
+    - replay yang sama tanpa header token itu jatuh ke error `invalid form token`
   - sample downstream final yang Boskuu kasih untuk alias ini:
     - `https://onlyfaucet.com/links/back/s7tM4CWuTNyfUkOLoqjR/USDT/b67127d45564acfeb4ef509e8a682ff5`
-  - arti praktis saat ini: `xut.io` belum jadi handler live terpisah, tapi sudah jelas ini kandidat family baru berbasis wrapper `cwsafelinkphp` dengan gate stepwise + IconCaptcha
+  - arti praktis saat ini: boundary `LOAD challenge` sudah kebuka, jadi blocker utama pindah dari `browser-only load` ke `SELECTION + verify` Step 1 lalu langkah 2..6
 - New implementation milestone:
   - `projects/shortlink-bypass-bot/engine.py` sekarang sudah ada sebagai core analyzer modular per family
   - `projects/shortlink-bypass-bot/bot.py` sudah ada sebagai wrapper Telegram sederhana untuk `/bypass` dan `/adlink`
@@ -158,14 +164,14 @@
 - Pertahankan lane `oii.la` berbasis hidden-token decode sebagai lane utama yang paling murah dan paling reproducible.
 - Jika riset `oii.la` dilanjut, fokuskan ke success oracle setelah URL `links/back/...`, bukan ke POST `advertisingcamps` yang saat ini terbukti hanya ad handoff.
 - Untuk `shrinkme.click`, fokus lanjutan sekarang bukan lagi proof-of-concept, tapi validasi apakah lane direct `MrProBlogger` dengan ThemeZon referer ini konsisten di alias lain juga.
-- Untuk `xut.io`, next narrow action sekarang adalah memetakan replay minimal family `autodime cwsafelinkphp` dari `Step 1/6` ke step berikutnya, lalu cek apakah ada shortcut HTTP yang lebih murah daripada solve UI penuh.
+- Untuk `xut.io`, next narrow action sekarang adalah membedah payload `SELECTION` dan verify Step 1 pada family `autodime cwsafelinkphp`, lalu cek apakah step 2..6 bisa direplay lebih murah lewat HTTP.
 - Engine sudah punya handler awal untuk family ini, tapi masih jujur berhenti di `ICONCAPTCHA_STEP1_MAPPED` sampai success oracle final benar-benar ketemu.
 
 ## Boundary catalog
 - `entry shortlink` -> status: narrowed
 - `redirect/session cookie gate` -> status: primary
 - `timer/wait gate` -> status: narrowed
-- `captcha gate` -> status: primary
+- `captcha gate` -> status: in progress
 - `final verify/back endpoint` -> status: narrowed
 - `downstream reward-site callback/state mutation` -> status: open
 

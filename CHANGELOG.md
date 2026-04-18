@@ -24,6 +24,27 @@
 - `references/shortlink-family-initial-map.md`
   - added initial wrapper-family map for `xut.io -> autodime cwsafelinkphp`
 
+### xut/autodime Step 1 load contract verified
+- Re-checked the earlier Step 1 IconCaptcha assumption with a real Chromium capture plus an out-of-browser replay.
+- Verified the first `LOAD` request contract is narrower than expected:
+  - real request goes to `/cwsafelinkphp/sl-iconcaptcha-request.php`
+  - it uses `X-Requested-With: XMLHttpRequest`
+  - it also requires `X-IconCaptcha-Token` mirroring the hidden `_iconcaptcha-token`
+  - the warmed browser cookie jar must include path-scoped `CWSLSESSID` for `/cwsafelinkphp/`
+- Verified replay behavior split:
+  - same warmed session **without** `X-IconCaptcha-Token` decodes to `invalid form token`
+  - same warmed session **with** `X-IconCaptcha-Token` returns a normal challenge JSON again, including `identifier`, `challenge`, `expiredAt`, and `timestamp`
+- Practical meaning:
+  - the old `404 route not found` conclusion was incomplete
+  - the first IconCaptcha `LOAD` step is replayable outside the browser if the request contract matches the real browser state closely enough
+  - the remaining blocker has moved forward to `SELECTION` and `sl-iconcaptcha-verify.php`, not the initial challenge load itself
+
+### Files changed
+- `ROADMAP.md`
+  - synced the new Step 1 contract and moved the xut blocker from `browser-only load` to `selection + verify`
+- `references/shortlink-family-initial-map.md`
+  - recorded the verified `CWSLSESSID + X-IconCaptcha-Token` replay contract
+
 ### Why this exists
 - Boskuu supplied a new shortlink sample and the expected final downstream URL.
 - Before writing a handler, the stronger evidence was to map the real wrapper family and its first hard gates.

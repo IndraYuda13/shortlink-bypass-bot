@@ -194,8 +194,13 @@
 - Browser-context proof now exists for the first IconCaptcha load request:
   - after the 10s countdown and the initial widget click in a real Chromium session, the page posts to `/cwsafelinkphp/sl-iconcaptcha-request.php`
   - hidden fields become populated with `ic-rq`, `ic-wid`, and `ic-cid`
-  - raw `requests` and `curl_cffi` replays of that same endpoint still returned `404 route not found` from outside the browser session in current tests
-  - practical meaning: there is a real browser-only boundary or anti-bot distinction here; plain HTTP replay is not yet equivalent even after warmup cookies are present
+  - the live browser request carries `X-Requested-With: XMLHttpRequest` plus `X-IconCaptcha-Token: <_iconcaptcha-token>`
+  - the warmed browser cookie jar also includes path-scoped session cookie `CWSLSESSID` under `/cwsafelinkphp/`
+- Verified external replay contract for `LOAD`:
+  - earlier bare `requests` and `curl_cffi` probes that only reused the warmup step-page cookies were incomplete and misleading
+  - when the replay uses the full browser session state, especially `CWSLSESSID` + `_iconcaptcha-token` mirrored into `X-IconCaptcha-Token`, raw HTTP replay to `/cwsafelinkphp/sl-iconcaptcha-request.php` works outside the browser
+  - same warmed session without `X-IconCaptcha-Token` decodes into an `invalid form token` error
+  - same warmed session with `X-IconCaptcha-Token` returns a normal IconCaptcha challenge JSON again, including `identifier`, `challenge`, `expiredAt`, and `timestamp`
 - Captcha form facts:
   - hidden input `_iconcaptcha-token`
   - widget class `.iconcaptcha-widget`
@@ -203,13 +208,15 @@
 - Important interpretation:
   - `xut.io` itself looks like a thin wrapper / alias entry point
   - the real technical family is probably the reusable `autodime cwsafelinkphp` step engine behind it
-  - success is not proven by the Google redirect or step page alone; the final oracle for this sample remains the downstream `onlyfaucet.com/links/back/...` URL above
+  - the earlier `404 route not found` conclusion was too early; the endpoint is replayable, but only after the request contract matches the real browser state closely enough
+  - success is still not proven by the Google redirect, step page, or challenge load alone; the final oracle for this sample remains the downstream `onlyfaucet.com/links/back/...` URL above
 - Current blocker:
-  - Step 1 still needs either a real IconCaptcha solve inside the browser lane or a cheaper server-side replay that truly matches the browser-only boundary
+  - Step 1 challenge load is now closed enough
+  - the remaining hard blocker is the `SELECTION` solve plus the follow-up verify transition in `/cwsafelinkphp/sl-iconcaptcha-verify.php`
 - Next best action:
-  1. inspect `sl-iconcaptcha-request.php` and `sl-iconcaptcha-verify.php` contract with the warmed session
-  2. see whether step 2..6 are only timed `nextUrl` posts like the shipped `app.js` suggests
-  3. test whether the family exposes a direct endpoint that can be replayed once the warmup cookies are valid
+  1. capture one valid `SELECTION` request and decode its payload structure
+  2. replay `sl-iconcaptcha-verify.php` with the warmed `CWSLSESSID` + token contract
+  3. check whether steps 2..6 collapse into simpler timed `nextUrl` or form posts once Step 1 is accepted
 
 ### Reusable workspace components
 - Best solver/browser base:
