@@ -32,6 +32,33 @@
 - Do not claim `xut.io` support yet.
 - A future handler should only call this family `supported` after it reaches the final downstream `onlyfaucet.com/links/back/...` style oracle, not just the Google warmup redirect or the `Step 1/6` page.
 
+### xut/autodime initial engine handler
+- Added a first real engine handler for `xut.io` and direct `autodime.com/cwsafelinkphp/go.php` URLs.
+- The new handler normalizes both entry styles into family `autodime.cwsafelinkphp`.
+- It replays the currently proven warmup chain:
+  - wrapper entry
+  - `go.php`
+  - Google wrapper decode
+  - `https://autodime.com/` step page fetch
+- It now returns a structured partial result instead of `UNSUPPORTED_FAMILY`:
+  - `message = ICONCAPTCHA_STEP1_MAPPED`
+  - `stage = step1-iconcaptcha`
+- Added regression tests for both entry styles so the new family mapping does not silently disappear.
+
+### Files changed
+- `engine.py`
+  - added autodime/xut family detection and step1 warmup handler
+  - added parsing for `step`, `countdown`, `captchaProvider`, `iconcaptchaEndpoint`, and `verifyUrl`
+  - added helper decoding for Google wrapper redirects and signed JSON-style cookies like `fexkomin`
+- `tests/test_xut.py`
+  - added regression coverage for `xut.io` wrapper entry and direct `autodime` go URL entry
+- `README.md`, `ROADMAP.md`
+  - synced support table and live milestone wording for the new handler
+
+### Why this exists
+- Boskuu asked to gas the new family after the initial mapping was done.
+- The strongest honest next step was turning the mapping into a real handler without pretending the IconCaptcha gate was already solved.
+
 ## 2026-04-16
 
 ### shrinkme.click final chain fix

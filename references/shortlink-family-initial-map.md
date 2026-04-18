@@ -191,6 +191,11 @@
   - `captchaProvider: 'iconcaptcha'`
   - `iconcaptchaEndpoint: '/cwsafelinkphp/sl-iconcaptcha-request.php'`
   - `verifyUrl: '/cwsafelinkphp/sl-iconcaptcha-verify.php'`
+- Browser-context proof now exists for the first IconCaptcha load request:
+  - after the 10s countdown and the initial widget click in a real Chromium session, the page posts to `/cwsafelinkphp/sl-iconcaptcha-request.php`
+  - hidden fields become populated with `ic-rq`, `ic-wid`, and `ic-cid`
+  - raw `requests` and `curl_cffi` replays of that same endpoint still returned `404 route not found` from outside the browser session in current tests
+  - practical meaning: there is a real browser-only boundary or anti-bot distinction here; plain HTTP replay is not yet equivalent even after warmup cookies are present
 - Captcha form facts:
   - hidden input `_iconcaptcha-token`
   - widget class `.iconcaptcha-widget`
@@ -200,7 +205,7 @@
   - the real technical family is probably the reusable `autodime cwsafelinkphp` step engine behind it
   - success is not proven by the Google redirect or step page alone; the final oracle for this sample remains the downstream `onlyfaucet.com/links/back/...` URL above
 - Current blocker:
-  - Step 1 still needs either a real IconCaptcha solve or a cheaper server-side replay of the same state transition
+  - Step 1 still needs either a real IconCaptcha solve inside the browser lane or a cheaper server-side replay that truly matches the browser-only boundary
 - Next best action:
   1. inspect `sl-iconcaptcha-request.php` and `sl-iconcaptcha-verify.php` contract with the warmed session
   2. see whether step 2..6 are only timed `nextUrl` posts like the shipped `app.js` suggests

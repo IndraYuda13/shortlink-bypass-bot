@@ -109,6 +109,8 @@
   - `projects/shortlink-bypass-bot/engine.py` sekarang sudah ada sebagai core analyzer modular per family
   - `projects/shortlink-bypass-bot/bot.py` sudah ada sebagai wrapper Telegram sederhana untuk `/bypass` dan `/adlink`
   - engine saat ini sudah bisa:
+    - deteksi `xut.io` atau direct `autodime.com/cwsafelinkphp/go.php` sebagai family `autodime.cwsafelinkphp`
+    - replay warmup wrapper sampai `https://autodime.com/` lalu mengembalikan mapping terstruktur untuk gate `Step 1/6`
     - deteksi `adlink.click` sebagai `CLOUDFLARE_CHALLENGE`
     - extract `oii.la` token-decoded downstream target
     - replay `shrinkme.click` chain `ThemeZon -> MrProBlogger -> /links/go` untuk sampel yang sudah terverifikasi
@@ -157,6 +159,7 @@
 - Jika riset `oii.la` dilanjut, fokuskan ke success oracle setelah URL `links/back/...`, bukan ke POST `advertisingcamps` yang saat ini terbukti hanya ad handoff.
 - Untuk `shrinkme.click`, fokus lanjutan sekarang bukan lagi proof-of-concept, tapi validasi apakah lane direct `MrProBlogger` dengan ThemeZon referer ini konsisten di alias lain juga.
 - Untuk `xut.io`, next narrow action sekarang adalah memetakan replay minimal family `autodime cwsafelinkphp` dari `Step 1/6` ke step berikutnya, lalu cek apakah ada shortcut HTTP yang lebih murah daripada solve UI penuh.
+- Engine sudah punya handler awal untuk family ini, tapi masih jujur berhenti di `ICONCAPTCHA_STEP1_MAPPED` sampai success oracle final benar-benar ketemu.
 
 ## Boundary catalog
 - `entry shortlink` -> status: narrowed

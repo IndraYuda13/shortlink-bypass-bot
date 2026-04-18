@@ -11,7 +11,7 @@ from dataclasses import asdict, dataclass, field
 from html import unescape
 from pathlib import Path
 from typing import Any
-from urllib.parse import unquote, urljoin, urlparse
+from urllib.parse import parse_qs, unquote, urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -62,6 +62,11 @@ class ShortlinkBypassEngine:
 
     def analyze(self, url: str) -> BypassResult:
         host = urlparse(url).netloc.lower()
+        parsed = urlparse(url)
+        if host == "xut.io" or host.endswith(".xut.io"):
+            return self._handle_autodime_cwsafelink(url)
+        if host == "autodime.com" and parsed.path.startswith("/cwsafelinkphp/go.php"):
+            return self._handle_autodime_cwsafelink(url)
         if host == "oii.la" or host.endswith(".oii.la"):
             return self._handle_oii(url)
         if host == "shrinkme.click" or host.endswith(".shrinkme.click"):
@@ -89,6 +94,124 @@ class ShortlinkBypassEngine:
             "title": (soup.title.string.strip() if soup.title and soup.title.string else None),
             "cookie_names": self._cookie_names(),
         }
+
+    def _handle_autodime_cwsafelink(self, url: str) -> BypassResult:
+        parsed = urlparse(url)
+        host = parsed.netloc.lower()
+        family = "autodime.cwsafelinkphp"
+        facts: dict[str, Any] = {
+            "entry_mode": "xut-wrapper" if host == "xut.io" or host.endswith(".xut.io") else "direct-go-url",
+            "entry_host": host,
+            "entry_path": parsed.path,
+            "entry_query": parsed.query,
+        }
+
+        try:
+            if facts["entry_mode"] == "xut-wrapper":
+                entry = self.session.get(url, timeout=self.timeout, allow_redirects=False)
+                facts["entry_status"] = entry.status_code
+                facts["entry_redirect"] = self._clean_url(entry.headers.get("location", "")) or None
+                facts["cookie_names_after_entry"] = self._cookie_names()
+                go_url = facts["entry_redirect"] or ""
+                referer = url
+            else:
+                go_url = url
+                referer = url
+
+            if not go_url:
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message="ENTRY_REDIRECT_MISSING",
+                    stage="entry-wrapper",
+                    facts=facts,
+                    blockers=["entry wrapper tidak memberi redirect ke lane go.php yang diharapkan"],
+                )
+
+            go = self.session.get(
+                go_url,
+                headers={"Referer": referer},
+                timeout=self.timeout,
+                allow_redirects=False,
+            )
+        except Exception as exc:
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="REQUEST_FAILED",
+                stage="entry-wrapper",
+                facts=facts,
+                blockers=[str(exc)],
+            )
+
+        facts["go_url"] = go_url
+        facts["go_status"] = go.status_code
+        facts["go_redirect"] = self._clean_url(go.headers.get("location", "")) or None
+        facts["cookie_names_after_go"] = self._cookie_names()
+
+        fexkomin = self.session.cookies.get("fexkomin") or ""
+        if fexkomin:
+            facts["fexkomin_claims"] = self._decode_signed_json_cookie(fexkomin)
+
+        google_target = self._decode_google_wrapper(facts.get("go_redirect") or "")
+        facts["google_target"] = google_target
+        home_url = google_target or "https://autodime.com/"
+
+        try:
+            home = self.session.get(
+                home_url,
+                headers={"Referer": "https://www.google.com/"},
+                timeout=self.timeout,
+                allow_redirects=True,
+            )
+        except Exception as exc:
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="HOME_FETCH_FAILED",
+                stage="google-warmup",
+                facts=facts,
+                blockers=[str(exc)],
+            )
+
+        soup = BeautifulSoup(home.text, "html.parser")
+        facts.update(self._common_facts(home, soup))
+        runtime = self._extract_runtime_config(home.text)
+        facts.update(runtime)
+
+        form = soup.select_one("form#sl-form") or soup
+        hidden = self._extract_hidden_inputs(form)
+        facts["hidden_inputs"] = hidden
+        facts["embedded_urls"] = self._collect_embedded_urls(home.text, hidden)
+        facts["iconcaptcha_token_present"] = bool(hidden.get("_iconcaptcha-token"))
+
+        blockers = [
+            "step 1 masih berhenti di gate IconCaptcha",
+            "hasil final downstream belum bisa diklaim sebelum stepwise captcha flow selesai",
+        ]
+        notes = [
+            "xut.io diperlakukan sebagai wrapper menuju family autodime cwsafelinkphp",
+            "warmup chain saat ini sudah bisa dipetakan sampai page Step 1/6 di autodime.com",
+        ]
+
+        if runtime.get("captchaProvider") == "iconcaptcha":
+            notes.append("runtime gate yang aktif sekarang adalah IconCaptcha dengan countdown 10 detik")
+        if facts.get("fexkomin_claims"):
+            notes.append("cookie fexkomin membawa step dan sid pendek yang membantu mengikat alias wrapper ke state server")
+
+        return BypassResult(
+            status=0,
+            input_url=url,
+            family=family,
+            message="ICONCAPTCHA_STEP1_MAPPED",
+            stage="step1-iconcaptcha",
+            facts=facts,
+            blockers=blockers,
+            notes=notes,
+        )
 
     def _handle_oii(self, url: str) -> BypassResult:
         try:
@@ -598,6 +721,11 @@ class ShortlinkBypassEngine:
             "captcha_type": r"[\"']?captcha_type[\"']?\s*[:=]\s*[\"']([^\"']+)",
             "counter_value": r"[\"']?counter_value[\"']?\s*[:=]\s*[\"']?(\d+)",
             "counter_start": r"[\"']?counter_start[\"']?\s*[:=]\s*[\"']([^\"']+)",
+            "step": r"[\"']?step[\"']?\s*[:=]\s*[\"']?(\d+)",
+            "countdown": r"[\"']?countdown[\"']?\s*[:=]\s*[\"']?(\d+)",
+            "captchaProvider": r"[\"']?captchaProvider[\"']?\s*[:=]\s*[\"']([^\"']+)",
+            "iconcaptchaEndpoint": r"[\"']?iconcaptchaEndpoint[\"']?\s*[:=]\s*[\"']([^\"']+)",
+            "verifyUrl": r"[\"']?verifyUrl[\"']?\s*[:=]\s*[\"']([^\"']+)",
             "captcha_shortlink": r"[\"']?captcha_shortlink[\"']?\s*[:=]\s*[\"']([^\"']+)",
             "targetClickCount": r"[\"']?targetClickCount[\"']?\s*[:=]\s*(\d+)",
             "turnstile_site_key": r"[\"']?turnstile_site_key[\"']?\s*[:=]\s*[\"']([^\"']+)",
@@ -617,7 +745,11 @@ class ShortlinkBypassEngine:
             value = facts.get(key)
             if value:
                 sitekeys.append(str(value))
-        sitekeys = [value for value in dict.fromkeys(sitekeys) if value]
+        sitekeys = [
+            value
+            for value in dict.fromkeys(sitekeys)
+            if value and not str(value).startswith("YOUR_")
+        ]
         if sitekeys:
             facts["sitekeys"] = sitekeys
             if facts.get("captcha_type") == "turnstile" and facts.get("turnstile_site_key"):
@@ -1012,6 +1144,28 @@ class ShortlinkBypassEngine:
             and "cloudflare" in (response.headers.get("server", "").lower() + text)
             and "just a moment" in text
         )
+
+    def _decode_google_wrapper(self, value: str) -> str | None:
+        if not value:
+            return None
+        parsed = urlparse(value)
+        if parsed.netloc.lower() not in {"google.com", "www.google.com"} or parsed.path != "/url":
+            return self._clean_url(value)
+        return self._clean_url(parse_qs(parsed.query).get("url", [""])[0]) or None
+
+    def _decode_signed_json_cookie(self, value: str) -> dict[str, Any] | None:
+        if not value or "." not in value:
+            return None
+        head = value.split(".", 1)[0]
+        for candidate in (head, head + "=", head + "=="):
+            try:
+                text = base64.urlsafe_b64decode(candidate).decode("utf-8", errors="ignore")
+                data = json.loads(text)
+            except Exception:
+                continue
+            if isinstance(data, dict):
+                return data
+        return None
 
     def _pick_preferred_bypass_url(self, urls: list[str], input_url: str) -> str | None:
         source_host = urlparse(input_url).netloc.lower()

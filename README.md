@@ -24,6 +24,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | `link.adlink.click` | Live bypass | Uses browserless TLS impersonation against `blog.adlink.click`, with live Chromium kept as fallback |
 | `oii.la` | Analysis only | Static mapping and downstream extraction |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
+| `xut.io` -> `autodime cwsafelinkphp` | Analysis only | Warmup wrapper and `Step 1/6` IconCaptcha gate are mapped, but the stepwise captcha flow is not solved yet |
 
 ## How it works
 
