@@ -1,5 +1,37 @@
 # Changelog
 
+## 2026-04-18
+
+### xut.io initial family mapping
+- Added first structured notes for sample `https://xut.io/3lid`.
+- Verified that `xut.io` is not yet its own final engine family. The tested alias immediately redirects into `https://autodime.com/cwsafelinkphp/go.php?link=snpurl%2F3lid`.
+- Verified the current warmup chain:
+  - `xut.io` sets `AppSession` and `ref3lid`
+  - `autodime ... go.php` sets short-lived cookie `fexkomin`
+  - that response then redirects to a Google wrapper for `https://autodime.com/`
+  - replaying `https://autodime.com/` with the warmed cookies and Google referer yields live page `Step 1/6`
+- Captured the active gate facts from the live step page:
+  - countdown `10s`
+  - captcha provider `iconcaptcha`
+  - endpoints `/cwsafelinkphp/sl-iconcaptcha-request.php` and `/cwsafelinkphp/sl-iconcaptcha-verify.php`
+  - path-scoped session cookie `CWSLSESSID`
+- Recorded Boskuu's provided downstream success oracle for this sample:
+  - `https://onlyfaucet.com/links/back/s7tM4CWuTNyfUkOLoqjR/USDT/b67127d45564acfeb4ef509e8a682ff5`
+
+### Files changed
+- `ROADMAP.md`
+  - added `xut.io` into tracked scope and current known facts
+- `references/shortlink-family-initial-map.md`
+  - added initial wrapper-family map for `xut.io -> autodime cwsafelinkphp`
+
+### Why this exists
+- Boskuu supplied a new shortlink sample and the expected final downstream URL.
+- Before writing a handler, the stronger evidence was to map the real wrapper family and its first hard gates.
+
+### Guardrail
+- Do not claim `xut.io` support yet.
+- A future handler should only call this family `supported` after it reaches the final downstream `onlyfaucet.com/links/back/...` style oracle, not just the Google warmup redirect or the `Step 1/6` page.
+
 ## 2026-04-16
 
 ### shrinkme.click final chain fix

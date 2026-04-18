@@ -4,6 +4,7 @@
 - `link.adlink.click`
 - `shrinkme.click`
 - `oii.la`
+- `xut.io` -> wrapper into `autodime.com/cwsafelinkphp`
 - foundation inventory for reusable solver/browser components
 
 ## What is already proven
@@ -162,6 +163,48 @@
   - for this family on Rawon, the blocker was not that the lane is impossible
   - the blocker was that raw HTTP and one-shot FlareSolverr API calls were the wrong execution lane for this sample
   - the earlier bot bug came from stopping at the first visible `maqal360` article instead of continuing the interstitial chain through the shared browser session
+
+### xut.io -> autodime cwsafelinkphp
+- Sample checked:
+  - `https://xut.io/3lid`
+- Boskuu already supplied the expected downstream final for this sample:
+  - `https://onlyfaucet.com/links/back/s7tM4CWuTNyfUkOLoqjR/USDT/b67127d45564acfeb4ef509e8a682ff5`
+- Entry behavior is a true HTTP redirect, not an HTML page:
+  - `302 -> https://autodime.com/cwsafelinkphp/go.php?link=snpurl%2F3lid`
+- Initial cookies observed on `xut.io`:
+  - `AppSession`
+  - `ref3lid` with `Max-Age=300`
+- First `autodime` handoff currently behaves like an anti-bot / warmup step:
+  - request to `.../go.php?link=snpurl%2F3lid` sets cookie `fexkomin`
+  - same response then `302`s to a Google wrapper URL whose `url=` points to `https://autodime.com/`
+- Decoded `fexkomin` payload on the tested sample contained:
+  - `step = 1`
+  - `sid = /3lid`
+  - short-lived `iat/exp`
+  - `nonce`
+  - `fp` fingerprint hash
+- After replaying `https://autodime.com/` with the warmed cookie jar and a Google referer, the live page becomes:
+  - title `Step 1/6`
+  - subtitle `Preparing a secure redirect. When the timer ends, solve the captcha to continue.`
+- Runtime config observed in DOM:
+  - `countdown: 10`
+  - `captchaProvider: 'iconcaptcha'`
+  - `iconcaptchaEndpoint: '/cwsafelinkphp/sl-iconcaptcha-request.php'`
+  - `verifyUrl: '/cwsafelinkphp/sl-iconcaptcha-verify.php'`
+- Captcha form facts:
+  - hidden input `_iconcaptcha-token`
+  - widget class `.iconcaptcha-widget`
+  - cookie `CWSLSESSID` is set under path `/cwsafelinkphp/`
+- Important interpretation:
+  - `xut.io` itself looks like a thin wrapper / alias entry point
+  - the real technical family is probably the reusable `autodime cwsafelinkphp` step engine behind it
+  - success is not proven by the Google redirect or step page alone; the final oracle for this sample remains the downstream `onlyfaucet.com/links/back/...` URL above
+- Current blocker:
+  - Step 1 still needs either a real IconCaptcha solve or a cheaper server-side replay of the same state transition
+- Next best action:
+  1. inspect `sl-iconcaptcha-request.php` and `sl-iconcaptcha-verify.php` contract with the warmed session
+  2. see whether step 2..6 are only timed `nextUrl` posts like the shipped `app.js` suggests
+  3. test whether the family exposes a direct endpoint that can be replayed once the warmup cookies are valid
 
 ### Reusable workspace components
 - Best solver/browser base:

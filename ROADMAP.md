@@ -5,6 +5,7 @@
   - `link.adlink.click`
   - `shrinkme.click`
   - `oii.la`
+  - `xut.io`
 - Contoh downstream yang sudah terlihat dari sampel:
   - `coinadster.com`
   - `99faucet.com`
@@ -91,6 +92,19 @@
     3. parse `form#go-link`
     4. submit final sekitar `4.0s` setelah page load
   - benchmark lokal untuk `CBr27fn4of3` sekarang turun ke sekitar `5.6s` sampai `5.9s` end-to-end di engine
+- `xut.io` sample baru `https://xut.io/3lid` sudah dipetakan sebagai wrapper awal ke family `autodime.com/cwsafelinkphp`:
+  - `GET https://xut.io/3lid` memberi `302 -> https://autodime.com/cwsafelinkphp/go.php?link=snpurl%2F3lid`
+  - entry `xut.io` set cookie `AppSession` dan `ref3lid`
+  - hop `autodime ... go.php` set cookie `fexkomin` yang payloadnya memuat `step=1` dan `sid=/3lid`, lalu `302` ke Google wrapper untuk `https://autodime.com/`
+  - setelah cookie + referer Google dipakai ke `https://autodime.com/`, page yang muncul adalah `Step 1/6`
+  - runtime config live yang teramati:
+    - `countdown = 10`
+    - `captchaProvider = iconcaptcha`
+    - `iconcaptchaEndpoint = /cwsafelinkphp/sl-iconcaptcha-request.php`
+    - `verifyUrl = /cwsafelinkphp/sl-iconcaptcha-verify.php`
+  - sample downstream final yang Boskuu kasih untuk alias ini:
+    - `https://onlyfaucet.com/links/back/s7tM4CWuTNyfUkOLoqjR/USDT/b67127d45564acfeb4ef509e8a682ff5`
+  - arti praktis saat ini: `xut.io` belum jadi handler live terpisah, tapi sudah jelas ini kandidat family baru berbasis wrapper `cwsafelinkphp` dengan gate stepwise + IconCaptcha
 - New implementation milestone:
   - `projects/shortlink-bypass-bot/engine.py` sekarang sudah ada sebagai core analyzer modular per family
   - `projects/shortlink-bypass-bot/bot.py` sudah ada sebagai wrapper Telegram sederhana untuk `/bypass` dan `/adlink`
@@ -142,6 +156,7 @@
 - Pertahankan lane `oii.la` berbasis hidden-token decode sebagai lane utama yang paling murah dan paling reproducible.
 - Jika riset `oii.la` dilanjut, fokuskan ke success oracle setelah URL `links/back/...`, bukan ke POST `advertisingcamps` yang saat ini terbukti hanya ad handoff.
 - Untuk `shrinkme.click`, fokus lanjutan sekarang bukan lagi proof-of-concept, tapi validasi apakah lane direct `MrProBlogger` dengan ThemeZon referer ini konsisten di alias lain juga.
+- Untuk `xut.io`, next narrow action sekarang adalah memetakan replay minimal family `autodime cwsafelinkphp` dari `Step 1/6` ke step berikutnya, lalu cek apakah ada shortcut HTTP yang lebih murah daripada solve UI penuh.
 
 ## Boundary catalog
 - `entry shortlink` -> status: narrowed
