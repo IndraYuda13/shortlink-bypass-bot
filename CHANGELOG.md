@@ -1,5 +1,81 @@
 # Changelog
 
+## 2026-04-21
+
+### xut/autodime warm-handoff lane wired into engine
+- Added `xut_live_browser.py` as the first live helper for the `xut -> autodime -> gamescrate` lane.
+- The helper now:
+  - solves the live IconCaptcha Step 1 through the local solver API
+  - drives the same Chromium session through Step 2, Step 3, and Step 4
+  - hands the warmed browser over to the patched local FlareSolverr attach mode through `debuggerAddress`
+  - reuses the current `gamescrate` page instead of restarting from a fresh browser
+- `engine.py` now calls this helper for the autodime/xut family when the helper runtime is available.
+- Important guardrail kept intact:
+  - if the helper still does **not** reach the downstream `onlyfaucet.com/links/back/...` oracle, the engine returns a partial live-progress result instead of falsely claiming success.
+- Added regression coverage so the xut handler can now surface either:
+  - partial live progress from the handoff lane, or
+  - a final bypass URL if a future run really closes the oracle.
+
+### xut/autodime partial-support wording fix
+- Reproduced the live `https://xut.io/3lid` lane again and confirmed the current implementation still stops at the Step 1 IconCaptcha boundary.
+- Fresh live browser proof still lands on `Step 1/6`, renders the IconCaptcha strip, and populates:
+  - `_iconcaptcha-token`
+  - `ic-rq`
+  - `ic-wid`
+  - `ic-cid`
+- Root cause of the confusing bot reply was not a broken sample alias. The engine for this family is still intentionally partial and returns `ICONCAPTCHA_STEP1_MAPPED` before any final `onlyfaucet.com/links/back/...` oracle is proven.
+- Updated bot output so non-final results are labeled clearly as:
+  - `Status: Partial / belum final bypass`
+
+### xut/autodime live progression breakthrough
+- Switched from manual guessing to the real IconCaptcha lane and replayed live browser captures from `https://xut.io/3lid`.
+- Confirmed that the existing local/public IconCaptcha solver can process the canvas, but its current heuristic is not reliable for this autodime variant. The solver repeatedly chose a wrong cell on sampled live challenges.
+- Captured the real Step 1 request contract more tightly:
+  - initial challenge load posts `action = LOAD` to `/cwsafelinkphp/sl-iconcaptcha-request.php`
+  - a user click posts `action = SELECTION` to the same endpoint with coordinates like `x`, `y`, and `width`
+  - when the selection is wrong, the response does **not** return `completed=true`; the widget resets and loads a new challenge
+- Ran live cell brute-force on fresh challenges and proved that at least one valid selection advances beyond Step 1.
+- New proven downstream progression for the sample lane:
+  - `Step 1/6` on `autodime.com`
+  - `Step 2/6` on `autodime.com/blog/...`
+  - `Step 3/6` on `textfrog.com/links/...`
+  - `Step 4/6` on another `textfrog.com/links/...`
+  - handoff into `https://gamescrate.app/cwsafelinkphp/setcookie.php?t=...`
+- New blocker after the progression breakthrough:
+  - `gamescrate.app` is now the active boundary
+  - browser trace reaches the `setcookie.php?t=...` lane, but then sits on Cloudflare `Just a moment...`
+  - browserless `curl_cffi` impersonation against that `gamescrate` lane still returned `403` / Cloudflare challenge, so the easy HTTP shortcut is not proven yet
+
+### xut/autodime solver consistency and same-session replay update
+- Found that the local `indra-api-hub` IconCaptcha endpoint was still exposing the old default grouping threshold `5.0`, which made the live autodime solver lane inconsistent across fresh challenges.
+- Updated the shared IconCaptcha defaults to `20.0` and restarted the local hub so the live API now returns the newer grouping threshold.
+- Fresh live proof after the reload:
+  - Step 1 can now auto-advance to `Step 2/6` through the local solver API in a real browser session
+  - one verification run solved on the first attempt and reached `https://autodime.com/blog/...` `Step 2/6`
+  - another verification run solved within three attempts on live refreshed challenges
+- New same-session replay proof:
+  - a single Chromium session can now be driven from `xut.io/3lid` through Step 1, Step 2, Step 3, and Step 4 again after the solver reload
+  - the same session still lands on `https://gamescrate.app/cwsafelinkphp/setcookie.php?t=...`
+  - final page state remains `Just a moment...`
+- Deeper `gamescrate` DOM probe from the warmed headless session:
+  - the page DOM does **not** expose a normal iframe or checkbox element at probe time
+  - instead it shows a hidden placeholder input `name="cf-turnstile-response"` under container `#GQTnq7`
+  - page source also loads `/cdn-cgi/challenge-platform/.../orchestrate/chl_page/...`
+- New click-boundary proof on `gamescrate`:
+  - blind clicking the **left side** of `#GQTnq7` changes the body text from `Performing security verification` to `Verifying you are human. This may take a few seconds.`
+  - clicking the center of the same box does **not** cause that state change
+  - this proves the live Cloudflare widget is spatially present and reacts to pointer input even when Selenium cannot find a normal checkbox selector
+- Practical meaning:
+  - the Step 1 boundary is weaker now and partly automatable
+  - the active hard blocker remains the downstream `gamescrate` Cloudflare managed challenge, but the boundary is now narrower: widget interaction is possible, selector visibility is the problem
+
+### Files changed
+- `bot.py`
+  - non-success results now explicitly show that the lane is partial instead of looking like a generic failed live bypass
+
+### Guardrail
+- Do not present `xut.io` as a solved family until the handler actually crosses the `gamescrate` Cloudflare gate and reaches the downstream `onlyfaucet.com/links/back/...` oracle.
+
 ## 2026-04-18
 
 ### xut.io initial family mapping

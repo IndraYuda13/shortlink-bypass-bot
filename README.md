@@ -24,13 +24,14 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | `link.adlink.click` | Live bypass | Uses browserless TLS impersonation against `blog.adlink.click`, with live Chromium kept as fallback |
 | `oii.la` | Analysis only | Static mapping and downstream extraction |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
-| `xut.io` -> `autodime cwsafelinkphp` | Analysis only | Warmup wrapper and `Step 1/6` IconCaptcha gate are mapped, but the stepwise captcha flow is not solved yet |
+| `xut.io` -> `autodime cwsafelinkphp` | Partial live lane | Warmup wrapper, Step 1 solver, and warm-browser handoff into patched FlareSolverr are wired, but the final `onlyfaucet.com/links/back/...` oracle is still not reached |
 
 ## How it works
 
 - `bot.py` receives Telegram commands, enforces the required join gate, and edits the same status message while work is running
 - `engine.py` detects the target family and chooses the right handler
 - `adlink_live_browser.py` stays as Adlink fallback when the faster browserless lane is not enough
+- `xut_live_browser.py` drives the live autodime -> gamescrate lane and hands off to the patched local FlareSolverr attach mode when the browser has already reached the hard boundary
 - `references/` and `ROADMAP.md` keep technical notes and current implementation status
 
 Flow docs:

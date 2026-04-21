@@ -15,7 +15,7 @@
 - [in progress] 1. Petakan flow teknis per shortlink family
 - [done] 2. Audit komponen solver/browser/flaresolverr yang sudah ada di workspace
 - [in progress] 3. Tentukan boundary utama dan success oracle per family
-- [in progress] 4. Rancang arsitektur bot bypass yang modular
+- [done] 4. Rancang arsitektur bot bypass yang modular
 - [done] 5. Buat POC runner untuk minimal 1 family yang bisa direplay
 - [done] 6. Verifikasi POC pada sampel link nyata tanpa spam
 - [in progress] 7. Dokumentasikan lesson reusable dan next patch list
@@ -78,6 +78,10 @@
     - `form action = /links/go`
     - hidden `ad_form_data`
     - anchor `Get Link` menuju URL verify `earn-pepe`
+- `xut.io` sekarang tidak lagi hanya berhenti di mapping Step 1 di level engine:
+  - helper live `xut_live_browser.py` sudah dihubungkan ke `engine.py`
+  - helper ini bisa melewati Step 1, maju ke `gamescrate`, lalu melakukan warm-browser handoff ke patched local FlareSolverr
+  - status jujur saat ini tetap **partial** karena final oracle `onlyfaucet.com/links/back/...` masih belum keluar stabil
   - lane yang lebih cepat sekarang sudah terbukti:
     1. lolos Cloudflare sampai browser mendarat di article `maqal360`
     2. langsung lompat ke `https://blog.adlink.click/<alias>` dalam browser session yang sama
@@ -108,9 +112,29 @@
     - browser session punya cookie path-scoped `CWSLSESSID` di `/cwsafelinkphp/`
     - replay HTTP di luar browser sekarang bisa memuat challenge lagi kalau pakai cookie penuh + `X-IconCaptcha-Token`
     - replay yang sama tanpa header token itu jatuh ke error `invalid form token`
+  - contract selection Step 1 sekarang juga sudah kebuka:
+    - klik user dikirim sebagai `action = SELECTION` ke `/cwsafelinkphp/sl-iconcaptcha-request.php`
+    - payload membawa `challengeId`, `x`, `y`, `width`, `token`, `timestamp`, `initTimestamp`
+    - kalau pilihan salah, respons tidak mengandung `completed=true` dan widget reset ke challenge baru
+  - solver IconCaptcha lama ternyata belum cocok untuk varian autodime ini:
+    - solver bisa baca canvas, tapi pada sample live yang diuji hasil pilihannya sering salah
+    - brute-force live menunjukkan sel benar berubah per challenge dan minimal satu pilihan valid memang bisa meloloskan Step 1
+  - progres live sesudah Step 1 sekarang sudah terbukti:
+    - `Step 2/6` di `autodime.com/blog/...`
+    - `Step 3/6` di `textfrog.com/links/...`
+    - `Step 4/6` di `textfrog.com/links/...`
+    - handoff ke `https://gamescrate.app/cwsafelinkphp/setcookie.php?t=...`
   - sample downstream final yang Boskuu kasih untuk alias ini:
     - `https://onlyfaucet.com/links/back/s7tM4CWuTNyfUkOLoqjR/USDT/b67127d45564acfeb4ef509e8a682ff5`
-  - arti praktis saat ini: boundary `LOAD challenge` sudah kebuka, jadi blocker utama pindah dari `browser-only load` ke `SELECTION + verify` Step 1 lalu langkah 2..6
+  - update live terbaru:
+    - local `indra-api-hub` IconCaptcha lane sempat masih pakai default lama `similarity_threshold = 5.0`; sekarang sudah disamakan ke `20.0` dan service sudah direstart
+    - setelah reload itu, Step 1 kembali bisa auto-lolos di browser live via API solver lokal
+    - verifikasi baru menunjukkan Step 1 kadang lolos di attempt pertama, kadang butuh beberapa refresh challenge, jadi lane ini sudah lebih kuat tetapi belum 100% stabil
+    - same-session browser replay sekarang sudah terbukti bisa menyeberang lagi sampai `gamescrate.app/cwsafelinkphp/setcookie.php?t=...` setelah solver reload
+    - probe DOM headless di `gamescrate` menunjukkan page memuat challenge platform Cloudflare dan placeholder hidden input `cf-turnstile-response`, tetapi tidak mengekspos iframe/checkbox selector biasa ke Selenium
+    - namun blind click ke sisi kiri container widget `#GQTnq7` mengubah state page dari `Performing security verification` menjadi `Verifying you are human. This may take a few seconds.`
+    - artinya widget Cloudflare itu benar-benar ada dan merespons pointer input, hanya saja boundary DOM/selector-nya tersembunyi atau tidak dirender seperti elemen checkbox biasa di probe ini
+  - arti praktis saat ini: blocker utama sudah pindah lagi, dari `Step 1 captcha` ke `gamescrate Cloudflare gate` sebelum oracle final
 - New implementation milestone:
   - `projects/shortlink-bypass-bot/engine.py` sekarang sudah ada sebagai core analyzer modular per family
   - `projects/shortlink-bypass-bot/bot.py` sudah ada sebagai wrapper Telegram sederhana untuk `/bypass` dan `/adlink`
@@ -164,7 +188,10 @@
 - Pertahankan lane `oii.la` berbasis hidden-token decode sebagai lane utama yang paling murah dan paling reproducible.
 - Jika riset `oii.la` dilanjut, fokuskan ke success oracle setelah URL `links/back/...`, bukan ke POST `advertisingcamps` yang saat ini terbukti hanya ad handoff.
 - Untuk `shrinkme.click`, fokus lanjutan sekarang bukan lagi proof-of-concept, tapi validasi apakah lane direct `MrProBlogger` dengan ThemeZon referer ini konsisten di alias lain juga.
-- Untuk `xut.io`, next narrow action sekarang adalah membedah payload `SELECTION` dan verify Step 1 pada family `autodime cwsafelinkphp`, lalu cek apakah step 2..6 bisa direplay lebih murah lewat HTTP.
+- Untuk `xut.io`, narrow action sekarang sudah bergeser lagi:
+  - pertahankan lane Step 1 yang sekarang lebih konsisten lewat solver API lokal yang sudah direload
+  - fokus utama berikutnya adalah boundary `gamescrate` Cloudflare managed challenge, bukan lagi sekadar mapping `SELECTION`
+  - cek apakah challenge itu butuh lane non-headless / xvfb / real Chrome profile / interaksi widget berbasis koordinat atau shadow boundary yang tidak muncul di probe selector biasa
 - Engine sudah punya handler awal untuk family ini, tapi masih jujur berhenti di `ICONCAPTCHA_STEP1_MAPPED` sampai success oracle final benar-benar ketemu.
 
 ## Boundary catalog

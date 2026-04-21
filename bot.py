@@ -263,6 +263,8 @@ class TelegramShortlinkBot:
             f"<b>Family:</b> {escape(result.family)}",
             f"<b>Message:</b> {escape(result.message)}",
         ]
+        if result.status != 1:
+            lines.append("<b>Status:</b> Partial / belum final bypass")
         if result.facts.get("captcha_type"):
             lines.append(f"<b>Captcha:</b> {escape(str(result.facts.get('captcha_type')))}")
         if result.facts.get("sitekey"):

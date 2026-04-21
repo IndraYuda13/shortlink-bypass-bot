@@ -22,12 +22,17 @@ except Exception:
     curl_requests = None
 
 PROJECT_ROOT = Path(__file__).resolve().parent
+WORKSPACE_ROOT = PROJECT_ROOT.parent.parent
 DEFAULT_TIMEOUT = 30
 ADLINK_BROWSER_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_ADLINK_BROWSER_TIMEOUT", "240"))
 ADLINK_HTTP_IMPERSONATE = os.getenv("SHORTLINK_BYPASS_ADLINK_IMPERSONATE", "chrome136")
 ADLINK_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_ADLINK_HELPER", str(PROJECT_ROOT / "adlink_live_browser.py"))
 HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_HELPER_PYTHON", sys.executable)
 HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_HELPER_PYTHONPATH", "")
+XUT_BROWSER_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_XUT_BROWSER_TIMEOUT", "300"))
+XUT_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_XUT_HELPER", str(PROJECT_ROOT / "xut_live_browser.py"))
+XUT_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_XUT_HELPER_PYTHON", HELPER_PYTHON)
+XUT_HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_XUT_HELPER_PYTHONPATH", "")
 DEFAULT_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -201,6 +206,43 @@ class ShortlinkBypassEngine:
             notes.append("runtime gate yang aktif sekarang adalah IconCaptcha dengan countdown 10 detik")
         if facts.get("fexkomin_claims"):
             notes.append("cookie fexkomin membawa step dan sid pendek yang membantu mengikat alias wrapper ke state server")
+
+        live = self._resolve_xut_live(url)
+        if live:
+            facts["live_helper"] = {k: v for k, v in live.items() if k not in {"facts", "notes", "blockers", "bypass_url"}}
+            if isinstance(live.get("facts"), dict):
+                facts["live_helper_facts"] = live["facts"]
+            if live.get("notes"):
+                notes.extend(str(item) for item in live.get("notes", []) if str(item).strip())
+
+            if live.get("status") == 1 and live.get("bypass_url"):
+                return BypassResult(
+                    status=1,
+                    input_url=url,
+                    family=family,
+                    message=str(live.get("message") or "LIVE_BROWSER_FINAL_OK"),
+                    bypass_url=str(live.get("bypass_url")),
+                    stage=str(live.get("stage") or "final-bypass"),
+                    facts=facts,
+                    blockers=list(live.get("blockers") or []),
+                    notes=notes,
+                )
+
+            live_stage = str(live.get("stage") or "")
+            live_message = str(live.get("message") or "")
+            if live_stage or live_message:
+                merged_blockers = blockers + [str(item) for item in live.get("blockers", []) if str(item).strip()]
+                deduped_blockers = list(dict.fromkeys(merged_blockers))
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message=live_message or "LIVE_BROWSER_PROGRESS_ONLY",
+                    stage=live_stage or "live-browser-partial",
+                    facts=facts,
+                    blockers=deduped_blockers,
+                    notes=notes,
+                )
 
         return BypassResult(
             status=0,
@@ -575,6 +617,69 @@ class ShortlinkBypassEngine:
             return {
                 "status": 0,
                 "message": stderr or f"helper output tidak valid: {last_line[:240]}",
+            }
+
+        if proc.returncode != 0 and not payload.get("message"):
+            payload["message"] = f"helper exit {proc.returncode}"
+        return payload
+
+    def _resolve_xut_live(self, url: str) -> dict[str, Any]:
+        if not (os.path.exists(XUT_LIVE_HELPER) and os.path.exists(XUT_HELPER_PYTHON)):
+            return {}
+
+        env = os.environ.copy()
+        helper_pythonpath_parts = [part for part in [XUT_HELPER_PYTHONPATH, HELPER_PYTHONPATH] if part]
+        if helper_pythonpath_parts:
+            existing = env.get("PYTHONPATH", "")
+            helper_pythonpath = ":".join(helper_pythonpath_parts)
+            env["PYTHONPATH"] = f"{helper_pythonpath}:{existing}" if existing else helper_pythonpath
+
+        try:
+            proc = subprocess.run(
+                [
+                    XUT_HELPER_PYTHON,
+                    XUT_LIVE_HELPER,
+                    url,
+                    "--timeout",
+                    str(XUT_BROWSER_TIMEOUT),
+                ],
+                capture_output=True,
+                text=True,
+                timeout=XUT_BROWSER_TIMEOUT + 60,
+                env=env,
+            )
+        except subprocess.TimeoutExpired:
+            return {
+                "status": 0,
+                "message": "XUT_LIVE_BROWSER_TIMEOUT",
+                "stage": "live-browser-timeout",
+                "blockers": ["helper live browser timeout sebelum final oracle tercapai"],
+            }
+        except Exception as exc:
+            return {
+                "status": 0,
+                "message": f"XUT_LIVE_BROWSER_ERROR: {exc}",
+                "stage": "live-browser-error",
+            }
+
+        stdout = (proc.stdout or "").strip()
+        if not stdout:
+            stderr = (proc.stderr or "").strip()
+            return {
+                "status": 0,
+                "message": stderr or f"helper exit {proc.returncode}",
+                "stage": "live-browser-no-output",
+            }
+
+        last_line = stdout.splitlines()[-1]
+        try:
+            payload = json.loads(last_line)
+        except Exception:
+            stderr = (proc.stderr or "").strip()
+            return {
+                "status": 0,
+                "message": stderr or f"helper output tidak valid: {last_line[:240]}",
+                "stage": "live-browser-invalid-output",
             }
 
         if proc.returncode != 0 and not payload.get("message"):
