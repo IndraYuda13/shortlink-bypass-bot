@@ -34,6 +34,11 @@ XUT_BROWSER_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_XUT_BROWSER_TIMEOUT", "300
 XUT_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_XUT_HELPER", str(PROJECT_ROOT / "xut_live_browser.py"))
 XUT_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_XUT_HELPER_PYTHON", HELPER_PYTHON)
 XUT_HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_XUT_HELPER_PYTHONPATH", "")
+CUTY_BROWSER_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_CUTY_BROWSER_TIMEOUT", "240"))
+CUTY_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_CUTY_HELPER", str(PROJECT_ROOT / "cuty_live_browser.py"))
+CUTY_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_CUTY_HELPER_PYTHON", HELPER_PYTHON)
+CUTY_HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_CUTY_HELPER_PYTHONPATH", "")
+CUTY_TURNSTILE_SOLVER_URL = os.getenv("SHORTLINK_BYPASS_CUTY_TURNSTILE_SOLVER_URL", "http://127.0.0.1:5000")
 DEFAULT_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -87,6 +92,10 @@ class ShortlinkBypassEngine:
             return self._handle_gplinks(url)
         if host == "ez4short.com" or host.endswith(".ez4short.com"):
             return self._handle_ez4short(url)
+        if host == "cuty.io" or host.endswith(".cuty.io") or host == "cuttlinks.com" or host.endswith(".cuttlinks.com"):
+            return self._handle_cuty(url)
+        if host == "lnbz.la" or host.endswith(".lnbz.la"):
+            return self._handle_lnbz(url)
         return BypassResult(
             status=0,
             input_url=url,
@@ -626,6 +635,154 @@ class ShortlinkBypassEngine:
                 blockers=[str(exc)],
             )
 
+
+    def _handle_cuty(self, url: str) -> BypassResult:
+        family = "cuty.io"
+        facts: dict[str, Any] = {
+            "helper": CUTY_LIVE_HELPER,
+            "solver_url": CUTY_TURNSTILE_SOLVER_URL,
+        }
+        live = self._resolve_cuty_live(url)
+        facts.update({
+            "live_stage": live.get("stage"),
+            "final_url": live.get("final_url"),
+            "final_title": live.get("final_title"),
+            "sitekey": live.get("sitekey"),
+            "waited_seconds": live.get("waited_seconds"),
+            "timeline": live.get("timeline") or [],
+        })
+        if live.get("status") == 1 and live.get("bypass_url"):
+            return BypassResult(
+                status=1,
+                input_url=url,
+                family=family,
+                message="CUTY_LIVE_TURNSTILE_CHAIN_OK",
+                bypass_url=live.get("bypass_url"),
+                stage=live.get("stage") or "live-browser-turnstile-go",
+                facts=facts,
+                notes=[
+                    "live browser helper uses same browser context for first form, Turnstile token injection, final timer, and /go submit",
+                    "success is claimed only after the browser leaves cuttlinks/cuty to the downstream target",
+                ],
+            )
+        return BypassResult(
+            status=0,
+            input_url=url,
+            family=family,
+            message="CUTY_LIVE_CHAIN_FAILED",
+            stage=live.get("stage") or "live-browser",
+            facts=facts,
+            blockers=[str(live.get("message") or "live helper did not return downstream final URL")],
+        )
+
+    def _handle_lnbz(self, url: str) -> BypassResult:
+        family = "lnbz.la"
+        facts: dict[str, Any] = {}
+        try:
+            session = self._new_impersonated_session()
+            page = session.get(url, timeout=self.timeout, allow_redirects=True)
+            soup = BeautifulSoup(page.text, "html.parser")
+            facts.update(self._common_facts_for_session(page, soup, session))
+            facts["entry_url"] = page.url
+
+            current = page
+            current_soup = soup
+            steps: list[dict[str, Any]] = []
+            for index in range(1, 6):
+                form = current_soup.select_one("form#go_d2") or current_soup.find("form")
+                if current_soup.select_one("form#go-link"):
+                    break
+                if not form:
+                    return BypassResult(
+                        status=0,
+                        input_url=url,
+                        family=family,
+                        message="LNBZ_CHAIN_FORM_NOT_FOUND",
+                        stage=f"step-{index}",
+                        facts=facts,
+                        blockers=["expected entry/go_d2 form before final go-link page"],
+                    )
+                action = urljoin(current.url, form.get("action") or "")
+                hidden = self._extract_hidden_inputs(form)
+                steps.append({"index": index, "url": current.url, "action": action, "field_names": sorted(hidden.keys())})
+                origin = f"{urlparse(current.url).scheme}://{urlparse(current.url).netloc}"
+                current = session.post(
+                    action,
+                    data=hidden,
+                    timeout=self.timeout,
+                    allow_redirects=True,
+                    headers={"Origin": origin, "Referer": current.url},
+                )
+                current_soup = BeautifulSoup(current.text, "html.parser")
+
+            facts["steps"] = steps
+            final_form = current_soup.select_one("form#go-link")
+            if not final_form:
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message="LNBZ_GO_LINK_FORM_NOT_FOUND",
+                    stage="article-chain",
+                    facts=facts,
+                    blockers=["article/survey chain did not reach final form#go-link"],
+                )
+
+            hidden = self._extract_hidden_inputs(final_form)
+            action = urljoin(current.url, final_form.get("action") or "/links/go")
+            timer = self._extract_numeric_timer(current.text, default=15.0)
+            wait_seconds = max(timer + 1.0, 16.0)
+            facts["go_link_action"] = action
+            facts["hidden_inputs"] = hidden
+            facts["timer_seconds"] = timer
+            facts["wait_seconds"] = wait_seconds
+            time.sleep(wait_seconds)
+
+            submit = session.post(
+                action,
+                data=hidden,
+                timeout=self.timeout,
+                headers={
+                    "Origin": "https://lnbz.la",
+                    "Referer": current.url,
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Accept": "application/json, text/javascript, */*; q=0.01",
+                },
+            )
+            payload = self._safe_json(submit)
+            facts["submit_payload"] = payload
+            target = self._clean_url(str(payload.get("url") or "")) or None
+            if payload.get("status") == "success" and target:
+                return BypassResult(
+                    status=1,
+                    input_url=url,
+                    family=family,
+                    message="LNBZ_ARTICLE_CHAIN_OK",
+                    bypass_url=target,
+                    stage="links-go",
+                    facts=facts,
+                    notes=["same-session article chain reached form#go-link and /links/go returned the downstream URL"],
+                )
+
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="LNBZ_SUBMIT_FAILED",
+                stage="links-go",
+                facts=facts,
+                blockers=[str(payload.get("message") or "links/go did not return success URL")],
+            )
+        except Exception as exc:
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="REQUEST_FAILED",
+                facts=facts,
+                blockers=[str(exc)],
+            )
+
     def _handle_shrinkme(self, url: str) -> BypassResult:
         try:
             response = self._get(url)
@@ -929,6 +1086,50 @@ class ShortlinkBypassEngine:
                 "message": stderr or f"helper output tidak valid: {last_line[:240]}",
             }
 
+        if proc.returncode != 0 and not payload.get("message"):
+            payload["message"] = f"helper exit {proc.returncode}"
+        return payload
+
+
+    def _resolve_cuty_live(self, url: str) -> dict[str, Any]:
+        if not (os.path.exists(CUTY_LIVE_HELPER) and os.path.exists(CUTY_HELPER_PYTHON)):
+            return {"status": 0, "message": "cuty live helper tidak tersedia"}
+
+        env = os.environ.copy()
+        helper_pythonpath_parts = [part for part in [CUTY_HELPER_PYTHONPATH, HELPER_PYTHONPATH] if part]
+        if helper_pythonpath_parts:
+            existing = env.get("PYTHONPATH", "")
+            helper_pythonpath = ":".join(helper_pythonpath_parts)
+            env["PYTHONPATH"] = f"{helper_pythonpath}:{existing}" if existing else helper_pythonpath
+        try:
+            proc = subprocess.run(
+                [
+                    CUTY_HELPER_PYTHON,
+                    CUTY_LIVE_HELPER,
+                    url,
+                    "--timeout",
+                    str(CUTY_BROWSER_TIMEOUT),
+                    "--solver-url",
+                    CUTY_TURNSTILE_SOLVER_URL,
+                ],
+                capture_output=True,
+                text=True,
+                timeout=CUTY_BROWSER_TIMEOUT + 30,
+                env=env,
+            )
+        except subprocess.TimeoutExpired:
+            return {"status": 0, "message": "cuty live browser timeout"}
+        except Exception as exc:
+            return {"status": 0, "message": str(exc)}
+
+        stdout = (proc.stdout or "").strip()
+        if not stdout:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper exit {proc.returncode}"}
+        last_line = stdout.splitlines()[-1]
+        try:
+            payload = json.loads(last_line)
+        except Exception:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper output tidak valid: {last_line[:240]}"}
         if proc.returncode != 0 and not payload.get("message"):
             payload["message"] = f"helper exit {proc.returncode}"
         return payload

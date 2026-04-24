@@ -181,6 +181,37 @@
 - Engine status:
   - partial mapper only, not final bypass support
 
+### cuty.io / cuttlinks.com
+- Sample checked:
+  - `https://cuty.io/AfaX6jx`
+- Entry redirects to:
+  - `https://cuttlinks.com/AfaX6jx?auth_token=...`
+  - then `https://cuttlinks.com/AfaX6jx`
+- Proven live flow:
+  1. first page exposes `form#free-submit-form` and `Continue`
+  2. first submit returns Turnstile page with sitekey `0x4AAAAAAABnHbN4cNchLhd_`
+  3. local Turnstile solver API returns a valid `cf-turnstile-response` token
+  4. same browser context submits captcha form and reaches `last.js` page with `form#submit-form action=https://cuttlinks.com/go/AfaX6jx`
+  5. final submit leaves Cuty/Cuttlinks and lands on `https://www.google.com/`
+- Engine status:
+  - live bypass supported for the sampled Cuty/Cuttlinks path via `cuty_live_browser.py`
+  - success is only claimed after the browser actually navigates to the downstream host
+
+### lnbz.la
+- Sample checked:
+  - `https://lnbz.la/Hmvp6`
+- Proven browserless flow:
+  1. `GET /Hmvp6` sets `refHmvp6` and `visit_token` and returns an entry form to a rotating `avnsgames.com` article
+  2. submit entry form to `avnsgames.com`
+  3. submit two `form#go_d2` article/survey steps
+  4. return to `https://lnbz.la/Hmvp6` and parse final `form#go-link`
+  5. wait the final 15s timer with a safe 16s margin
+  6. `POST https://lnbz.la/links/go` returns the downstream URL
+- Live verification on the sample returned:
+  - `https://cryptoearns.com/links/back/AaDZLgKQsnhy423EIS9c`
+- Engine status:
+  - live browserless bypass supported for the sampled article-chain path
+
 ### link.adlink.click
 - Samples checked:
   - `https://link.adlink.click/CBuahny8kxt`
@@ -329,6 +360,37 @@
   - Turnstile never enables `#continue`
   - cookie/token fields go stale
   - adblock gate or blocked scripts stop the page from progressing
+
+### cuty.io / cuttlinks.com
+- Sample checked:
+  - `https://cuty.io/AfaX6jx`
+- Entry redirects to:
+  - `https://cuttlinks.com/AfaX6jx?auth_token=...`
+  - then `https://cuttlinks.com/AfaX6jx`
+- Proven live flow:
+  1. first page exposes `form#free-submit-form` and `Continue`
+  2. first submit returns Turnstile page with sitekey `0x4AAAAAAABnHbN4cNchLhd_`
+  3. local Turnstile solver API returns a valid `cf-turnstile-response` token
+  4. same browser context submits captcha form and reaches `last.js` page with `form#submit-form action=https://cuttlinks.com/go/AfaX6jx`
+  5. final submit leaves Cuty/Cuttlinks and lands on `https://www.google.com/`
+- Engine status:
+  - live bypass supported for the sampled Cuty/Cuttlinks path via `cuty_live_browser.py`
+  - success is only claimed after the browser actually navigates to the downstream host
+
+### lnbz.la
+- Sample checked:
+  - `https://lnbz.la/Hmvp6`
+- Proven browserless flow:
+  1. `GET /Hmvp6` sets `refHmvp6` and `visit_token` and returns an entry form to a rotating `avnsgames.com` article
+  2. submit entry form to `avnsgames.com`
+  3. submit two `form#go_d2` article/survey steps
+  4. return to `https://lnbz.la/Hmvp6` and parse final `form#go-link`
+  5. wait the final 15s timer with a safe 16s margin
+  6. `POST https://lnbz.la/links/go` returns the downstream URL
+- Live verification on the sample returned:
+  - `https://cryptoearns.com/links/back/AaDZLgKQsnhy423EIS9c`
+- Engine status:
+  - live browserless bypass supported for the sampled article-chain path
 
 ### link.adlink.click
 - `TIMEOUT`

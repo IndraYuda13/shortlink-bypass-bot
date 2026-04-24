@@ -10,10 +10,11 @@ Purpose: durable mapping of Boskuu-provided shortlink samples to their expected 
 | `https://xut.io/hd7AOJ` | `xut.io` -> likely wrapper family | `http://tesskibidixxx.com` | partial for existing xut/autodime sample | New sample target differs from previous `onlyfaucet` xut sample. First action is identify whether it still wraps into `autodime/cwsafelinkphp` or another backend. |
 | `https://tpi.li/Dd5xka` | `tpi.li` | `https://99faucet.com/links/back/haBKjYrugRxDIVCpGqMo` | analysis-only supported | Shared token-tail handler now extracts the sampled faucet target. |
 | `https://ez4short.com/qSyPzeo` | `ez4short.com` | `https://tesskibidixxx.com` | live bypass supported for sample | Fast `game5s.com` referer lane unlocks `form#go-link`, waits the 3s timer, then `/links/go` returns the oracle. |
-| `https://cuty.io/AfaX6jx` | `cuty.io` | `https://google.com` | unsupported | New family to map. |
-| `https://gplinks.co/YVTC` | `gplinks.co` | `http://tesskibidixxx.com` | partial mapper | PowerGam entry and JS target candidate are mapped, but final still returns `not_enough_steps` without the missing ad-impression/conversion contract. |
+| `https://cuty.io/AfaX6jx` | `cuty.io` | `https://google.com` | live bypass supported for sample | CDP Chrome helper solves Turnstile through local solver, reaches `last.js`/`/go`, and lands on Google. |
+| `https://gplinks.co/YVTC` | `gplinks.co` | `http://tesskibidixxx.com` | partial mapper | PowerGam entry and JS target candidate are mapped; non-headless/Xvfb GPT probe still leaves `ad_impressions=0` and no rewarded/impression lifecycle events, so final remains unproven. |
 | `https://sfl.gl/18PZXXI9` | `sfl.gl` | `https://google.com` | live bypass supported for sample | Browserless SafelinkU API flow reaches ready page and extracts `window.location.href`. |
 | `https://exe.io/vkRI1` | `exe.io` | `https://google.com` | unsupported | New family to map. |
+| `https://lnbz.la/Hmvp6` | `lnbz.la` | `https://cryptoearns.com/links/back/AaDZLgKQsnhy423EIS9c` | live bypass supported for sample | Browserless same-session chain through `avnsgames.com` article steps and final `/links/go` returns the oracle. |
 | `https://aii.sh/CBygg8fn2s3` | `aii.sh` | `https://coinadster.com/shortlink.php?short_key=1cnd9hq0nfbem5dr8vrmaz17f44pvh9a` | analysis-only supported | Final candidate discovered from ShrinkBixby hidden token. Still label as token extraction, not live Turnstile completion. |
 
 ## Immediate planning notes

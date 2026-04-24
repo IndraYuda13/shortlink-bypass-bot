@@ -4,3 +4,4 @@ requests
 selenium
 setuptools
 undetected-chromedriver
+websocket-client

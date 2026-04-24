@@ -2,6 +2,15 @@
 
 ## 2026-04-24
 
+### cuty live helper and lnbz browserless handler
+- Added `cuty_live_browser.py`, a CDP Chrome helper for the `cuty.io` -> `cuttlinks.com` flow.
+- The Cuty handler now uses the local Turnstile solver API, submits the captcha in the same browser context, waits through the final page, and only returns success after navigating to the downstream target.
+- Live verification on `https://cuty.io/AfaX6jx` returned `https://www.google.com/`.
+- Added `lnbz.la` browserless article-chain handler for sample `Hmvp6`.
+- The LNBZ handler follows the same-session `avnsgames.com` article/survey forms, waits the final 15s timer, then posts `/links/go`.
+- Live verification on `https://lnbz.la/Hmvp6` returned `https://cryptoearns.com/links/back/AaDZLgKQsnhy423EIS9c`.
+- Restored the local `turnstile-solver-api.service` repo/runtime after its configured working directory was missing and the service was crash-looping.
+
 ### ez4short fast live handler
 - Added `ez4short.com` browserless fast lane for sample `qSyPzeo`.
 - The handler uses `Referer: https://game5s.com/` to unlock a fresh final `form#go-link` directly on `ez4short.com`.

@@ -11,11 +11,12 @@
   - `xut.io/hd7AOJ` -> `tesskibidixxx.com`
   - `tpi.li/Dd5xka` -> `99faucet.com/links/back/...` (token handler now supported)
   - `ez4short.com/qSyPzeo` -> `tesskibidixxx.com` (fast live handler now supported)
-  - `cuty.io/AfaX6jx` -> `google.com`
+  - `cuty.io/AfaX6jx` -> `google.com` (live CDP+Turnstile helper now supported for sample)
   - `gplinks.co/YVTC` -> `tesskibidixxx.com`
   - `sfl.gl/18PZXXI9` -> `google.com` (live API handler now supported for sample)
   - `exe.io/vkRI1` -> `google.com`
   - `aii.sh/CBygg8fn2s3` -> `coinadster.com/shortlink.php?...` (token handler now supported)
+  - `lnbz.la/Hmvp6` -> `cryptoearns.com/links/back/...` (browserless article-chain handler now supported)
 - Durable sample catalog:
   - `references/target-sample-catalog.md`
 - Contoh downstream yang sudah terlihat dari sampel:
@@ -212,7 +213,9 @@
   - `sfl.gl` now has a browserless SafelinkU API handler that reaches the sampled `google.com` oracle
   - `ez4short.com` now has a fast live handler through the `game5s.com` referer lane
   - `gplinks.co` now has a partial PowerGam mapper, but final remains blocked by missing ad-impression/conversion state
-  - `cuty.io` and `exe.io` remain mapped but unsupported for final bypass
+  - `cuty.io` now has a live CDP Chrome + local Turnstile solver helper that reaches the sampled `google.com` oracle
+  - `lnbz.la` now has a browserless article/survey-chain handler that reaches the sampled `cryptoearns.com` oracle
+  - `exe.io` remains mapped but unsupported for final bypass
 
 ## Boundary catalog
 - `entry shortlink` -> status: narrowed

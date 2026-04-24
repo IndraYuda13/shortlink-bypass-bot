@@ -25,6 +25,8 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | `oii.la` | Analysis only | Static token-tail downstream extraction |
 | `tpi.li` | Analysis only | Same token-tail Turnstile family as `oii.la`; extracts sampled `99faucet` target |
 | `aii.sh` | Analysis only | ShrinkBixby token-tail extraction; sampled target is `coinadster.com/shortlink.php?...` |
+| `cuty.io` | Live bypass | Live CDP Chrome helper uses local Turnstile solver, reaches final `cuttlinks.com/go/<alias>`, and lands on sampled `google.com` target |
+| `lnbz.la` | Live bypass | Browserless article/survey chain through `avnsgames.com` reaches `/links/go` and returns sampled `cryptoearns.com` target |
 | `sfl.gl` | Live bypass | Browserless SafelinkU API flow reaches ready page and extracts final `window.location.href` target |
 | `gplinks.co` | Partial mapper | Browserless entry reaches PowerGam and decodes step contract, but final still fails server `not_enough_steps` validation |
 | `ez4short.com` | Live bypass | Fast `game5s.com` referer lane unlocks final go-link form and returns sampled `tesskibidixxx.com` target |
@@ -37,6 +39,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 - `engine.py` detects the target family and chooses the right handler
 - `adlink_live_browser.py` stays as Adlink fallback when the faster browserless lane is not enough
 - `xut_live_browser.py` drives the live autodime -> gamescrate lane and hands off to the patched local FlareSolverr attach mode when the browser has already reached the hard boundary
+- `cuty_live_browser.py` drives the Cuty/Cuttlinks Turnstile and final go-form flow through CDP Chrome plus the local Turnstile solver API
 - `references/` and `ROADMAP.md` keep technical notes and current implementation status
 
 Flow and target docs:
