@@ -10,7 +10,7 @@
   - `oii.la/BW8ntz` -> `onlyfaucet.com/links/back/.../LTC/...`
   - `xut.io/hd7AOJ` -> `tesskibidixxx.com`
   - `tpi.li/Dd5xka` -> `99faucet.com/links/back/...` (token handler now supported)
-  - `ez4short.com/qSyPzeo` -> `tesskibidixxx.com`
+  - `ez4short.com/qSyPzeo` -> `tesskibidixxx.com` (fast live handler now supported)
   - `cuty.io/AfaX6jx` -> `google.com`
   - `gplinks.co/YVTC` -> `tesskibidixxx.com`
   - `sfl.gl/18PZXXI9` -> `google.com` (live API handler now supported for sample)
@@ -210,7 +210,9 @@
 - New sample target implementation status:
   - `tpi.li` and `aii.sh` now use the shared token-tail landing handler
   - `sfl.gl` now has a browserless SafelinkU API handler that reaches the sampled `google.com` oracle
-  - `ez4short.com`, `cuty.io`, `gplinks.co`, and `exe.io` remain mapped but unsupported for final bypass
+  - `ez4short.com` now has a fast live handler through the `game5s.com` referer lane
+  - `gplinks.co` now has a partial PowerGam mapper, but final remains blocked by missing ad-impression/conversion state
+  - `cuty.io` and `exe.io` remain mapped but unsupported for final bypass
 
 ## Boundary catalog
 - `entry shortlink` -> status: narrowed

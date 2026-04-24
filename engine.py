@@ -83,6 +83,10 @@ class ShortlinkBypassEngine:
             return self._handle_adlink_click(url)
         if host == "sfl.gl" or host.endswith(".sfl.gl"):
             return self._handle_sfl(url)
+        if host == "gplinks.co" or host.endswith(".gplinks.co"):
+            return self._handle_gplinks(url)
+        if host == "ez4short.com" or host.endswith(".ez4short.com"):
+            return self._handle_ez4short(url)
         return BypassResult(
             status=0,
             input_url=url,
@@ -473,6 +477,144 @@ class ShortlinkBypassEngine:
                 stage="ready-page",
                 facts=facts,
                 blockers=["ready page tidak memuat window.location.href final"],
+            )
+        except Exception as exc:
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="REQUEST_FAILED",
+                facts=facts,
+                blockers=[str(exc)],
+            )
+
+    def _handle_gplinks(self, url: str) -> BypassResult:
+        family = "gplinks.co"
+        facts: dict[str, Any] = {}
+        try:
+            session = self._new_impersonated_session()
+            entry = session.get(url, timeout=self.timeout, allow_redirects=False)
+            facts["entry_status"] = entry.status_code
+            facts["entry_redirect"] = self._clean_url(entry.headers.get("location", "")) or None
+            power_url = facts["entry_redirect"] or ""
+            if not power_url:
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message="POWERGAM_REDIRECT_NOT_FOUND",
+                    stage="entry",
+                    facts=facts,
+                    blockers=["entry tidak memberi redirect ke powergam.online"],
+                )
+
+            decoded = self._decode_gplinks_power_query(power_url)
+            facts["decoded_query"] = decoded
+            lid = decoded.get("lid") or ""
+            pid = decoded.get("pid") or ""
+            vid = decoded.get("vid") or ""
+            facts["target_final_candidate"] = f"https://gplinks.co/{lid}?pid={pid}&vid={vid}" if lid and pid and vid else None
+
+            power = session.get(power_url, timeout=self.timeout, allow_redirects=True, headers={"Referer": url})
+            soup = BeautifulSoup(power.text, "html.parser")
+            facts.update(self._common_facts_for_session(power, soup, session))
+            form = soup.select_one("form#adsForm") or soup.find("form")
+            facts["form_action"] = urljoin(power.url, form.get("action") or "") if form else None
+            facts["hidden_inputs"] = self._extract_hidden_inputs(form or soup)
+            facts["has_ads_form"] = bool(form)
+
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="POWERGAM_STEPS_MAPPED",
+                stage="powergam-mapped",
+                facts=facts,
+                blockers=[
+                    "PowerGam step flow mapped, but naive 3-step replay still returns gplinks not_enough_steps",
+                    "missing server-side ad impression/conversion contract before final target can be claimed",
+                ],
+                notes=["target_final_candidate is a JS-computed candidate, not a verified final bypass result"],
+            )
+        except Exception as exc:
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="REQUEST_FAILED",
+                facts=facts,
+                blockers=[str(exc)],
+            )
+
+    def _handle_ez4short(self, url: str) -> BypassResult:
+        family = "ez4short.com"
+        facts: dict[str, Any] = {"fast_referer": "https://game5s.com/"}
+        try:
+            session = self._new_impersonated_session()
+            page = session.get(
+                url,
+                timeout=self.timeout,
+                allow_redirects=True,
+                headers={"Referer": "https://game5s.com/"},
+            )
+            soup = BeautifulSoup(page.text, "html.parser")
+            facts.update(self._common_facts_for_session(page, soup, session))
+            form = soup.select_one("form#go-link")
+            if not form:
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message="GO_LINK_FORM_NOT_FOUND",
+                    stage="game5s-referer-entry",
+                    facts=facts,
+                    blockers=["game5s referer belum membuka form#go-link pada response ini"],
+                )
+
+            hidden = self._extract_hidden_inputs(form)
+            action = urljoin(page.url, form.get("action") or "/links/go")
+            timer = self._extract_numeric_timer(page.text, default=3.0)
+            wait_seconds = max(timer + 0.2, 3.2)
+            facts["go_link_action"] = action
+            facts["hidden_inputs"] = hidden
+            facts["timer_seconds"] = timer
+            facts["wait_seconds"] = wait_seconds
+            time.sleep(wait_seconds)
+
+            submit = session.post(
+                action,
+                data=hidden,
+                timeout=self.timeout,
+                headers={
+                    "Origin": "https://ez4short.com",
+                    "Referer": page.url,
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Accept": "application/json, text/javascript, */*; q=0.01",
+                },
+            )
+            payload = self._safe_json(submit)
+            facts["submit_payload"] = payload
+            target = self._clean_url(str(payload.get("url") or "")) or None
+            if payload.get("status") == "success" and target:
+                return BypassResult(
+                    status=1,
+                    input_url=url,
+                    family=family,
+                    message="EZ4SHORT_FAST_CHAIN_OK",
+                    bypass_url=target,
+                    stage="game5s-referer-go-link",
+                    facts=facts,
+                    notes=["fast lane uses game5s referer to unlock fresh go-link form, then waits final timer before /links/go"],
+                )
+
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="EZ4SHORT_SUBMIT_FAILED",
+                stage="links-go",
+                facts=facts,
+                blockers=[str(payload.get("message") or "links/go did not return success URL")],
             )
         except Exception as exc:
             return BypassResult(
@@ -1123,6 +1265,41 @@ class ShortlinkBypassEngine:
         except Exception:
             return {}
         return payload if isinstance(payload, dict) else {}
+
+    def _decode_gplinks_power_query(self, url: str) -> dict[str, str | None]:
+        query = parse_qs(urlparse(url).query)
+        return {
+            "lid": self._base64_url_decode_first(query.get("lid", [None])[0]),
+            "pid": self._base64_url_decode_first(query.get("pid", [None])[0]),
+            "pages": self._base64_url_decode_first(query.get("pages", [None])[0]),
+            "vid": query.get("vid", [None])[0],
+        }
+
+    def _base64_url_decode_first(self, value: str | None) -> str | None:
+        if not value:
+            return None
+        normalized = value.replace("-", "+").replace("_", "/")
+        normalized += "=" * ((4 - len(normalized) % 4) % 4)
+        try:
+            return base64.b64decode(normalized).decode("utf-8", errors="ignore")
+        except Exception:
+            return None
+
+    def _extract_numeric_timer(self, html: str, default: float) -> float:
+        patterns = [
+            r'id=["\']timer["\'][^>]*>\s*(\d+(?:\.\d+)?)',
+            r'class=["\'][^"\']*timer[^"\']*["\'][^>]*>\s*(\d+(?:\.\d+)?)',
+            r'count\d*\s*=\s*(\d+(?:\.\d+)?)',
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, html, re.IGNORECASE)
+            if not match:
+                continue
+            try:
+                return float(match.group(1))
+            except Exception:
+                continue
+        return default
 
     def _extract_shrinkme_continue_hint(self, html: str, input_url: str) -> str | None:
         patterns = [

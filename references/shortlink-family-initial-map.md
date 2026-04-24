@@ -148,6 +148,39 @@
 - Engine status:
   - live bypass supported for the sampled no-captcha SafelinkU path
 
+### ez4short.com
+- Sample checked:
+  - `https://ez4short.com/qSyPzeo`
+- Full frontend family is a multi-domain `newwpsafelink` chain:
+  - `ez4short -> tech8s safe/article POST -> game5s safe/article POST -> ez4short final go-link`
+- Fast lane now proven:
+  1. `GET https://ez4short.com/qSyPzeo` with `Referer: https://game5s.com/`
+  2. parse fresh same-session `form#go-link`
+  3. preserve `AppSession`, `csrfToken`, and `app_visitor`
+  4. wait the final page timer, currently `3s` plus safety margin
+  5. `POST https://ez4short.com/links/go` with hidden CakePHP fields
+- Live verification on the sample returned:
+  - `https://tesskibidixxx.com`
+- Engine status:
+  - live bypass supported for the sampled fast referer path
+
+### gplinks.co
+- Sample checked:
+  - `https://gplinks.co/YVTC`
+- Browserless lane with TLS impersonation can pass entry Cloudflare and reach PowerGam.
+- PowerGam query values decode as:
+  - `lid` -> alias `YVTC`
+  - `pid` -> publisher id `1224622`
+  - `pages` -> required step count `3`
+  - `vid` -> visitor id token
+- The JS computes a target candidate:
+  - `https://gplinks.co/YVTC?pid=1224622&vid=<vid>`
+- Current blocker:
+  - naive 3-step form replay reaches that candidate but server rejects with `error_code=not_enough_steps`
+  - missing proof likely lives in ad-impression/conversion state around `gplinks.com/track/data.php` or third-party ad callbacks
+- Engine status:
+  - partial mapper only, not final bypass support
+
 ### link.adlink.click
 - Samples checked:
   - `https://link.adlink.click/CBuahny8kxt`

@@ -26,6 +26,8 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | `tpi.li` | Analysis only | Same token-tail Turnstile family as `oii.la`; extracts sampled `99faucet` target |
 | `aii.sh` | Analysis only | ShrinkBixby token-tail extraction; sampled target is `coinadster.com/shortlink.php?...` |
 | `sfl.gl` | Live bypass | Browserless SafelinkU API flow reaches ready page and extracts final `window.location.href` target |
+| `gplinks.co` | Partial mapper | Browserless entry reaches PowerGam and decodes step contract, but final still fails server `not_enough_steps` validation |
+| `ez4short.com` | Live bypass | Fast `game5s.com` referer lane unlocks final go-link form and returns sampled `tesskibidixxx.com` target |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
 | `xut.io` -> `autodime cwsafelinkphp` | Partial live lane | Warmup wrapper, Step 1 solver, and warm-browser handoff into patched FlareSolverr are wired, but the final oracle is still not reached |
 
@@ -185,6 +187,9 @@ A sample systemd unit is included at:
 - [x] Add `tpi.li` token-tail extraction using the shared Turnstile landing handler
 - [x] Add `aii.sh` token-tail extraction for ShrinkBixby samples
 - [x] Add browserless `sfl.gl` SafelinkU API flow for sampled `google.com` oracle
+- [x] Add partial `gplinks.co` PowerGam mapper with decoded query and target candidate
+- [ ] Close `gplinks.co` server-side ad-impression/conversion validation
+- [x] Add browserless `ez4short.com` fast lane for sampled `tesskibidixxx.com` oracle
 - [ ] Add broader examples and regression checks for supported families
 
 ## Security and sanitization notes

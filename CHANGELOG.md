@@ -2,6 +2,24 @@
 
 ## 2026-04-24
 
+### ez4short fast live handler
+- Added `ez4short.com` browserless fast lane for sample `qSyPzeo`.
+- The handler uses `Referer: https://game5s.com/` to unlock a fresh final `form#go-link` directly on `ez4short.com`.
+- It preserves same-session `AppSession`, `csrfToken`, and `app_visitor`, waits the final timer, and posts hidden fields to `/links/go`.
+- Live verification on `https://ez4short.com/qSyPzeo` returned `https://tesskibidixxx.com`.
+- Deep probe evidence is recorded in `references/probes/2026-04-24-ez4short-deep.md`.
+
+### gplinks PowerGam partial mapper
+- Added a `gplinks.co` handler that uses TLS impersonation to pass the entry Cloudflare layer and reach `powergam.online`.
+- The handler decodes the PowerGam query contract:
+  - `lid` -> alias
+  - `pid` -> publisher id
+  - `pages` -> required step count
+  - `vid` -> visitor id token
+- It parses the `adsForm`, computes the JS `target_final_candidate`, and returns `POWERGAM_STEPS_MAPPED` honestly as partial support.
+- Deep replay evidence is recorded in `references/probes/2026-04-24-gplinks-deep.md`.
+- Current blocker: naive 3-step replay reaches the computed final candidate but `gplinks.co` rejects it with `error_code=not_enough_steps`, so a missing ad-impression/conversion contract still needs browser instrumentation.
+
 ### tpi/aii token handlers and sfl live handler
 - Generalized the old `oii.la` hidden-token extraction into a shared token landing handler.
 - Added `tpi.li` routing; sample `Dd5xka` now returns `https://99faucet.com/links/back/haBKjYrugRxDIVCpGqMo` from the decoded token tail.
