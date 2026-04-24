@@ -34,9 +34,10 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 - `xut_live_browser.py` drives the live autodime -> gamescrate lane and hands off to the patched local FlareSolverr attach mode when the browser has already reached the hard boundary
 - `references/` and `ROADMAP.md` keep technical notes and current implementation status
 
-Flow docs:
+Flow and target docs:
 
 - [`docs/FLOWS.md`](docs/FLOWS.md)
+- [`references/target-sample-catalog.md`](references/target-sample-catalog.md)
 
 ## Quick start
 

@@ -5,6 +5,14 @@
 - `shrinkme.click`
 - `oii.la`
 - `xut.io` -> wrapper into `autodime.com/cwsafelinkphp`
+- new sample batch captured in `references/target-sample-catalog.md`:
+  - `tpi.li`
+  - `ez4short.com`
+  - `cuty.io`
+  - `gplinks.co`
+  - `sfl.gl`
+  - `exe.io`
+  - `aii.sh`
 - foundation inventory for reusable solver/browser components
 
 ## What is already proven
@@ -60,6 +68,8 @@
 - Samples checked:
   - `https://oii.la/TaVOKJleNN`
   - `https://oii.la/FOT3p2HAVb`
+- New Boskuu-provided oracle sample captured for next live run:
+  - `https://oii.la/BW8ntz` -> `https://onlyfaucet.com/links/back/vYal1NZ2dtDFTr5cXqUi/LTC/208faecab92bd6cc094014e046df165d`
 - First response is `200 OK`, not an HTTP redirect.
 - Initial cookie pattern observed:
   - `ref<alias>` with `Max-Age=300`

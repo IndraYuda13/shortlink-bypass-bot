@@ -6,6 +6,18 @@
   - `shrinkme.click`
   - `oii.la`
   - `xut.io`
+- New sample batch captured on 2026-04-24:
+  - `oii.la/BW8ntz` -> `onlyfaucet.com/links/back/.../LTC/...`
+  - `xut.io/hd7AOJ` -> `tesskibidixxx.com`
+  - `tpi.li/Dd5xka` -> `99faucet.com/links/back/...`
+  - `ez4short.com/qSyPzeo` -> `tesskibidixxx.com`
+  - `cuty.io/AfaX6jx` -> `google.com`
+  - `gplinks.co/YVTC` -> `tesskibidixxx.com`
+  - `sfl.gl/18PZXXI9` -> `google.com`
+  - `exe.io/vkRI1` -> `google.com`
+  - `aii.sh/CBygg8fn2s3` -> target discovery pending
+- Durable sample catalog:
+  - `references/target-sample-catalog.md`
 - Contoh downstream yang sudah terlihat dari sampel:
   - `coinadster.com`
   - `99faucet.com`
@@ -52,6 +64,8 @@
 - `oii.la` sample set sekarang sudah cukup kuat secara static/lane evidence:
   - `TaVOKJleNN` token tail decode = `https://99faucet.com/links/back/SNcKa7f52qRk4xiA1gl6`
   - `FOT3p2HAVb` token tail decode = `https://claimcrypto.cc/links/back/wvCF7sRItpKGM2XrhoOj`
+  - New Boskuu-provided oracle sample:
+    - `BW8ntz` expected final = `https://onlyfaucet.com/links/back/vYal1NZ2dtDFTr5cXqUi/LTC/208faecab92bd6cc094014e046df165d`
   - captcha aktif tetap = Turnstile
   - sitekey = `0x4AAAAAABatM0GOBpAxBoeD`
   - counter = `15`
@@ -193,6 +207,8 @@
   - fokus utama berikutnya adalah boundary `gamescrate` Cloudflare managed challenge, bukan lagi sekadar mapping `SELECTION`
   - cek apakah challenge itu butuh lane non-headless / xvfb / real Chrome profile / interaksi widget berbasis koordinat atau shadow boundary yang tidak muncul di probe selector biasa
 - Engine sudah punya handler awal untuk family ini, tapi masih jujur berhenti di `ICONCAPTCHA_STEP1_MAPPED` sampai success oracle final benar-benar ketemu.
+- New unsupported-family sample targets are now captured for future expansion:
+  - `tpi.li`, `ez4short.com`, `cuty.io`, `gplinks.co`, `sfl.gl`, `exe.io`, `aii.sh`
 
 ## Boundary catalog
 - `entry shortlink` -> status: narrowed

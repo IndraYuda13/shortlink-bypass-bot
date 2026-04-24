@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-04-24
+
+### Boskuu target sample catalog captured
+- Added `references/target-sample-catalog.md` as the durable sample-to-final-target map for the next handler expansion work.
+- Captured the new sample batch:
+  - `oii.la/BW8ntz` -> `onlyfaucet.com/links/back/.../LTC/...`
+  - `xut.io/hd7AOJ` -> `tesskibidixxx.com`
+  - `tpi.li/Dd5xka` -> `99faucet.com/links/back/...`
+  - `ez4short.com/qSyPzeo` -> `tesskibidixxx.com`
+  - `cuty.io/AfaX6jx` -> `google.com`
+  - `gplinks.co/YVTC` -> `tesskibidixxx.com`
+  - `sfl.gl/18PZXXI9` -> `google.com`
+  - `exe.io/vkRI1` -> `google.com`
+  - `aii.sh/CBygg8fn2s3` -> target discovery pending
+- Synced `ROADMAP.md`, `README.md`, and `references/shortlink-family-initial-map.md` so future work starts from the same oracle list.
+
+### Guardrail
+- These entries are target oracles only. Do not mark a family as supported until the engine returns the expected final target or a directly equivalent downstream URL.
+
 ## 2026-04-21
 
 ### xut/autodime warm-handoff lane wired into engine
