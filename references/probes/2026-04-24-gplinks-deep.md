@@ -121,3 +121,77 @@ Next real research lane:
 - instrument a real browser for network requests during a human-like ad/impression step
 - capture successful `track/data.php` or third-party postback calls
 - compare cookies/localStorage before step 3 final GET
+
+## Browser instrumentation pass - 2026-04-24 evening
+
+A CDP-driven Chrome run was added after the initial HTTP replay.
+
+### What changed vs the naive replay
+
+Instead of only posting with `curl_cffi`, Chrome loaded the real `powergam.online` page and executed the page JS:
+
+- PowerGam initialized cookies:
+  - `lid=YVTC`
+  - `pid=1224622`
+  - `pages=3`
+  - `vid=<visitor token>`
+  - `step_count=0`
+  - `imps=0`
+- Real page scripts loaded:
+  - Google tags / fundingchoices
+  - `api.gplinks.com/track/js/power-cdn.js`
+  - `tracki.click/ads/js/embed.js`
+  - `tracki.click/ads/api/get-banner.php`
+  - `tracki.click/ads/api/imp.php?...` for banner impressions
+- The browser produced real PowerGam form posts:
+  - `step_id=1`, `next_target=https://powergam.online`
+  - `step_id=2`, `next_target=https://powergam.online`
+  - `step_id=3`, `next_target=https://gplinks.co/YVTC?pid=1224622&vid=<visitor token>`
+
+### Important negative proof
+
+Even when the browser was forced to submit `ad_impressions=5` on all three PowerGam form posts, a follow-up `curl_cffi` request to the computed final candidate still returned:
+
+```text
+302 -> https://gplinks.co/link-error?alias=YVTC&error_code=not_enough_steps
+```
+
+Adding obvious query params like `steps=3`, `step=3`, `imps=5`, or `pages=3` to the final URL did not change the result.
+
+### Updated interpretation
+
+The missing state is **not only** the visible `step_id` count, the PowerGam cookies, or the visible `ad_impressions` field.
+
+The strongest current hypothesis is that `gplinks.co` expects a server-side conversion/postback record tied to `vid` and `pid`, likely written by one of:
+
+- `gplinks.com/track/data.php` with a stricter contract than the obvious `request=addConversion` attempt
+- a Tracki click/ad callback beyond passive `imp.php` impression requests
+- a Google ad/fundingchoices viewability path that the current headless run loads but does not convert into the server-side gplinks step record
+
+### Current hard blocker
+
+The frontend PowerGam form can be reproduced and the browser can execute the visible steps, but the server-side enough-steps ledger still does not update. A future pass needs to capture or synthesize the exact conversion/postback that increments that ledger.
+
+## GPT hook trace - 2026-04-24 evening
+
+A follow-up CDP run injected hooks for GPT lifecycle events and native `#adsForm` submission.
+
+Observed:
+- The hook installed successfully (`GPT_HOOKED`).
+- No `impressionViewable`, `rewardedSlotReady`, `rewardedSlotClosed`, or related GPT lifecycle event was logged before any of the three form submits.
+- `window.rewardedAdReadyEvent` stayed false before the final submit.
+- The browser still posted the expected visible payloads:
+  - step 1: `ad_impressions=0`, `next_target=https://powergam.online`
+  - step 2: `ad_impressions=0`, `next_target=https://powergam.online`
+  - step 3: `ad_impressions=0`, `next_target=https://gplinks.co/YVTC?pid=1224622&vid=<vid>`
+- The final browser navigation to the computed `gplinks.co` candidate hit Cloudflare challenge first in headless Chrome, not the downstream target.
+- Separate `curl_cffi` follow-up to the same final candidate still returned `not_enough_steps`.
+
+Updated blocker:
+- The missing proof is now narrower: this VPS/headless browser run does not produce a usable GPT rewarded/viewable lifecycle, and without that lifecycle the server ledger still refuses the final candidate.
+- No code patch should claim final `gplinks.co` support from current evidence. The current partial mapper is still the honest state.
+
+Next practical options:
+1. Run the same hooked trace in a non-headless/real profile browser where GPT rewarded/interstitial ads can actually become ready.
+2. Continue JS/protocol analysis of Google/GPT calls, but this is likely lower ROI than a real browser trace because the missing state appears ad-lifecycle dependent.
+3. Leave `gplinks.co` as partial and switch to `cuty.io` or `exe.io` if faster family expansion is preferred.
