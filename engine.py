@@ -7,11 +7,12 @@ import re
 import subprocess
 import sys
 import time
+import uuid
 from dataclasses import asdict, dataclass, field
 from html import unescape
 from pathlib import Path
 from typing import Any
-from urllib.parse import parse_qs, unquote, urljoin, urlparse
+from urllib.parse import parse_qs, urlencode, unquote, urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -72,12 +73,16 @@ class ShortlinkBypassEngine:
             return self._handle_autodime_cwsafelink(url)
         if host == "autodime.com" and parsed.path.startswith("/cwsafelinkphp/go.php"):
             return self._handle_autodime_cwsafelink(url)
-        if host == "oii.la" or host.endswith(".oii.la"):
-            return self._handle_oii(url)
+        token_landing_hosts = {"oii.la", "tpi.li", "aii.sh"}
+        if host in token_landing_hosts or any(host.endswith(f".{item}") for item in token_landing_hosts):
+            family = next(item for item in token_landing_hosts if host == item or host.endswith(f".{item}"))
+            return self._handle_token_landing(url, family)
         if host == "shrinkme.click" or host.endswith(".shrinkme.click"):
             return self._handle_shrinkme(url)
         if host == "link.adlink.click" or host.endswith(".adlink.click"):
             return self._handle_adlink_click(url)
+        if host == "sfl.gl" or host.endswith(".sfl.gl"):
+            return self._handle_sfl(url)
         return BypassResult(
             status=0,
             input_url=url,
@@ -89,6 +94,13 @@ class ShortlinkBypassEngine:
     def _get(self, url: str) -> requests.Response:
         return self.session.get(url, timeout=self.timeout, allow_redirects=True)
 
+    def _new_impersonated_session(self):
+        if curl_requests is None:
+            raise RuntimeError("curl_cffi is not installed")
+        session = curl_requests.Session(impersonate=ADLINK_HTTP_IMPERSONATE)
+        session.headers.update(DEFAULT_HEADERS)
+        return session
+
     def _cookie_names(self) -> list[str]:
         return sorted({cookie.name for cookie in self.session.cookies})
 
@@ -98,6 +110,20 @@ class ShortlinkBypassEngine:
             "status_code": response.status_code,
             "title": (soup.title.string.strip() if soup.title and soup.title.string else None),
             "cookie_names": self._cookie_names(),
+        }
+
+    def _common_facts_for_session(self, response: Any, soup: BeautifulSoup, session: Any) -> dict[str, Any]:
+        cookie_names: list[str] = []
+        jar = getattr(getattr(session, "cookies", None), "jar", [])
+        try:
+            cookie_names = sorted({cookie.name for cookie in jar})
+        except Exception:
+            cookie_names = []
+        return {
+            "final_url": response.url,
+            "status_code": response.status_code,
+            "title": (soup.title.string.strip() if soup.title and soup.title.string else None),
+            "cookie_names": cookie_names,
         }
 
     def _handle_autodime_cwsafelink(self, url: str) -> BypassResult:
@@ -256,13 +282,16 @@ class ShortlinkBypassEngine:
         )
 
     def _handle_oii(self, url: str) -> BypassResult:
+        return self._handle_token_landing(url, "oii.la")
+
+    def _handle_token_landing(self, url: str, family: str) -> BypassResult:
         try:
             response = self._get(url)
         except Exception as exc:
             return BypassResult(
                 status=0,
                 input_url=url,
-                family="oii.la",
+                family=family,
                 message="REQUEST_FAILED",
                 blockers=[str(exc)],
             )
@@ -292,21 +321,21 @@ class ShortlinkBypassEngine:
             return BypassResult(
                 status=1,
                 input_url=url,
-                family="oii.la",
-                message="EMBEDDED_TARGET_EXTRACTED",
+                family=family,
+                message="TOKEN_TARGET_EXTRACTED" if token_target else "EMBEDDED_TARGET_EXTRACTED",
                 bypass_url=preferred,
-                stage="embedded-target",
+                stage="token-target" if token_target else "embedded-target",
                 facts=facts,
                 notes=[
                     "hasil ini berasal dari payload entry page, belum dari eksekusi captcha/timer live",
-                    "untuk sample oii.la, target terkuat diambil dari hidden token yang didecode",
+                    "target terkuat diambil dari hidden token yang didecode" if token_target else "target diambil dari URL embedded di entry page",
                 ],
             )
 
         return BypassResult(
             status=0,
             input_url=url,
-            family="oii.la",
+            family=family,
             message="CAPTCHA_OR_TOKEN_FLOW_STILL_REQUIRED",
             stage="entry-mapped",
             facts=facts,
@@ -315,6 +344,145 @@ class ShortlinkBypassEngine:
                 "flow live tetap butuh timer + turnstile + verify/back execution",
             ],
         )
+
+    def _handle_sfl(self, url: str) -> BypassResult:
+        family = "sfl.gl"
+        facts: dict[str, Any] = {}
+        try:
+            session = self._new_impersonated_session()
+            entry = session.get(url, timeout=self.timeout, allow_redirects=True)
+            soup = BeautifulSoup(entry.text, "html.parser")
+            facts.update(self._common_facts_for_session(entry, soup, session))
+
+            form = soup.find("form")
+            if not form:
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message="ENTRY_FORM_NOT_FOUND",
+                    stage="entry",
+                    facts=facts,
+                    blockers=["form redirect.php tidak ditemukan di entry page"],
+                )
+
+            action = urljoin(entry.url, form.get("action") or "")
+            hidden = self._extract_hidden_inputs(form)
+            facts["entry_form_action"] = action
+            facts["entry_hidden_inputs"] = hidden
+            redirect_url = f"{action}?{urlencode(hidden)}"
+            redirect_response = session.get(
+                redirect_url,
+                timeout=self.timeout,
+                allow_redirects=False,
+                headers={"Referer": entry.url},
+            )
+            article_url = urljoin(action, redirect_response.headers.get("location", ""))
+            facts["article_redirect_status"] = redirect_response.status_code
+            facts["article_url"] = article_url
+            if not article_url:
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message="ARTICLE_REDIRECT_NOT_FOUND",
+                    stage="redirect",
+                    facts=facts,
+                    blockers=["redirect article app.khaddavi.net tidak ditemukan"],
+                )
+
+            article = session.get(article_url, timeout=self.timeout, allow_redirects=True, headers={"Referer": redirect_url})
+            facts["article_final_url"] = article.url
+            app_base = f"{urlparse(article.url).scheme}://{urlparse(article.url).netloc}"
+            api_headers = {
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+                "Origin": app_base,
+                "Referer": article.url,
+            }
+
+            session_response = session.post(f"{app_base}/api/session", json={}, headers=api_headers, timeout=self.timeout)
+            session_payload = self._safe_json(session_response)
+            facts["api_session"] = session_payload
+            wait_seconds = 10 if int(session_payload.get("step") or 1) == 1 else 3
+            facts["wait_seconds"] = wait_seconds
+            time.sleep(wait_seconds)
+
+            captcha = session_payload.get("captcha")
+            if captcha:
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message="CAPTCHA_REQUIRED",
+                    stage="api-session",
+                    facts=facts,
+                    blockers=[f"api/session meminta captcha: {captcha}"],
+                )
+
+            verify_response = session.post(
+                f"{app_base}/api/verify",
+                json={"_a": True, "captcha": None, "passcode": None},
+                headers={**api_headers, "Idempotency-Key": str(uuid.uuid4())},
+                timeout=self.timeout,
+            )
+            verify_payload = self._safe_json(verify_response)
+            facts["api_verify"] = verify_payload
+
+            go_response = session.post(
+                f"{app_base}/api/go",
+                json={"key": hidden.get("alias"), "size": 0, "_dvc": "desktop"},
+                headers={**api_headers, "Idempotency-Key": str(uuid.uuid4())},
+                timeout=self.timeout,
+            )
+            go_payload = self._safe_json(go_response)
+            facts["api_go"] = go_payload
+            ready_url = go_payload.get("url")
+            if not ready_url:
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message="READY_URL_NOT_FOUND",
+                    stage="api-go",
+                    facts=facts,
+                    blockers=["api/go belum mengembalikan ready URL"],
+                )
+
+            ready = session.get(ready_url, timeout=self.timeout, allow_redirects=True, headers={"Referer": article.url})
+            facts["ready_url"] = ready.url
+            target = self._extract_sfl_ready_target(ready.text)
+            facts["ready_target"] = target
+            if target:
+                return BypassResult(
+                    status=1,
+                    input_url=url,
+                    family=family,
+                    message="SFL_API_FLOW_OK",
+                    bypass_url=target,
+                    stage="ready-page",
+                    facts=facts,
+                    notes=["target final diekstrak dari ready page setelah API session/verify/go flow"],
+                )
+
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="READY_TARGET_NOT_FOUND",
+                stage="ready-page",
+                facts=facts,
+                blockers=["ready page tidak memuat window.location.href final"],
+            )
+        except Exception as exc:
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="REQUEST_FAILED",
+                facts=facts,
+                blockers=[str(exc)],
+            )
 
     def _handle_shrinkme(self, url: str) -> BypassResult:
         try:
@@ -920,19 +1088,41 @@ class ShortlinkBypassEngine:
 
     def _extract_oii_token_target(self, token: str) -> str | None:
         candidates = self._decode_urls_from_blob(token)
-        tail_match = re.search(r"(aHR0cHM6Ly[A-Za-z0-9+/=]+)$", token)
-        if tail_match:
-            tail = tail_match.group(1)
-            for padded in {tail, tail + "=", tail + "=="}:
-                try:
-                    text = base64.b64decode(padded).decode("utf-8", errors="ignore")
-                except Exception:
-                    continue
-                candidates.extend(URL_RE.findall(text))
+        for match in re.finditer(r"aHR0[A-Za-z0-9+/=]{20,}", token):
+            blob = match.group(0)
+            for end in range(len(blob), 19, -1):
+                fragment = blob[:end]
+                for padded in {fragment, fragment + "=", fragment + "=="}:
+                    try:
+                        text = base64.b64decode(padded).decode("utf-8", errors="ignore")
+                    except Exception:
+                        continue
+                    candidates.extend(URL_RE.findall(text))
         for candidate in candidates:
-            if any(marker in candidate for marker in ["/links/back/", "/member/shortlinks/verify/"]):
+            if any(marker in candidate for marker in ["/links/back/", "/member/shortlinks/verify/", "/shortlink.php?"]):
                 return self._clean_url(candidate)
         return None
+
+    def _extract_sfl_ready_target(self, html: str) -> str | None:
+        patterns = [
+            r"window\.location\.href\s*=\s*['\"]([^'\"]+)['\"]",
+            r"location\.href\s*=\s*['\"]([^'\"]+)['\"]",
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, html, re.IGNORECASE)
+            if not match:
+                continue
+            value = match.group(1).replace("\\/", "/")
+            if value.startswith("http://") or value.startswith("https://"):
+                return self._clean_url(value)
+        return None
+
+    def _safe_json(self, response: Any) -> dict[str, Any]:
+        try:
+            payload = response.json()
+        except Exception:
+            return {}
+        return payload if isinstance(payload, dict) else {}
 
     def _extract_shrinkme_continue_hint(self, html: str, input_url: str) -> str | None:
         patterns = [

@@ -9,13 +9,13 @@
 - New sample batch captured on 2026-04-24:
   - `oii.la/BW8ntz` -> `onlyfaucet.com/links/back/.../LTC/...`
   - `xut.io/hd7AOJ` -> `tesskibidixxx.com`
-  - `tpi.li/Dd5xka` -> `99faucet.com/links/back/...`
+  - `tpi.li/Dd5xka` -> `99faucet.com/links/back/...` (token handler now supported)
   - `ez4short.com/qSyPzeo` -> `tesskibidixxx.com`
   - `cuty.io/AfaX6jx` -> `google.com`
   - `gplinks.co/YVTC` -> `tesskibidixxx.com`
-  - `sfl.gl/18PZXXI9` -> `google.com`
+  - `sfl.gl/18PZXXI9` -> `google.com` (live API handler now supported for sample)
   - `exe.io/vkRI1` -> `google.com`
-  - `aii.sh/CBygg8fn2s3` -> target discovery pending
+  - `aii.sh/CBygg8fn2s3` -> `coinadster.com/shortlink.php?...` (token handler now supported)
 - Durable sample catalog:
   - `references/target-sample-catalog.md`
 - Contoh downstream yang sudah terlihat dari sampel:
@@ -207,8 +207,10 @@
   - fokus utama berikutnya adalah boundary `gamescrate` Cloudflare managed challenge, bukan lagi sekadar mapping `SELECTION`
   - cek apakah challenge itu butuh lane non-headless / xvfb / real Chrome profile / interaksi widget berbasis koordinat atau shadow boundary yang tidak muncul di probe selector biasa
 - Engine sudah punya handler awal untuk family ini, tapi masih jujur berhenti di `ICONCAPTCHA_STEP1_MAPPED` sampai success oracle final benar-benar ketemu.
-- New unsupported-family sample targets are now captured for future expansion:
-  - `tpi.li`, `ez4short.com`, `cuty.io`, `gplinks.co`, `sfl.gl`, `exe.io`, `aii.sh`
+- New sample target implementation status:
+  - `tpi.li` and `aii.sh` now use the shared token-tail landing handler
+  - `sfl.gl` now has a browserless SafelinkU API handler that reaches the sampled `google.com` oracle
+  - `ez4short.com`, `cuty.io`, `gplinks.co`, and `exe.io` remain mapped but unsupported for final bypass
 
 ## Boundary catalog
 - `entry shortlink` -> status: narrowed

@@ -103,6 +103,51 @@
 - Adblock gate exists via fetch to:
   - `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js`
 
+### tpi.li
+- Sample checked:
+  - `https://tpi.li/Dd5xka`
+- Shape matches the `oii.la` token-tail Turnstile landing family:
+  - `200 OK` entry page
+  - `refDd5xka` cookie
+  - form action `https://advertisingcamps.com/taboola1/landing/`
+  - active Turnstile config with `counter_value=15` and `counter_start=load`
+- Hidden `token` decodes to the expected final oracle:
+  - `https://99faucet.com/links/back/haBKjYrugRxDIVCpGqMo`
+- Engine status:
+  - supported as analysis-only token extraction via shared token landing handler
+  - not a proven live captcha/timer completion lane
+
+### aii.sh
+- Sample checked:
+  - `https://aii.sh/CBygg8fn2s3`
+- Shape is ShrinkBixby token-tail Turnstile landing:
+  - `200 OK` entry page
+  - `refCBygg8fn2s3` and `visit_token` cookies
+  - form action rotates through `techbixby.com` article pages
+  - active Turnstile config with `counter_value=15` and `counter_start=load`
+- Hidden `token` has suffix noise after the base64 URL, but the shared decoder now extracts:
+  - `https://coinadster.com/shortlink.php?short_key=1cnd9hq0nfbem5dr8vrmaz17f44pvh9a`
+- Engine status:
+  - supported as analysis-only token extraction
+  - not a proven live Turnstile/timer completion lane
+
+### sfl.gl
+- Sample checked:
+  - `https://sfl.gl/18PZXXI9`
+- Browserless lane uses `curl_cffi` TLS impersonation.
+- Proven flow:
+  1. entry page exposes form to `https://app.khaddavi.net/redirect.php` with `ray_id` and `alias`
+  2. redirect lands on a rotating `app.khaddavi.net` article
+  3. `POST /api/session` returns `step=1`, `captcha=null`, `passcode=false`
+  4. wait the real step timer, currently `10s` for step 1
+  5. `POST /api/verify` with boolean `_a=true`
+  6. `POST /api/go` returns `https://sfl.gl/ready/go?...`
+  7. ready page embeds final target in `window.location.href`
+- Live verification on the sample returned:
+  - `https://google.com`
+- Engine status:
+  - live bypass supported for the sampled no-captcha SafelinkU path
+
 ### link.adlink.click
 - Samples checked:
   - `https://link.adlink.click/CBuahny8kxt`

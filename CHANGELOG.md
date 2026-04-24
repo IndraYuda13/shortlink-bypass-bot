@@ -2,6 +2,22 @@
 
 ## 2026-04-24
 
+### tpi/aii token handlers and sfl live handler
+- Generalized the old `oii.la` hidden-token extraction into a shared token landing handler.
+- Added `tpi.li` routing; sample `Dd5xka` now returns `https://99faucet.com/links/back/haBKjYrugRxDIVCpGqMo` from the decoded token tail.
+- Added `aii.sh` routing; sample `CBygg8fn2s3` now returns `https://coinadster.com/shortlink.php?short_key=1cnd9hq0nfbem5dr8vrmaz17f44pvh9a` from the ShrinkBixby hidden token.
+- Added a browserless `sfl.gl` SafelinkU API flow:
+  - parses entry `ray_id` and `alias`
+  - follows `app.khaddavi.net/redirect.php`
+  - calls `/api/session`, waits the step timer, calls `/api/verify`, then `/api/go`
+  - fetches the ready page and extracts `window.location.href`
+- Live verification on `https://sfl.gl/18PZXXI9` returned the expected final target `https://google.com`.
+
+### Tests
+- Added `tests/test_token_landing.py` for `tpi.li` and `aii.sh` token extraction.
+- Added `tests/test_sfl.py` for ready-page extraction and the mocked SafelinkU API flow.
+- Verification: `python -m unittest discover -s tests -p 'test*.py' -v` passed with 19 tests.
+
 ### Boskuu target sample catalog captured
 - Added `references/target-sample-catalog.md` as the durable sample-to-final-target map for the next handler expansion work.
 - Captured the new sample batch:

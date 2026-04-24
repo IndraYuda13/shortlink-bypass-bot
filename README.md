@@ -22,9 +22,12 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | Family | Status | Notes |
 | --- | --- | --- |
 | `link.adlink.click` | Live bypass | Uses browserless TLS impersonation against `blog.adlink.click`, with live Chromium kept as fallback |
-| `oii.la` | Analysis only | Static mapping and downstream extraction |
+| `oii.la` | Analysis only | Static token-tail downstream extraction |
+| `tpi.li` | Analysis only | Same token-tail Turnstile family as `oii.la`; extracts sampled `99faucet` target |
+| `aii.sh` | Analysis only | ShrinkBixby token-tail extraction; sampled target is `coinadster.com/shortlink.php?...` |
+| `sfl.gl` | Live bypass | Browserless SafelinkU API flow reaches ready page and extracts final `window.location.href` target |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
-| `xut.io` -> `autodime cwsafelinkphp` | Partial live lane | Warmup wrapper, Step 1 solver, and warm-browser handoff into patched FlareSolverr are wired, but the final `onlyfaucet.com/links/back/...` oracle is still not reached |
+| `xut.io` -> `autodime cwsafelinkphp` | Partial live lane | Warmup wrapper, Step 1 solver, and warm-browser handoff into patched FlareSolverr are wired, but the final oracle is still not reached |
 
 ## How it works
 
@@ -179,6 +182,9 @@ A sample systemd unit is included at:
 - [x] Add live `shrinkme.click` chain support for sampled alias flow
 - [x] Add direct `MrProBlogger` shortcut for the verified shrinkme sample
 - [ ] Validate the `shrinkme.click` chain across more aliases
+- [x] Add `tpi.li` token-tail extraction using the shared Turnstile landing handler
+- [x] Add `aii.sh` token-tail extraction for ShrinkBixby samples
+- [x] Add browserless `sfl.gl` SafelinkU API flow for sampled `google.com` oracle
 - [ ] Add broader examples and regression checks for supported families
 
 ## Security and sanitization notes
