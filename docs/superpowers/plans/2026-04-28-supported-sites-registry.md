@@ -53,5 +53,5 @@
 - [x] Run live sample smoke checks for at least `shrinkme.click` and `link.adlink.click`.
 - [x] Restart `shortlink-bypass-bot.service`.
 - [x] Confirm service is active.
-- [ ] Commit and push repo.
-- [ ] Run workspace MyAiAgent autosync.
+- [x] Commit and push repo.
+- [x] Run workspace MyAiAgent autosync.
