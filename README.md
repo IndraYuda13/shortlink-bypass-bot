@@ -22,16 +22,17 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | Family | Status | Notes |
 | --- | --- | --- |
 | `link.adlink.click` | Live bypass | Uses browserless TLS impersonation against `blog.adlink.click`, with live Chromium kept as fallback |
-| `oii.la` | Analysis only | Static token-tail downstream extraction |
+| `oii.la` | Analysis only | Token-tail extraction returns sampled `onlyfaucet` target; live Turnstile/timer completion is not proven |
 | `tpi.li` | Analysis only | Same token-tail Turnstile family as `oii.la`; extracts sampled `99faucet` target |
 | `aii.sh` | Analysis only | ShrinkBixby token-tail extraction; sampled target is `coinadster.com/shortlink.php?...` |
-| `cuty.io` | Live bypass | Live CDP Chrome helper uses local Turnstile solver, reaches final `cuttlinks.com/go/<alias>`, and lands on sampled `google.com` target |
+| `cuty.io` | Partial | Handler exists, but current live bot run can fail at solver boundary with `ERROR_CAPTCHA_UNSOLVABLE` |
 | `lnbz.la` | Live bypass | Browserless article/survey chain through `avnsgames.com` reaches `/links/go` and returns sampled `cryptoearns.com` target |
-| `sfl.gl` | Live bypass | Browserless SafelinkU API flow reaches ready page and extracts final `window.location.href` target |
+| `sfl.gl` | Partial | Handler exists, but current live entry page no longer exposes the expected `redirect.php` form reliably |
 | `gplinks.co` | Partial mapper | Browserless entry reaches PowerGam and decodes step contract, but final still fails server `not_enough_steps` validation |
 | `ez4short.com` | Live bypass | Fast `game5s.com` referer lane unlocks final go-link form and returns sampled `tesskibidixxx.com` target |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
-| `xut.io` -> `autodime cwsafelinkphp` | Partial live lane | Warmup wrapper, Step 1 solver, and warm-browser handoff into patched FlareSolverr are wired, but the final oracle is still not reached |
+| `xut.io` -> `autodime cwsafelinkphp` | Partial live lane | Warmup wrapper and helper exist, but current bot runtime fails on missing `dtos` import before final oracle |
+| `exe.io` | Unsupported | Sample oracle captured, but no handler exists yet |
 
 ## How it works
 

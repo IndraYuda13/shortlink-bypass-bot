@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-04-28
+
+### supported sites registry and status correction
+- Added `supported_sites.py` as the canonical machine-readable registry for supported shortlink families.
+- Added `/supported` as a bot alias for the registry-backed `/status` output.
+- Updated bot status output so it no longer uses the stale hardcoded list that only showed `adlink`, `shrinkme`, and `oii`.
+- Added `tests/test_supported_sites_registry.py` to lock the registry grouping and bot status behavior.
+- Added `docs/SUPPORTED_SITES.md` for integration notes and API-ready field meanings.
+- Corrected current support labels based on fresh user/live evidence:
+  - `link.adlink.click`, `shrinkme.click`, `ez4short.com`, and `lnbz.la` are the current `live_bypass` set.
+  - `oii.la`, `tpi.li`, and `aii.sh` are `analysis_only` token-extraction lanes.
+  - `xut.io`, `cuty.io`, `gplinks.co`, and `sfl.gl` stay `partial` until their current blockers are closed.
+  - `exe.io` remains `unsupported` until a handler exists.
+
 ## 2026-04-24
 
 ### cuty live helper and lnbz browserless handler

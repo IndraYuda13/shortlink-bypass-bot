@@ -10,6 +10,7 @@ from urllib.parse import urlparse
 import requests
 
 from engine import ShortlinkBypassEngine
+from supported_sites import status_lines
 
 API_BASE = "https://api.telegram.org"
 POLL_TIMEOUT = 30
@@ -108,6 +109,7 @@ class TelegramShortlinkBot:
             "<code>/bypass URL</code> , deteksi family otomatis lalu coba ambil hasil final",
             "<code>/adlink URL</code> , paksa jalur Adlink kalau targetnya keluarga adlink",
             "<code>/status</code> , lihat status singkat bot dan family yang lagi disupport",
+            "<code>/supported</code> , alias status supported-sites buat integrasi/API nanti",
             "<code>/ping</code> , cek bot masih nyala atau tidak",
             "<code>/help</code> , tampilkan bantuan ini lagi",
             "",
@@ -131,20 +133,15 @@ class TelegramShortlinkBot:
         ])
 
     def status_text(self) -> str:
-        return "\n".join([
-            "<b>Status bot:</b> online",
-            "",
-            "<b>Family saat ini:</b>",
-            "- <code>link.adlink.click</code> , live bypass",
-            "- <code>shrinkme.click</code> , live bypass",
-            "- <code>oii.la</code> , analysis only",
-            "",
-            "<b>Belum ada handler:</b>",
-            "- <code>linkcut.pro</code>",
-            "- <code>aii.sh</code>",
-            "- <code>tpi.li</code>",
-            "- <code>lnbz.la</code>",
-        ])
+        lines = ["<b>Status bot:</b> online", "", "<b>Supported sites registry:</b>"]
+        for line in status_lines():
+            if not line:
+                lines.append("")
+            elif line.endswith(":"):
+                lines.append(f"<b>{escape(line)}</b>")
+            else:
+                lines.append(escape(line))
+        return "\n".join(lines)
 
     def is_plain_url(self, text: str) -> bool:
         value = text.strip()
@@ -294,7 +291,7 @@ class TelegramShortlinkBot:
             self.send_message(chat_id, text_out, reply_to_message_id=message_id)
             return
 
-        if command == "/status":
+        if command in {"/status", "/supported"}:
             self.send_message(chat_id, self.status_text(), reply_to_message_id=message_id)
             return
 

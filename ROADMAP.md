@@ -11,9 +11,9 @@
   - `xut.io/hd7AOJ` -> `tesskibidixxx.com`
   - `tpi.li/Dd5xka` -> `99faucet.com/links/back/...` (token handler now supported)
   - `ez4short.com/qSyPzeo` -> `tesskibidixxx.com` (fast live handler now supported)
-  - `cuty.io/AfaX6jx` -> `google.com` (live CDP+Turnstile helper now supported for sample)
+  - `cuty.io/AfaX6jx` -> `google.com` (handler exists, but current live run is blocked by solver instability)
   - `gplinks.co/YVTC` -> `tesskibidixxx.com`
-  - `sfl.gl/18PZXXI9` -> `google.com` (live API handler now supported for sample)
+  - `sfl.gl/18PZXXI9` -> `google.com` (handler exists, but current live run fails when entry form is missing)
   - `exe.io/vkRI1` -> `google.com`
   - `aii.sh/CBygg8fn2s3` -> `coinadster.com/shortlink.php?...` (token handler now supported)
   - `lnbz.la/Hmvp6` -> `cryptoearns.com/links/back/...` (browserless article-chain handler now supported)
@@ -31,7 +31,7 @@
 - [done] 4. Rancang arsitektur bot bypass yang modular
 - [done] 5. Buat POC runner untuk minimal 1 family yang bisa direplay
 - [done] 6. Verifikasi POC pada sampel link nyata tanpa spam
-- [in progress] 7. Dokumentasikan lesson reusable dan next patch list
+- [done] 7. Dokumentasikan lesson reusable dan next patch list
 - [done] 8. Deploy bot Telegram persist di Rawon
 
 ## Current known facts
@@ -150,6 +150,10 @@
     - namun blind click ke sisi kiri container widget `#GQTnq7` mengubah state page dari `Performing security verification` menjadi `Verifying you are human. This may take a few seconds.`
     - artinya widget Cloudflare itu benar-benar ada dan merespons pointer input, hanya saja boundary DOM/selector-nya tersembunyi atau tidak dirender seperti elemen checkbox biasa di probe ini
   - arti praktis saat ini: blocker utama sudah pindah lagi, dari `Step 1 captcha` ke `gamescrate Cloudflare gate` sebelum oracle final
+- Supported-sites registry milestone:
+  - `supported_sites.py` sekarang menjadi sumber data resmi untuk status family, sample URL, expected final, handler, proof, blockers, dan command alias
+  - `/status` dan `/supported` di bot sekarang mengambil data dari registry ini, bukan daftar hardcoded lama
+  - status saat ini sengaja ketat: hanya family yang terbukti stabil/live saat ini diberi label `live_bypass`; token extraction dan partial lane tidak dinaikkan jadi working hanya karena pernah mengeluarkan candidate URL
 - New implementation milestone:
   - `projects/shortlink-bypass-bot/engine.py` sekarang sudah ada sebagai core analyzer modular per family
   - `projects/shortlink-bypass-bot/bot.py` sudah ada sebagai wrapper Telegram sederhana untuk `/bypass` dan `/adlink`
