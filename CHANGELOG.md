@@ -3,6 +3,13 @@
 ## 2026-04-28
 
 ### supported sites registry and status correction
+
+### remaining-family expansion pass
+- Added an `exe.io` / `exeygo.com` gated mapper that follows the entry redirect, submits the first CakePHP form, parses the second `form#link-view`, and records captcha/timer facts without claiming the final target.
+- Added Cloudflare access-denied detection for `sfl.gl` so current VPS/IP blocks are reported as `CLOUDFLARE_BLOCKED` instead of the misleading `ENTRY_FORM_NOT_FOUND`.
+- Split token-returning families into `token_bypass` in the registry: `oii.la`, `tpi.li`, and `aii.sh` return the captured downstream target from decoded token payloads, but are still not full live-gate bypasses.
+- Kept `gplinks.co`, `xut.io`, and `cuty.io` partial because their current blockers remain server-side ad lifecycle, missing helper/runtime boundary, and solver instability respectively.
+
 - Added `supported_sites.py` as the canonical machine-readable registry for supported shortlink families.
 - Added `/supported` as a bot alias for the registry-backed `/status` output.
 - Updated bot status output so it no longer uses the stale hardcoded list that only showed `adlink`, `shrinkme`, and `oii`.

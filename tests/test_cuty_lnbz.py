@@ -1,4 +1,5 @@
 import unittest
+from pathlib import Path
 from unittest.mock import Mock, patch
 
 from engine import ShortlinkBypassEngine
@@ -93,6 +94,15 @@ class LnbzTests(unittest.TestCase):
         final_call = fake_session.post.call_args_list[-1]
         self.assertEqual(final_call.args[0], 'https://lnbz.la/links/go')
         self.assertEqual(final_call.kwargs['data']['ad_form_data'], 'blob123')
+
+
+class CutyHelperBehaviorTests(unittest.TestCase):
+    def test_cuty_helper_uses_dynamic_port_and_returns_solver_error_timeline(self):
+        source = Path('cuty_live_browser.py').read_text()
+        self.assertIn('find_free_port', source)
+        self.assertNotIn('self.port = 9240', source)
+        self.assertIn('solver_error', source)
+        self.assertIn('timeline', source)
 
 
 if __name__ == '__main__':

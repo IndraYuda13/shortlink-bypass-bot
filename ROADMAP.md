@@ -214,12 +214,12 @@
 - Engine sudah punya handler awal untuk family ini, tapi masih jujur berhenti di `ICONCAPTCHA_STEP1_MAPPED` sampai success oracle final benar-benar ketemu.
 - New sample target implementation status:
   - `tpi.li` and `aii.sh` now use the shared token-tail landing handler
-  - `sfl.gl` now has a browserless SafelinkU API handler that reaches the sampled `google.com` oracle
+  - `sfl.gl` has a browserless SafelinkU API handler, but current VPS egress is Cloudflare-blocked before the entry form
   - `ez4short.com` now has a fast live handler through the `game5s.com` referer lane
   - `gplinks.co` now has a partial PowerGam mapper, but final remains blocked by missing ad-impression/conversion state
   - `cuty.io` now has a live CDP Chrome + local Turnstile solver helper that reaches the sampled `google.com` oracle
   - `lnbz.la` now has a browserless article/survey-chain handler that reaches the sampled `cryptoearns.com` oracle
-  - `exe.io` remains mapped but unsupported for final bypass
+  - `exe.io` now has a gated mapper through the two-stage exeygo CakePHP forms, but final remains blocked by Turnstile/reCAPTCHA token validity
 
 ## Boundary catalog
 - `entry shortlink` -> status: narrowed

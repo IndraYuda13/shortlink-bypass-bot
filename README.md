@@ -22,12 +22,12 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | Family | Status | Notes |
 | --- | --- | --- |
 | `link.adlink.click` | Live bypass | Uses browserless TLS impersonation against `blog.adlink.click`, with live Chromium kept as fallback |
-| `oii.la` | Analysis only | Token-tail extraction returns sampled `onlyfaucet` target; live Turnstile/timer completion is not proven |
-| `tpi.li` | Analysis only | Same token-tail Turnstile family as `oii.la`; extracts sampled `99faucet` target |
-| `aii.sh` | Analysis only | ShrinkBixby token-tail extraction; sampled target is `coinadster.com/shortlink.php?...` |
+| `oii.la` | Token bypass | Token-tail extraction returns sampled `onlyfaucet` target; live Turnstile/timer completion is not proven |
+| `tpi.li` | Token bypass | Same token-tail Turnstile family as `oii.la`; extracts sampled `99faucet` target |
+| `aii.sh` | Token bypass | ShrinkBixby token-tail extraction; sampled target is `coinadster.com/shortlink.php?...` |
 | `cuty.io` | Partial | Handler exists, but current live bot run can fail at solver boundary with `ERROR_CAPTCHA_UNSOLVABLE` |
 | `lnbz.la` | Live bypass | Browserless article/survey chain through `avnsgames.com` reaches `/links/go` and returns sampled `cryptoearns.com` target |
-| `sfl.gl` | Partial | Handler exists, but current live entry page no longer exposes the expected `redirect.php` form reliably |
+| `sfl.gl` | Partial | Handler exists, but current VPS egress is Cloudflare-blocked before the expected `redirect.php` form appears |
 | `gplinks.co` | Partial mapper | Browserless entry reaches PowerGam and decodes step contract, but final still fails server `not_enough_steps` validation |
 | `ez4short.com` | Live bypass | Fast `game5s.com` referer lane unlocks final go-link form and returns sampled `tesskibidixxx.com` target |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |

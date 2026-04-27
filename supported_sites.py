@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, field
 from typing import Literal
 
-SupportStatus = Literal["live_bypass", "analysis_only", "partial", "unsupported"]
+SupportStatus = Literal["live_bypass", "token_bypass", "analysis_only", "partial", "unsupported"]
 
 
 @dataclass(frozen=True)
@@ -68,7 +68,7 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
     SupportedSite(
         host="oii.la",
         family="oii.la",
-        status="analysis_only",
+        status="token_bypass",
         handler="_handle_token_landing",
         command_alias="oii",
         sample_url="https://oii.la/BW8ntz",
@@ -79,7 +79,7 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
     SupportedSite(
         host="tpi.li",
         family="tpi.li",
-        status="analysis_only",
+        status="token_bypass",
         handler="_handle_token_landing",
         command_alias="tpi",
         sample_url="https://tpi.li/Dd5xka",
@@ -90,7 +90,7 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
     SupportedSite(
         host="aii.sh",
         family="aii.sh",
-        status="analysis_only",
+        status="token_bypass",
         handler="_handle_token_landing",
         command_alias="aii",
         sample_url="https://aii.sh/CBygg8fn2s3",
@@ -148,18 +148,19 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
     SupportedSite(
         host="exe.io",
         family="exe.io",
-        status="unsupported",
-        handler=None,
+        status="partial",
+        handler="_handle_exe",
         command_alias="exe",
         sample_url="https://exe.io/vkRI1",
         expected_final="https://google.com",
-        proof="Current user bot run returns UNSUPPORTED_FAMILY.",
-        blockers=("No exe.io handler exists yet.",),
+        proof="Engine now maps exe.io -> exeygo.com through the second captcha gate without claiming final target.",
+        blockers=("Valid Turnstile/reCAPTCHA token is required before final target can be proven.",),
     ),
 )
 
 STATUS_LABELS: dict[SupportStatus, str] = {
     "live_bypass": "Live bypass",
+    "token_bypass": "Token bypass",
     "analysis_only": "Analysis/token extraction",
     "partial": "Partial / needs more work",
     "unsupported": "Unsupported / not implemented yet",
@@ -184,7 +185,7 @@ def registry_as_dicts() -> list[dict[str, object]]:
 
 def status_lines() -> list[str]:
     lines: list[str] = []
-    for status in ("live_bypass", "analysis_only", "partial", "unsupported"):
+    for status in ("live_bypass", "token_bypass", "analysis_only", "partial", "unsupported"):
         sites = sites_by_status(status)  # type: ignore[arg-type]
         if not sites:
             continue

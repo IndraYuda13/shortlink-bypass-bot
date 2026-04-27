@@ -2,7 +2,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
+import signal
+import socket
 import subprocess
 import tempfile
 import time
@@ -14,6 +17,12 @@ import requests
 from websocket import create_connection
 
 GOOGLE_HOSTS = {"google.com", "www.google.com"}
+
+
+def find_free_port() -> int:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind(("127.0.0.1", 0))
+        return int(sock.getsockname()[1])
 
 
 def detect_chrome_path() -> str:
@@ -35,7 +44,7 @@ def detect_chrome_path() -> str:
 class CdpPage:
     def __init__(self, chrome_path: str, timeout: int):
         self.timeout = timeout
-        self.port = 9240
+        self.port = find_free_port()
         self.proc = subprocess.Popen(
             [
                 chrome_path,
@@ -50,6 +59,7 @@ class CdpPage:
             ],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
+            start_new_session=True,
         )
         self.ws = None
         self.msg_id = 0
@@ -79,11 +89,17 @@ class CdpPage:
                 self.ws.close()
         except Exception:
             pass
-        self.proc.terminate()
+        try:
+            os.killpg(self.proc.pid, signal.SIGTERM)
+        except Exception:
+            self.proc.terminate()
         try:
             self.proc.wait(timeout=3)
         except Exception:
-            self.proc.kill()
+            try:
+                os.killpg(self.proc.pid, signal.SIGKILL)
+            except Exception:
+                self.proc.kill()
 
     def send(self, method: str, params: dict | None = None) -> int:
         self.msg_id += 1
@@ -174,7 +190,17 @@ def run(url: str, timeout: int, solver_url: str) -> dict:
         if not sitekey:
             return {"status": 0, "stage": "captcha", "message": "Turnstile sitekey not found", "timeline": timeline}
 
-        token = solve_turnstile(solver_url, captcha_state.get("href") or url, sitekey, max(60, timeout - int(time.time() - started)))
+        try:
+            token = solve_turnstile(solver_url, captcha_state.get("href") or url, sitekey, max(60, timeout - int(time.time() - started)))
+        except Exception as exc:
+            return {
+                "status": 0,
+                "stage": "captcha-solver",
+                "message": "TURNSTILE_SOLVER_FAILED",
+                "solver_error": str(exc),
+                "sitekey": sitekey,
+                "timeline": timeline,
+            }
         page.eval(
             """(()=>{const token=%s; const f=document.querySelector('form'); if(!f) return false; let ta=document.querySelector('[name="cf-turnstile-response"]'); if(!ta){ta=document.createElement('textarea'); ta.name='cf-turnstile-response'; ta.style.display='none'; f.appendChild(ta)} ta.value=token; let b=document.querySelector('#submit-button'); if(b)b.disabled=false; return true;})()"""
             % json.dumps(token)

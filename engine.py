@@ -96,6 +96,8 @@ class ShortlinkBypassEngine:
             return self._handle_cuty(url)
         if host == "lnbz.la" or host.endswith(".lnbz.la"):
             return self._handle_lnbz(url)
+        if host == "exe.io" or host.endswith(".exe.io") or host == "exeygo.com" or host.endswith(".exeygo.com"):
+            return self._handle_exe(url)
         return BypassResult(
             status=0,
             input_url=url,
@@ -297,6 +299,99 @@ class ShortlinkBypassEngine:
     def _handle_oii(self, url: str) -> BypassResult:
         return self._handle_token_landing(url, "oii.la")
 
+
+    def _handle_exe(self, url: str) -> BypassResult:
+        family = "exe.io"
+        facts: dict[str, Any] = {}
+        try:
+            session = self._new_impersonated_session()
+            parsed = urlparse(url)
+            if parsed.netloc.lower() == "exe.io" or parsed.netloc.lower().endswith(".exe.io"):
+                entry = session.get(url, timeout=self.timeout, allow_redirects=False)
+                facts["entry_status"] = entry.status_code
+                facts["entry_redirect"] = self._clean_url(entry.headers.get("location", "")) or None
+                gate_url = facts["entry_redirect"] or url
+            else:
+                gate_url = url
+                facts["entry_status"] = None
+                facts["entry_redirect"] = gate_url
+
+            first = session.get(gate_url, timeout=self.timeout, allow_redirects=True, headers={"Referer": url})
+            first_soup = BeautifulSoup(first.text, "html.parser")
+            facts.update(self._common_facts_for_session(first, first_soup, session))
+            facts.update(self._extract_runtime_config(first.text))
+
+            before_form = first_soup.select_one("form#before-captcha") or first_soup.find("form")
+            if not before_form:
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message="EXE_BEFORE_FORM_NOT_FOUND",
+                    stage="entry",
+                    facts=facts,
+                    blockers=["form before-captcha tidak ditemukan di gate exe/exeygo"],
+                )
+
+            before_action = urljoin(first.url, before_form.get("action") or "")
+            before_hidden = self._extract_hidden_inputs(before_form)
+            facts["before_form_action"] = before_action
+            facts["before_hidden_names"] = sorted(before_hidden)
+
+            second = session.post(
+                before_action,
+                data=before_hidden,
+                timeout=self.timeout,
+                allow_redirects=True,
+                headers={
+                    "Origin": f"{urlparse(first.url).scheme}://{urlparse(first.url).netloc}",
+                    "Referer": first.url,
+                },
+            )
+            second_soup = BeautifulSoup(second.text, "html.parser")
+            facts["second_status"] = second.status_code
+            facts["second_url"] = second.url
+            facts.update({k: v for k, v in self._extract_runtime_config(second.text).items() if k not in facts or not facts.get(k)})
+
+            link_form = second_soup.select_one("form#link-view")
+            if not link_form:
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message="EXE_LINK_FORM_NOT_FOUND",
+                    stage="second-gate",
+                    facts=facts,
+                    blockers=["form link-view tidak ditemukan setelah submit before-captcha"],
+                )
+
+            link_hidden = self._extract_hidden_inputs(link_form)
+            facts["link_form_action"] = urljoin(second.url, link_form.get("action") or "")
+            facts["link_hidden_names"] = sorted(link_hidden)
+
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="EXE_GATE_MAPPED",
+                stage="captcha-gate",
+                facts=facts,
+                blockers=[
+                    "valid Turnstile/reCAPTCHA token diperlukan sebelum final target bisa dibuktikan",
+                    "jangan klaim google.com dari snippet referrer randomizer; final harus datang dari post-captcha redirect/body",
+                ],
+                notes=["dua tahap CakePHP form sudah termap sampai form#link-view"],
+            )
+        except Exception as exc:
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="REQUEST_FAILED",
+                facts=facts,
+                blockers=[str(exc)],
+            )
+
     def _handle_token_landing(self, url: str, family: str) -> BypassResult:
         try:
             response = self._get(url)
@@ -366,6 +461,16 @@ class ShortlinkBypassEngine:
             entry = session.get(url, timeout=self.timeout, allow_redirects=True)
             soup = BeautifulSoup(entry.text, "html.parser")
             facts.update(self._common_facts_for_session(entry, soup, session))
+            if self._is_cloudflare_block(entry, soup):
+                return BypassResult(
+                    status=0,
+                    input_url=url,
+                    family=family,
+                    message="CLOUDFLARE_BLOCKED",
+                    stage="entry-cloudflare",
+                    facts=facts,
+                    blockers=["Cloudflare access denied / IP block sebelum form SafelinkU muncul"],
+                )
 
             form = soup.find("form")
             if not form:
@@ -648,6 +753,7 @@ class ShortlinkBypassEngine:
             "final_url": live.get("final_url"),
             "final_title": live.get("final_title"),
             "sitekey": live.get("sitekey"),
+            "solver_error": live.get("solver_error"),
             "waited_seconds": live.get("waited_seconds"),
             "timeline": live.get("timeline") or [],
         })
@@ -672,7 +778,7 @@ class ShortlinkBypassEngine:
             message="CUTY_LIVE_CHAIN_FAILED",
             stage=live.get("stage") or "live-browser",
             facts=facts,
-            blockers=[str(live.get("message") or "live helper did not return downstream final URL")],
+            blockers=[str(live.get("solver_error") or live.get("message") or "live helper did not return downstream final URL")],
         )
 
     def _handle_lnbz(self, url: str) -> BypassResult:
@@ -1868,6 +1974,17 @@ class ShortlinkBypassEngine:
             return None
         strong = [item for item in ranked if any(marker in item for marker in ["/links/back/", "/member/shortlinks/verify/"])]
         return strong[0] if strong else ranked[0]
+
+
+    def _is_cloudflare_block(self, response: Any, soup: BeautifulSoup | None = None) -> bool:
+        title = ""
+        if soup and soup.title and soup.title.string:
+            title = soup.title.string.strip().lower()
+        server = str(getattr(response, "headers", {}).get("server", "")).lower()
+        text = str(getattr(response, "text", ""))[:2000].lower()
+        if getattr(response, "status_code", None) in {403, 429} and "cloudflare" in (server + title + text):
+            return True
+        return "access denied" in title and "cloudflare" in title
 
     def _clean_url(self, value: str) -> str:
         return value.strip().strip('"\'').rstrip('.,);]')

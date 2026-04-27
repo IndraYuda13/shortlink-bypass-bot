@@ -17,14 +17,14 @@ class SupportedSitesRegistryTests(unittest.TestCase):
 
     def test_registry_keeps_partial_and_analysis_hosts_separate(self):
         statuses = {site.host: site.status for site in SUPPORTED_SITES}
-        self.assertEqual(statuses["oii.la"], "analysis_only")
-        self.assertEqual(statuses["tpi.li"], "analysis_only")
-        self.assertEqual(statuses["aii.sh"], "analysis_only")
+        self.assertEqual(statuses["oii.la"], "token_bypass")
+        self.assertEqual(statuses["tpi.li"], "token_bypass")
+        self.assertEqual(statuses["aii.sh"], "token_bypass")
         self.assertEqual(statuses["xut.io"], "partial")
         self.assertEqual(statuses["cuty.io"], "partial")
         self.assertEqual(statuses["gplinks.co"], "partial")
         self.assertEqual(statuses["sfl.gl"], "partial")
-        self.assertEqual(statuses["exe.io"], "unsupported")
+        self.assertEqual(statuses["exe.io"], "partial")
 
     def test_registry_exports_api_ready_dicts(self):
         data = registry_as_dicts()
@@ -41,18 +41,17 @@ class SupportedSitesRegistryTests(unittest.TestCase):
             "blockers",
             "notes",
         })
-        self.assertTrue(any(item["host"] == "exe.io" and item["handler"] is None for item in data))
+        self.assertTrue(any(item["host"] == "exe.io" and item["handler"] == "_handle_exe" for item in data))
 
     def test_status_lines_are_grouped_for_bot_and_api_docs(self):
         rendered = "\n".join(status_lines())
         self.assertIn("Live bypass:", rendered)
         self.assertIn("link.adlink.click", rendered)
         self.assertIn("shrinkme.click", rendered)
-        self.assertIn("Analysis/token extraction:", rendered)
+        self.assertIn("Token bypass:", rendered)
         self.assertIn("oii.la", rendered)
         self.assertIn("Partial / needs more work:", rendered)
         self.assertIn("xut.io", rendered)
-        self.assertIn("Unsupported / not implemented yet:", rendered)
         self.assertIn("exe.io", rendered)
 
     def test_bot_status_uses_registry_not_hardcoded_old_list(self):

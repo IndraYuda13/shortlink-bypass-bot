@@ -58,6 +58,37 @@ class SflTests(unittest.TestCase):
         self.assertEqual(result.bypass_url, 'https://google.com')
         sleep.assert_called_once_with(10)
 
+    def test_sfl_reports_cloudflare_block_when_entry_is_access_denied(self):
+        engine = ShortlinkBypassEngine()
+
+        def response(url, text='', status_code=403, headers=None):
+            item = Mock()
+            item.url = url
+            item.text = text
+            item.status_code = status_code
+            item.headers = headers or {}
+            item.json = Mock(return_value={})
+            return item
+
+        entry = response(
+            'https://sfl.gl/18PZXXI9',
+            '<html><head><title>Access denied | sfl.gl used Cloudflare to restrict access | sfl.gl | Cloudflare</title></head><body>Access denied</body></html>',
+            403,
+            {'server': 'cloudflare'},
+        )
+        fake_session = Mock()
+        fake_session.get.return_value = entry
+        fake_session.cookies.jar = []
+
+        with patch.object(engine, '_new_impersonated_session', return_value=fake_session):
+            result = engine.analyze('https://sfl.gl/18PZXXI9')
+
+        self.assertEqual(result.family, 'sfl.gl')
+        self.assertEqual(result.status, 0)
+        self.assertEqual(result.message, 'CLOUDFLARE_BLOCKED')
+        self.assertEqual(result.stage, 'entry-cloudflare')
+        self.assertIn('Cloudflare', result.blockers[0])
+
 
 if __name__ == '__main__':
     unittest.main()
