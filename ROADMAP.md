@@ -13,7 +13,7 @@
   - `ez4short.com/qSyPzeo` -> `tesskibidixxx.com` (fast live handler now supported)
   - `cuty.io/AfaX6jx` -> `google.com` (handler exists, but current live run is blocked by solver instability)
   - `gplinks.co/YVTC` -> `tesskibidixxx.com`
-  - `sfl.gl/18PZXXI9` -> `google.com` (handler exists, but current live run fails when entry form is missing)
+  - `sfl.gl/18PZXXI9` -> `google.com` (live via WARP proxy fallback + SafelinkU API flow)
   - `exe.io/vkRI1` -> `google.com`
   - `aii.sh/CBygg8fn2s3` -> `coinadster.com/shortlink.php?...` (token handler now supported)
   - `lnbz.la/Hmvp6` -> `cryptoearns.com/links/back/...` (browserless article-chain handler now supported)
@@ -214,7 +214,7 @@
 - Engine sudah punya handler awal untuk family ini, tapi masih jujur berhenti di `ICONCAPTCHA_STEP1_MAPPED` sampai success oracle final benar-benar ketemu.
 - New sample target implementation status:
   - `tpi.li` and `aii.sh` now use the shared token-tail landing handler
-  - `sfl.gl` has a browserless SafelinkU API handler, but current VPS egress is Cloudflare-blocked before the entry form
+  - `sfl.gl` now has a browserless SafelinkU API handler with WARP proxy fallback for Cloudflare-blocked VPS egress
   - `ez4short.com` now has a fast live handler through the `game5s.com` referer lane
   - `gplinks.co` now has a partial PowerGam mapper, but final remains blocked by missing ad-impression/conversion state
   - `cuty.io` now has a live CDP Chrome + local Turnstile solver helper that reaches the sampled `google.com` oracle
@@ -246,3 +246,11 @@
   - `projects/shortlink-bypass-bot/engine.py`
   - `projects/shortlink-bypass-bot/bot.py`
   - `projects/shortlink-bypass-bot/README.md`
+
+## 2026-04-28 shared-blocker phase
+- Restored `state/flaresolverr-exp/src` source files after they were accidentally deleted from the worktree, which fixed `xut_live_browser.py` imports for `dtos` and `flaresolverr_service`.
+- Pinned xut live helper ChromeDriver to the installed Chrome major version so undetected-chromedriver does not pull a mismatched major.
+- Added a local Python IconCaptcha fallback for xut using the proven ClaimCoin solver when the old API hub endpoint returns 404.
+- xut runtime/dependency blockers are repaired. One live run reached `gamescrate.app` Cloudflare after Step 1-4, but a later repeat still failed at Step 1, so the active blocker is solver stability plus gamescrate final gate.
+- Added SFL WARP proxy fallback; `sfl.gl/18PZXXI9` now returns `https://google.com` again.
+- Turnstile benchmark for cuty/exe still returns `ERROR_CAPTCHA_UNSOLVABLE`; solver/provider lane remains the blocker.

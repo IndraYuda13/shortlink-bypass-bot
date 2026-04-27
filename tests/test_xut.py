@@ -1,6 +1,7 @@
 import base64
 import json
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 from engine import ShortlinkBypassEngine
@@ -154,3 +155,15 @@ class XutAutodimeTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class XutHelperRuntimeTests(unittest.TestCase):
+    def test_xut_helper_pins_chromedriver_to_installed_chrome_major(self):
+        source = Path('xut_live_browser.py').read_text()
+        self.assertIn('detect_chrome_major', source)
+        self.assertIn('version_main=chrome_major', source)
+
+    def test_xut_helper_has_local_iconcaptcha_fallback(self):
+        source = Path('xut_live_browser.py').read_text()
+        self.assertIn('solve_iconcaptcha_data_url', source)
+        self.assertIn('provider', source)
+        self.assertIn('local-python', source)

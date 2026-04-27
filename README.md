@@ -27,11 +27,11 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | `aii.sh` | Token bypass | ShrinkBixby token-tail extraction; sampled target is `coinadster.com/shortlink.php?...` |
 | `cuty.io` | Partial | Handler exists, but current live bot run can fail at solver boundary with `ERROR_CAPTCHA_UNSOLVABLE` |
 | `lnbz.la` | Live bypass | Browserless article/survey chain through `avnsgames.com` reaches `/links/go` and returns sampled `cryptoearns.com` target |
-| `sfl.gl` | Partial | Handler exists, but current VPS egress is Cloudflare-blocked before the expected `redirect.php` form appears |
+| `sfl.gl` | Live bypass | Direct VPS egress is Cloudflare-blocked, but WARP proxy fallback reaches SafelinkU API flow and returns sampled `google.com` target |
 | `gplinks.co` | Partial mapper | Browserless entry reaches PowerGam and decodes step contract, but final still fails server `not_enough_steps` validation |
 | `ez4short.com` | Live bypass | Fast `game5s.com` referer lane unlocks final go-link form and returns sampled `tesskibidixxx.com` target |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
-| `xut.io` -> `autodime cwsafelinkphp` | Partial live lane | Warmup wrapper and helper exist, but current bot runtime fails on missing `dtos` import before final oracle |
+| `xut.io` -> `autodime cwsafelinkphp` | Partial live lane | Runtime repaired through FlareSolverr restore, ChromeDriver pin, and local IconCaptcha fallback; has reached `gamescrate.app` Cloudflare in one live run, but Step 1 remains flaky across repeated runs before final oracle |
 | `exe.io` | Unsupported | Sample oracle captured, but no handler exists yet |
 
 ## How it works

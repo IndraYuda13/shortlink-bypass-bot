@@ -5,6 +5,15 @@
 ### supported sites registry and status correction
 
 ### remaining-family expansion pass
+
+### shared blocker repair phase
+- Restored the local FlareSolverr source tree used by `xut_live_browser.py`; `dtos.py` and `flaresolverr_service.py` imports work again.
+- Pinned the xut helper to the installed Chrome major version to avoid undetected-chromedriver downloading a mismatched ChromeDriver.
+- Added a local Python IconCaptcha fallback for xut using the existing ClaimCoin solver when the old API hub endpoint returns 404.
+- Verified xut now passes IconCaptcha Step 1 and reaches the `gamescrate.app` Cloudflare handoff; final remains partial because the downstream target is not reached yet.
+- Added WARP proxy fallback for `sfl.gl`; live verification now returns `https://google.com`, so `sfl.gl` is promoted back to `live_bypass`.
+- Benchmarked Turnstile solver for `cuty.io` and `exe.io`; both still return `ERROR_CAPTCHA_UNSOLVABLE`, so those remain partial.
+
 - Added an `exe.io` / `exeygo.com` gated mapper that follows the entry redirect, submits the first CakePHP form, parses the second `form#link-view`, and records captcha/timer facts without claiming the final target.
 - Added Cloudflare access-denied detection for `sfl.gl` so current VPS/IP blocks are reported as `CLOUDFLARE_BLOCKED` instead of the misleading `ENTRY_FORM_NOT_FOUND`.
 - Split token-returning families into `token_bypass` in the registry: `oii.la`, `tpi.li`, and `aii.sh` return the captured downstream target from decoded token payloads, but are still not full live-gate bypasses.

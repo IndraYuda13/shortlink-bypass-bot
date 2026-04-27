@@ -5,6 +5,7 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 import time
 import urllib.request
@@ -27,13 +28,28 @@ for site_path in FLARESOLVERR_SITE_PACKAGES:
         sys.path.insert(0, str(site_path))
 if str(FLARESOLVERR_SRC) not in sys.path:
     sys.path.insert(0, str(FLARESOLVERR_SRC))
+ICONCAPTCHA_SOLVER_SRC = WORKSPACE_ROOT / "projects" / "claimcoin-autoclaim" / "src"
+if ICONCAPTCHA_SOLVER_SRC.exists() and str(ICONCAPTCHA_SOLVER_SRC) not in sys.path:
+    sys.path.insert(0, str(ICONCAPTCHA_SOLVER_SRC))
 
+from claimcoin_autoclaim.iconcaptcha_solver import solve_iconcaptcha_data_url
 from dtos import V1RequestBase  # type: ignore
 from flaresolverr_service import _controller_v1_handler  # type: ignore
 
 FINAL_PREFIX = "https://onlyfaucet.com/links/back/"
 DEFAULT_TIMEOUT = 300
 CHROME_PATH = "/usr/bin/google-chrome" if Path("/usr/bin/google-chrome").exists() else "/usr/bin/google-chrome-stable"
+
+
+def detect_chrome_major() -> int | None:
+    try:
+        output = subprocess.check_output([CHROME_PATH, "--version"], text=True, timeout=10)
+    except Exception:
+        return None
+    match = re.search(r"(\d+)\.", output)
+    return int(match.group(1)) if match else None
+
+
 ENV_TEXT = Path("/etc/indra-api-hub.env").read_text()
 ENV_MATCH = re.search(r"^INDRA_API_KEYS=(.*)$", ENV_TEXT, re.M)
 RAW_KEYS = ENV_MATCH.group(1).strip().strip('"').strip("'") if ENV_MATCH else ""
@@ -42,13 +58,21 @@ API_KEY = FIRST_KEY.split(":", 1)[1] if ":" in FIRST_KEY else FIRST_KEY
 
 
 def solve_canvas_via_local_api(canvas_data_url: str) -> dict:
-    req = urllib.request.Request(
-        "http://127.0.0.1:5001/api/v1/iconcaptcha/solve",
-        data=json.dumps({"canvas_data_url": canvas_data_url}).encode(),
-        headers={"Content-Type": "application/json", "X-API-Key": API_KEY, "Accept": "application/json"},
-    )
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return json.loads(resp.read().decode())["result"]
+    try:
+        req = urllib.request.Request(
+            "http://127.0.0.1:5001/api/v1/iconcaptcha/solve",
+            data=json.dumps({"canvas_data_url": canvas_data_url}).encode(),
+            headers={"Content-Type": "application/json", "X-API-Key": API_KEY, "Accept": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            data = json.loads(resp.read().decode())["result"]
+            data.setdefault("provider", "api")
+            return data
+    except Exception as api_exc:
+        result = solve_iconcaptcha_data_url(canvas_data_url, similarity_threshold=20.0).to_dict()
+        result["provider"] = "local-python"
+        result["api_error"] = str(api_exc)
+        return result
 
 
 def body_text(driver) -> str:
@@ -193,7 +217,8 @@ def main() -> int:
     opts.add_argument("--lang=en-US")
     opts.add_argument("--headless=new")
 
-    driver = uc.Chrome(options=opts, use_subprocess=True, headless=True)
+    chrome_major = detect_chrome_major()
+    driver = uc.Chrome(options=opts, use_subprocess=True, headless=True, version_main=chrome_major)
     session_id = f"xut-live-{int(time.time())}"
     result: dict = {
         "status": 0,

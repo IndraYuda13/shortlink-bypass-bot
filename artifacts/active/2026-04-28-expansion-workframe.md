@@ -16,11 +16,11 @@ A family can be promoted to `live_bypass` only when `engine.py <sample> --pretty
 
 ## Parent checklist
 - [done] 1. Reproduce each current blocker with raw engine output.
-- [in progress] 2. Fix cheap deterministic failures first, especially env/import and stale parser issues.
+- [done] 2. Fix cheap deterministic failures first, especially env/import and stale parser issues.
 - [done] 3. Run targeted live probes for remaining protocol boundaries.
 - [done] 4. Patch handlers with tests.
 - [in progress] 5. Promote only families with verified final oracle.
-- [pending] 6. Deploy, push project repo, then sync MyAiAgent.
+- [in progress] 6. Deploy, push project repo, then sync MyAiAgent.
 
 ## Boundary catalog
 - Token-tail final-candidate boundary: `oii.la`, `tpi.li`, `aii.sh`, status narrowed but live-gate open.
@@ -43,3 +43,16 @@ A family can be promoted to `live_bypass` only when `engine.py <sample> --pretty
 - `sfl.gl` now returns `CLOUDFLARE_BLOCKED` with the current VPS egress.
 - `exe.io` now returns `EXE_GATE_MAPPED` with Turnstile sitekey/timer, no false final claim.
 - `cuty.io` helper now uses dynamic CDP port and returns solver error with timeline; current live blocker remains `ERROR_CAPTCHA_UNSOLVABLE`.
+
+## Shared blocker phase progress
+- Restored FlareSolverr source tree and verified `xut_live_browser` imports.
+- Updated Chrome to `147.0.7727.116` and pinned xut helper to installed Chrome major.
+- Added local Python IconCaptcha fallback after API hub route returned 404.
+- Live xut reached gamescrate Cloudflare once with Step 1 solved by local-python provider, but repeatability is not stable yet.
+- WARP proxy fallback made `sfl.gl/18PZXXI9` live again: `SFL_API_FLOW_OK -> https://google.com`.
+- Turnstile solver benchmark for cuty/exe still fails with `ERROR_CAPTCHA_UNSOLVABLE`.
+
+## Final smoke after shared blocker phase
+- `sfl.gl/18PZXXI9`: `status=1`, `SFL_API_FLOW_OK`, final `https://google.com`.
+- `xut.io/hd7AOJ`: current repeat `ICONCAPTCHA_STEP1_FAILED`; previous run reached `GAMESCRATE_HANDOFF_PROGRESS_ONLY`. Treat as partial/flaky, not working.
+- `cuty.io/AfaX6jx`: still `TURNSTILE_SOLVER_FAILED` / `ERROR_CAPTCHA_UNSOLVABLE`.

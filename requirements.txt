@@ -5,3 +5,5 @@ selenium
 setuptools
 undetected-chromedriver
 websocket-client
+
+Pillow>=10.0

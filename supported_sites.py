@@ -137,13 +137,13 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
     SupportedSite(
         host="sfl.gl",
         family="sfl.gl",
-        status="partial",
+        status="live_bypass",
         handler="_handle_sfl",
         command_alias="sfl",
         sample_url="https://sfl.gl/18PZXXI9",
         expected_final="https://google.com",
-        proof="Current user bot run failed at ENTRY_FORM_NOT_FOUND.",
-        blockers=("redirect.php form was not found on the current entry page, so the old live lane is stale.",),
+        proof="Live engine recheck on 2026-04-28 returned google.com through WARP proxy fallback and SafelinkU API flow.",
+        notes=("Direct VPS egress is Cloudflare-blocked, so this handler falls back to the local WARP proxy at 127.0.0.1:40000.",),
     ),
     SupportedSite(
         host="exe.io",

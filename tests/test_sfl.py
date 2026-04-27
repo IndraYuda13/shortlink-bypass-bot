@@ -89,6 +89,57 @@ class SflTests(unittest.TestCase):
         self.assertEqual(result.stage, 'entry-cloudflare')
         self.assertIn('Cloudflare', result.blockers[0])
 
+    def test_sfl_retries_entry_with_proxy_after_cloudflare_block(self):
+        engine = ShortlinkBypassEngine()
+
+        def response(url, text='', status_code=200, headers=None):
+            item = Mock()
+            item.url = url
+            item.text = text
+            item.status_code = status_code
+            item.headers = headers or {}
+            item.json = Mock(return_value={})
+            return item
+
+        blocked = response(
+            'https://sfl.gl/18PZXXI9',
+            '<html><head><title>Access denied | sfl.gl used Cloudflare to restrict access | sfl.gl | Cloudflare</title></head></html>',
+            403,
+            {'server': 'cloudflare'},
+        )
+        entry = response(
+            'https://sfl.gl/18PZXXI9',
+            '<form action="https://app.khaddavi.net/redirect.php" method="GET">'
+            '<input name="ray_id" value="ray123"><input name="alias" value="18PZXXI9"></form>',
+        )
+        redirect = response('https://app.khaddavi.net/redirect.php?ray_id=ray123&alias=18PZXXI9', '', 302, {'location': '/article/'})
+        article = response('https://app.khaddavi.net/article/', '<title>Article</title>')
+        session_resp = response('https://app.khaddavi.net/api/session', '{}')
+        session_resp.json.return_value = {'step': 1, 'fb': False, 'captcha': None, 'passcode': False}
+        verify_resp = response('https://app.khaddavi.net/api/verify', '{}')
+        verify_resp.json.return_value = {'message': 'OK'}
+        go_resp = response('https://app.khaddavi.net/api/go', '{}')
+        go_resp.json.return_value = {'url': 'https://sfl.gl/ready/go?t=abc&a=MThQWlhYSTk%3D'}
+        ready = response('https://sfl.gl/ready/go?t=abc&a=MThQWlhYSTk%3D', '<script>window.location.href = "https:\/\/google.com";</script>')
+
+        first_session = Mock()
+        first_session.get.return_value = blocked
+        first_session.cookies.jar = []
+        proxy_session = Mock()
+        proxy_session.get.side_effect = [entry, redirect, article, ready]
+        proxy_session.post.side_effect = [session_resp, verify_resp, go_resp]
+        proxy_session.cookies.jar = []
+
+        with patch.object(engine, '_new_impersonated_session', side_effect=[first_session, proxy_session]), \
+             patch.object(engine, '_sfl_proxy_candidates', return_value=[{'https': 'http://127.0.0.1:40000'}]), \
+             patch('engine.time.sleep'):
+            result = engine.analyze('https://sfl.gl/18PZXXI9')
+
+        self.assertEqual(result.status, 1)
+        self.assertEqual(result.message, 'SFL_API_FLOW_OK')
+        self.assertEqual(result.bypass_url, 'https://google.com')
+        self.assertEqual(result.facts['egress_mode'], 'proxy-fallback')
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -21,10 +21,10 @@ This document mirrors `supported_sites.py`, which is the canonical machine-reada
 | `oii.la` | `token_bypass` | `oii` | `_handle_token_landing` | `https://oii.la/BW8ntz` | `https://onlyfaucet.com/links/back/vYal1NZ2dtDFTr5cXqUi/LTC/208faecab92bd6cc094014e046df165d` | Token extraction works, full Turnstile/timer lane not proven. |
 | `tpi.li` | `token_bypass` | `tpi` | `_handle_token_landing` | `https://tpi.li/Dd5xka` | `https://99faucet.com/links/back/haBKjYrugRxDIVCpGqMo` | Token extraction works, full Turnstile/timer lane not proven. |
 | `aii.sh` | `token_bypass` | `aii` | `_handle_token_landing` | `https://aii.sh/CBygg8fn2s3` | `https://coinadster.com/shortlink.php?short_key=1cnd9h...h9a` | Token extraction only. Fresh full oracle should be captured before marking live. |
-| `xut.io` | `partial` | `xut` | `_handle_autodime_cwsafelink` | `https://xut.io/hd7AOJ` | `http://tesskibidixxx.com` | Current bot run fails because `xut_live_browser.py` cannot import `dtos`; later gates are still not closed. |
+| `xut.io` | `partial` | `xut` | `_handle_autodime_cwsafelink` | `https://xut.io/hd7AOJ` | `http://tesskibidixxx.com` | Runtime has reached gamescrate Cloudflare after Step 1-4 in one live run; later repeat still failed at Step 1, so final target is still not proven. |
 | `cuty.io` | `partial` | `cuty` | `_handle_cuty` | `https://cuty.io/AfaX6jx` | `https://google.com` | Current bot run can fail with `ERROR_CAPTCHA_UNSOLVABLE`. |
 | `gplinks.co` | `partial` | `gplinks` | `_handle_gplinks` | `https://gplinks.co/YVTC` | `http://tesskibidixxx.com` | PowerGam flow mapped, but final still fails `not_enough_steps`. |
-| `sfl.gl` | `partial` | `sfl` | `_handle_sfl` | `https://sfl.gl/18PZXXI9` | `https://google.com` | Current VPS egress is Cloudflare-blocked before the SafelinkU entry form appears. |
+| `sfl.gl` | `live_bypass` | `sfl` | `_handle_sfl` | `https://sfl.gl/18PZXXI9` | `https://google.com` | WARP proxy fallback reaches SafelinkU API flow and returns the expected final target. |
 | `exe.io` | `partial` | `exe` | `_handle_exe` | `https://exe.io/vkRI1` | `https://google.com` | Two-stage exeygo CakePHP gate is mapped; valid Turnstile/reCAPTCHA token is still required before final can be proven. |
 
 ## Integration rule

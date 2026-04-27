@@ -458,19 +458,38 @@ class ShortlinkBypassEngine:
         facts: dict[str, Any] = {}
         try:
             session = self._new_impersonated_session()
+            facts["egress_mode"] = "direct"
             entry = session.get(url, timeout=self.timeout, allow_redirects=True)
             soup = BeautifulSoup(entry.text, "html.parser")
             facts.update(self._common_facts_for_session(entry, soup, session))
             if self._is_cloudflare_block(entry, soup):
-                return BypassResult(
-                    status=0,
-                    input_url=url,
-                    family=family,
-                    message="CLOUDFLARE_BLOCKED",
-                    stage="entry-cloudflare",
-                    facts=facts,
-                    blockers=["Cloudflare access denied / IP block sebelum form SafelinkU muncul"],
-                )
+                for proxy in self._sfl_proxy_candidates():
+                    proxy_session = self._new_impersonated_session()
+                    try:
+                        proxy_session.proxies = proxy
+                    except Exception:
+                        pass
+                    proxy_entry = proxy_session.get(url, timeout=self.timeout, allow_redirects=True, proxies=proxy)
+                    proxy_soup = BeautifulSoup(proxy_entry.text, "html.parser")
+                    if not self._is_cloudflare_block(proxy_entry, proxy_soup):
+                        session = proxy_session
+                        entry = proxy_entry
+                        soup = proxy_soup
+                        facts.clear()
+                        facts["egress_mode"] = "proxy-fallback"
+                        facts["proxy"] = next(iter(proxy.values())) if proxy else None
+                        facts.update(self._common_facts_for_session(entry, soup, session))
+                        break
+                else:
+                    return BypassResult(
+                        status=0,
+                        input_url=url,
+                        family=family,
+                        message="CLOUDFLARE_BLOCKED",
+                        stage="entry-cloudflare",
+                        facts=facts,
+                        blockers=["Cloudflare access denied / IP block sebelum form SafelinkU muncul"],
+                    )
 
             form = soup.find("form")
             if not form:
@@ -1975,6 +1994,24 @@ class ShortlinkBypassEngine:
         strong = [item for item in ranked if any(marker in item for marker in ["/links/back/", "/member/shortlinks/verify/"])]
         return strong[0] if strong else ranked[0]
 
+
+
+    def _sfl_proxy_candidates(self) -> list[dict[str, str]]:
+        candidates: list[dict[str, str]] = []
+        env_proxy = os.getenv("SHORTLINK_BYPASS_SFL_PROXY", "").strip()
+        if env_proxy:
+            candidates.append({"http": env_proxy, "https": env_proxy})
+        warp_proxy = os.getenv("SHORTLINK_BYPASS_WARP_PROXY", "http://127.0.0.1:40000").strip()
+        if warp_proxy:
+            candidates.append({"http": warp_proxy, "https": warp_proxy})
+        deduped: list[dict[str, str]] = []
+        seen: set[tuple[tuple[str, str], ...]] = set()
+        for item in candidates:
+            key = tuple(sorted(item.items()))
+            if key not in seen:
+                seen.add(key)
+                deduped.append(item)
+        return deduped
 
     def _is_cloudflare_block(self, response: Any, soup: BeautifulSoup | None = None) -> bool:
         title = ""

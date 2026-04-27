@@ -12,6 +12,7 @@ class SupportedSitesRegistryTests(unittest.TestCase):
             "shrinkme.click",
             "ez4short.com",
             "lnbz.la",
+            "sfl.gl",
         })
         self.assertEqual(LIVE_BYPASS_HOSTS, live_hosts)
 
@@ -23,7 +24,7 @@ class SupportedSitesRegistryTests(unittest.TestCase):
         self.assertEqual(statuses["xut.io"], "partial")
         self.assertEqual(statuses["cuty.io"], "partial")
         self.assertEqual(statuses["gplinks.co"], "partial")
-        self.assertEqual(statuses["sfl.gl"], "partial")
+        self.assertEqual(statuses["sfl.gl"], "live_bypass")
         self.assertEqual(statuses["exe.io"], "partial")
 
     def test_registry_exports_api_ready_dicts(self):
