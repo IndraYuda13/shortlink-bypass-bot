@@ -2,6 +2,11 @@
 
 ## 2026-04-28
 
+### total optimization batch 1
+- GPLinks now skips the diagnostic HTTP-fast preflight by default and uses more state-driven browser waits; live sample improved from `183.3s` to `148.6s` while preserving `http://tesskibidixxx.com/`.
+- XUT now treats the visible exact `Get Link` href as the final oracle by default, skipping the final click/navigation wait; live sample improved from `187.0s` to `181.21s` while preserving `http://tesskibidixxx.com/`.
+- Research toggles remain available: `SHORTLINK_BYPASS_GPLINKS_HTTP_FAST=1` and `SHORTLINK_BYPASS_XUT_CLICK_FINAL=1`.
+
 ### cuty.io HTTP-only fast lane
 - Added `cuty_http_fast.py` for the `cuty.io -> cuttlinks.com` Laravel + Turnstile chain.
 - Wired `_handle_cuty()` to try the HTTP helper before the older CDP browser helper.

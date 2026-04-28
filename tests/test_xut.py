@@ -171,5 +171,6 @@ class XutHelperRuntimeTests(unittest.TestCase):
     def test_xut_helper_clicks_exact_get_link_not_download_ad(self):
         source = Path('xut_live_browser.py').read_text()
         self.assertIn('click_exact_visible(driver, "Get Link")', source)
+        self.assertIn('SHORTLINK_BYPASS_XUT_CLICK_FINAL', source)
         self.assertIn('XUT_FINAL_HOST_BLOCKLIST', source)
         self.assertNotIn('click_button_contains(driver, "download")', source.lower())

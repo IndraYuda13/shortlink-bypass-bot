@@ -39,11 +39,11 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 - `bot.py` receives Telegram commands, enforces the required join gate, and edits the same status message while work is running
 - `engine.py` detects the target family and chooses the right handler
 - `adlink_live_browser.py` stays as Adlink fallback when the faster browserless lane is not enough
-- `xut_live_browser.py` drives the live autodime -> gamescrate -> xut Step 6 lane, including IconCaptcha retry capture and exact `Get Link` final-click handling
+- `xut_live_browser.py` drives the live autodime -> gamescrate -> xut Step 6 lane, including IconCaptcha retry capture and exact `Get Link` href final-oracle handling; set `SHORTLINK_BYPASS_XUT_CLICK_FINAL=1` to restore final-click behavior.
 - `cuty_http_fast.py` solves `cuty.io` over HTTP with curl_cffi plus the local Turnstile solver; VHit replay can be enabled with `SHORTLINK_BYPASS_CUTY_HTTP_VHIT=1`, and CDP browser remains fallback.
 - `cuty_live_browser.py` remains the Cuty/Cuttlinks fallback for same-browser Turnstile and final go-form flow.
 - `exe_http_fast.py` solves `exe.io` over HTTP with curl_cffi plus the local Turnstile solver, keeping the browser helper as fallback.
-- `gplinks_http_fast.py` runs a fast HTTP-first GPLinks preflight. Current live result is a quick `not_enough_steps`, so it falls back to browser.
+- `gplinks_http_fast.py` is kept as opt-in research with `SHORTLINK_BYPASS_GPLINKS_HTTP_FAST=1`; default skips it because the current live result is a quick `not_enough_steps` before browser fallback.
 - `gplinks_live_browser.py` drives the PowerGam 3-step browser flow, scroll/verify handling, and final GPLinks Turnstile callback lane
 - `references/` and `ROADMAP.md` keep technical notes and current implementation status
 

@@ -24,3 +24,13 @@
 Implement an optional hybrid helper mode: HTTP through autodime/textfrog to gamescrate, browser only for gamescrate Cloudflare/Step 5, then HTTP for xut `/links/go`.
 
 Main report: `artifacts/active/2026-04-28-xut-http-hybrid-subagent.md`.
+
+## Optimization update 2026-04-28
+- The simple `HTTP Steps 1-4 -> browser gamescrate` lane was later falsified: gamescrate returned `Forbidden.` even after matching HTTP UA to installed Chrome major. Treat the gamescrate `t=` token as browser/fingerprint-bound until proven otherwise.
+- Do not promote a hybrid that generates Step 2-4 tokens in requests and opens gamescrate in Chrome.
+- Safer optimization order is now:
+  1. return visible exact XUT Step 6 `Get Link` href without clicking when it already equals the downstream oracle;
+  2. probe lower gamescrate dwell values with an env-controlled temporary helper before reducing the current safe `14s` wait;
+  3. replace Step 1 fixed sleeps with DOM/state polling;
+  4. only retry hybrid as HTTP Step 1 only -> browser Step 2, or browser-born cookies -> HTTP IconCaptcha.
+- Detailed report: `artifacts/active/total-optimization/xut-optimization-report.md`.

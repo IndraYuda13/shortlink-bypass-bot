@@ -51,7 +51,8 @@ class GplinksTests(unittest.TestCase):
         self.assertEqual(result.facts['target_final_candidate'], 'https://gplinks.co/YVTC?pid=1224622&vid=MTAxNzc2MzQ1Mw')
         self.assertTrue(result.blockers)
 
-    def test_gplinks_promotes_http_fast_helper_final_url(self):
+    @patch('engine.GPLINKS_HTTP_FAST_ENABLED', True)
+    def test_gplinks_promotes_http_fast_helper_final_url_when_enabled(self):
         engine = ShortlinkBypassEngine()
         with patch.object(engine, '_resolve_gplinks_http_fast', return_value={
             'status': 1,
@@ -74,7 +75,7 @@ class GplinksTests(unittest.TestCase):
 
     def test_gplinks_promotes_live_helper_final_url(self):
         engine = ShortlinkBypassEngine()
-        with patch.object(engine, '_resolve_gplinks_http_fast', return_value={}), \
+        with patch.object(engine, '_resolve_gplinks_http_fast') as http_fast, \
              patch.object(engine, '_resolve_gplinks_live', return_value={
             'status': 1,
             'stage': 'live-browser-final-gate',
@@ -86,6 +87,7 @@ class GplinksTests(unittest.TestCase):
         }):
             result = engine.analyze('https://gplinks.co/YVTC')
 
+        http_fast.assert_not_called()
         self.assertEqual(result.family, 'gplinks.co')
         self.assertEqual(result.status, 1)
         self.assertEqual(result.message, 'GPLINKS_FINAL_OK')

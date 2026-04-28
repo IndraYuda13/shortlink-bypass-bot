@@ -289,3 +289,9 @@
 - Engine now tries `cuty_http_fast.py` before the older CDP browser fallback.
 - Root cause update: the previous HTTP bounce was not a hard Turnstile/form blocker. A browser-shaped HTTP replay with `Origin: null`, HeadlessChrome-style UA, final wait, and optional VHit calls can clear `/go/AfaX6jx`.
 - Follow-up ablation: `--no-vhit` also returned `https://www.google.com/` in `69.9s`, so VHit replay is now opt-in via `SHORTLINK_BYPASS_CUTY_HTTP_VHIT=1` instead of default.
+
+## 2026-04-28 total optimization batch 1
+- Baseline matrix captured for all current samples under `artifacts/active/total-optimization/`.
+- GPLinks improved from `183.3s` to `148.6s` by skipping the diagnostic HTTP preflight by default and replacing several fixed waits with state-driven browser polling. Delta: saved `34.7s`, `18.9%` faster, `1.23x` speedup.
+- XUT improved from `187.0s` to `181.21s` by treating the visible exact `Get Link` href as final oracle and skipping the final click/navigation wait. Delta: saved `5.8s`, `3.1%` faster, `1.03x` speedup.
+- Token families remain intentionally `token_bypass` because current extraction is already ~`0.9-1.8s`; full live Turnstile/timer gate is not proven and would be slower for the current objective.

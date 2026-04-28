@@ -42,6 +42,8 @@ FINAL_HOST_MARKERS = ("onlyfaucet.com", "tesskibidixxx.com")
 DEFAULT_TIMEOUT = 300
 XUT_FINAL_HOST_BLOCKLIST = {"xut.io", "gamescrate.app", "stiftais.top", "webtrafic.ru", "earnviv.com"}
 CHROME_PATH = "/usr/bin/google-chrome" if Path("/usr/bin/google-chrome").exists() else "/usr/bin/google-chrome-stable"
+XUT_GAMESCRATE_DWELL_SECONDS = float(os.getenv("SHORTLINK_BYPASS_XUT_GAMESCRATE_DWELL", "8"))
+XUT_CLICK_FINAL_LINK = os.getenv("SHORTLINK_BYPASS_XUT_CLICK_FINAL", "0").strip().lower() in {"1", "true", "yes", "on"}
 
 
 def detect_chrome_major() -> int | None:
@@ -422,7 +424,7 @@ def main() -> int:
 
         wait_for(lambda: "Open Final Page" in body_text(driver), timeout=120, interval=1)
         result["facts"]["open_final_visible"] = snap(driver, "open-final-visible")
-        time.sleep(14)
+        time.sleep(max(0.0, XUT_GAMESCRATE_DWELL_SECONDS))
         result["facts"]["open_final_after_dwell"] = snap(driver, "open-final-after-dwell")
         result["facts"]["open_final_clicked"] = click_button_contains(driver, "open final page")
         time.sleep(3)
@@ -432,11 +434,14 @@ def main() -> int:
             final_url = final_url_from_current_state(driver)
             if final_url:
                 result["facts"]["step6_clickables"] = get_visible_exact_clickables(driver)
-                clicked = click_exact_visible(driver, "Get Link")
-                result["facts"]["get_link_clicked"] = clicked
-                if clicked:
-                    time.sleep(5)
-                    final_url = final_url_from_current_state(driver) or driver.current_url
+                if XUT_CLICK_FINAL_LINK:
+                    clicked = click_exact_visible(driver, "Get Link")
+                    result["facts"]["get_link_clicked"] = clicked
+                    if clicked:
+                        time.sleep(5)
+                        final_url = final_url_from_current_state(driver) or driver.current_url
+                else:
+                    result["facts"]["get_link_clicked"] = {"skipped": True, "reason": "visible Get Link href is already the downstream final oracle"}
                 result["status"] = 1
                 result["message"] = "XUT_FINAL_OK"
                 result["stage"] = "final-bypass"

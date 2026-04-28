@@ -157,6 +157,25 @@ def wait_not_cloudflare(driver, timeout: float) -> dict:
     return last
 
 
+def wait_document_ready(driver, timeout: float = 20, interval: float = 0.5) -> dict:
+    """Wait until the current page has enough DOM to inspect.
+
+    The old helper used large fixed sleeps after navigation. This keeps the
+    same success oracle but returns as soon as the browser has a body and is not
+    visibly sitting on Cloudflare's interstitial.
+    """
+    end = time.time() + timeout
+    last = state(driver, "ready-wait")
+    while time.time() < end:
+        last = state(driver, "ready-wait")
+        text = (last.get("text") or "").strip().lower()
+        title = (last.get("title") or "").strip().lower()
+        if text and "performing security verification" not in text and "just a moment" not in title:
+            return last
+        time.sleep(interval)
+    return last
+
+
 def unlock_final_gate(driver, solver_url: str, timeout_left: int) -> dict:
     actions: list[dict] = []
     before = wait_not_cloudflare(driver, 35)
@@ -240,7 +259,7 @@ def run(url: str, timeout: int, solver_url: str) -> dict:
     driver = build_driver()
     try:
         driver.get(url)
-        time.sleep(12)
+        wait_document_ready(driver, 25)
         timeline.append(state(driver, "entry"))
         if urlparse(driver.current_url).netloc.lower() not in POWERGAM_HOSTS:
             if not power_url:
@@ -251,7 +270,7 @@ def run(url: str, timeout: int, solver_url: str) -> dict:
             except Exception:
                 pass
             driver.get(power_url)
-            time.sleep(12)
+            wait_document_ready(driver, 25)
         timeline.append(state(driver, "power-entry"))
 
         deadline = time.time() + max(90, timeout - 45)
@@ -267,11 +286,14 @@ def run(url: str, timeout: int, solver_url: str) -> dict:
                 return {"status": 0, "stage": "powergam", "message": "GPLINKS_LINK_ERROR", "final_url": href, "decoded_query": decoded, "timeline": timeline}
             last_click = click_next_powergam(driver)
             timeline.append({"stage": "power-click", **last_click})
-            time.sleep(9)
+            wait_left = last_click.get("waitLeft")
+            if isinstance(wait_left, (int, float)) and wait_left > 0:
+                time.sleep(min(float(wait_left) + 0.5, 9.0))
+            else:
+                wait_document_ready(driver, 6, interval=0.5)
         else:
             return {"status": 0, "stage": "powergam", "message": "POWERGAM_FINAL_CANDIDATE_TIMEOUT", "decoded_query": decoded, "last_click": last_click, "timeline": timeline}
 
-        time.sleep(8)
         candidate = wait_not_cloudflare(driver, 35)
         candidate["stage"] = "candidate"
         timeline.append(candidate)
