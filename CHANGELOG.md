@@ -2,6 +2,11 @@
 
 ## 2026-04-28
 
+### gplinks HTTP fast preflight
+- Added `gplinks_http_fast.py` and engine HTTP-first preflight before the live browser fallback.
+- The current HTTP replay finishes in about 2 seconds but still receives `not_enough_steps`, so it is kept as a diagnostic/fast-fail lane instead of replacing the proven browser helper.
+- Browser fallback remains the production success lane for `gplinks.co` until the PowerGam server ledger proof is replicated over HTTP.
+
 ### gplinks.co live browser final lane
 - Added `gplinks_live_browser.py` for the GPLinks/PowerGam family.
 - Wired `_handle_gplinks` to the live helper before the older browserless mapper fallback.

@@ -41,6 +41,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 - `adlink_live_browser.py` stays as Adlink fallback when the faster browserless lane is not enough
 - `xut_live_browser.py` drives the live autodime -> gamescrate -> xut Step 6 lane, including IconCaptcha retry capture and exact `Get Link` final-click handling
 - `cuty_live_browser.py` drives the Cuty/Cuttlinks Turnstile and final go-form flow through CDP Chrome plus the local Turnstile solver API
+- `gplinks_http_fast.py` runs a fast HTTP-first GPLinks preflight. Current live result is a quick `not_enough_steps`, so it falls back to browser.
 - `gplinks_live_browser.py` drives the PowerGam 3-step browser flow, scroll/verify handling, and final GPLinks Turnstile callback lane
 - `references/` and `ROADMAP.md` keep technical notes and current implementation status
 

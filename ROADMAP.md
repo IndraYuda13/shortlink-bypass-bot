@@ -272,3 +272,8 @@
 - Verified final oracle: `http://tesskibidixxx.com/`.
 - Chain terbukti: GPLinks entry -> PowerGam 3-step browser flow -> final GPLinks page -> local Turnstile solve -> `onTurnstileCompleted()` / page submit callback -> final `Get Link` href.
 - Catatan stabilitas: PowerGam sensitif terhadap scroll/verify/adblock/rate state, jadi helper tetap menyimpan structured failure facts kalau gagal di step awal.
+## 2026-04-28 gplinks HTTP optimization checkpoint
+- HTTP-only PowerGam replay was tested and wired as an HTTP-first preflight.
+- Speed result: fast failure in about `2.1s`.
+- Current blocker: PowerGam still returns `not_enough_steps` even with decoded query, cookies, and three form POSTs, meaning the missing proof is server-side ledger state from browser/GPT activity, not simple form fields.
+- Production order is now HTTP preflight -> live browser fallback -> mapper fallback.

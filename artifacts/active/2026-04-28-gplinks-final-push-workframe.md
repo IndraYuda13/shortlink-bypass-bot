@@ -30,3 +30,16 @@ Make `https://gplinks.co/YVTC` return final `http://tesskibidixxx.com` through t
 - Important nuance: a manual direct `fetch('/links/go')` after the page's own ajax can return 403, so the helper must trust the first in-page jQuery submit result and read/click the resulting button href instead of doing a second direct fetch.
 - Reliability blocker still open: repeated live runs can stall at `powergam.online` 403 / PowerGam step timeout, likely due the PowerGam scroll/verification/adblock sensitivity or rate/exposure state. Keep registry status conservative until a clean engine run returns status=1 with the new helper.
 
+
+## 2026-04-28 HTTP fast-lane probe
+
+- Added `gplinks_http_fast.py` as an HTTP-first GPLinks probe and engine preflight lane.
+- Live run: `.venv/bin/python gplinks_http_fast.py https://gplinks.co/YVTC --timeout 90`.
+- Result: `status=0`, `stage=powergam-ledger`, `message=HTTP_FAST_POWERGAM_LEDGER_REJECTED`, `waited_seconds=2.1`.
+- Bounded replay attempted:
+  - entry redirect decode
+  - PowerGam page fetch with referer
+  - local cookies for `lid`, `pid`, `pages`, `vid`, `step_count`, `imps`, `adexp`
+  - three `adsForm` POSTs with `step_id=1/2/3`, `ad_impressions=5`, `visitor_id`, and final `next_target`
+- Server still redirected final candidate to `gplinks.co/link-error?alias=YVTC&error_code=not_enough_steps`.
+- Meaning: full HTTP replacement is not yet valid because PowerGam ledger requires a browser-side proof beyond form fields/cookies, likely GPT impression/reward or JS activity proof. Keep browser fallback as production success lane.

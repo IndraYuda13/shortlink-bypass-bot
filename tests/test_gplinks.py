@@ -51,9 +51,31 @@ class GplinksTests(unittest.TestCase):
         self.assertEqual(result.facts['target_final_candidate'], 'https://gplinks.co/YVTC?pid=1224622&vid=MTAxNzc2MzQ1Mw')
         self.assertTrue(result.blockers)
 
+    def test_gplinks_promotes_http_fast_helper_final_url(self):
+        engine = ShortlinkBypassEngine()
+        with patch.object(engine, '_resolve_gplinks_http_fast', return_value={
+            'status': 1,
+            'stage': 'http-fast',
+            'bypass_url': 'http://tesskibidixxx.com/',
+            'decoded_query': {'lid': 'YVTC', 'pid': '1224622', 'vid': '1019365269'},
+            'sitekey': '0x4AAAAAAAynCEcs0RV-UleY',
+            'token_used': True,
+            'waited_seconds': 31.2,
+        }), patch.object(engine, '_resolve_gplinks_live') as live:
+            result = engine.analyze('https://gplinks.co/YVTC')
+
+        live.assert_not_called()
+        self.assertEqual(result.family, 'gplinks.co')
+        self.assertEqual(result.status, 1)
+        self.assertEqual(result.message, 'GPLINKS_FINAL_OK')
+        self.assertEqual(result.stage, 'http-fast')
+        self.assertEqual(result.bypass_url, 'http://tesskibidixxx.com/')
+        self.assertTrue(result.facts['token_used'])
+
     def test_gplinks_promotes_live_helper_final_url(self):
         engine = ShortlinkBypassEngine()
-        with patch.object(engine, '_resolve_gplinks_live', return_value={
+        with patch.object(engine, '_resolve_gplinks_http_fast', return_value={}), \
+             patch.object(engine, '_resolve_gplinks_live', return_value={
             'status': 1,
             'stage': 'live-browser-final-gate',
             'bypass_url': 'http://tesskibidixxx.com/',

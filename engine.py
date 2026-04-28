@@ -50,6 +50,10 @@ GPLINKS_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_GPLINKS_HELPER", str(PROJECT_R
 GPLINKS_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_GPLINKS_HELPER_PYTHON", HELPER_PYTHON)
 GPLINKS_HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_GPLINKS_HELPER_PYTHONPATH", "")
 GPLINKS_TURNSTILE_SOLVER_URL = os.getenv("SHORTLINK_BYPASS_GPLINKS_TURNSTILE_SOLVER_URL", CUTY_TURNSTILE_SOLVER_URL)
+GPLINKS_HTTP_FAST_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FAST_TIMEOUT", "90"))
+GPLINKS_HTTP_FAST_HELPER = os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FAST_HELPER", str(PROJECT_ROOT / "gplinks_http_fast.py"))
+GPLINKS_HTTP_FAST_PYTHON = os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FAST_PYTHON", HELPER_PYTHON)
+GPLINKS_HTTP_FAST_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FAST_PYTHONPATH", "")
 DEFAULT_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -651,6 +655,31 @@ class ShortlinkBypassEngine:
         family = "gplinks.co"
         facts: dict[str, Any] = {}
         try:
+            http_fast = self._resolve_gplinks_http_fast(url)
+            if http_fast.get("status") == 1 and http_fast.get("bypass_url"):
+                facts["live_stage"] = http_fast.get("stage")
+                facts["decoded_query"] = http_fast.get("decoded_query")
+                facts["sitekey"] = http_fast.get("sitekey")
+                facts["token_used"] = http_fast.get("token_used")
+                facts["waited_seconds"] = http_fast.get("waited_seconds")
+                return BypassResult(
+                    status=1,
+                    input_url=url,
+                    family=family,
+                    message="GPLINKS_FINAL_OK",
+                    bypass_url=self._clean_url(http_fast["bypass_url"]),
+                    stage="http-fast",
+                    facts=facts,
+                    notes=[
+                        "GPLinks returned final target through the HTTP fast helper",
+                        "success is claimed only after /links/go returns a non-gplinks downstream target",
+                    ],
+                )
+            if http_fast:
+                facts["http_fast_stage"] = http_fast.get("stage")
+                facts["http_fast_message"] = http_fast.get("message")
+                facts["http_fast_waited_seconds"] = http_fast.get("waited_seconds")
+
             live = self._resolve_gplinks_live(url)
             if live.get("status") == 1 and live.get("bypass_url"):
                 facts["live_stage"] = live.get("stage")
@@ -729,6 +758,49 @@ class ShortlinkBypassEngine:
                 facts=facts,
                 blockers=[str(exc)],
             )
+
+    def _resolve_gplinks_http_fast(self, url: str) -> dict[str, Any]:
+        if not (os.path.exists(GPLINKS_HTTP_FAST_HELPER) and os.path.exists(GPLINKS_HTTP_FAST_PYTHON)):
+            return {}
+
+        env = os.environ.copy()
+        helper_pythonpath_parts = [part for part in [GPLINKS_HTTP_FAST_PYTHONPATH, HELPER_PYTHONPATH] if part]
+        if helper_pythonpath_parts:
+            existing = env.get("PYTHONPATH", "")
+            helper_pythonpath = ":".join(helper_pythonpath_parts)
+            env["PYTHONPATH"] = f"{helper_pythonpath}:{existing}" if existing else helper_pythonpath
+        try:
+            proc = subprocess.run(
+                [
+                    GPLINKS_HTTP_FAST_PYTHON,
+                    GPLINKS_HTTP_FAST_HELPER,
+                    url,
+                    "--timeout",
+                    str(GPLINKS_HTTP_FAST_TIMEOUT),
+                    "--solver-url",
+                    GPLINKS_TURNSTILE_SOLVER_URL,
+                ],
+                capture_output=True,
+                text=True,
+                timeout=GPLINKS_HTTP_FAST_TIMEOUT + 30,
+                env=env,
+            )
+        except subprocess.TimeoutExpired:
+            return {"status": 0, "message": "gplinks HTTP fast timeout", "stage": "http-fast-timeout"}
+        except Exception as exc:
+            return {"status": 0, "message": str(exc), "stage": "http-fast-error"}
+
+        stdout = (proc.stdout or "").strip()
+        if not stdout:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper exit {proc.returncode}", "stage": "http-fast-no-output"}
+        last_line = stdout.splitlines()[-1]
+        try:
+            payload = json.loads(last_line)
+        except Exception:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper output tidak valid: {last_line[:240]}", "stage": "http-fast-invalid-output"}
+        if proc.returncode != 0 and not payload.get("message"):
+            payload["message"] = f"helper exit {proc.returncode}"
+        return payload
 
     def _resolve_gplinks_live(self, url: str) -> dict[str, Any]:
         if not (os.path.exists(GPLINKS_LIVE_HELPER) and os.path.exists(GPLINKS_HELPER_PYTHON)):
