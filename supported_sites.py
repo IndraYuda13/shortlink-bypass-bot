@@ -126,13 +126,13 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
     SupportedSite(
         host="gplinks.co",
         family="gplinks.co",
-        status="partial",
+        status="live_bypass",
         handler="_handle_gplinks",
         command_alias="gplinks",
         sample_url="https://gplinks.co/YVTC",
         expected_final="http://tesskibidixxx.com",
-        proof="Current user bot run maps PowerGam steps but still returns not_enough_steps before final.",
-        blockers=("Missing server-side ad impression/conversion contract before final target can be claimed.",),
+        proof="Live engine recheck on 2026-04-28 returned http://tesskibidixxx.com/ through the browser PowerGam + final Turnstile callback lane.",
+        notes=("Uses live browser PowerGam steps, scroll/verify handling, local Turnstile solver, and the page's own final Get Link href oracle.",),
     ),
     SupportedSite(
         host="sfl.gl",

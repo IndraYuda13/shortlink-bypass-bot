@@ -45,6 +45,11 @@ EXE_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_EXE_HELPER", str(PROJECT_ROOT / "e
 EXE_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_EXE_HELPER_PYTHON", HELPER_PYTHON)
 EXE_HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_EXE_HELPER_PYTHONPATH", "")
 EXE_TURNSTILE_SOLVER_URL = os.getenv("SHORTLINK_BYPASS_EXE_TURNSTILE_SOLVER_URL", CUTY_TURNSTILE_SOLVER_URL)
+GPLINKS_BROWSER_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_GPLINKS_BROWSER_TIMEOUT", "340"))
+GPLINKS_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_GPLINKS_HELPER", str(PROJECT_ROOT / "gplinks_live_browser.py"))
+GPLINKS_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_GPLINKS_HELPER_PYTHON", HELPER_PYTHON)
+GPLINKS_HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_GPLINKS_HELPER_PYTHONPATH", "")
+GPLINKS_TURNSTILE_SOLVER_URL = os.getenv("SHORTLINK_BYPASS_GPLINKS_TURNSTILE_SOLVER_URL", CUTY_TURNSTILE_SOLVER_URL)
 DEFAULT_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -646,6 +651,31 @@ class ShortlinkBypassEngine:
         family = "gplinks.co"
         facts: dict[str, Any] = {}
         try:
+            live = self._resolve_gplinks_live(url)
+            if live.get("status") == 1 and live.get("bypass_url"):
+                facts["live_stage"] = live.get("stage")
+                facts["decoded_query"] = live.get("decoded_query")
+                facts["sitekey"] = live.get("sitekey")
+                facts["token_used"] = live.get("token_used")
+                facts["waited_seconds"] = live.get("waited_seconds")
+                return BypassResult(
+                    status=1,
+                    input_url=url,
+                    family=family,
+                    message="GPLINKS_FINAL_OK",
+                    bypass_url=self._clean_url(live["bypass_url"]),
+                    stage="live-browser",
+                    facts=facts,
+                    notes=[
+                        "PowerGam steps completed in a browser, then the final gplinks page was unlocked via its Turnstile callback path",
+                        "success is claimed only after the final page exposes a non-gplinks downstream target",
+                    ],
+                )
+            if live:
+                facts["live_stage"] = live.get("stage")
+                facts["live_message"] = live.get("message")
+                facts["live_final_url"] = live.get("final_url")
+
             session = self._new_impersonated_session()
             entry = session.get(url, timeout=self.timeout, allow_redirects=False)
             facts["entry_status"] = entry.status_code
@@ -699,6 +729,49 @@ class ShortlinkBypassEngine:
                 facts=facts,
                 blockers=[str(exc)],
             )
+
+    def _resolve_gplinks_live(self, url: str) -> dict[str, Any]:
+        if not (os.path.exists(GPLINKS_LIVE_HELPER) and os.path.exists(GPLINKS_HELPER_PYTHON)):
+            return {}
+
+        env = os.environ.copy()
+        helper_pythonpath_parts = [part for part in [GPLINKS_HELPER_PYTHONPATH, HELPER_PYTHONPATH] if part]
+        if helper_pythonpath_parts:
+            existing = env.get("PYTHONPATH", "")
+            helper_pythonpath = ":".join(helper_pythonpath_parts)
+            env["PYTHONPATH"] = f"{helper_pythonpath}:{existing}" if existing else helper_pythonpath
+        try:
+            proc = subprocess.run(
+                [
+                    GPLINKS_HELPER_PYTHON,
+                    GPLINKS_LIVE_HELPER,
+                    url,
+                    "--timeout",
+                    str(GPLINKS_BROWSER_TIMEOUT),
+                    "--solver-url",
+                    GPLINKS_TURNSTILE_SOLVER_URL,
+                ],
+                capture_output=True,
+                text=True,
+                timeout=GPLINKS_BROWSER_TIMEOUT + 45,
+                env=env,
+            )
+        except subprocess.TimeoutExpired:
+            return {"status": 0, "message": "gplinks live browser timeout", "stage": "live-browser-timeout"}
+        except Exception as exc:
+            return {"status": 0, "message": str(exc), "stage": "live-browser-error"}
+
+        stdout = (proc.stdout or "").strip()
+        if not stdout:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper exit {proc.returncode}", "stage": "live-browser-no-output"}
+        last_line = stdout.splitlines()[-1]
+        try:
+            payload = json.loads(last_line)
+        except Exception:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper output tidak valid: {last_line[:240]}", "stage": "live-browser-invalid-output"}
+        if proc.returncode != 0 and not payload.get("message"):
+            payload["message"] = f"helper exit {proc.returncode}"
+        return payload
 
     def _handle_ez4short(self, url: str) -> BypassResult:
         family = "ez4short.com"

@@ -28,7 +28,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | `cuty.io` | Live bypass | Local Turnstile solver + same-browser timer/go-form flow returns sampled `google.com` target; solver pool now refreshes every 6h |
 | `lnbz.la` | Live bypass | Browserless article/survey chain through `avnsgames.com` reaches `/links/go` and returns sampled `cryptoearns.com` target |
 | `sfl.gl` | Live bypass | Direct VPS egress is Cloudflare-blocked, but WARP proxy fallback reaches SafelinkU API flow and returns sampled `google.com` target |
-| `gplinks.co` | Partial mapper | Browserless entry reaches PowerGam and decodes step contract, but final still fails server `not_enough_steps` validation |
+| `gplinks.co` | Live bypass | Browser PowerGam lane completes the 3-step gate, solves final Turnstile through the page callback, and returns sampled `tesskibidixxx.com` target |
 | `ez4short.com` | Live bypass | Fast `game5s.com` referer lane unlocks final go-link form and returns sampled `tesskibidixxx.com` target |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
 | `xut.io` -> `autodime cwsafelinkphp` | Live bypass | Live browser lane now reaches IconCaptcha Step 1, gamescrate Step 5, xut Step 6, and clicks `Get Link` to return sampled `tesskibidixxx.com` target |
@@ -41,6 +41,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 - `adlink_live_browser.py` stays as Adlink fallback when the faster browserless lane is not enough
 - `xut_live_browser.py` drives the live autodime -> gamescrate -> xut Step 6 lane, including IconCaptcha retry capture and exact `Get Link` final-click handling
 - `cuty_live_browser.py` drives the Cuty/Cuttlinks Turnstile and final go-form flow through CDP Chrome plus the local Turnstile solver API
+- `gplinks_live_browser.py` drives the PowerGam 3-step browser flow, scroll/verify handling, and final GPLinks Turnstile callback lane
 - `references/` and `ROADMAP.md` keep technical notes and current implementation status
 
 Flow and target docs:
@@ -191,8 +192,7 @@ A sample systemd unit is included at:
 - [x] Add `tpi.li` token-tail extraction using the shared Turnstile landing handler
 - [x] Add `aii.sh` token-tail extraction for ShrinkBixby samples
 - [x] Add browserless `sfl.gl` SafelinkU API flow for sampled `google.com` oracle
-- [x] Add partial `gplinks.co` PowerGam mapper with decoded query and target candidate
-- [ ] Close `gplinks.co` server-side ad-impression/conversion validation
+- [x] Add `gplinks.co` live browser lane with PowerGam steps plus final Turnstile callback oracle
 - [x] Add browserless `ez4short.com` fast lane for sampled `tesskibidixxx.com` oracle
 - [ ] Add broader examples and regression checks for supported families
 

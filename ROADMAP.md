@@ -216,7 +216,7 @@
   - `tpi.li` and `aii.sh` now use the shared token-tail landing handler
   - `sfl.gl` now has a browserless SafelinkU API handler with WARP proxy fallback for Cloudflare-blocked VPS egress
   - `ez4short.com` now has a fast live handler through the `game5s.com` referer lane
-  - `gplinks.co` now has a partial PowerGam mapper, but final remains blocked by missing ad-impression/conversion state
+  - `gplinks.co` now has a live browser helper through PowerGam 3-step flow plus the final GPLinks Turnstile callback lane
   - `cuty.io` now has a live CDP Chrome + local Turnstile solver helper that reaches the sampled `google.com` oracle
   - `lnbz.la` now has a browserless article/survey-chain handler that reaches the sampled `cryptoearns.com` oracle
   - `exe.io` now has a gated mapper through the two-stage exeygo CakePHP forms, but final remains blocked by Turnstile/reCAPTCHA token validity
@@ -229,10 +229,10 @@
 - `final verify/back endpoint` -> status: narrowed
 - `downstream reward-site callback/state mutation` -> status: open
 
-### Current top-level status after Adlink fix
-- [in progress] 1. Petakan flow teknis per shortlink family
+### Current top-level status after GPLinks fix
+- [done] 1. Petakan flow teknis per shortlink family
 - [done] 2. Audit komponen solver/browser/flaresolverr yang sudah ada di workspace
-- [in progress] 3. Tentukan boundary utama dan success oracle per family
+- [done] 3. Tentukan boundary utama dan success oracle per family
 - [in progress] 4. Rancang arsitektur bot bypass yang modular
 - [done] 5. Buat POC runner untuk minimal 1 family yang bisa direplay
 - [done] 6. Verifikasi POC pada sampel link nyata tanpa spam
@@ -259,9 +259,16 @@
 - `xut.io` is now live-proven for sample `https://xut.io/hd7AOJ`.
 - Verified final oracle: `http://tesskibidixxx.com/` from xut Step 6 `Get Link` href.
 - Remaining improvement is stability, not unknown flow mapping: Step 1 IconCaptcha and ChromeDriver can still fail intermittently, so retries and structured failure reports stay important.
-- `gplinks.co` remains the last partial family, blocked by PowerGam/GPT enough-step proof.
+- `gplinks.co` is now live-proven for sample `https://gplinks.co/YVTC`, returning `http://tesskibidixxx.com/` through the PowerGam browser lane and final Turnstile callback.
 
 
 ## 2026-04-28 xut.io final update
 - `xut.io` sample `https://xut.io/hd7AOJ` sekarang live-proven. Chain yang terbukti: IconCaptcha Step 1 -> Step 2/3/4 -> gamescrate Step 5 -> xut Step 6 -> exact visible `Get Link` -> `http://tesskibidixxx.com/`.
 - Catatan stabilitas: IconCaptcha masih flaky dan Chrome/driver kadang mati, jadi helper tetap harus mengembalikan structured failure facts saat run gagal. Tetapi status family boleh naik karena ada live engine/helper final oracle yang jelas.
+
+
+## 2026-04-28 gplinks.co final update
+- `gplinks.co` sample `https://gplinks.co/YVTC` sekarang live-proven via engine.
+- Verified final oracle: `http://tesskibidixxx.com/`.
+- Chain terbukti: GPLinks entry -> PowerGam 3-step browser flow -> final GPLinks page -> local Turnstile solve -> `onTurnstileCompleted()` / page submit callback -> final `Get Link` href.
+- Catatan stabilitas: PowerGam sensitif terhadap scroll/verify/adblock/rate state, jadi helper tetap menyimpan structured failure facts kalau gagal di step awal.

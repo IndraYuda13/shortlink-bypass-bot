@@ -37,7 +37,8 @@ class GplinksTests(unittest.TestCase):
         fake_session.get.side_effect = [entry, power]
         fake_session.cookies.jar = []
 
-        with patch.object(engine, '_new_impersonated_session', return_value=fake_session):
+        with patch.object(engine, '_resolve_gplinks_live', return_value={}), \
+             patch.object(engine, '_new_impersonated_session', return_value=fake_session):
             result = engine.analyze('https://gplinks.co/YVTC')
 
         self.assertEqual(result.family, 'gplinks.co')
@@ -49,6 +50,26 @@ class GplinksTests(unittest.TestCase):
         self.assertEqual(result.facts['decoded_query']['pages'], '3')
         self.assertEqual(result.facts['target_final_candidate'], 'https://gplinks.co/YVTC?pid=1224622&vid=MTAxNzc2MzQ1Mw')
         self.assertTrue(result.blockers)
+
+    def test_gplinks_promotes_live_helper_final_url(self):
+        engine = ShortlinkBypassEngine()
+        with patch.object(engine, '_resolve_gplinks_live', return_value={
+            'status': 1,
+            'stage': 'live-browser-final-gate',
+            'bypass_url': 'http://tesskibidixxx.com/',
+            'decoded_query': {'lid': 'YVTC', 'pid': '1224622', 'vid': 'MTAxOTM1MjU4Mg'},
+            'sitekey': '0x4AAAAAAAynCEcs0RV-UleY',
+            'token_used': True,
+            'waited_seconds': 122.5,
+        }):
+            result = engine.analyze('https://gplinks.co/YVTC')
+
+        self.assertEqual(result.family, 'gplinks.co')
+        self.assertEqual(result.status, 1)
+        self.assertEqual(result.message, 'GPLINKS_FINAL_OK')
+        self.assertEqual(result.stage, 'live-browser')
+        self.assertEqual(result.bypass_url, 'http://tesskibidixxx.com/')
+        self.assertTrue(result.facts['token_used'])
 
 
 if __name__ == '__main__':

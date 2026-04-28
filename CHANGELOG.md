@@ -2,6 +2,13 @@
 
 ## 2026-04-28
 
+### gplinks.co live browser final lane
+- Added `gplinks_live_browser.py` for the GPLinks/PowerGam family.
+- Wired `_handle_gplinks` to the live helper before the older browserless mapper fallback.
+- The helper completes PowerGam's 3-step browser flow, handles the final GPLinks Turnstile callback, and returns the final `Get Link` href only when it points off GPLinks/PowerGam.
+- Verified live engine sample: `https://gplinks.co/YVTC` -> `http://tesskibidixxx.com/`.
+- Promoted `gplinks.co` from `partial` to `live_bypass` in the registry and docs.
+
 ### xut.io live final lane
 - Promoted `xut.io` to `live_bypass` after a live helper run returned `http://tesskibidixxx.com/` from sample `https://xut.io/hd7AOJ`.
 - Replaced the old FlareSolverr-only gamescrate handoff with the proven direct browser chain: IconCaptcha Step 1 -> autodime steps -> gamescrate Step 5 -> xut Step 6 -> exact visible `Get Link`.
