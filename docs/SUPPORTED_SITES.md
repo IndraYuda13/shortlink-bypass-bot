@@ -27,6 +27,24 @@ This document mirrors `supported_sites.py`, which is the canonical machine-reada
 | `sfl.gl` | `live_bypass` | `sfl` | `_handle_sfl` | `https://sfl.gl/18PZXXI9` | `https://google.com` | WARP proxy fallback reaches SafelinkU API flow and returns the expected final target. |
 | `exe.io` | `live_bypass` | `exe` | `_handle_exe` | `https://exe.io/vkRI1` | `https://google.com` | Live engine recheck on 2026-04-28 returned the final URL after Turnstile solve and go-link submit. |
 
+## Supported timing display
+
+`/supported` and `/status` render the canonical speed-ranked list from `supported_sites.status_lines()`:
+
+1. `aii.sh` `±0.9s`
+2. `oii.la / tpi.li` `±1.8s`
+3. `ez4short.com` `±3.9s`
+4. `link.adlink.click` `±5.5s`
+5. `sfl.gl` `±13.1s`
+6. `shrinkme.click` `±13.3s`
+7. `lnbz.la` `±19.7s`
+8. `exe.io` `±69s`
+9. `cuty.io` `±72s`
+10. `xut.io` `±97-109s`
+11. `gplinks.co` `±149-150s`
+
+Each individual registry entry also exposes `method_summary`, `solve_time_label`, `solve_time_seconds_min`, and `solve_time_seconds_max` for API consumers. The grouped display list is exposed through `supported_sites.display_groups_as_dicts()`.
+
 ## Integration rule
 
-Use `supported_sites.registry_as_dicts()` for API-style JSON. Use `supported_sites.status_lines()` for bot/status text. Avoid adding new hardcoded supported-site lists in `bot.py`, `README.md`, or future API handlers.
+Use `supported_sites.registry_as_dicts()` for per-host API-style JSON. Use `supported_sites.display_groups_as_dicts()` for the grouped speed-ranked API view. Use `supported_sites.status_lines()` for bot/status text. Avoid adding new hardcoded supported-site lists in `bot.py`, `README.md`, or future API handlers.

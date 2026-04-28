@@ -1,7 +1,13 @@
 import unittest
 
 from bot import TelegramShortlinkBot
-from supported_sites import LIVE_BYPASS_HOSTS, SUPPORTED_SITES, registry_as_dicts, status_lines
+from supported_sites import (
+    LIVE_BYPASS_HOSTS,
+    SUPPORTED_SITES,
+    display_groups_as_dicts,
+    registry_as_dicts,
+    status_lines,
+)
 
 
 class SupportedSitesRegistryTests(unittest.TestCase):
@@ -41,23 +47,43 @@ class SupportedSitesRegistryTests(unittest.TestCase):
             "handler",
             "command_alias",
             "sample_url",
+            "method_summary",
+            "solve_time_label",
+            "solve_time_seconds_min",
+            "solve_time_seconds_max",
             "expected_final",
             "proof",
             "blockers",
             "notes",
         })
-        self.assertTrue(any(item["host"] == "exe.io" and item["handler"] == "_handle_exe" for item in data))
+        self.assertTrue(any(
+            item["host"] == "exe.io"
+            and item["handler"] == "_handle_exe"
+            and item["solve_time_label"] == "±69s"
+            and "Turnstile" in item["method_summary"]
+            for item in data
+        ))
+
+    def test_display_groups_are_api_ready_and_ranked_by_speed(self):
+        data = display_groups_as_dicts()
+        self.assertEqual(data[0], {
+            "rank": 1,
+            "hosts": ["aii.sh"],
+            "solve_time_label": "±0.9s",
+            "method_summary": "token-tail extraction",
+        })
+        self.assertEqual(data[1]["hosts"], ["oii.la", "tpi.li"])
+        self.assertEqual(data[-1]["hosts"], ["gplinks.co"])
+        self.assertEqual(data[-1]["solve_time_label"], "±149-150s")
 
     def test_status_lines_are_grouped_for_bot_and_api_docs(self):
         rendered = "\n".join(status_lines())
-        self.assertIn("Live bypass:", rendered)
-        self.assertIn("link.adlink.click", rendered)
-        self.assertIn("shrinkme.click", rendered)
-        self.assertIn("Token bypass:", rendered)
-        self.assertIn("oii.la", rendered)
-        self.assertIn("gplinks.co", rendered)
-        self.assertIn("xut.io", rendered)
-        self.assertIn("exe.io", rendered)
+        self.assertIn("Supported sites + estimasi waktu:", rendered)
+        self.assertIn("1. aii.sh ±0.9s", rendered)
+        self.assertIn("2. oii.la / tpi.li ±1.8s", rendered)
+        self.assertIn("8. exe.io ±69s", rendered)
+        self.assertIn("10. xut.io ±97-109s", rendered)
+        self.assertIn("11. gplinks.co ±149-150s", rendered)
 
     def test_bot_status_uses_registry_not_hardcoded_old_list(self):
         bot = TelegramShortlinkBot("123:ABC")
