@@ -33,6 +33,36 @@ class TokenLandingTests(unittest.TestCase):
         self.assertEqual(result.stage, 'token-target')
         self.assertEqual(result.bypass_url, 'https://99faucet.com/links/back/haBKjYrugRxDIVCpGqMo')
 
+    def test_tpi_token_landing_prefers_bitcotasks_result_from_noisy_token(self):
+        engine = ShortlinkBypassEngine()
+        expected = 'https://bitcotasks.com//shortlink/result/a4sbiirc1jcip4r9yncggus5nw8u1xwz-.-.-620efc44d2206adb53c603a787ee9770f78400d74b14a49bc0c1980fefd77678/843/194'
+        html = f'''
+        <html><head><title>ShrinkEarn</title></head><body>
+        <form action="https://vpzserver.com/what-is-disk-space-and-bandwidth-limits-in-web-hosting/" method="POST">
+          <input type="hidden" name="url" value="https://fithelptipz.com/OWgbl0wy35w">
+          <input type="hidden" name="token" value="8eb07d3b4deeb0bd34a191d8dfdf2de19be452ce2026OWgbl0wy35w2804aHR0cHM6Ly9iaXRjb3Rhc2tzLmNvbS8vc2hvcnRsaW5rL3Jlc3VsdC9hNHNiaWlyYzFqY2lwNHI5eW5jZ2d1czVudzh1MXh3ei0uLS4tNjIwZWZjNDRkMjIwNmFkYjUzYzYwM2E3ODdlZTk3NzBmNzg0MDBkNzRiMTRhNDliYzBjMTk4MGZlZmQ3NzY3OC84NDMvMTk0shrinkbixby.com">
+          <input type="hidden" name="mysite" value="shrinkbixby.com">
+          <input type="hidden" name="alias" value="OWgbl0wy35w">
+          <a href="https://shrinkearn.com/">home</a>
+        </form>
+        </body></html>
+        '''
+        with patch.object(engine, '_get') as mock_get:
+            mock_get.return_value = type('Resp', (), {
+                'text': html,
+                'url': 'https://tpi.li/OWgbl0wy35w',
+                'status_code': 200,
+                'headers': {},
+            })()
+
+            result = engine.analyze('https://tpi.li/OWgbl0wy35w')
+
+        self.assertEqual(result.family, 'tpi.li')
+        self.assertEqual(result.status, 1)
+        self.assertEqual(result.message, 'TOKEN_TARGET_EXTRACTED')
+        self.assertEqual(result.stage, 'token-target')
+        self.assertEqual(result.bypass_url, expected)
+
     def test_aii_token_landing_extracts_base64_url_with_suffix_noise(self):
         engine = ShortlinkBypassEngine()
         html = '''

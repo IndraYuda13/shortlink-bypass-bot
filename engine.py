@@ -1936,9 +1936,27 @@ class ShortlinkBypassEngine:
                         continue
                     candidates.extend(URL_RE.findall(text))
         for candidate in candidates:
-            if any(marker in candidate for marker in ["/links/back/", "/member/shortlinks/verify/", "/shortlink.php?"]):
-                return self._clean_url(candidate)
+            cleaned = self._clean_token_target_url(candidate)
+            if cleaned and any(marker in cleaned for marker in [
+                "/links/back/",
+                "/member/shortlinks/verify/",
+                "/shortlink.php?",
+                "/shortlink/result/",
+            ]):
+                return cleaned
         return None
+
+    def _clean_token_target_url(self, value: str) -> str | None:
+        cleaned = self._clean_url(value)
+        if not cleaned:
+            return None
+        bitcotasks_result = re.search(
+            r"https?://bitcotasks\.com//shortlink/result/[A-Za-z0-9_.-]+/\d+/\d+",
+            cleaned,
+        )
+        if bitcotasks_result:
+            return bitcotasks_result.group(0)
+        return cleaned
 
     def _extract_sfl_ready_target(self, html: str) -> str | None:
         patterns = [

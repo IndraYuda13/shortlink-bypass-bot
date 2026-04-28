@@ -413,3 +413,14 @@
 - Proven chain: `xut.io/hd7AOJ` -> autodime IconCaptcha Step 1 -> gamescrate Step 5 -> xut Step 6 -> exact `Get Link` click -> `http://tesskibidixxx.com/`.
 - Updated `xut_live_browser.py` to treat the direct gamescrate/xut Step 6 lane as the primary final path and return the visible `Get Link` href when it is ready.
 - Kept structured failure facts because IconCaptcha/browser runtime can still be flaky on some runs.
+
+## 2026-04-29 Supported timing display
+- Added canonical per-host timing metadata to `supported_sites.py`: `method_summary`, `solve_time_label`, `solve_time_seconds_min`, and `solve_time_seconds_max`.
+- Added `SUPPORTED_SITE_DISPLAY_GROUPS`, `display_groups_as_dicts()`, and speed-ranked `/supported` lines so bot output and future API consumers share the same source.
+- `/supported` and `/status` now show the compact ranked timing list from fastest to slowest, including grouped `oii.la / tpi.li`.
+
+## 2026-04-29 - TPI noisy-token target extraction fix
+- Fixed `tpi.li` token extraction for noisy ShrinkBixby-style tokens where the base64 final URL is followed by a domain suffix.
+- Root cause: `_extract_oii_token_target()` only promoted `/links/back/`, `/member/shortlinks/verify/`, and `/shortlink.php?` markers, so Bitcotasks `/shortlink/result/...` payloads were ignored and fallback embedded URL selection returned `https://shrinkearn.com/`.
+- Changed `engine.py` to recognize `/shortlink/result/` token targets and trim Bitcotasks result URLs to the real `.../<id>/<id>` oracle instead of keeping suffix-decoding garbage.
+- Added regression test for `https://tpi.li/OWgbl0wy35w`, expected final `https://bitcotasks.com//shortlink/result/a4sbiirc1jcip4r9yncggus5nw8u1xwz-.-.-620efc44d2206adb53c603a787ee9770f78400d74b14a49bc0c1980fefd77678/843/194`.
