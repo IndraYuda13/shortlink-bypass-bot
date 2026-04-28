@@ -42,3 +42,8 @@ Get `https://xut.io/hd7AOJ` to final `http://tesskibidixxx.com` through `/bypass
 - [done] Live engine verification: `.venv/bin/python engine.py https://xut.io/hd7AOJ --pretty` -> `status=1`, `message=XUT_FINAL_OK`, `bypass_url=http://tesskibidixxx.com/`.
 - [done] Service restart: `shortlink-bypass-bot.service` active; `turnstile-solver-api.service` active.
 - [done] Registry/docs: `xut.io` promoted to `live_bypass`; `gplinks.co` remains partial.
+
+## Compact verification evidence
+- Helper proof: `xut_live_browser.py https://xut.io/hd7AOJ` under `xvfb-run -a` returned `status=1`, `message=XUT_FINAL_OK`, `stage=final-bypass`, `bypass_url=http://tesskibidixxx.com/`.
+- Engine proof: `ShortlinkBypassEngine(timeout=30).analyze('https://xut.io/hd7AOJ')` returned `status=1`, `message=XUT_FINAL_OK`, `stage=final-bypass`, `bypass_url=http://tesskibidixxx.com/`.
+- Test gate: `.venv/bin/python -m unittest discover -s tests -v` returned `36 tests OK`.
