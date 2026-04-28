@@ -2,6 +2,12 @@
 
 ## 2026-04-28
 
+### cuty.io HTTP-only fast lane
+- Added `cuty_http_fast.py` for the `cuty.io -> cuttlinks.com` Laravel + Turnstile chain.
+- Wired `_handle_cuty()` to try the HTTP helper before the older CDP browser helper.
+- Verified live sample `https://cuty.io/AfaX6jx` returned `https://www.google.com/` in `70.2s` through the helper and `74.5s` through `engine.py`.
+- Browser fallback remains active if the HTTP helper does not return a downstream final URL.
+
 ### exe.io HTTP-only fast lane
 - Added `exe_http_fast.py` for the `exe.io -> exeygo.com` CakePHP + Turnstile chain.
 - Wired `_handle_exe()` to try the HTTP helper before the older live browser helper.

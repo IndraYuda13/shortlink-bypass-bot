@@ -56,3 +56,17 @@ A family can be promoted to `live_bypass` only when `engine.py <sample> --pretty
 - `sfl.gl/18PZXXI9`: `status=1`, `SFL_API_FLOW_OK`, final `https://google.com`.
 - `xut.io/hd7AOJ`: current repeat `ICONCAPTCHA_STEP1_FAILED`; previous run reached `GAMESCRATE_HANDOFF_PROGRESS_ONLY`. Treat as partial/flaky, not working.
 - `cuty.io/AfaX6jx`: still `TURNSTILE_SOLVER_FAILED` / `ERROR_CAPTCHA_UNSOLVABLE`.
+
+## 2026-04-28 cuty HTTP speed milestone
+- Parent checklist status:
+  - [done] 1. Reproduce each current blocker with raw engine output.
+  - [done] 2. Fix cheap deterministic failures first, especially env/import and stale parser issues.
+  - [done] 3. Run targeted live probes for remaining protocol boundaries.
+  - [done] 4. Patch handlers with tests.
+  - [done] 5. Promote only families with verified final oracle.
+  - [in progress] 6. Deploy, push project repo, then sync MyAiAgent.
+- `cuty.io/AfaX6jx` is now HTTP-first.
+- Live helper oracle: `cuty_http_fast.py https://cuty.io/AfaX6jx -> https://www.google.com/` in `70.2s`.
+- Live engine oracle: `CUTY_HTTP_FAST_OK -> https://www.google.com/` in `74.5s`.
+- Root-cause correction: the previous HTTP bounce was not a permanent VHit-only blocker. Browser-shaped HTTP replay with `Origin: null`, HeadlessChrome-style UA, final wait, and best-effort VHit fetches can clear `/go/AfaX6jx`.
+- Browser fallback remains wired because production success is only promoted when the HTTP helper returns a downstream final URL.

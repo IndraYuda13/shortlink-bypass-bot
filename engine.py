@@ -40,6 +40,10 @@ CUTY_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_CUTY_HELPER", str(PROJECT_ROOT / 
 CUTY_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_CUTY_HELPER_PYTHON", HELPER_PYTHON)
 CUTY_HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_CUTY_HELPER_PYTHONPATH", "")
 CUTY_TURNSTILE_SOLVER_URL = os.getenv("SHORTLINK_BYPASS_CUTY_TURNSTILE_SOLVER_URL", "http://127.0.0.1:5000")
+CUTY_HTTP_FAST_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_CUTY_HTTP_FAST_TIMEOUT", "160"))
+CUTY_HTTP_FAST_HELPER = os.getenv("SHORTLINK_BYPASS_CUTY_HTTP_FAST_HELPER", str(PROJECT_ROOT / "cuty_http_fast.py"))
+CUTY_HTTP_FAST_PYTHON = os.getenv("SHORTLINK_BYPASS_CUTY_HTTP_FAST_PYTHON", HELPER_PYTHON)
+CUTY_HTTP_FAST_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_CUTY_HTTP_FAST_PYTHONPATH", "")
 EXE_BROWSER_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_EXE_BROWSER_TIMEOUT", "240"))
 EXE_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_EXE_HELPER", str(PROJECT_ROOT / "exe_live_browser.py"))
 EXE_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_EXE_HELPER_PYTHON", HELPER_PYTHON)
@@ -993,14 +997,39 @@ class ShortlinkBypassEngine:
         family = "cuty.io"
         facts: dict[str, Any] = {
             "helper": CUTY_LIVE_HELPER,
+            "http_fast_helper": CUTY_HTTP_FAST_HELPER,
             "solver_url": CUTY_TURNSTILE_SOLVER_URL,
         }
+        http_fast = self._resolve_cuty_http_fast(url)
+        facts.update({
+            "http_fast_stage": http_fast.get("stage"),
+            "http_fast_message": http_fast.get("message"),
+            "http_fast_final_url": http_fast.get("final_url"),
+            "http_fast_waited_seconds": http_fast.get("waited_seconds"),
+            "sitekey": http_fast.get("sitekey"),
+            "http_fast_timeline": http_fast.get("timeline") or [],
+        })
+        if http_fast.get("status") == 1 and http_fast.get("bypass_url"):
+            return BypassResult(
+                status=1,
+                input_url=url,
+                family=family,
+                message="CUTY_HTTP_FAST_OK",
+                bypass_url=http_fast.get("bypass_url"),
+                stage=http_fast.get("stage") or "http-final",
+                facts=facts,
+                notes=[
+                    "HTTP helper replays the cuttlinks forms, local Turnstile solver token, timer, optional VHit lifecycle calls, and final /go submit",
+                    "browser helper remains the fallback if the HTTP lane does not return a downstream final URL",
+                ],
+            )
+
         live = self._resolve_cuty_live(url)
         facts.update({
             "live_stage": live.get("stage"),
             "final_url": live.get("final_url"),
             "final_title": live.get("final_title"),
-            "sitekey": live.get("sitekey"),
+            "sitekey": live.get("sitekey") or facts.get("sitekey"),
             "solver_error": live.get("solver_error"),
             "waited_seconds": live.get("waited_seconds"),
             "timeline": live.get("timeline") or [],
@@ -1015,7 +1044,7 @@ class ShortlinkBypassEngine:
                 stage=live.get("stage") or "live-browser-turnstile-go",
                 facts=facts,
                 notes=[
-                    "live browser helper uses same browser context for first form, Turnstile token injection, final timer, and /go submit",
+                    "HTTP fast helper did not return a downstream final URL, so the proven live browser fallback was used",
                     "success is claimed only after the browser leaves cuttlinks/cuty to the downstream target",
                 ],
             )
@@ -1484,6 +1513,49 @@ class ShortlinkBypassEngine:
             payload = json.loads(last_line)
         except Exception:
             return {"status": 0, "message": (proc.stderr or "").strip() or f"helper output tidak valid: {last_line[:240]}", "stage": "live-browser-invalid-output"}
+        if proc.returncode != 0 and not payload.get("message"):
+            payload["message"] = f"helper exit {proc.returncode}"
+        return payload
+
+    def _resolve_cuty_http_fast(self, url: str) -> dict[str, Any]:
+        if not (os.path.exists(CUTY_HTTP_FAST_HELPER) and os.path.exists(CUTY_HTTP_FAST_PYTHON)):
+            return {"status": 0, "message": "cuty HTTP fast helper tidak tersedia", "stage": "http-fast-unavailable"}
+
+        env = os.environ.copy()
+        helper_pythonpath_parts = [part for part in [CUTY_HTTP_FAST_PYTHONPATH, HELPER_PYTHONPATH] if part]
+        if helper_pythonpath_parts:
+            existing = env.get("PYTHONPATH", "")
+            helper_pythonpath = ":".join(helper_pythonpath_parts)
+            env["PYTHONPATH"] = f"{helper_pythonpath}:{existing}" if existing else helper_pythonpath
+        try:
+            proc = subprocess.run(
+                [
+                    CUTY_HTTP_FAST_PYTHON,
+                    CUTY_HTTP_FAST_HELPER,
+                    url,
+                    "--timeout",
+                    str(CUTY_HTTP_FAST_TIMEOUT),
+                    "--solver-url",
+                    CUTY_TURNSTILE_SOLVER_URL,
+                ],
+                capture_output=True,
+                text=True,
+                timeout=CUTY_HTTP_FAST_TIMEOUT + 30,
+                env=env,
+            )
+        except subprocess.TimeoutExpired:
+            return {"status": 0, "message": "cuty HTTP fast timeout", "stage": "http-fast-timeout"}
+        except Exception as exc:
+            return {"status": 0, "message": str(exc), "stage": "http-fast-exception"}
+
+        stdout = (proc.stdout or "").strip()
+        if not stdout:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper exit {proc.returncode}", "stage": "http-fast-no-output"}
+        last_line = stdout.splitlines()[-1]
+        try:
+            payload = json.loads(last_line)
+        except Exception:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper output tidak valid: {last_line[:240]}", "stage": "http-fast-invalid-output"}
         if proc.returncode != 0 and not payload.get("message"):
             payload["message"] = f"helper exit {proc.returncode}"
         return payload

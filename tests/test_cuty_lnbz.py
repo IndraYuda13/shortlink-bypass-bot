@@ -6,8 +6,32 @@ from engine import ShortlinkBypassEngine
 
 
 class CutyTests(unittest.TestCase):
+    def test_cuty_http_fast_result_returns_final_google(self):
+        engine = ShortlinkBypassEngine()
+        helper_result = {
+            'status': 1,
+            'stage': 'http-final',
+            'bypass_url': 'https://www.google.com/',
+            'final_url': 'https://www.google.com/',
+            'sitekey': '0x4AAAAAAABnHbN4cNchLhd_',
+            'waited_seconds': 70.2,
+            'timeline': [{'stage': 'final', 'url': 'https://www.google.com/'}],
+        }
+
+        with patch.object(engine, '_resolve_cuty_http_fast', return_value=helper_result), patch.object(engine, '_resolve_cuty_live') as live:
+            result = engine.analyze('https://cuty.io/AfaX6jx')
+
+        self.assertEqual(result.family, 'cuty.io')
+        self.assertEqual(result.status, 1)
+        self.assertEqual(result.message, 'CUTY_HTTP_FAST_OK')
+        self.assertEqual(result.stage, 'http-final')
+        self.assertEqual(result.bypass_url, 'https://www.google.com/')
+        self.assertEqual(result.facts['http_fast_waited_seconds'], 70.2)
+        live.assert_not_called()
+
     def test_cuty_live_helper_result_returns_final_google(self):
         engine = ShortlinkBypassEngine()
+        http_result = {'status': 0, 'stage': 'http-final', 'message': 'FINAL_DID_NOT_LEAVE_CUTTLINKS'}
         helper_result = {
             'status': 1,
             'stage': 'live-browser-turnstile-go',
@@ -19,7 +43,7 @@ class CutyTests(unittest.TestCase):
             'timeline': [{'stage': 'final', 'href': 'https://www.google.com/'}],
         }
 
-        with patch.object(engine, '_resolve_cuty_live', return_value=helper_result):
+        with patch.object(engine, '_resolve_cuty_http_fast', return_value=http_result), patch.object(engine, '_resolve_cuty_live', return_value=helper_result):
             result = engine.analyze('https://cuty.io/AfaX6jx')
 
         self.assertEqual(result.family, 'cuty.io')

@@ -1,0 +1,2232 @@
+{
+  "waited_seconds": 136.5,
+  "timeline": [
+    {
+      "stage": "entry",
+      "href": "https://cuttlinks.com/AfaX6jx",
+      "title": "Shorten Links And Earn Money | cuty.io",
+      "text": "Please click the button below to continue.\nPREMIUM\nSkip All Ads\n✓ No Ads\n✓ Instant Access\n✓ Premium user experience\n✓ Support Publishers\nBecome a Premium Member\nContinue with Ads\n\nWatch ads and complete captcha\n\nContinue\nshare on\n\nshare\n\ntweet\n\npost\n\n3 Steps to start earning\n\nGetting started with cuty.io is very easy. You only need to follow the steps below to get an active account that generates you passive income.\n\nCreate an account\n\nCreating an account would not take you more than 3 minutes. You only need to provide your email, username and a password. You can also use your social accounts ",
+      "site": null,
+      "forms": [
+        {
+          "id": "free-submit-form",
+          "action": "https://cuttlinks.com/AfaX6jx",
+          "data": "_token=wVQwA4tMfw1UGE3FWMPjSkRAdYEgWqgMpdWM0IAS"
+        }
+      ],
+      "buttons": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "\n        \n            \n        \n    ",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "\n        \n            \n        \n    ",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n            ",
+          "href": "https://cuty.io/",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Payment Rates",
+          "href": "https://cuty.io/payout-rates",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                English\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=en",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                Español\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=es",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                العربية\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=ar",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                Français\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=fr",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Earn Money",
+          "href": "https://cuty.io/register",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "",
+          "href": "https://cuty.io/",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Payment Rates",
+          "href": "https://cuty.io/payout-rates",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    English\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=en",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    Español\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=es",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    العربية\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=ar",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    Français\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=fr",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Earn Money",
+          "href": "https://cuty.io/register",
+          "disabled": false
+        }
+      ],
+      "perf": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+          "initiatorType": "link",
+          "duration": 95
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/links/first.js?id=31a0bdf25ec5846786d710596c39492e",
+          "initiatorType": "script",
+          "duration": 77
+        },
+        {
+          "name": "https://vhit.io/scripts/vhit.js?ref=cuty&tid=01KQ9ZY4RRANZ5C1CG31K43BES&cid=412361",
+          "initiatorType": "script",
+          "duration": 321
+        },
+        {
+          "name": "https://fstatic.netpub.media/extra/cmp/cmp-gdpr.js",
+          "initiatorType": "script",
+          "duration": 779
+        },
+        {
+          "name": "https://live.demand.supply/up.js",
+          "initiatorType": "link",
+          "duration": 1094
+        },
+        {
+          "name": "https://cdn.cuty.io/css/public.css?id=f527c13d31334a50752b6d72875f9c53",
+          "initiatorType": "link",
+          "duration": 45
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/logo.svg",
+          "initiatorType": "img",
+          "duration": 46
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-en.png",
+          "initiatorType": "img",
+          "duration": 42
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/arrow-down.svg",
+          "initiatorType": "img",
+          "duration": 66
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-es.png",
+          "initiatorType": "img",
+          "duration": 71
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-fr.png",
+          "initiatorType": "img",
+          "duration": 554
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-ar.png",
+          "initiatorType": "img",
+          "duration": 559
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/x.svg",
+          "initiatorType": "img",
+          "duration": 498
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/burger.svg",
+          "initiatorType": "img",
+          "duration": 530
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/facebook-icon.png",
+          "initiatorType": "img",
+          "duration": 534
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/twitter-icon.png",
+          "initiatorType": "img",
+          "duration": 534
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/linkedin-icon.png",
+          "initiatorType": "img",
+          "duration": 619
+        },
+        {
+          "name": "https://acscdn.com/script/aclib.js",
+          "initiatorType": "script",
+          "duration": 137
+        },
+        {
+          "name": "https://kk.vaudona.com/1clkn/60028",
+          "initiatorType": "script",
+          "duration": 1057
+        },
+        {
+          "name": "https://d2ng6x3yyemlxz.cloudfront.net/?yxgnd=1251306",
+          "initiatorType": "script",
+          "duration": 367
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-1.svg",
+          "initiatorType": "img",
+          "duration": 541
+        },
+        {
+          "name": "https://d33f51dyacx7bd.cloudfront.net/?aydfd=1236957",
+          "initiatorType": "script",
+          "duration": 619
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-2.svg",
+          "initiatorType": "img",
+          "duration": 544
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-3.svg",
+          "initiatorType": "img",
+          "duration": 544
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/money-tree.png",
+          "initiatorType": "img",
+          "duration": 555
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/paypal.png",
+          "initiatorType": "img",
+          "duration": 556
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/volet.svg",
+          "initiatorType": "img",
+          "duration": 549
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/usdt.png",
+          "initiatorType": "img",
+          "duration": 591
+        },
+        {
+          "name": "https://cdn.cuty.io/js/layouts/base.js?id=07eba5c095e0a77673473fb120b47b39",
+          "initiatorType": "script",
+          "duration": 552
+        },
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516",
+          "initiatorType": "script",
+          "duration": 578
+        },
+        {
+          "name": "https://www.googletagmanager.com/gtag/js?id=G-GGDCMPL4QP",
+          "initiatorType": "script",
+          "duration": 786
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/layouts/_partials/nav-links.js?id=7c771530af9cbba08e34f936597e59e5",
+          "initiatorType": "script",
+          "duration": 551
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/layouts/app.js?id=8675a7f87c4b7053cf3f617044c01885",
+          "initiatorType": "script",
+          "duration": 612
+        },
+        {
+          "name": "https://cuttlinks.com/js/public/links/first/337.js",
+          "initiatorType": "script",
+          "duration": 268
+        },
+        {
+          "name": "https://fstatic.netpub.media/static/103298a8c25a24d26a0d86b1848772f0.min.js?1777378205091",
+          "initiatorType": "script",
+          "duration": 301
+        },
+        {
+          "name": "https://acscdn.com/script/videoSliderAlt.js",
+          "initiatorType": "script",
+          "duration": 105
+        },
+        {
+          "name": "https://ukankingwithea.com/",
+          "initiatorType": "fetch",
+          "duration": 374
+        },
+        {
+          "name": "https://undefined/bm5lVHQPDAY5Sw9TB3IBHAJYcUYoS1cSEFwAAmIMXRccMRkCFh96FwIBEDASHAELIFoACxFxRihfKD4cGQ8xPCY4FlEENl40NxIyPyQkFUUsOQIzMSYJJDYsOD8jEQwWIzc4JTQsVBo2KAYoEyI8PDYVAzQ5NDMhXjYLAhgIBhIxIDgaJAQ2Lws3Pz07OCRsITgsIBwsGVYAEiUKDCEjGDktIywlLDs3BCArJD0TRTwgPRIDOCpUEhc2PDcEIDgjIxwlNC0yZSUNLSdkNQgFMxw3LA0uBTEoLyQjGDg5CzssLQUkEiE4FisXMRklJD82JzZXNzEqKEg4OS0JLw41LAIwAkRWOCZlOgw6IwIWCAkGGCZeDSkWNl8tMgY2NDskBTE4LAYfOV4ZLhUYPzQkOEQ2LQ4VOzY4IwA8Xi8BFTUJNyESGDk4JwEVPV8jBTUJNDMCDF8tKSMfKSpUYS4oCSwDJSsZLhUfHTwhZRgvOzMCFggJBhgmXg0pFjZaKDMVH0gEFjsaHlMhYzk5KAkjAQcWKS0",
+          "initiatorType": "iframe",
+          "duration": 125
+        },
+        {
+          "name": "https://weiledsteverm.org/YWR2M0JOWxVAfwNXOGYVND4vYgU3FxVleyo9MQI1OTE4WRspXFBHKwVZRwF3UFdGBWQRDRIOcVNCBUcjFREFDnNHDRhVLVxCAA5yT11YBGxRQgMOc0cQBlIlXFVQQzYVCEsCdVZTRQR6U1RDAXNX",
+          "initiatorType": "img",
+          "duration": 283
+        },
+        {
+          "name": "https://weiledsteverm.org/THhFZkZjRyYVexoVFxUTGQwtMHd9EyMhHCgvAjB/Fj4XBCcEMWMSLyhFdFRzfUt1UGA8ESFbdX5eNhInOA02W3R8SHJALyIeKlt0ag54Vmh1VnJIdmoNeFdgOAgkAXt9XjUSMiBFdFFxe0tyXnR8TXdXfw",
+          "initiatorType": "img",
+          "duration": 282
+        },
+        {
+          "name": "https://ukankingwithea.com/",
+          "initiatorType": "fetch",
+          "duration": 464
+        },
+        {
+          "name": "https://weiledsteverm.org/WDFZc3B3DjoATQoAPTsnHXtqKjgKQDodNjFXawsJPHYfQREAdH8HGTwMaEFDbghsRFYoWD1OQX5CLRIELUJkQlYxXz8cTX5HZEJeawV3QEd2Bn8GTWkXLQMRPwxoVQAsRTVOQW8GbkBHYANpRkNrBA",
+          "initiatorType": "img",
+          "duration": 205
+        },
+        {
+          "name": "https://www.facebook.com/login.php?next=https%3A%2F%2Fwww.facebook.com%2Ffavicon.ico%3F_rdr%3Dp",
+          "initiatorType": "img",
+          "duration": 381
+        },
+        {
+          "name": "https://accounts.google.com/ServiceLogin?passive=true&continue=https%3A%2F%2Fwww.google.com%2Ffavicon.ico&uilel=3&hl=en&service=mail",
+          "initiatorType": "img",
+          "duration": 339
+        },
+        {
+          "name": "https://accounts.google.com/ServiceLogin?passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Ffavicon.ico&uilel=3&hl=en&service=youtube",
+          "initiatorType": "img",
+          "duration": 384
+        },
+        {
+          "name": "https://scripts.cleverwebserver.com/d19bc1f46130f17eb96c9ecc9e710bdf.js",
+          "initiatorType": "script",
+          "duration": 118
+        },
+        {
+          "name": "https://fstatic.netpub.media/static/fefa132e8a7c4c10e9350b49c9e3b31b.min.js?1777378205347",
+          "initiatorType": "script",
+          "duration": 62
+        },
+        {
+          "name": "https://adexchangeclear.com/video/slider.php?r=11032754&atv=80.0",
+          "initiatorType": "fetch",
+          "duration": 303
+        },
+        {
+          "name": "https://cdnjs.cloudflare.com/",
+          "initiatorType": "fetch",
+          "duration": 39
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/",
+          "initiatorType": "fetch",
+          "duration": 262
+        },
+        {
+          "name": "https://code.jquery.com/",
+          "initiatorType": "fetch",
+          "duration": 106
+        },
+        {
+          "name": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+          "initiatorType": "fetch",
+          "duration": 402
+        },
+        {
+          "name": "https://static.doubleclick.net/instream/ad_status.js",
+          "initiatorType": "fetch",
+          "duration": 31
+        },
+        {
+          "name": "https://ads.pubmatic.com/",
+          "initiatorType": "fetch",
+          "duration": 103
+        },
+        {
+          "name": "https://cdn.taboola.com/libtrc/loader.js",
+          "initiatorType": "fetch",
+          "duration": 79
+        },
+        {
+          "name": "https://ib.adnxs.com/ut/v3",
+          "initiatorType": "fetch",
+          "duration": 180
+        },
+        {
+          "name": "https://c.amazon-adsystem.com/aax2/apstag.js",
+          "initiatorType": "fetch",
+          "duration": 50
+        },
+        {
+          "name": "https://cuttlinks.com/cdn-cgi/rum?",
+          "initiatorType": "xmlhttprequest",
+          "duration": 8
+        },
+        {
+          "name": "https://www.google-analytics.com/g/collect?v=2&tid=G-GGDCMPL4QP&gtm=45je64o1h1v869225560za200zd869225560&_p=1777378205353&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=1357931180.1777378206&frm=0&pscdl=noapi&rcb=0&sr=800x600&uaa=x86&uab=64&uafvl=Google%2520Chrome%3B147.0.7727.116%7CNot.A%252FBrand%3B8.0.0.0%7CChromium%3B147.0.7727.116&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=0~115938465~115938469~117266401~117384406~117512542~118167059~118289195&sid=1777378205&sct=1&seg=0&dl=https%3A%2F%2Fcuttlinks.com%2FAfaX6jx&dt=Shorten%20Links%20And%20Earn%20Money%20%7C%20cuty.io&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=6555",
+          "initiatorType": "fetch",
+          "duration": 85
+        },
+        {
+          "name": "https://usrpubtrk.com/ut/hb.php?cb=0.7560624303843402&v=1",
+          "initiatorType": "beacon",
+          "duration": 465
+        },
+        {
+          "name": "https://ui.cleverwebserver.com/",
+          "initiatorType": "script",
+          "duration": 81
+        },
+        {
+          "name": "https://call.cleverwebserver.com/?id=100230&c=IN&r=MH&l=91&b=Headless%20Chrome&bv=0&os=Linux&mob=0&v=2.65.0&lg=en-US&ref=aHR0cHM6Ly9jdXR0bGlua3MuY29tL0FmYVg2ang%3D&ruri=&s=071b78f980ba529cedd0b1272457afe3b155c5b49b2a3a2eaf7d95b520755e99&e=c0vbk1My&st=W&iv=-1",
+          "initiatorType": "img",
+          "duration": 23
+        },
+        {
+          "name": "https://acscdn.com/script/suv5.js",
+          "initiatorType": "script",
+          "duration": 17
+        },
+        {
+          "name": "https://adexchangeclear.com/video/select.php?r=11032754&chu=%22Google%20Chrome%22%3Bv%3D147%2C%20%22Not.A%2FBrand%22%3Bv%3D8%2C%20%22Chromium%22%3Bv%3D147&chmob=%3F0&chp=Linux&chuafv=147.0.7727.116&btp=0.99&srs=d2b295918a879c426ca883c28433ef18&ufp=Linux%20x86_64%2FMozilla%2FNetscape%2Ftrue%2Ffalse%2FGoogle%20Inc.800x600-420en-US32424%20bits&cbpage=https%3A%2F%2Fcuttlinks.com%2FAfaX6jx&atv=80.0&cbref=",
+          "initiatorType": "fetch",
+          "duration": 299
+        },
+        {
+          "name": "https://adexchangeclear.com/script/suurl5.php?r=11032790&chu=%22Google%20Chrome%22%3Bv%3D147%2C%20%22Not.A%2FBrand%22%3Bv%3D8%2C%20%22Chromium%22%3Bv%3D147&chmob=%3F0&chp=Linux&chuafv=147.0.7727.116&cbur=0.12105486366553642&cbiframe=0&cbWidth=780&cbHeight=441&cbtitle=Shorten%20Links%20And%20Earn%20Money%20%7C%20cuty.io&cbpage=https%3A%2F%2Fcuttlinks.com%2FAfaX6jx&cbref=&cbdescription=&cbkeywords=cuty%2C%20url%20shortener%2C%20shorten%20urls%2C%20best%20url%20shortener%2C%20shorten%20links%20and%20earn%20money%2C%20url%20shortener%20online%2C%20earn%20money%2C%20earn%20money%20online&cbcdn=acscdn.com&ufp=Linux%20x86_64%2FMozilla%2FNetscape%2Ftrue%2Ffalse%2FGoogle%20Inc.800x600-420en-US32424%20bits&ts=1777378205779&srs=d2b295918a879c426ca883c28433ef18&atv=80.0&btp=0.99&pblcz=11032754",
+          "initiatorType": "fetch",
+          "duration": 311
+        },
+        {
+          "name": "https://weiledsteverm.org/popunder.gif",
+          "initiatorType": "img",
+          "duration": 11
+        },
+        {
+          "name": "https://weiledsteverm.org/UjJESnB9DSc5TQZcBhA+CnRxG0I1cxYkRRhQFQw4NHcGPzQXVWI+GTYPdXhFYwF0fFYiWyB3Q2AUNz4RJkc3d0JiAnNsGTxUK3dCdER5el5rHHNkQHRHeXtDYQdxeUhmAnN9R2QDcX5WJkIlLU1jFDQ+BD4PdX1HZQFzckJiB3x8SA",
+          "initiatorType": "beacon",
+          "duration": 200
+        },
+        {
+          "name": "https://oundhertobeconsist.org/floater?cs=d1JFdmRAYXRDU0drcUJSRWJyT10&abt=0&red=1&sm=83&k=online%20links%20cuty%20shortener%20shorten%20earn%20money&v=0.9.7.0&sts=0&prn=0&emb=0&tid=1251306&rxy=800_600&u=1335538407776154&agec=1777378205&fs=1&t=600&m=2&ns=1&ndp=1&asi=1&fd=12&rv=1&di=12&ref=https%3A%2F%2Fcuttlinks.com%2FAfaX6jx&jst=0&enr=0&lcua=mozilla%2F5.0%20(x11%3B%20linux%20x86_64)%20applewebkit%2F537.36%20(khtml%2C%20like%20gecko)%20headlesschrome%2F147.0.0.0%20safari%2F537.36&tzd=7&uloc=&if=0&aa=oi12_&_rwrK=1777378205869&crc=1",
+          "initiatorType": "xmlhttprequest",
+          "duration": 721
+        },
+        {
+          "name": "https://cuttlinks.com/cdn-cgi/rum?",
+          "initiatorType": "xmlhttprequest",
+          "duration": 9
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/favicon.ico",
+          "initiatorType": "other",
+          "duration": 16
+        }
+      ],
+      "localStorage": {
+        "fjidd": "{\"value\":\"1335538407776154\",\"expiry\":1777380005795}",
+        "agecc": "{\"value\":\"1777378205\",\"expiry\":1777380005795}",
+        "vast-client-total-calls-timeout": "1777381805749",
+        "vast-client-total-calls": "1",
+        "clever-parameters": "{\"skippedTrackerSort\":[],\"trackerSortShowed\":[]}"
+      },
+      "sessionStorage": {},
+      "scripts": [
+        "https://scripts.cleverwebserver.com/d19bc1f46130f17eb96c9ecc9e710bdf.js",
+        "https://cdn.cuty.io/js/public/links/first.js?id=31a0bdf25ec5846786d710596c39492e",
+        "https://vhit.io/scripts/vhit.js?ref=cuty&tid=01KQ9ZY4RRANZ5C1CG31K43BES&cid=412361",
+        "https://live.demand.supply/up.js",
+        "https://fstatic.netpub.media/extra/cmp/cmp-gdpr.js",
+        "https://fstatic.netpub.media/static/103298a8c25a24d26a0d86b1848772f0.min.js?1777378205091",
+        "https://acscdn.com/script/videoSliderAlt.js",
+        "https://fstatic.netpub.media/static/fefa132e8a7c4c10e9350b49c9e3b31b.min.js?1777378205347",
+        "https://ui.cleverwebserver.com/",
+        "https://acscdn.com/script/suv5.js",
+        "https://kk.vaudona.com/1clkn/60028",
+        "https://acscdn.com/script/aclib.js",
+        "https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516",
+        "https://cdn.cuty.io/js/layouts/base.js?id=07eba5c095e0a77673473fb120b47b39",
+        "https://www.googletagmanager.com/gtag/js?id=G-GGDCMPL4QP",
+        "https://cdn.cuty.io/js/public/layouts/_partials/nav-links.js?id=7c771530af9cbba08e34f936597e59e5",
+        "https://cdn.cuty.io/js/public/layouts/app.js?id=8675a7f87c4b7053cf3f617044c01885"
+      ],
+      "cookies": "XSRF-TOKEN=eyJpdiI6Ind2Y1FwTVZSbFBuOFdsRy9CdXFXL3c9PSIsInZhbHVlIjoidGxHQVJjMVJGYkpTUDhXWWlLMHRRVXlhM3VZUmRQTTN4MTdkQ0lWTUUwVTI3M3RlM2p0SGZSTFR2Qk5aK2lGNTlIYXJrWDJoYXFBdUlOZGxWYnkxTkowOTd5amlPTnhVRUxLdEhwSUViOE1KeE5MNFRoZURTNldNTlpkYm5NdGIiLCJtYWMiOiI1ZTg0YzJiZWNmMDQ4NjI3Mzg3OWY2MzM0ZmJlMTBiOWVmNTE4NGFkY2NjYjU0Zjc5ODVkOGZhYjliNjA3ZWEwIiwidGFnIjoiIn0%3D; _ga_GGDCMPL4QP=GS2.1.s1777378205$o1$g0$t1777378205$j60$l0$h0; _ga=GA1.1.1357931180.1777378206; clever-counter-100230=0-1",
+      "hiddenInputs": [
+        {
+          "name": "_token",
+          "value": "wVQwA4tMfw1UGE3FWMPjSkRAdYEgWqgMpdWM0IAS"
+        }
+      ]
+    },
+    {
+      "stage": "captcha",
+      "href": "https://cuttlinks.com/AfaX6jx",
+      "title": "Shorten Links And Earn Money | cuty.io",
+      "text": "Please click the button below to verify that you are not a robot.\nContinue with Ads\n\nWatch ads and complete captcha\n\nI am not a robot\nPREMIUM\nSkip All Ads\n✓ No captcha required\n✓ Skip all advertisements\n✓ Support Publishers\n✓ Instant access to links\nBecome a Premium Member\nshare on\n\nshare\n\ntweet\n\npost\n\n3 Steps to start earning\n\nGetting started with cuty.io is very easy. You only need to follow the steps below to get an active account that generates you passive income.\n\nCreate an account\n\nCreating an account would not take you more than 3 minutes. You only need to provide your email, username a",
+      "site": "0x4AAAAAAABnHbN4cNchLhd_",
+      "forms": [
+        {
+          "id": "free-submit-form",
+          "action": "https://cuttlinks.com/AfaX6jx",
+          "data": "_token=wVQwA4tMfw1UGE3FWMPjSkRAdYEgWqgMpdWM0IAS&cf-turnstile-response="
+        }
+      ],
+      "buttons": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "\n        \n            \n        \n    ",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "\n        \n            \n        \n    ",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n            ",
+          "href": "https://cuty.io/",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Payment Rates",
+          "href": "https://cuty.io/payout-rates",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                English\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=en",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                Español\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=es",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                العربية\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=ar",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                Français\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=fr",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Earn Money",
+          "href": "https://cuty.io/register",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "",
+          "href": "https://cuty.io/",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Payment Rates",
+          "href": "https://cuty.io/payout-rates",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    English\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=en",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    Español\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=es",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    العربية\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=ar",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    Français\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=fr",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Earn Money",
+          "href": "https://cuty.io/register",
+          "disabled": false
+        }
+      ],
+      "perf": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+          "initiatorType": "link",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/links/captcha.js?id=055d6fb6f4da73965cbfccbbd2344831",
+          "initiatorType": "script",
+          "duration": 111
+        },
+        {
+          "name": "https://vhit.io/scripts/vhit.js?ref=cuty&tid=01KQ9ZY4RRANZ5C1CG31K43BES&cid=412361",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://live.demand.supply/up.js",
+          "initiatorType": "link",
+          "duration": 0
+        },
+        {
+          "name": "https://fstatic.netpub.media/extra/cmp/cmp-gdpr.js",
+          "initiatorType": "script",
+          "duration": 50
+        },
+        {
+          "name": "https://cdn.cuty.io/css/public.css?id=f527c13d31334a50752b6d72875f9c53",
+          "initiatorType": "link",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/logo.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-en.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/arrow-down.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-es.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-ar.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-fr.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/burger.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/x.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/facebook-icon.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/twitter-icon.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/linkedin-icon.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://d33f51dyacx7bd.cloudfront.net/?aydfd=1236958",
+          "initiatorType": "script",
+          "duration": 736
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-1.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-2.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-3.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/money-tree.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/paypal.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/usdt.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/volet.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/js/layouts/base.js?id=07eba5c095e0a77673473fb120b47b39",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit",
+          "initiatorType": "script",
+          "duration": 296
+        },
+        {
+          "name": "https://www.googletagmanager.com/gtag/js?id=G-3K0TP58S5B",
+          "initiatorType": "script",
+          "duration": 676
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/layouts/_partials/nav-links.js?id=7c771530af9cbba08e34f936597e59e5",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/layouts/app.js?id=8675a7f87c4b7053cf3f617044c01885",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://cuttlinks.com/js/public/links/first/337.js",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+          "initiatorType": "css",
+          "duration": 0
+        },
+        {
+          "name": "https://fstatic.netpub.media/static/103298a8c25a24d26a0d86b1848772f0.min.js?1777378229586",
+          "initiatorType": "script",
+          "duration": 23
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/heading-background.png",
+          "initiatorType": "css",
+          "duration": 0
+        },
+        {
+          "name": "https://weiledsteverm.org/UklWbHB9djUfTQd5Il8UOCE8ChsUDRc7NisdZlQ5CCdnPCQ1PnAYGTZ0Z15DZHBjVFYiIDJRQXQ6Ig0EJzprXVY7JzADTXQ/a11eYX14X0d8fnAZTWN6ZVlFYXFiXEdlfmBdRWZvIhwRNXRnSgAmPTpRQWV+YV9HantkVUlgfA",
+          "initiatorType": "img",
+          "duration": 204
+        },
+        {
+          "name": "https://www.facebook.com/login.php?next=https%3A%2F%2Fwww.facebook.com%2Ffavicon.ico%3F_rdr%3Dp",
+          "initiatorType": "img",
+          "duration": 286
+        },
+        {
+          "name": "https://accounts.google.com/ServiceLogin?passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Ffavicon.ico&uilel=3&hl=en&service=youtube",
+          "initiatorType": "img",
+          "duration": 356
+        },
+        {
+          "name": "https://accounts.google.com/ServiceLogin?passive=true&continue=https%3A%2F%2Fwww.google.com%2Ffavicon.ico&uilel=3&hl=en&service=mail",
+          "initiatorType": "img",
+          "duration": 357
+        },
+        {
+          "name": "https://weiledsteverm.org/UU9uT2R+cA08WQcjKBcBFz8HLiMHAAx9Nj8WKwkOC30sOjAGJEg7DTVyX31QYnhZekIhJgpyVXc8Gi4QJDxTfkI4IQggWXc5U35KYntAfFN/eEg6WWB8XXpRYndaf1NmeFh+UWVpGj8FNnJfaRQlOwJyVWZ4WXxTaX1cdl1kfw",
+          "initiatorType": "img",
+          "duration": 222
+        },
+        {
+          "name": "https://scripts.cleverwebserver.com/d19bc1f46130f17eb96c9ecc9e710bdf.js",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://fstatic.netpub.media/static/fefa132e8a7c4c10e9350b49c9e3b31b.min.js?1777378229963",
+          "initiatorType": "script",
+          "duration": 31
+        },
+        {
+          "name": "https://ui.cleverwebserver.com/",
+          "initiatorType": "script",
+          "duration": 16
+        },
+        {
+          "name": "https://cdnjs.cloudflare.com/",
+          "initiatorType": "fetch",
+          "duration": 24
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/",
+          "initiatorType": "fetch",
+          "duration": 72
+        },
+        {
+          "name": "https://code.jquery.com/",
+          "initiatorType": "fetch",
+          "duration": 79
+        },
+        {
+          "name": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+          "initiatorType": "fetch",
+          "duration": 78
+        },
+        {
+          "name": "https://static.doubleclick.net/instream/ad_status.js",
+          "initiatorType": "fetch",
+          "duration": 15
+        },
+        {
+          "name": "https://ads.pubmatic.com/",
+          "initiatorType": "fetch",
+          "duration": 82
+        },
+        {
+          "name": "https://cdn.taboola.com/libtrc/loader.js",
+          "initiatorType": "fetch",
+          "duration": 24
+        },
+        {
+          "name": "https://ib.adnxs.com/ut/v3",
+          "initiatorType": "fetch",
+          "duration": 191
+        },
+        {
+          "name": "https://c.amazon-adsystem.com/aax2/apstag.js",
+          "initiatorType": "fetch",
+          "duration": 13
+        },
+        {
+          "name": "https://cuttlinks.com/cdn-cgi/rum?",
+          "initiatorType": "xmlhttprequest",
+          "duration": 20
+        },
+        {
+          "name": "https://www.google-analytics.com/g/collect?v=2&tid=G-3K0TP58S5B&gtm=45je64o1v869225559za200zd869225559&_p=1777378229970&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=1357931180.1777378206&frm=0&pscdl=noapi&rcb=7&sr=800x600&uaa=x86&uab=64&uafvl=Google%2520Chrome%3B147.0.7727.116%7CNot.A%252FBrand%3B8.0.0.0%7CChromium%3B147.0.7727.116&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=0~115616986~115938466~115938468~116363097~117266400~117512542~117884344~118167058&sid=1777378230&sct=1&seg=0&dl=https%3A%2F%2Fcuttlinks.com%2FAfaX6jx&dt=Shorten%20Links%20And%20Earn%20Money%20%7C%20cuty.io&en=page_view&_fv=1&_ss=1&_ee=1&tfd=3020",
+          "initiatorType": "fetch",
+          "duration": 70
+        },
+        {
+          "name": "https://call.cleverwebserver.com/?id=100230&c=IN&r=MH&l=135&b=Headless%20Chrome&bv=0&os=Linux&mob=0&v=2.65.0&lg=en-US&ref=aHR0cHM6Ly9jdXR0bGlua3MuY29tL0FmYVg2ang%3D&ruri=&s=df3d916e826e6e489dfb3d6a2fb5326f3100b682921853de546a0f10bdd351c3&e=opTjoHKO&st=W&iv=-1",
+          "initiatorType": "img",
+          "duration": 16
+        },
+        {
+          "name": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/ov2/av0/rch/735up/0x4AAAAAAABnHbN4cNchLhd_/light/fbE/new/normal?lang=en",
+          "initiatorType": "iframe",
+          "duration": 85
+        },
+        {
+          "name": "https://weiledsteverm.org/RzdUOUZoCDdKexVxHkkiAGUjWHczdAFhHCxvPwgiI2AaaBcRVHJNLyMKZQtydABjDGA3XjAEd2FEIFgyMkRpCnZ3BnJQKCFYaQl2dwZyT3t2GWcNaHQAeg5gMgplCnVyAmcBcncAYw5wdgJgHzI3VjMEd2FHIE0qegZjDnF0AGwLdXcEZQA",
+          "initiatorType": "img",
+          "duration": 201
+        },
+        {
+          "name": "https://weiledsteverm.org/popunder.gif",
+          "initiatorType": "img",
+          "duration": 4
+        },
+        {
+          "name": "https://cuttlinks.com/cdn-cgi/rum?",
+          "initiatorType": "xmlhttprequest",
+          "duration": 9
+        }
+      ],
+      "localStorage": {
+        "vhit_pages_01KQ9ZY4RRANZ5C1CG31K43BES": "[{\"r\":\"first\",\"u\":\"https://cuttlinks.com/AfaX6jx\",\"pt\":1777378227081,\"e\":{\"st\":22001,\"tc\":1,\"msd\":0,\"act\":20001,\"idl\":2000,\"pent\":\"{\\\"collected\\\":false,\\\"points\\\":0,\\\"entropy\\\":0,\\\"speed_variance\\\":0,\\\"pattern_score\\\":0}\",\"ptim\":\"{\\\"collected\\\":false,\\\"intervals_count\\\":0,\\\"variance\\\":0,\\\"coefficient_of_variation\\\":0,\\\"mean\\\":0,\\\"std_dev\\\":0}\",\"ci\":\"[]\",\"sp\":null,\"vm\":\"{\\\"focus_changes\\\":0,\\\"total_hidden_time\\\":0,\\\"total_visible_time\\\":22001,\\\"last_state_change\\\":1777378205087}\",\"ap\":\"{\\\"collected\\\":false,\\\"avg_acceleration\\\":0,\\\"acceleration_variance\\\":0,\\\"natural_curve_score\\\":0}\",\"tg\":\"{\\\"tap_count\\\":0,\\\"pinch_count\\\":0,\\\"swipe_count\\\":0,\\\"long_press_count\\\":0,\\\"multi_touch_count\\\":0}\",\"evti\":\"{\\\"collected\\\":true,\\\"event_count\\\":0,\\\"avg_processing\\\":0,\\\"processing_variance\\\":0}\"}}]",
+        "fjidd": "{\"value\":\"1335538407776154\",\"expiry\":1777380005795}",
+        "agecc": "{\"value\":\"1777378205\",\"expiry\":1777380005795}",
+        "vast-client-total-calls": "1",
+        "vast-client-total-calls-timeout": "1777381805749",
+        "clever-parameters": "{\"skippedTrackerSort\":[],\"trackerSortShowed\":[]}"
+      },
+      "sessionStorage": {},
+      "scripts": [
+        "https://scripts.cleverwebserver.com/d19bc1f46130f17eb96c9ecc9e710bdf.js",
+        "https://cdn.cuty.io/js/public/links/captcha.js?id=055d6fb6f4da73965cbfccbbd2344831",
+        "https://vhit.io/scripts/vhit.js?ref=cuty&tid=01KQ9ZY4RRANZ5C1CG31K43BES&cid=412361",
+        "https://live.demand.supply/up.js",
+        "https://fstatic.netpub.media/extra/cmp/cmp-gdpr.js",
+        "https://fstatic.netpub.media/static/103298a8c25a24d26a0d86b1848772f0.min.js?1777378229586",
+        "https://fstatic.netpub.media/static/fefa132e8a7c4c10e9350b49c9e3b31b.min.js?1777378229963",
+        "https://ui.cleverwebserver.com/",
+        "https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516",
+        "https://cdn.cuty.io/js/layouts/base.js?id=07eba5c095e0a77673473fb120b47b39",
+        "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit",
+        "https://www.googletagmanager.com/gtag/js?id=G-3K0TP58S5B",
+        "https://cdn.cuty.io/js/public/layouts/_partials/nav-links.js?id=7c771530af9cbba08e34f936597e59e5",
+        "https://cdn.cuty.io/js/public/layouts/app.js?id=8675a7f87c4b7053cf3f617044c01885"
+      ],
+      "cookies": "_ga_GGDCMPL4QP=GS2.1.s1777378205$o1$g0$t1777378205$j60$l0$h0; _ga=GA1.1.1357931180.1777378206; clever-counter-100230=0-1; XSRF-TOKEN=eyJpdiI6InoyQ1I2cGNIdDhWRGM0NG9sWEVLS3c9PSIsInZhbHVlIjoiYTMyandFQ3BtTFIxbmNlMlZxSHFrblFPR3BKQUlJdCs4V01QcjRMVTduQnFpaDNhM3QwckFmajNwQUNFbis4d0ZOTlUyc3Q3NjZGd1ZCS3hSRmEzQy95UXd6QUNNU0VZbFNqcVpnaHV1OU9YbmRDRXZ1YXVsZmxsRXNDNFFGUWIiLCJtYWMiOiIwMDRkNTM3YmQyZmY1YmJjYWUzYmQ0OThhM2QxYzgzNDc3MmFmYTE4Y2MxMDEwZWU2YmQ2YzgxMTA2MzNhNmMzIiwidGFnIjoiIn0%3D; _ga_3K0TP58S5B=GS2.1.s1777378230$o1$g0$t1777378230$j60$l0$h0",
+      "hiddenInputs": [
+        {
+          "name": "_token",
+          "value": "wVQwA4tMfw1UGE3FWMPjSkRAdYEgWqgMpdWM0IAS"
+        },
+        {
+          "name": "cf-turnstile-response",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "stage": "last-initial",
+      "href": "https://cuttlinks.com/AfaX6jx",
+      "title": "Shorten Links And Earn Money | cuty.io",
+      "text": "Please wait while your link is being prepared\n\nEarn up to $18 per 1000 views on every link you shorten.\n\nJoin Now\n0\nSeconds\nGo ->\nshare on\n\nshare\n\ntweet\n\npost\n\n3 Steps to start earning\n\nGetting started with cuty.io is very easy. You only need to follow the steps below to get an active account that generates you passive income.\n\nCreate an account\n\nCreating an account would not take you more than 3 minutes. You only need to provide your email, username and a password. You can also use your social accounts like Facebook and Google for a quicker registration!\n\nShorten and share links\n\nAfter you cr",
+      "site": null,
+      "forms": [
+        {
+          "id": "submit-form",
+          "action": "https://cuttlinks.com/go/AfaX6jx",
+          "data": "_token=wVQwA4tMfw1UGE3FWMPjSkRAdYEgWqgMpdWM0IAS&data=eyJpdiI6InNrVjZhUGJGdGtjZ0RLbkxIOWRJM3c9PSIsInZhbHVlIjoiUmdoRHlyVEQvamMxREN0THFmVnAwVEQ2NkVYaTQrQmtCcVNFanNnYXgvRnV2R0h3RlJ1cHZ3eVFZbkk3eXRnK2hMcGdiVWFwV0hVdVVlUzFSWlJjOXc9PSIsIm1hYyI6IjBjMGJmMzE5ZmEzOGQxNmE0M2EyOTEwNTVkOWNlN2U3OWJlNzMyMTVkMDJhMjJhNmY0MDMyOTY0NzA3YTk2NWIiLCJ0YWciOiIifQ%3D%3D"
+        }
+      ],
+      "buttons": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "\n        \n            \n        \n    ",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "\n        \n            \n        \n    ",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n            ",
+          "href": "https://cuty.io/",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Payment Rates",
+          "href": "https://cuty.io/payout-rates",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                English\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=en",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                Español\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=es",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                العربية\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=ar",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                Français\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=fr",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Earn Money",
+          "href": "https://cuty.io/register",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "",
+          "href": "https://cuty.io/",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Payment Rates",
+          "href": "https://cuty.io/payout-rates",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    English\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=en",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    Español\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=es",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    العربية\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=ar",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    Français\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=fr",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Earn Money",
+          "href": "https://cuty.io/register",
+          "disabled": false
+        }
+      ],
+      "perf": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+          "initiatorType": "link",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/links/last.js?id=6f532c254dacb8301c55b8c594852acd",
+          "initiatorType": "script",
+          "duration": 64
+        },
+        {
+          "name": "https://vhit.io/scripts/vhit.js?ref=cuty&tid=01KQ9ZY4RRANZ5C1CG31K43BES&cid=412361",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://live.demand.supply/up.js",
+          "initiatorType": "link",
+          "duration": 0
+        },
+        {
+          "name": "https://fstatic.netpub.media/extra/cmp/cmp-gdpr.js",
+          "initiatorType": "script",
+          "duration": 235
+        },
+        {
+          "name": "https://cdn.cuty.io/css/public.css?id=f527c13d31334a50752b6d72875f9c53",
+          "initiatorType": "link",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/logo.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-en.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/arrow-down.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-es.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-ar.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-fr.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/burger.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/x.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/facebook-icon.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/twitter-icon.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/linkedin-icon.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://d33f51dyacx7bd.cloudfront.net/?aydfd=1236964",
+          "initiatorType": "script",
+          "duration": 317
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-1.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-2.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-3.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/money-tree.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/paypal.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/usdt.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/volet.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/js/layouts/base.js?id=07eba5c095e0a77673473fb120b47b39",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://www.googletagmanager.com/gtag/js?id=G-GGDCMPL4QP",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/layouts/_partials/nav-links.js?id=7c771530af9cbba08e34f936597e59e5",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/layouts/app.js?id=8675a7f87c4b7053cf3f617044c01885",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://cuttlinks.com/js/public/links/first/337.js",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+          "initiatorType": "css",
+          "duration": 0
+        },
+        {
+          "name": "https://fstatic.netpub.media/static/103298a8c25a24d26a0d86b1848772f0.min.js?1777378289777",
+          "initiatorType": "script",
+          "duration": 20
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/heading-background.png",
+          "initiatorType": "css",
+          "duration": 0
+        },
+        {
+          "name": "https://undefined/MEtNb3JRKS4CTVF2L0kHQidwSkB2bn8pFgN4K1pDVDIsDAoHKSlBEVwkOAsUQiQjG1xeLjlKQHZ8FzgeBRIYXzVyIy4nEVgODCckSHMbXkN6HSMDI2Q8Jjs5cQUYKBphfgg+J2EPNDYlYjMiIDt1BgksFQQhCzkjAQE1OjV4CT4gMXQSJyMbajkIPT9UEwUfNnIZKj85XCMdJzMIPhopGlYKDgQ6Zg58Jz1xGRgpMwR4CS4nZgoKByp8ezU/FGUJLzwnW3obKRpTHipWM2d7JiE4cTguLidibn8pJGINDzkKeh8VOTB1LXw6O3MZCAczcn8uLgtpBgU5X0gfDl4wUR8mVlcCCRhfCnweGjo9cRp9IjtlCS8gGWJufykkYR4cLBtYChpfGXcADDYxdiAlACQBIB8tMUcJDz0FYxsqNjBzPHkIM3UzASVBSBkVAxZiEnw5OmMeH0pAdh0fACtyMjo3M3YzGSxDcioZBEsVeQ86QggGFScKZxwmFydWJ3wLIWYRezoeCQIbJxkWIT4AHEB2ASkqUz4vADdjARoo",
+          "initiatorType": "iframe",
+          "duration": 430
+        },
+        {
+          "name": "https://weiledsteverm.org/ODF3TXoXDhQ+R2xbOTkucGdPDksNCSUVHX5pLz07XlYtKR5taFE5E1wMRn9JDghBeVxIWBNwSx5CAywOTUJKfFxRXxEiRx5HSnxUCwVZfk0WBlE4RwkCRHhPCwlDfU0PBkF8TwwXAz0bXwxGawpMRRtwSw8GQH5NAANPdEIIAw",
+          "initiatorType": "img",
+          "duration": 223
+        },
+        {
+          "name": "https://www.facebook.com/login.php?next=https%3A%2F%2Fwww.facebook.com%2Ffavicon.ico%3F_rdr%3Dp",
+          "initiatorType": "img",
+          "duration": 300
+        },
+        {
+          "name": "https://accounts.google.com/ServiceLogin?passive=true&continue=https%3A%2F%2Fwww.google.com%2Ffavicon.ico&uilel=3&hl=en&service=mail",
+          "initiatorType": "img",
+          "duration": 621
+        },
+        {
+          "name": "https://weiledsteverm.org/NEpTOXEbdTBKTGINZlgrcQQ9bhxYGTd+QG4TPwgIbSYJSSRaJXVNGFB3YgtFBH1nDFdEIzcEQAxsIE0QQD8gBEASIz1fHglsJQRAGnp9C18BbCYEQAd5ZgxCDH5jDkYDfGIMRRI+I1gWCXt1SQVAJm4IRgN9YA5JBnJqAUAN",
+          "initiatorType": "img",
+          "duration": 218
+        },
+        {
+          "name": "https://accounts.google.com/ServiceLogin?passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Ffavicon.ico&uilel=3&hl=en&service=youtube",
+          "initiatorType": "img",
+          "duration": 685
+        },
+        {
+          "name": "https://scripts.cleverwebserver.com/d19bc1f46130f17eb96c9ecc9e710bdf.js",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://fstatic.netpub.media/static/fefa132e8a7c4c10e9350b49c9e3b31b.min.js?1777378289832",
+          "initiatorType": "script",
+          "duration": 33
+        },
+        {
+          "name": "https://ui.cleverwebserver.com/",
+          "initiatorType": "script",
+          "duration": 36
+        },
+        {
+          "name": "https://cdnjs.cloudflare.com/",
+          "initiatorType": "fetch",
+          "duration": 19
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/",
+          "initiatorType": "fetch",
+          "duration": 404
+        },
+        {
+          "name": "https://code.jquery.com/",
+          "initiatorType": "fetch",
+          "duration": 412
+        },
+        {
+          "name": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+          "initiatorType": "fetch",
+          "duration": 2000
+        },
+        {
+          "name": "https://static.doubleclick.net/instream/ad_status.js",
+          "initiatorType": "fetch",
+          "duration": 19
+        },
+        {
+          "name": "https://ads.pubmatic.com/",
+          "initiatorType": "fetch",
+          "duration": 95
+        },
+        {
+          "name": "https://cdn.taboola.com/libtrc/loader.js",
+          "initiatorType": "fetch",
+          "duration": 82
+        },
+        {
+          "name": "https://ib.adnxs.com/ut/v3",
+          "initiatorType": "fetch",
+          "duration": 183
+        },
+        {
+          "name": "https://c.amazon-adsystem.com/aax2/apstag.js",
+          "initiatorType": "fetch",
+          "duration": 29
+        },
+        {
+          "name": "https://fp.vhit.io/",
+          "initiatorType": "fetch",
+          "duration": 441
+        },
+        {
+          "name": "https://cuttlinks.com/cdn-cgi/rum?",
+          "initiatorType": "xmlhttprequest",
+          "duration": 7
+        },
+        {
+          "name": "https://call.cleverwebserver.com/?id=100230&c=IN&r=MH&l=430&b=Headless%20Chrome&bv=0&os=Linux&mob=0&v=2.65.0&lg=en-US&ref=aHR0cHM6Ly9jdXR0bGlua3MuY29tL0FmYVg2ang%3D&ruri=&s=d306a52e2e801df2b184b0370fa1804980e3f9ab30131957f5f349f2fac9b66a&e=YbLkZZXl&st=W&iv=-1",
+          "initiatorType": "img",
+          "duration": 17
+        },
+        {
+          "name": "https://vhit.io/api/request?f=c05f1bfbacf97684fd9fc9e742760250",
+          "initiatorType": "fetch",
+          "duration": 539
+        },
+        {
+          "name": "https://cuttlinks.com/cdn-cgi/rum?",
+          "initiatorType": "xmlhttprequest",
+          "duration": 7
+        },
+        {
+          "name": "https://weiledsteverm.org/popunder.gif",
+          "initiatorType": "img",
+          "duration": 2
+        },
+        {
+          "name": "https://www.google-analytics.com/g/collect?v=2&tid=G-GGDCMPL4QP&gtm=45je64o1h1v869225560za200zd869225560&_p=1777378289838&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1357931180.1777378206&frm=0&pscdl=noapi&rcb=3&sr=800x600&uaa=x86&uab=64&uafvl=Google%2520Chrome%3B147.0.7727.116%7CNot.A%252FBrand%3B8.0.0.0%7CChromium%3B147.0.7727.116&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=0~115938466~115938468~117266400~117384406~117512542~118128923&sid=1777378205&sct=1&seg=1&dl=https%3A%2F%2Fcuttlinks.com%2FAfaX6jx&dt=Shorten%20Links%20And%20Earn%20Money%20%7C%20cuty.io&en=page_view&_ee=1&tfd=8064",
+          "initiatorType": "fetch",
+          "duration": 81
+        }
+      ],
+      "localStorage": {
+        "vhit_pages_01KQ9ZY4RRANZ5C1CG31K43BES": "[{\"r\":\"first\",\"u\":\"https://cuttlinks.com/AfaX6jx\",\"pt\":1777378227081,\"e\":{\"st\":22001,\"tc\":1,\"msd\":0,\"act\":20001,\"idl\":2000,\"pent\":\"{\\\"collected\\\":false,\\\"points\\\":0,\\\"entropy\\\":0,\\\"speed_variance\\\":0,\\\"pattern_score\\\":0}\",\"ptim\":\"{\\\"collected\\\":false,\\\"intervals_count\\\":0,\\\"variance\\\":0,\\\"coefficient_of_variation\\\":0,\\\"mean\\\":0,\\\"std_dev\\\":0}\",\"ci\":\"[]\",\"sp\":null,\"vm\":\"{\\\"focus_changes\\\":0,\\\"total_hidden_time\\\":0,\\\"total_visible_time\\\":22001,\\\"last_state_change\\\":1777378205087}\",\"ap\":\"{\\\"collected\\\":false,\\\"avg_acceleration\\\":0,\\\"acceleration_variance\\\":0,\\\"natural_curve_score\\\":0}\",\"tg\":\"{\\\"tap_count\\\":0,\\\"pinch_count\\\":0,\\\"swipe_count\\\":0,\\\"long_press_count\\\":0,\\\"multi_touch_count\\\":0}\",\"evti\":\"{\\\"collected\\\":true,\\\"event_count\\\":0,\\\"avg_processing\\\":0,\\\"processing_variance\\\":0}\"}},{\"r\":\"captcha\",\"u\":\"https://cuttlinks.com/AfaX6jx\",\"pt\":1777378287179,\"e\":{\"st\":57614,\"tc\":1,\"msd\":0,\"act\":19614,\"idl\":38000,\"pent\":\"{\\\"collected\\\":false,\\\"points\\\":0,\\\"entropy\\\":0,\\\"speed_variance\\\":0,\\\"pattern_score\\\":0}\",\"ptim\":\"{\\\"collected\\\":false,\\\"intervals_count\\\":0,\\\"variance\\\":0,\\\"coefficient_of_variation\\\":0,\\\"mean\\\":0,\\\"std_dev\\\":0}\",\"ci\":\"[]\",\"sp\":null,\"vm\":\"{\\\"focus_changes\\\":0,\\\"total_hidden_time\\\":0,\\\"total_visible_time\\\":57614,\\\"last_state_change\\\":1777378229573}\",\"ap\":\"{\\\"collected\\\":false,\\\"avg_acceleration\\\":0,\\\"acceleration_variance\\\":0,\\\"natural_curve_score\\\":0}\",\"tg\":\"{\\\"tap_count\\\":0,\\\"pinch_count\\\":0,\\\"swipe_count\\\":0,\\\"long_press_count\\\":0,\\\"multi_touch_count\\\":0}\",\"evti\":\"{\\\"collected\\\":true,\\\"event_count\\\":0,\\\"avg_processing\\\":0,\\\"processing_variance\\\":0}\"}}]",
+        "fjidd": "{\"value\":\"1335538407776154\",\"expiry\":1777380005795}",
+        "agecc": "{\"value\":\"1777378205\",\"expiry\":1777380005795}",
+        "vast-client-total-calls": "1",
+        "vast-client-total-calls-timeout": "1777381805749",
+        "vhit_vid": "\"a19eed0f-f095-4072-894a-917eab3a2268\"",
+        "clever-parameters": "{\"skippedTrackerSort\":[],\"trackerSortShowed\":[]}"
+      },
+      "sessionStorage": {},
+      "scripts": [
+        "https://scripts.cleverwebserver.com/d19bc1f46130f17eb96c9ecc9e710bdf.js",
+        "https://cdn.cuty.io/js/public/links/last.js?id=6f532c254dacb8301c55b8c594852acd",
+        "https://vhit.io/scripts/vhit.js?ref=cuty&tid=01KQ9ZY4RRANZ5C1CG31K43BES&cid=412361",
+        "https://live.demand.supply/up.js",
+        "https://fstatic.netpub.media/extra/cmp/cmp-gdpr.js",
+        "https://fstatic.netpub.media/static/103298a8c25a24d26a0d86b1848772f0.min.js?1777378289777",
+        "https://fstatic.netpub.media/static/fefa132e8a7c4c10e9350b49c9e3b31b.min.js?1777378289832",
+        "https://ui.cleverwebserver.com/",
+        "https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516",
+        "https://cdn.cuty.io/js/layouts/base.js?id=07eba5c095e0a77673473fb120b47b39",
+        "https://www.googletagmanager.com/gtag/js?id=G-GGDCMPL4QP",
+        "https://cdn.cuty.io/js/public/layouts/_partials/nav-links.js?id=7c771530af9cbba08e34f936597e59e5",
+        "https://cdn.cuty.io/js/public/layouts/app.js?id=8675a7f87c4b7053cf3f617044c01885"
+      ],
+      "cookies": "_ga=GA1.1.1357931180.1777378206; clever-counter-100230=0-1; _ga_3K0TP58S5B=GS2.1.s1777378230$o1$g0$t1777378230$j60$l0$h0; XSRF-TOKEN=eyJpdiI6ImJNOG5naTEwMXZRZDFRdi9vZVRJRXc9PSIsInZhbHVlIjoidldKNFR4dkRLNlM1eTNPMy9Sa1RsNndYN1c5QW1hdWI4WjVrYTJReDQ1QnU5OHhmcXUweVpvVTFEa1RDcGtWcnlnWi9nOU9icXFlcEdWUFRya3YxZzZLYkFac2ordDBqd3o5UmdLSE5tVHI5Szl5N01ybUwreXNmWlVGb0xlMnkiLCJtYWMiOiJiMDE3MDNmNGRiZWMxM2U1NjY0MDNlZWVhMzI0OWQ0ZGFiODA4M2I2ZTA4OGFhOWJkNjNiMWFlNGY2YjgyZTQ3IiwidGFnIjoiIn0%3D; _ga_GGDCMPL4QP=GS2.1.s1777378205$o1$g1$t1777378290$j60$l0$h0",
+      "hiddenInputs": [
+        {
+          "name": "_token",
+          "value": "wVQwA4tMfw1UGE3FWMPjSkRAdYEgWqgMpdWM0IAS"
+        },
+        {
+          "name": "data",
+          "value": "eyJpdiI6InNrVjZhUGJGdGtjZ0RLbkxIOWRJM3c9PSIsInZhbHVlIjoiUmdoRHlyVEQvamMxREN0THFmVnAwVEQ2NkVYaTQrQmtCcVNFanNnYXgvRnV2R0h3RlJ1cHZ3eVFZbkk3eXRnK2hMcGdiVWFwV0hVdVVl"
+        }
+      ]
+    },
+    {
+      "stage": "last-after-wait",
+      "href": "https://cuttlinks.com/AfaX6jx",
+      "title": "Shorten Links And Earn Money | cuty.io",
+      "text": "Please wait while your link is being prepared\n\nEarn up to $18 per 1000 views on every link you shorten.\n\nJoin Now\n0\nSeconds\nGo ->\nshare on\n\nshare\n\ntweet\n\npost\n\n3 Steps to start earning\n\nGetting started with cuty.io is very easy. You only need to follow the steps below to get an active account that generates you passive income.\n\nCreate an account\n\nCreating an account would not take you more than 3 minutes. You only need to provide your email, username and a password. You can also use your social accounts like Facebook and Google for a quicker registration!\n\nShorten and share links\n\nAfter you cr",
+      "site": null,
+      "forms": [
+        {
+          "id": "submit-form",
+          "action": "https://cuttlinks.com/go/AfaX6jx",
+          "data": "_token=wVQwA4tMfw1UGE3FWMPjSkRAdYEgWqgMpdWM0IAS&data=eyJpdiI6InNrVjZhUGJGdGtjZ0RLbkxIOWRJM3c9PSIsInZhbHVlIjoiUmdoRHlyVEQvamMxREN0THFmVnAwVEQ2NkVYaTQrQmtCcVNFanNnYXgvRnV2R0h3RlJ1cHZ3eVFZbkk3eXRnK2hMcGdiVWFwV0hVdVVlUzFSWlJjOXc9PSIsIm1hYyI6IjBjMGJmMzE5ZmEzOGQxNmE0M2EyOTEwNTVkOWNlN2U3OWJlNzMyMTVkMDJhMjJhNmY0MDMyOTY0NzA3YTk2NWIiLCJ0YWciOiIifQ%3D%3D"
+        }
+      ],
+      "buttons": [
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "\n        \n            \n        \n    ",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "text": "\n        \n            \n        \n    ",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n            ",
+          "href": "https://cuty.io/",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Payment Rates",
+          "href": "https://cuty.io/payout-rates",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                English\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=en",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                Español\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=es",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                العربية\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=ar",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n            \n                Français\n            \n            \n        ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=fr",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Earn Money",
+          "href": "https://cuty.io/register",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "",
+          "href": "https://cuty.io/",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Payment Rates",
+          "href": "https://cuty.io/payout-rates",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    English\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=en",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    Español\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=es",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    العربية\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=ar",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "\n                \n                    Français\n                \n                \n            ",
+          "href": "https://cuttlinks.com/AfaX6jx?lang=fr",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Earn Money",
+          "href": "https://cuty.io/register",
+          "disabled": false
+        }
+      ],
+      "perf": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+          "initiatorType": "link",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/links/last.js?id=6f532c254dacb8301c55b8c594852acd",
+          "initiatorType": "script",
+          "duration": 64
+        },
+        {
+          "name": "https://vhit.io/scripts/vhit.js?ref=cuty&tid=01KQ9ZY4RRANZ5C1CG31K43BES&cid=412361",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://live.demand.supply/up.js",
+          "initiatorType": "link",
+          "duration": 0
+        },
+        {
+          "name": "https://fstatic.netpub.media/extra/cmp/cmp-gdpr.js",
+          "initiatorType": "script",
+          "duration": 235
+        },
+        {
+          "name": "https://cdn.cuty.io/css/public.css?id=f527c13d31334a50752b6d72875f9c53",
+          "initiatorType": "link",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/logo.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-en.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/arrow-down.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-es.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-ar.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/locale-fr.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/burger.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/x.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/facebook-icon.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/twitter-icon.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/shared/linkedin-icon.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://d33f51dyacx7bd.cloudfront.net/?aydfd=1236964",
+          "initiatorType": "script",
+          "duration": 317
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-1.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-2.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/step-3.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/money-tree.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/paypal.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/usdt.png",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/withdrawal-methods/volet.svg",
+          "initiatorType": "img",
+          "duration": 0
+        },
+        {
+          "name": "https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/js/layouts/base.js?id=07eba5c095e0a77673473fb120b47b39",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://www.googletagmanager.com/gtag/js?id=G-GGDCMPL4QP",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/layouts/_partials/nav-links.js?id=7c771530af9cbba08e34f936597e59e5",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://cdn.cuty.io/js/public/layouts/app.js?id=8675a7f87c4b7053cf3f617044c01885",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://cuttlinks.com/js/public/links/first/337.js",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+          "initiatorType": "css",
+          "duration": 0
+        },
+        {
+          "name": "https://fstatic.netpub.media/static/103298a8c25a24d26a0d86b1848772f0.min.js?1777378289777",
+          "initiatorType": "script",
+          "duration": 20
+        },
+        {
+          "name": "https://cdn.cuty.io/images/public/landing/heading-background.png",
+          "initiatorType": "css",
+          "duration": 0
+        },
+        {
+          "name": "https://undefined/MEtNb3JRKS4CTVF2L0kHQidwSkB2bn8pFgN4K1pDVDIsDAoHKSlBEVwkOAsUQiQjG1xeLjlKQHZ8FzgeBRIYXzVyIy4nEVgODCckSHMbXkN6HSMDI2Q8Jjs5cQUYKBphfgg+J2EPNDYlYjMiIDt1BgksFQQhCzkjAQE1OjV4CT4gMXQSJyMbajkIPT9UEwUfNnIZKj85XCMdJzMIPhopGlYKDgQ6Zg58Jz1xGRgpMwR4CS4nZgoKByp8ezU/FGUJLzwnW3obKRpTHipWM2d7JiE4cTguLidibn8pJGINDzkKeh8VOTB1LXw6O3MZCAczcn8uLgtpBgU5X0gfDl4wUR8mVlcCCRhfCnweGjo9cRp9IjtlCS8gGWJufykkYR4cLBtYChpfGXcADDYxdiAlACQBIB8tMUcJDz0FYxsqNjBzPHkIM3UzASVBSBkVAxZiEnw5OmMeH0pAdh0fACtyMjo3M3YzGSxDcioZBEsVeQ86QggGFScKZxwmFydWJ3wLIWYRezoeCQIbJxkWIT4AHEB2ASkqUz4vADdjARoo",
+          "initiatorType": "iframe",
+          "duration": 430
+        },
+        {
+          "name": "https://weiledsteverm.org/ODF3TXoXDhQ+R2xbOTkucGdPDksNCSUVHX5pLz07XlYtKR5taFE5E1wMRn9JDghBeVxIWBNwSx5CAywOTUJKfFxRXxEiRx5HSnxUCwVZfk0WBlE4RwkCRHhPCwlDfU0PBkF8TwwXAz0bXwxGawpMRRtwSw8GQH5NAANPdEIIAw",
+          "initiatorType": "img",
+          "duration": 223
+        },
+        {
+          "name": "https://www.facebook.com/login.php?next=https%3A%2F%2Fwww.facebook.com%2Ffavicon.ico%3F_rdr%3Dp",
+          "initiatorType": "img",
+          "duration": 300
+        },
+        {
+          "name": "https://accounts.google.com/ServiceLogin?passive=true&continue=https%3A%2F%2Fwww.google.com%2Ffavicon.ico&uilel=3&hl=en&service=mail",
+          "initiatorType": "img",
+          "duration": 621
+        },
+        {
+          "name": "https://weiledsteverm.org/NEpTOXEbdTBKTGINZlgrcQQ9bhxYGTd+QG4TPwgIbSYJSSRaJXVNGFB3YgtFBH1nDFdEIzcEQAxsIE0QQD8gBEASIz1fHglsJQRAGnp9C18BbCYEQAd5ZgxCDH5jDkYDfGIMRRI+I1gWCXt1SQVAJm4IRgN9YA5JBnJqAUAN",
+          "initiatorType": "img",
+          "duration": 218
+        },
+        {
+          "name": "https://accounts.google.com/ServiceLogin?passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Ffavicon.ico&uilel=3&hl=en&service=youtube",
+          "initiatorType": "img",
+          "duration": 685
+        },
+        {
+          "name": "https://scripts.cleverwebserver.com/d19bc1f46130f17eb96c9ecc9e710bdf.js",
+          "initiatorType": "script",
+          "duration": 0
+        },
+        {
+          "name": "https://fstatic.netpub.media/static/fefa132e8a7c4c10e9350b49c9e3b31b.min.js?1777378289832",
+          "initiatorType": "script",
+          "duration": 33
+        },
+        {
+          "name": "https://ui.cleverwebserver.com/",
+          "initiatorType": "script",
+          "duration": 36
+        },
+        {
+          "name": "https://cdnjs.cloudflare.com/",
+          "initiatorType": "fetch",
+          "duration": 19
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/",
+          "initiatorType": "fetch",
+          "duration": 404
+        },
+        {
+          "name": "https://code.jquery.com/",
+          "initiatorType": "fetch",
+          "duration": 412
+        },
+        {
+          "name": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+          "initiatorType": "fetch",
+          "duration": 2000
+        },
+        {
+          "name": "https://static.doubleclick.net/instream/ad_status.js",
+          "initiatorType": "fetch",
+          "duration": 19
+        },
+        {
+          "name": "https://ads.pubmatic.com/",
+          "initiatorType": "fetch",
+          "duration": 95
+        },
+        {
+          "name": "https://cdn.taboola.com/libtrc/loader.js",
+          "initiatorType": "fetch",
+          "duration": 82
+        },
+        {
+          "name": "https://ib.adnxs.com/ut/v3",
+          "initiatorType": "fetch",
+          "duration": 183
+        },
+        {
+          "name": "https://c.amazon-adsystem.com/aax2/apstag.js",
+          "initiatorType": "fetch",
+          "duration": 29
+        },
+        {
+          "name": "https://fp.vhit.io/",
+          "initiatorType": "fetch",
+          "duration": 441
+        },
+        {
+          "name": "https://cuttlinks.com/cdn-cgi/rum?",
+          "initiatorType": "xmlhttprequest",
+          "duration": 7
+        },
+        {
+          "name": "https://call.cleverwebserver.com/?id=100230&c=IN&r=MH&l=430&b=Headless%20Chrome&bv=0&os=Linux&mob=0&v=2.65.0&lg=en-US&ref=aHR0cHM6Ly9jdXR0bGlua3MuY29tL0FmYVg2ang%3D&ruri=&s=d306a52e2e801df2b184b0370fa1804980e3f9ab30131957f5f349f2fac9b66a&e=YbLkZZXl&st=W&iv=-1",
+          "initiatorType": "img",
+          "duration": 17
+        },
+        {
+          "name": "https://vhit.io/api/request?f=c05f1bfbacf97684fd9fc9e742760250",
+          "initiatorType": "fetch",
+          "duration": 539
+        },
+        {
+          "name": "https://cuttlinks.com/cdn-cgi/rum?",
+          "initiatorType": "xmlhttprequest",
+          "duration": 7
+        },
+        {
+          "name": "https://weiledsteverm.org/popunder.gif",
+          "initiatorType": "img",
+          "duration": 2
+        },
+        {
+          "name": "https://www.google-analytics.com/g/collect?v=2&tid=G-GGDCMPL4QP&gtm=45je64o1h1v869225560za200zd869225560&_p=1777378289838&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1357931180.1777378206&frm=0&pscdl=noapi&rcb=3&sr=800x600&uaa=x86&uab=64&uafvl=Google%2520Chrome%3B147.0.7727.116%7CNot.A%252FBrand%3B8.0.0.0%7CChromium%3B147.0.7727.116&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=en-us&_s=1&tag_exp=0~115938466~115938468~117266400~117384406~117512542~118128923&sid=1777378205&sct=1&seg=1&dl=https%3A%2F%2Fcuttlinks.com%2FAfaX6jx&dt=Shorten%20Links%20And%20Earn%20Money%20%7C%20cuty.io&en=page_view&_ee=1&tfd=8064",
+          "initiatorType": "fetch",
+          "duration": 81
+        }
+      ],
+      "localStorage": {
+        "vhit_pages_01KQ9ZY4RRANZ5C1CG31K43BES": "[{\"r\":\"first\",\"u\":\"https://cuttlinks.com/AfaX6jx\",\"pt\":1777378227081,\"e\":{\"st\":22001,\"tc\":1,\"msd\":0,\"act\":20001,\"idl\":2000,\"pent\":\"{\\\"collected\\\":false,\\\"points\\\":0,\\\"entropy\\\":0,\\\"speed_variance\\\":0,\\\"pattern_score\\\":0}\",\"ptim\":\"{\\\"collected\\\":false,\\\"intervals_count\\\":0,\\\"variance\\\":0,\\\"coefficient_of_variation\\\":0,\\\"mean\\\":0,\\\"std_dev\\\":0}\",\"ci\":\"[]\",\"sp\":null,\"vm\":\"{\\\"focus_changes\\\":0,\\\"total_hidden_time\\\":0,\\\"total_visible_time\\\":22001,\\\"last_state_change\\\":1777378205087}\",\"ap\":\"{\\\"collected\\\":false,\\\"avg_acceleration\\\":0,\\\"acceleration_variance\\\":0,\\\"natural_curve_score\\\":0}\",\"tg\":\"{\\\"tap_count\\\":0,\\\"pinch_count\\\":0,\\\"swipe_count\\\":0,\\\"long_press_count\\\":0,\\\"multi_touch_count\\\":0}\",\"evti\":\"{\\\"collected\\\":true,\\\"event_count\\\":0,\\\"avg_processing\\\":0,\\\"processing_variance\\\":0}\"}},{\"r\":\"captcha\",\"u\":\"https://cuttlinks.com/AfaX6jx\",\"pt\":1777378287179,\"e\":{\"st\":57614,\"tc\":1,\"msd\":0,\"act\":19614,\"idl\":38000,\"pent\":\"{\\\"collected\\\":false,\\\"points\\\":0,\\\"entropy\\\":0,\\\"speed_variance\\\":0,\\\"pattern_score\\\":0}\",\"ptim\":\"{\\\"collected\\\":false,\\\"intervals_count\\\":0,\\\"variance\\\":0,\\\"coefficient_of_variation\\\":0,\\\"mean\\\":0,\\\"std_dev\\\":0}\",\"ci\":\"[]\",\"sp\":null,\"vm\":\"{\\\"focus_changes\\\":0,\\\"total_hidden_time\\\":0,\\\"total_visible_time\\\":57614,\\\"last_state_change\\\":1777378229573}\",\"ap\":\"{\\\"collected\\\":false,\\\"avg_acceleration\\\":0,\\\"acceleration_variance\\\":0,\\\"natural_curve_score\\\":0}\",\"tg\":\"{\\\"tap_count\\\":0,\\\"pinch_count\\\":0,\\\"swipe_count\\\":0,\\\"long_press_count\\\":0,\\\"multi_touch_count\\\":0}\",\"evti\":\"{\\\"collected\\\":true,\\\"event_count\\\":0,\\\"avg_processing\\\":0,\\\"processing_variance\\\":0}\"}}]",
+        "fjidd": "{\"value\":\"1335538407776154\",\"expiry\":1777380005795}",
+        "agecc": "{\"value\":\"1777378205\",\"expiry\":1777380005795}",
+        "vast-client-total-calls": "1",
+        "vast-client-total-calls-timeout": "1777381805749",
+        "vhit_vid": "\"a19eed0f-f095-4072-894a-917eab3a2268\"",
+        "clever-parameters": "{\"skippedTrackerSort\":[],\"trackerSortShowed\":[]}"
+      },
+      "sessionStorage": {},
+      "scripts": [
+        "https://scripts.cleverwebserver.com/d19bc1f46130f17eb96c9ecc9e710bdf.js",
+        "https://cdn.cuty.io/js/public/links/last.js?id=6f532c254dacb8301c55b8c594852acd",
+        "https://vhit.io/scripts/vhit.js?ref=cuty&tid=01KQ9ZY4RRANZ5C1CG31K43BES&cid=412361",
+        "https://live.demand.supply/up.js",
+        "https://fstatic.netpub.media/extra/cmp/cmp-gdpr.js",
+        "https://fstatic.netpub.media/static/103298a8c25a24d26a0d86b1848772f0.min.js?1777378289777",
+        "https://fstatic.netpub.media/static/fefa132e8a7c4c10e9350b49c9e3b31b.min.js?1777378289832",
+        "https://ui.cleverwebserver.com/",
+        "https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516",
+        "https://cdn.cuty.io/js/layouts/base.js?id=07eba5c095e0a77673473fb120b47b39",
+        "https://www.googletagmanager.com/gtag/js?id=G-GGDCMPL4QP",
+        "https://cdn.cuty.io/js/public/layouts/_partials/nav-links.js?id=7c771530af9cbba08e34f936597e59e5",
+        "https://cdn.cuty.io/js/public/layouts/app.js?id=8675a7f87c4b7053cf3f617044c01885"
+      ],
+      "cookies": "_ga=GA1.1.1357931180.1777378206; clever-counter-100230=0-1; _ga_3K0TP58S5B=GS2.1.s1777378230$o1$g0$t1777378230$j60$l0$h0; XSRF-TOKEN=eyJpdiI6ImJNOG5naTEwMXZRZDFRdi9vZVRJRXc9PSIsInZhbHVlIjoidldKNFR4dkRLNlM1eTNPMy9Sa1RsNndYN1c5QW1hdWI4WjVrYTJReDQ1QnU5OHhmcXUweVpvVTFEa1RDcGtWcnlnWi9nOU9icXFlcEdWUFRya3YxZzZLYkFac2ordDBqd3o5UmdLSE5tVHI5Szl5N01ybUwreXNmWlVGb0xlMnkiLCJtYWMiOiJiMDE3MDNmNGRiZWMxM2U1NjY0MDNlZWVhMzI0OWQ0ZGFiODA4M2I2ZTA4OGFhOWJkNjNiMWFlNGY2YjgyZTQ3IiwidGFnIjoiIn0%3D; _ga_GGDCMPL4QP=GS2.1.s1777378205$o1$g1$t1777378290$j60$l0$h0",
+      "hiddenInputs": [
+        {
+          "name": "_token",
+          "value": "wVQwA4tMfw1UGE3FWMPjSkRAdYEgWqgMpdWM0IAS"
+        },
+        {
+          "name": "data",
+          "value": "eyJpdiI6InNrVjZhUGJGdGtjZ0RLbkxIOWRJM3c9PSIsInZhbHVlIjoiUmdoRHlyVEQvamMxREN0THFmVnAwVEQ2NkVYaTQrQmtCcVNFanNnYXgvRnV2R0h3RlJ1cHZ3eVFZbkk3eXRnK2hMcGdiVWFwV0hVdVVl"
+        }
+      ]
+    },
+    {
+      "stage": "final",
+      "href": "https://www.google.com/",
+      "title": "Google",
+      "text": "About\nStore\nGmailImages\nSign in\n \nGoogle offered in: हिन्दी বাংলা తెలుగు मराठी தமிழ் ગુજરાતી ಕನ್ನಡ മലയാളം ਪੰਜਾਬੀ\nIndia\nAdvertising\nBusiness\nHow Search works\nPrivacy\nTerms\nSettings",
+      "site": null,
+      "forms": [
+        {
+          "id": "",
+          "action": "https://www.google.com/search",
+          "data": "q=&sca_esv=8973cab98d98f2bf&source=hp&ei=DaTwabG0L6HV1sQPnv6c6QM&iflsig=AFdpzrgAAAAAafCyHSe14jasD9_ynSo3V7rmAQXhNHlw"
+        }
+      ],
+      "buttons": [
+        {
+          "tag": "A",
+          "id": "",
+          "text": "About",
+          "href": "https://about.google/?fg=1&utm_source=google-IN&utm_medium=referral&utm_campaign=hp-header",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Store",
+          "href": "https://store.google.com/IN?utm_source=hp_header&utm_medium=google_ooo&utm_campaign=GS100042&hl=en-IN",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Gmail",
+          "href": "https://mail.google.com/mail/&ogbl",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Images",
+          "href": "https://www.google.com/imghp?hl=en&ogbl",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "",
+          "href": "https://www.google.co.in/intl/en/about/products",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "Sign in",
+          "href": "https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/&ec=futura_exp_og_so_72776762_e",
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "id": "spchx",
+          "text": "",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "Google Search",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "I'm Feeling Lucky",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "Google Search",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "INPUT",
+          "id": "",
+          "text": "I'm Feeling Lucky",
+          "href": "",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "हिन्दी",
+          "href": "https://www.google.com/setprefs?sig=0_HGh3BF4PjQhwAbp7tPRpcuCcxTw%3D&hl=hi&source=homepage&sa=X&ved=0ahUKEwjx7oyawpCUAxWhqpUCHR4_Jz0Q2ZgBCBc",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "বাংলা",
+          "href": "https://www.google.com/setprefs?sig=0_HGh3BF4PjQhwAbp7tPRpcuCcxTw%3D&hl=bn&source=homepage&sa=X&ved=0ahUKEwjx7oyawpCUAxWhqpUCHR4_Jz0Q2ZgBCBg",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "తెలుగు",
+          "href": "https://www.google.com/setprefs?sig=0_HGh3BF4PjQhwAbp7tPRpcuCcxTw%3D&hl=te&source=homepage&sa=X&ved=0ahUKEwjx7oyawpCUAxWhqpUCHR4_Jz0Q2ZgBCBk",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "मराठी",
+          "href": "https://www.google.com/setprefs?sig=0_HGh3BF4PjQhwAbp7tPRpcuCcxTw%3D&hl=mr&source=homepage&sa=X&ved=0ahUKEwjx7oyawpCUAxWhqpUCHR4_Jz0Q2ZgBCBo",
+          "disabled": false
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "text": "தமிழ்",
+          "href": "https://www.google.com/setprefs?sig=0_HGh3BF4PjQhwAbp7tPRpcuCcxTw%3D&hl=ta&source=homepage&sa=X&ved=0ahUKEwjx7oyawpCUAxWhqpUCHR4_Jz0Q2ZgBCBs",
+          "disabled": false
+        }
+      ],
+      "perf": [
+        {
+          "name": "https://www.google.com/gen_204?s=webhp&t=cap&atyp=csi&ei=DaTwabG0L6HV1sQPnv6c6QM&rt=wsrt.2790,hst.19,cbt.31&nt=navigate&dt=&ts=300&nhp=h3&ant=push&opi=89978449",
+          "initiatorType": "beacon",
+          "duration": 116
+        },
+        {
+          "name": "https://www.google.com/xjs/_/ss/k=xjs.hd.YJncLzT7MQo.L.W.O/am=AAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAACAAAiEEEACAAAAAAAIDQAwAANAAAAAAAAAAAAAAAAACAAAAAAAIAAAAAAAAgAAAAAAAAAAAQAAAAAABAAEAAEQAAAIACAAAAAEAAAAAAAAAAAAAIAAAAAAAAAAAAAAgAAAAAAAyAMAAIAAIAABBGAAAAAAAAAAAAAAAAAAAAAAIkkAAABAwAAAAAQAAAAAAAQAAAIQQBAhRAAAAAAAAABAAAAAAAABAAAAAAAAAIAAQEQgABAAAACABAAAgACAAgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACAAAAAAAAATAg4SBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAACg/d=1/ed=1/rs=ACT90oFUaHIlkM3K4PFpOZMILu8NLs0T7A/m=cdos,cr,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi",
+          "initiatorType": "link",
+          "duration": 9
+        },
+        {
+          "name": "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIKAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAEQgAAIMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAg4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUECgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=1/ed=1/dg=4/rs=ACT90oHkzcSM7loaimPgCi6vPdNoy3FsnA/ee=ALeJib:B8gLwd;AfeaP:TkrAjf;BMxAGc:E5bFse;BgS6mb:fidj5d;BjwMce:cXX2Wb;CIZTGb:Kqhykb;CxXAWb:YyRLvc;DQEued:Fevhcf;DULqB:RKfG5c;Dkk6ge:JZmW9e;DpcR3d:zL72xf;Du7NI:C6zLgf;EABSZ:MXZt9d;ESrPQc:mNTJvc;EVNhjf:pw70Gc;EjXHpb:pSHqh;EmZ2Bf:zr1jrb;EnlcNd:WeHg4;F54IAe:ZgsFh;F9mqte:UoRcbe;FSxmUe:fiZR8b;Fkukfc:i8H2c;Fmv9Nc:O1Tzwc;G0KhTb:LIaoZ;GEkGdd:e1RzQd;GleZL:J1A7Od;HMDDWe:G8QUdb;HtPxrd:Gx8jAb;IBADCc:RYquRb;IoGlCf:b5lhvb;JXJSm:ii1RGf;JXS8fb:p4LrCe;JqSq7d:y9ePhe;JsbNhc:Xd8iUd;K5nYTd:ZDZcre;KA3P2:C3JnCe;KDb6nb:fE9n2;KOxcK:OZqGte;KQzWid:ZMKkN;KpRAue:Tia57b;LBgRLc:SdcwHb,XVMNvd;LBn8Cf:bJ9L0c;LEikZe:byfTOb,lsjVmc;LXA8b:q7OdKd;LsNahb:ucGLNb;NJ1rfe:qTnoBf;NPKaK:SdcwHb;NSEoX:lazG7b;NjIwef:YVgi7d;Np8Qkd:Dpx6qc;Nyt6ic:jn2sGd;OIfWUb:qfOYcd;OgagBe:cNTe0;OiqE2c:TFpEK;OoK5v:Sp69O;OohIYe:mpEAQb;Pjplud:PoEs9b;PpTLXd:pJYjx;Q1Ow7b:x5CSu;QE20Be:gIltO;QFOGlf:PQ2Aoe;QGR0gd:Mlhmy;QYLF2b:pAQYUd;Qw8Feb:jpavUe;R4IIIb:QWfeKf;R9Ulx:CR7Ufe;RCF5Sd:X1kBmd;SLtqO:Kh1xYe;SMDL4c:fTfGO;SNUn3:ZwDk9d,xD8Kp;SNk4Je:wWMhg;ScI3Yc:e7Hzgb,e7Hzgb;ShpF6e:N0pvGc;Snahre:mGCtob;SwCqAd:fXbCZc;SzQQ3e:dNhofb;TIUVQd:lWTJwd;TroZ1d:vVVzjb;U96pRd:FsR04;UBKJZ:LGDJGb;UDrY1c:N0F29d,W50NVd,eps46d,rw5jGd,wciyUe;UVmjEd:EesRsb;UVzb9c:IvPZ6d;UYRIEb:HzTAQc;UyG7Kb:wQd0G;V2HTTe:RolTY;VGRfx:VFqbr;VMuEm:pL7sBc;VN6jIc:ddQyuf;VOcgDe:YquhTb;VhA7bd:vAmQFf;VsAqSb:PGf2Re;W9QSQe:ynCWwc;WDGyFe:jcVOxd;WXtNeb:QU9BMd;Wfmdue:g3MJlb;Wl55ib:vgbiKb;Y3c5sd:FGbfLe;YIZmRd:A1yn5d;YV5bee:IvPZ6d;YnHUBf:sNsSob;ZSH6tc:QAvyLe;ZWEUA:afR4Cf;ZlOOMb:P0I0Ec;a56pNe:JEfCwb;aAJE9c:WHW6Ef;aCJ9tf:qKftvc;aVZq3e:EMeVIb;aZ61od:arTwJ;aci7y:Z5Tr6c;bDXwRe:UsyOtc;bUIkwb:WMwEHe;bcPXSc:gSZLJb;cEt90b:ws9Tlc;cFTWae:gT8qnd;dIoSBb:ZgGg9b;dLlj2:Qqt3Gf;dXdZV:a7QTqd;dowIGb:ebZ3mb,ebZ3mb;dtl0hd:lLQWFe;eBAeSb:Ck63tb;eBZ5Nd:audvde;eHDfl:ofjVkb;eJKchc:ATg1be;eO3lse:UefOmb;euOXY:OZjbQ;g8nkx:U4MzKc;gaub4:TN6bMe;gtVSi:ekUOYd;h3MYod:ws9Tlc;hK67qb:QWEO5b;hVic1b:Kqhykb;heHB1:sFczq;hjRo6e:F62sG;hlqGX:FWz1ic;hsLsYc:Vl118;hwoVHd:zw4U8c;iFQyKf:QIhFr;iySzae:a6xXfd;jJj2G:kF2o2b;k1O0rf:pnOULd;k2Qxcb:XY51pe;kbAm9d:MkHyGd;lOO0Vd:OTA3Ae;lbfkyf:MqGdUd;liAz7d:kF2o2b;mWzs9c:fz5ukf;nBZnZe:CvErjb;nJw4Gd:dPFZH;nrDcw:SuEoDe;oGtAuc:sOXFj;oSUNyd:fTfGO,fTfGO;oUlnpc:RagDlc;oiBhre:OuMkRd;okUaUd:wItadb;pKJiXd:VCenhc;pNsl2d:j9Yuyc;pXdRYb:JKoKVe;pj82le:ww04Df;qGV2uc:HHi04c;qQEoOc:KUM7Z,d7YSfd;qZx2Fc:j0xrE;qaS3gd:yiLg6e;qafBPd:sgY6Zb;qavrXe:I0C9u;qddgKe:d7YSfd,x4FYXe;rdexKf:FEkKD;rmWaj:PMS6Sd;ropkZ:hjoqoe;sTsDMc:JksfDf;sZmdvc:rdGEfc;tH4IIe:Ymry6;teSRSb:BMLai;tosKvd:ZCqP3;trZL0b:qY8PFe;uuQkY:u2V3ud;vEYCNb:FaqsVd;vRlMvf:Iw9Xo;vfVwPd:lcrkwe;w3bZCb:ZPGaIb;w4rSdf:XKiZ9;w9w86d:XwhUEb,dt4g2b,gKD90c,lWVZVe;wQlYve:aLUfP;wR5FRb:O1Gjze,TtcOte;wV5Pjc:L8KGxe;x9N9ie:KH4Qof;xBbsrc:NEW1Qc;ysNiMc:CpIBjd;yxTchf:KUM7Z;z97YGf:oug9te;zaIgPb:Sl0pxd/m=cdos,cr,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi",
+          "initiatorType": "script",
+          "duration": 33
+        },
+        {
+          "name": "https://www.google.com/async/hpba?yv=3&cs=0&ei=DaTwabG0L6HV1sQPnv6c6QM&async=_basejs:/xjs/_/js/k%3Dxjs.hd.en_GB.IwvkciKP7Lo.2019.O/am%3DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIIAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAAQgAAAMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAA4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUEAgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/dg%3D0/rs%3DACT90oE7La3qCdgiWgMnNTJurzqVIJMbTg,_basecss:/xjs/_/ss/k%3Dxjs.hd.YJncLzT7MQo.L.W.O/am%3DAAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAACAAAiEEEACAAAAAAAIDQAwAANAAAAAAAAAAAAAAAAACAAAAAAAIAAAAAAAAgAAAAAAAAAAAQAAAAAABAAEAAEQAAAIACAAAAAEAAAAAAAAAAAAAIAAAAAAAAAAAAAAgAAAAAAAyAMAAIAAIAABBGAAAAAAAAAAAAAAAAAAAAAAIkkAAABAwAAAAAQAAAAAAAQAAAIQQBAhRAAAAAAAAABAAAAAAAABAAAAAAAAAIAAQEQgABAAAACABAAAgACAAgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACAAAAAAAAATAg4SBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAACg/rs%3DACT90oFUaHIlkM3K4PFpOZMILu8NLs0T7A,_basecomb:/xjs/_/js/k%3Dxjs.hd.en_GB.IwvkciKP7Lo.2019.O/ck%3Dxjs.hd.YJncLzT7MQo.L.W.O/am%3DAAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAQgAAACAAIjEEEACAAAAAAAIDQAwgANAAAAAAAAAAAAAAAAIKAAAAAAAIAAAAAAAAgAIAAACAAAAAQAAAAMABAAEAAEQgAAIMCAAAAAEAAAAAAAAAAAIAIAAAAQAAAgD8AAAwAAAAAAAyJMAAIAAIAABBGLAAAAAUAAAAIIAAAAAAAAAIkkAAABAwAAgAAQAAAAAAAQAAAIQQBAhRAAAAAEAAABAAAAAAAABAAAAAAQAAIAAQEQgABAAAACChAAAgACAQgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACQBAIAAAAATAg4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUECgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d%3D1/ed%3D1/dg%3D0/ujg%3D1/rs%3DACT90oFdAP_98jNae2js5UB-6h5jntX2HA,_fmt:prog,_id:_DaTwabG0L6HV1sQPnv6c6QM_7&sp_imghp=false&sp_hpep=2&sp_hpte=0&vet=10ahUKEwjx7oyawpCUAxWhqpUCHR4_Jz0Qj-0KCBQ..i",
+          "initiatorType": "xmlhttprequest",
+          "duration": 150
+        },
+        {
+          "name": "https://www.gstatic.com/og/_/js/k=og.asy.en_US.87__AbjnoCc.2019.O/rt=j/m=_ac,_awd,ada,lldp,qads,abld/exm=/d=1/ed=1/rs=AA2YrTtNG5N43avyT80zo8yrmXHlg7VDtw",
+          "initiatorType": "script",
+          "duration": 34
+        },
+        {
+          "name": "https://www.gstatic.com/og/_/ss/k=og.asy.ItyNtKOSdlw.L.W.O/m=ll_tdm,adcgm3,ll_fw,abld/excm=/d=1/ed=1/ct=zgms/rs=AA2YrTtiXsIWU36xVynPse0-cTCzuo-35w",
+          "initiatorType": "link",
+          "duration": 36
+        },
+        {
+          "name": "https://www.google.com/gen_204?s=webhp&t=aft&atyp=csi&ei=DaTwabG0L6HV1sQPnv6c6QM&rt=wsrt.2790,hst.19,cbt.31,prt.162,aft.162&nt=navigate&dt=&ts=300&nhp=h3&ant=push&folr=_DaTwabG0L6HV1sQPnv6c6QM_7&imn=9&dtc=139&stc=22&ima=0&imad=0&imac=0&wh=441&opi=89978449",
+          "initiatorType": "beacon",
+          "duration": 132
+        },
+        {
+          "name": "https://www.google.com/xjs/_/js/md=2/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIKAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAEQgAAIMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAg4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUECgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/rs=ACT90oHkzcSM7loaimPgCi6vPdNoy3FsnA",
+          "initiatorType": "fetch",
+          "duration": 21
+        },
+        {
+          "name": "https://www.google.com/gen_204?atyp=csi&ei=DaTwabG0L6HV1sQPnv6c6QM&s=webhp&t=all&nt=navigate&dt=&ts=300&nhp=h3&ant=push&folr=_DaTwabG0L6HV1sQPnv6c6QM_7&imn=9&dtc=139&stc=22&ima=0&imad=0&imac=0&wh=441&ime=0&imeh=0&imeha=0&imehb=0&imea=0&imeb=0&imel=0&imed=0&imeeb=0&imexb=0&scp=0&cb=57702&ucb=196359&lts=58002&adh=&mem=ujhs.9,tjhs.13,jhsl.4295,dm.32&nv=ne.1,feid.48987c19-1c55-4ee7-81a1-7a4ea644772e&hp=&p=bs.false&rt=hst.19,cbt.31,prt.162,aft.162,xjses.189,xjsee.336,xjs.337,wsrt.2790,cst.0,dnst.0,rqst.579,rspt.182,sslt.0,rqstt.2393,unt.2390,cstt.2392,dit.2975&zx=1777378318351&opi=89978449",
+          "initiatorType": "beacon",
+          "duration": 115
+        },
+        {
+          "name": "https://www.google.com/gen_204?s=async&astyp=hpba&t=all&atyp=csi&ei=DqTwaa-XDLes4-EPicfjuAY&rt=ipf.0,ipfr.200,ttfb.200,st.200,ipfrl.201,acrt.201,aaft.201,art.202,ns.-2939&twt=2&mwt=1&imn=0&ima=0&cb=130&ucb=102&folid=_DaTwabG0L6HV1sQPnv6c6QM_7",
+          "initiatorType": "beacon",
+          "duration": 113
+        },
+        {
+          "name": "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/ck=xjs.hd.YJncLzT7MQo.L.W.O/am=AAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAQgAAACAAIjEEEACAAAAAAAIDQAwgANAAAAAAAAAAAAAAAAIKAAAAAAAIAAAAAAAAgAIAAACAAAAAQAAAAMABAAEAAEQgAAIMCAAAAAEAAAAAAAAAAAIAIAAAAQAAAgD8AAAwAAAAAAAyJMAAIAAIAABBGLAAAAAUAAAAIIAAAAAAAAAIkkAAABAwAAgAAQAAAAAAAQAAAIQQBAhRAAAAAEAAABAAAAAAAABAAAAAAQAAIAAQEQgABAAAACChAAAgACAQgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACQBAIAAAAATAg4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUECgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/ujg=1/rs=ACT90oFdAP_98jNae2js5UB-6h5jntX2HA/m=sy15k,sy15j,rtH1bd,ZgGg9b,dIoSBb,sy1vv,sy1w5,syzv,sy2ds,sy2dr,b6knsb,sy2do,sy2dn,syy8,sy1sg,sysw,syr6,syo7,sy13o,sy1w4,sy1nv,sy13m,syfs,sye1,sydz,syap,sye3,JKoKVe,pXdRYb,sy3hw,syaq,syan,sy9b,O1Gjze,TtcOte,wR5FRb,kQvlef,syfq,syfn,syfj,syfi,syc9,sycw,sybw,syfh,sydu,syfg,syff,syfe,syfd,syfc,syfb,syf9,syf8,syf7,syc3,syc4,syf5,sybk,sybm,sybi,sybg,sybj,syb7,syb9,syb8,sybe,syax,syav,syf6,syf4,syf2,sydq,sydm,sybt,sybs,sybp,sybr,syby,sycq,syd9,sybv,sycf,syce,syc7,sycd,sycc,syc0,syca,sycb,syd6,syf1,syf0,syep,syey,syef,syda,sydb,syd5,syd4,sycz,syct,sycj,syck,sycs,sycr,syci,sycu,syc2,syc5,syc1,sycl,syc6,syde,sybq,sybz,sye6,sye7,syex,sydo,sydj,sydi,syd1,syd0,sydl,sydg,sydh,sydp,sycp,syen,syew,syea,sycv,syeb,syeu,sye9,syet,sydr,syds,syec,sye4,syem,syer,syel,syeq,syek,syej,sye8,syeh,syeg,syee,syed,syeo,sye5,sydy,sydt,syau,sy8m,zbML3c,sy15z,sy15w,gskBEc,sy1k8,s980lf,U9EYge,syzh,loL8vb,syzu,syzm,syzp,sy10k,sy10h,sy10f,sy10i,sy10n,sygu,sygt,sygs,sy10j,sy10l,sy10o,sy10p,sy10m,syzt,sy102,syzy,syzx,syzw,syzj,sy10e,sy10c,sy10b,sy10a,sy104,sy109,sy105,sy101,sy100,syzz,syzl?xjs=s3",
+          "initiatorType": "script",
+          "duration": 30
+        },
+        {
+          "name": "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/ck=xjs.hd.YJncLzT7MQo.L.W.O/am=AAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAQgAAACAAIjEEEACAAAAAAAIDQAwgANAAAAAAAAAAAAAAAAIKAAAAAAAIAAAAAAAAgAIAAACAAAAAQAAAAMABAAEAAEQgAAIMCAAAAAEAAAAAAAAAAAIAIAAAAQAAAgD8AAAwAAAAAAAyJMAAIAAIAABBGLAAAAAUAAAAIIAAAAAAAAAIkkAAABAwAAgAAQAAAAAAAQAAAIQQBAhRAAAAAEAAABAAAAAAAABAAAAAAQAAIAAQEQgABAAAACChAAAgACAQgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACQBAIAAAAATAg4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUECgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/ujg=1/rs=ACT90oFdAP_98jNae2js5UB-6h5jntX2HA/m=syzd,syyq,syzn,ms4mZb,syxd,B2qlPe,sy13i,NzU6V,abd,sy3zi,TDFkye?xjs=s3",
+          "initiatorType": "link",
+          "duration": 29
+        },
+        {
+          "name": "https://www.google.com/client_204?atyp=i&biw=780&bih=441&dpr=1&ei=DaTwabG0L6HV1sQPnv6c6QM&opi=89978449",
+          "initiatorType": "img",
+          "duration": 93
+        },
+        {
+          "name": "https://www.google.com/complete/s?q&cp=0&client=gws-wiz&xssi=t&gs_pcrt=2&hl=en-IN&authuser=0&psi=DaTwabG0L6HV1sQPnv6c6QM.1777378318400&dpr=1&nolsbt=1",
+          "initiatorType": "xmlhttprequest",
+          "duration": 105
+        },
+        {
+          "name": "https://ogads-pa.clients6.google.com/$rpc/google.internal.onegoogle.asyncdata.v1.AsyncDataService/GetAsyncData",
+          "initiatorType": "xmlhttprequest",
+          "duration": 179
+        },
+        {
+          "name": "https://www.google.com/xjs/_/ss/k=xjs.hd.YJncLzT7MQo.L.W.O/am=AAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAACAAAiEEEACAAAAAAAIDQAwAANAAAAAAAAAAAAAAAAACAAAAAAAIAAAAAAAAgAAAAAAAAAAAQAAAAAABAAEAAEQAAAIACAAAAAEAAAAAAAAAAAAAIAAAAAAAAAAAAAAgAAAAAAAyAMAAIAAIAABBGAAAAAAAAAAAAAAAAAAAAAAIkkAAABAwAAAAAQAAAAAAAQAAAIQQBAhRAAAAAAAAABAAAAAAAABAAAAAAAAAIAAQEQgABAAAACABAAAgACAAgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACAAAAAAAAATAg4SBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAACg/d=0/rs=ACT90oFUaHIlkM3K4PFpOZMILu8NLs0T7A/m=syqy?xjs=s4",
+          "initiatorType": "fetch",
+          "duration": 12
+        },
+        {
+          "name": "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIIAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAAQgAAAMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAA4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUEAgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/rs=ACT90oE7La3qCdgiWgMnNTJurzqVIJMbTg/m=sy14w,sy14z,sy14x,sy14v,sy14r,sy14q,sy14d,sy14c,SMquOb,sy8r,sy8q,syhf,syhe,syhb,syhc,syha,syho,syhl,syhj,syh9,syh1,syh8,syh6,syh5,syh4,sy99,sy95,sy98,syh3,syh7,syh2,syh0,sygx,sygv,sy9d,uxMpU,sygm,sy9x,sy9u,sy9t,sy9s,sy9r,sy9q,sy9p,Mlhmy,QGR0gd,PoEs9b,Pjplud,OTA3Ae,sy9m,sy9h,A1yn5d,YIZmRd,sy90,sy8y,sy8x,sy8v,sy8u,byfTOb,lsjVmc,LEikZe,sy8s,kWgXee,ovKuLd,sgY6Zb,qafBPd,ebZ3mb,dowIGb,sy15x,sy15t,d5EhJe,sy1nc,fCxEDd,sy1nb,sy1n9,sy1n8,sy1n5,sy167,sy1n7,sy1n6,sy1n4,sy196,sy195,sy194,sy14g,sy164,sy168,sy13k,T1HOxc,LFk59d,sy16d,sy165,sy162,sy163,sy160,syqy,zx30Y,sy1ne,sy1nd,sy16g,syye,Wo3n8,sy16n,sy16l,zGLm3b,sy1rj,sy1ri,sy1rh,sy1rf,sy1rg,sy1bb,sy1bc,DhPYme,sy3ys,sy3ow,sy3ou,syhp,sy3p1,sy3ov,sy3p3,sy3or,sy3yr,KHourd,sy3zo,sy12d,syyx,oQfbDd,sy3zu,sy1cb,sy18q,sy18m,syyp,syyn,syyo,syym,sy1or,sy3zt,sy3zr,sy1c0,syyw,sy3zs,qmjr3?xjs=s4",
+          "initiatorType": "link",
+          "duration": 27
+        },
+        {
+          "name": "https://www.google.com/gen_204?atyp=csi&ei=DaTwabG0L6HV1sQPnv6c6QM&s=promo&rt=hpbas.459&zx=1777378318468&opi=89978449",
+          "initiatorType": "beacon",
+          "duration": 120
+        },
+        {
+          "name": "https://www.google.com/gen_204?atyp=csi&ei=DaTwabG0L6HV1sQPnv6c6QM&s=promo&rt=hpbas.459,hpbarr.2&zx=1777378318470&opi=89978449",
+          "initiatorType": "beacon",
+          "duration": 120
+        },
+        {
+          "name": "https://www.google.com/async/hpba?vet=10ahUKEwjx7oyawpCUAxWhqpUCHR4_Jz0Qj-0KCBU..i&ei=DaTwabG0L6HV1sQPnv6c6QM&opi=89978449&yv=3&sp_imghp=false&sp_hpte=1&sp_hpep=1&stick=&cs=0&async=_basejs:%2Fxjs%2F_%2Fjs%2Fk%3Dxjs.hd.en_GB.IwvkciKP7Lo.2019.O%2Fam%3DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIIAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAAQgAAAMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAA4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUEAgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA%2Fdg%3D0%2Frs%3DACT90oE7La3qCdgiWgMnNTJurzqVIJMbTg,_basecss:%2Fxjs%2F_%2Fss%2Fk%3Dxjs.hd.YJncLzT7MQo.L.W.O%2Fam%3DAAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAACAAAiEEEACAAAAAAAIDQAwAANAAAAAAAAAAAAAAAAACAAAAAAAIAAAAAAAAgAAAAAAAAAAAQAAAAAABAAEAAEQAAAIACAAAAAEAAAAAAAAAAAAAIAAAAAAAAAAAAAAgAAAAAAAyAMAAIAAIAABBGAAAAAAAAAAAAAAAAAAAAAAIkkAAABAwAAAAAQAAAAAAAQAAAIQQBAhRAAAAAAAAABAAAAAAAABAAAAAAAAAIAAQEQgABAAAACABAAAgACAAgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACAAAAAAAAATAg4SBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAACg%2Frs%3DACT90oFUaHIlkM3K4PFpOZMILu8NLs0T7A,_basecomb:%2Fxjs%2F_%2Fjs%2Fk%3Dxjs.hd.en_GB.IwvkciKP7Lo.2019.O%2Fck%3Dxjs.hd.YJncLzT7MQo.L.W.O%2Fam%3DAAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAQgAAACAAIjEEEACAAAAAAAIDQAwgANAAAAAAAAAAAAAAAAIKAAAAAAAIAAAAAAAAgAIAAACAAAAAQAAAAMABAAEAAEQgAAIMCAAAAAEAAAAAAAAAAAIAIAAAAQAAAgD8AAAwAAAAAAAyJMAAIAAIAABBGLAAAAAUAAAAIIAAAAAAAAAIkkAAABAwAAgAAQAAAAAAAQAAAIQQBAhRAAAAAEAAABAAAAAAAABAAAAAAQAAIAAQEQgABAAAACChAAAgACAQgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACQBAIAAAAATAg4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUECgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA%2Fd%3D1%2Fed%3D1%2Fdg%3D0%2Fujg%3D1%2Frs%3DACT90oFdAP_98jNae2js5UB-6h5jntX2HA,_fmt:prog,_id:_DaTwabG0L6HV1sQPnv6c6QM_8",
+          "initiatorType": "xmlhttprequest",
+          "duration": 114
+        },
+        {
+          "name": "https://www.google.com/gen_204?atyp=i&ct=psnt&cad=&nt=navigate&ei=DaTwabG0L6HV1sQPnv6c6QM&zx=1777378318481&opi=89978449",
+          "initiatorType": "img",
+          "duration": 123
+        },
+        {
+          "name": "https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico",
+          "initiatorType": "other",
+          "duration": 18
+        },
+        {
+          "name": "https://www.google.com/xjs/_/ss/k=xjs.hd.YJncLzT7MQo.L.W.O/am=AAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAACAAAiEEEACAAAAAAAIDQAwAANAAAAAAAAAAAAAAAAACAAAAAAAIAAAAAAAAgAAAAAAAAAAAQAAAAAABAAEAAEQAAAIACAAAAAEAAAAAAAAAAAAAIAAAAAAAAAAAAAAgAAAAAAAyAMAAIAAIAABBGAAAAAAAAAAAAAAAAAAAAAAIkkAAABAwAAAAAQAAAAAAAQAAAIQQBAhRAAAAAAAAABAAAAAAAABAAAAAAAAAIAAQEQgABAAAACABAAAgACAAgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACAAAAAAAAATAg4SBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAACg/d=0/rs=ACT90oFUaHIlkM3K4PFpOZMILu8NLs0T7A/m=y05UD,PPhKqf,vECdaf,sy193,sy1m1,sy1ml,sy1hk,sy1ia,sy1i6,sy1hv,sy1m2,sy1hn,sy1m3,syno,syp5,sy1m4,sy18o,sy18n,sy18p,epYOx?xjs=s4",
+          "initiatorType": "fetch",
+          "duration": 30
+        },
+        {
+          "name": "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIIAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAAQgAAAMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAA4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUEAgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/rs=ACT90oE7La3qCdgiWgMnNTJurzqVIJMbTg/m=qTnoBf,sya6,sOXFj,oGtAuc,NJ1rfe,syag,q0xTif,y05UD,PPhKqf,vECdaf,sy193,sy1m1,sy1ml,sy1m9,sy1au,sy191,sy190,sy18z,sy192,sygh,sy1m8,sy1mn,sy1hk,sy1ia,sy1mj,sy1i6,sy1mi,sy1hv,sy1ma,sy18t,sy18u,sy1m2,sy1cz,sy1ie,sy18v,sy1mb,sy1hn,sy1m7,sy1m5,sy1m3,syno,syp5,sy1m4,sy1md,sy1ih,sy1ii,sy18x,sy18o,sy18w,sy18n,sy18s,sy18p,sy18y,epYOx?xjs=s4",
+          "initiatorType": "link",
+          "duration": 30
+        },
+        {
+          "name": "https://www.google.com/gen_204?atyp=i&ei=DaTwabG0L6HV1sQPnv6c6QM&dt19=2&zx=1777378318550&opi=89978449",
+          "initiatorType": "beacon",
+          "duration": 112
+        },
+        {
+          "name": "https://www.google.com/client_204?cs=1&opi=89978449",
+          "initiatorType": "xmlhttprequest",
+          "duration": 79
+        },
+        {
+          "name": "https://www.google.com/gen_204?atyp=i&ei=DaTwabG0L6HV1sQPnv6c6QM&vet=10ahUKEwjx7oyawpCUAxWhqpUCHR4_Jz0QuqMJCC0..s&bl=vRDK&s=webhp&lpl=CAUYATAEOANiCAgDEMCZu6UB&zx=1777378318567&opi=89978449",
+          "initiatorType": "beacon",
+          "duration": 114
+        },
+        {
+          "name": "https://www.google.com/xjs/_/ss/k=xjs.hd.YJncLzT7MQo.L.W.O/am=AAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAACAAAiEEEACAAAAAAAIDQAwAANAAAAAAAAAAAAAAAAACAAAAAAAIAAAAAAAAgAAAAAAAAAAAQAAAAAABAAEAAEQAAAIACAAAAAEAAAAAAAAAAAAAIAAAAAAAAAAAAAAgAAAAAAAyAMAAIAAIAABBGAAAAAAAAAAAAAAAAAAAAAAIkkAAABAwAAAAAQAAAAAAAQAAAIQQBAhRAAAAAAAAABAAAAAAAABAAAAAAAAAIAAQEQgABAAAACABAAAgACAAgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACAAAAAAAAATAg4SBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAACg/d=0/rs=ACT90oFUaHIlkM3K4PFpOZMILu8NLs0T7A/m=sym2,sypa?xjs=s4",
+          "initiatorType": "fetch",
+          "duration": 8
+        },
+        {
+          "name": "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIIAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAAQgAAAMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAA4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUEAgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/rs=ACT90oE7La3qCdgiWgMnNTJurzqVIJMbTg/m=sy1om,P10Owf,sy16i,gSZvdb,sy140,WlNQGd,syzc,syza,syz9,DPreE,sy142,sy141,nabPbb,sy13y,sy13w,sym2,sypa,CnSW2d,sy13s,sy13p,sy13r,nRwWne,sy13v,fXO0xe?xjs=s4",
+          "initiatorType": "link",
+          "duration": 19
+        },
+        {
+          "name": "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIIAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAAQgAAAMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAA4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUEAgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/rs=ACT90oE7La3qCdgiWgMnNTJurzqVIJMbTg/m=lOO0Vd,sy9n,P6sQOc?xjs=s4",
+          "initiatorType": "link",
+          "duration": 10
+        },
+        {
+          "name": "https://play.google.com/log?format=json&hasfast=true",
+          "initiatorType": "xmlhttprequest",
+          "duration": 166
+        }
+      ],
+      "localStorage": {
+        "sb_wiz.zpc.gws-wiz.": "{\"0\":[[\"shillong teer results\",0,[3,143,362],{\"zp\":{\"gs_ss\":\"1\"},\"zf\":33,\"zl\":8}],[\"suzlon share price\",0,[3,143,362],{\"zl\":8,\"zf\":33,\"zp\":{\"gs_ss\":\"1\"}}],[\"veteran actor bharat kapoor\",0,[3,143,362],{\"zl\":8,\"zf\":33,\"zp\":{\"gs_ss\":\"1\"}}],[\"keshav maharaj ipl\",0,[3,143,362],{\"zl\":8,\"zf\":33,\"zp\":{\"gs_ss\":\"1\"}}],[\"garena free fire max redeem codes\",0,[3,143,362],{\"zf\":33,\"zp\":{\"gs_ss\":\"1\"},\"zl\":8}],[\"oracle layoffs\",0,[3,143,362],{\"zl\":8,\"zf\":33,\"zp\":{\"gs_ss\":\"1\"}}],[\"royal enfield himalayan base camp\",0,[3,143,362],{\"zl\":8,\"zp\":{\"gs_ss\":\"1\"},\"zf\":33}],[\"mann sundar serial\",46,[3,143,362],{\"lm\":[],\"zs\":\"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFAAUAMBIgACEQEDEQH/xAAbAAACAgMBAAAAAAAAAAAAAAAFBgEHAAIEA//EADUQAAIBAgUCBAQGAAcBAAAAAAECAwQRAAUSITEGQRMiUWEUcYGRBxUyobHwJCVCksHR8SP/xAAaAQABBQEAAAAAAAAAAAAAAAADAQIEBQYA/8QAIxEAAgICAQMFAQAAAAAAAAAAAQIAEQMSIQQFURMiMTJhQf/aAAwDAQACEQMRAD8ArK2JAwS6byn88zulyw1IpVn1kzmPWECozk6bi/6fXDHmf4dV2XZdLO1ZG9V8atLDSiKxlV5DHHJq1bBiCQLHbvi4bIqmiZJ2A+YmYzDu/wCHNQOoJspjzaBv8D8VT1LQlUmbWIxH+rynUbX37bb43p/w1rahZ1SvVamF6dWp3gs3/wBEV3t5tygY7d9J4wz1sfmdusRsZhlyHpI5xnWZ5YMwWN6B2UBYg8k9nKEohdeLXPm225vjpi6Glkq8rp2zDQ2YVdTTDXSspj8G/mKkg+a3G1vfDjlQGiYuwEUhjZTvhuToGqfKaTM0r42pp6GOpdlhv4MjmO0TebnTLqDd9J2GJrOhJUrIqfLMzSt/zIZdUE05iMMltWq2o6lCgm4Pb7J6yeZwdYtRsDjaQ+X3w3UvQE0maZlSCvZo6SKCeKWCjMhqUl4KprFrWN9zwcLmfUH5XmtXQGeKc00nhmWL9L2HPsexHY3GFXIrGgYZWBFCDMtrqjLK2OsonCTxhgrFQ1tSlTsfZjgvD1p1BCyuK0OyrEqtJEjEeECE5HI1E/M3wAxnO2FZVPJEEQDDEvVGd1FItNU5hLOqwvCJJjrl0M6uRrPm/Ui232ttj2l6xz+WrSrevPxCVCVIkEag+Isfhg7DjSSCODfAR4yhAawYi9hvtiGXS1jgYOEmhUSlhKiz6vo6qsqIzTyNWP4k6T06So76iwbSwIBDEkWx2R9Z9QIr3rlkkaV5Vllgjd4ncWYxsVulxtt9LYAYzgXPGCFE+SIuohiHqfN6eneGOs0wtTw07JoW2iK3h9uRbnk98es/XmeVFQJjXBGUyODBBHGFd1KtILAefSSNXIvtzhdgo63NHf4OlqZ0j2IhiZwD72GOsdM52xEa5PVudOrZCAAfc/8AOK7L1SBqUCD5P1WGJOrs8npvCmr2lukSGVwGlIjfxEu/6iQxvub4H5jmE+ZV01ZUlTNO+uQqoUFjybDbfnAdjUUdQ8NXG0TobOjLYr9MduJfTuuRbA5j0aQwscRFFPVVKU1KpaRzawxs3OGPoiCaKaethpWqJi3hxBbXWwueSNzcfY4F1+TTFCabELCsX4cV5QVDVsIdkI02JtcW5wiZ5S1eT5o9NVoUkSxsTcMvYj1GLdpuoq9KVmzCjmQ8RL8PvyF8xUkcsu+2EbrGefOAXrKZ0mgYqG+DaIW9AxdtQvbsPXjFLiyuH5hcuEae3iLg3APbGSITC5Xm2IgDCFAwsQMFun46eXOKKKrUNBJMqOpF732/kjGic3iJ/IILsKjn+HFVT5V01HNVRSqs0zuvhws5IvbUbDYXU/bDvm2b0FJQx1BZpBNYRpChZmJ9v+8cGXZFSHLqajDSolMWVAkrLsHNgSDuOOecb1MdBNUU9Cd7CRCNB8vHe39+mMo5BYmpKRSFAuVL+JCeJVxV6xNHHIPDYSABlYC4vYkHa/B9cBYiGiQ+qjFtZ3ldDHJQ00SbRT+Jub72bv8AU/LFVzsjTytFbw2dituLE7Yue1PdjxI+THq5bzNcPfQ0vh0phjVBOy+KvicHcrcf7cIy2YgKQSdhbvhk6SpKibM4ZQsqLTQyJqYWtqIIt673+xwXutejyf7CY+HEeK2arjoJ7UwcbCV5pk1gA32Gu5G+w2wsdY1U82X06SK6vKPIjHzG/tzf64KZpnssCET5THNMi2WUHYn1OK9qcyrKzPfHqZD4kKFkXsrW5xS4EORhUNnfQV5nO36jtbfj0xisVIIJB9RiWJZizck3OIxqwKFSNLE6U6nmqqGaGvqrVQY6JiB5lNrbWAuCf/d8F6qKYJ4slbIEA1GRZEBPsBpv++K36bv+bxeXVGbiVexQ7G/yvf6YaK/pY1c+qKoqEgI3BmJS2M512JMOageDDYy1eYE6szc5rRmKnkbQJER31W9dvfj98LuH9cmpkiSmgiISOVNRkQAHk734Xy82NwRbY3wk1nw71k/wb6owxtew+1trYmdtyotr8QLctdy9p8vpQxcQQxvsok0DV9+/ywOeFUrNbIqq0ZRyP9JU3H7MT8t8HwgqIkdkYMu4BPB9McVZJBCuuZ7ONlsLlva39t+2KMe7gwqvrBVbQxyQuDa7A2+WK76iyGkpJoqgyOssriMBDz/P8YfamuIfZUjBGohjYEdiT/RhUpqj846iSSNVNNTlhfVcNbSbWHIuFtt39sHwoUO0V33FETwl6QpyCI61onUANrXUNVt8A86yaXKGj8aeJ0kHlK7N25U/P5YsV7R6ALrIouVAJ24J39L+g3PvjaHKYM3y2b4xFkEx7qLqBxpPY37++JadwzY/sbEGOZVVNmpyytWSnQOAuiQHlgebeltvrfnB1+tENIkb0sqlWDaA9r2IIFxwNv3+mObqLpuHIoUkWqaRZpWWMmKxCgA3Z+L72sObX9QFeRLEm98PbXP7zzGmxCuddT1mZQimRFp6cCxVTdm55aw5vva18AwxHBxhxKre1+MOAA4EBzc//9k=\",\"zp\":{\"gs_ssp\":\"eJzj4tVP1zc0LDbJMDEzKE82YPQSyk3My1MoLs1LSSxSKE4tykzMAQC5QQtG\"},\"zh\":\"mann sundar serial\",\"zi\":\"Mann Sundar — Drama series\",\"zl\":8,\"zf\":33}],[\"real zaragoza goalkeeper esteban andrada\",0,[3,143,362],{\"zp\":{\"gs_ss\":\"1\"},\"zf\":33,\"zl\":8}],[\"vivo x300 fe\",46,[3,143,613,362],{\"zl\":8,\"zf\":33,\"lm\":[],\"zs\":\"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFAAUAMBIgACEQEDEQH/xAAaAAADAAMBAAAAAAAAAAAAAAAABgcDBAUC/8QAPhAAAQMCAwUDBgsJAAAAAAAAAQIDBAARBRIhBgcxQVETIrIUYaGxs9EWIzRSYnJ1kZOi8RUyQkNkcYGSwf/EABkBAAMBAQEAAAAAAAAAAAAAAAAEBQMGAv/EACcRAAICAQIFAwUAAAAAAAAAAAECAAMRBAUSIUFRcRNh4SIkMZHB/9oADAMBAAIRAxEAPwC40UUUQi1t9iEuBgaUwHiw/KfSwHki6m0m5UR57AgHlepNOefaWQJk09SZbhJ/NVT3hpzwcNT1nJ8C6lWPJLTyqsbXWjZ4hmKXuRYBmc96VMLa+xmyg5Y5M0py1+V+9XpmRMKE9pNlldhmyynLX5271Z0YfGSFKexBrIpIW2UanJmQMyhxB7x7vHuq5AX3oeCIUcrk9kOAgLDZStLd+alZh3bWNxfjbiKp/ag5IH6+JqCZqtvSrgidOSRwKZbgI/NVd3eYpLxXZttye52shh1bCnSLFzKdFHz2tfz1JmW7pBtVN3VkfB6SnmJzt/RSW7VVLWrKoBzPSHMcqKKKgzSFFFFEItbbJzowhPWePZuVO9tIBa+NA0qg7ePiMxhTyhcIngn8NyuFPVFxuEttpQz24HiKp7e5rPF0zJmttRbQueeIiRouHZu/DlqT2YCylC8wc0uUa2y9M2ut+gO0uPCRFWpuM8lwC+bIsJvcWy3PC2a99b2tpXLmxoMSQ406HEuC1gQbXvr6KzxlYaW7HPfLyBtf3VYKnPEC00SwETdi5VpBAUPrJKT9xqh7rRbBZw/r3PUmpzAS0ygIZQlCeNkiwqj7rlBWCzrC1p7lz10TSW659JfM3pOTHKiiioMYhRRRRCI+9qWIOBQZJTmDc9FwOhSoH11OFYiqHIS+w58WqykqB6/8/TlT9vrTm2VjJHOajwqqQQZiWR5HOJ8mUe64Bcsk87c0nmP8jWre2ECo57yFutAstDdcR0mR2NpY3aM5UTkDhyWKVlMvRHi28gpUk6g1u4d5Ths1sg6aKQtBulQ6g8xTxKhRcViNvuNC6hqRxBqiLvR5flTFNLqCj+mTmJUV01Ud1IH7Alq5qnu3+5NJTuz5aN2zcU87r2yzgUts8Uz3R6E0huliPUvD3l3TOGPKOFFFFQo3CiiiiERt7qO0wKCjrOR4F1IpmH3vpVj3oDNhmGJ6z0+zXU/kRgQdKq6B+FD5nNbxeatSvj+mLOGYjJwhfZqbEmGTdTCzwPVJ5GqfszMw/EIJMR5QB1LTospB9RpCkQgeVMewccJluNkd1SeFOWhWQmT3uUkWKPqjcWk2sRW/sEAmFiYHAYi74U1ieZbU2CBlNv4Tas2wgtExQa6Yi5x+qipF7ZUTpdGGzk9ozUUUUrKEKKKKIRO3mfIcK+0E+zcpMcTT5vCw+XNwZl6CwqQ7DkpfLKP3nE2KVBPU2USBztap6qcwRql9J+auO4kj+4KdKe0jqFIJnKb/AKe6y9GRSRjoPczA82CaYdio9pLjttAm1LypTKj/ADfwV+6mfAsVwuFEKVySFnjdlfH/AFpqy5eDAMS0ekuNgLIQB7Gd5RvcfRBrNsJ8lxX7Sc8KK4nwhw0KcUHXl/NQ3GdWpXmACbmmHYiJKj4S6/OjqjPTJLknsFnvNJVYJCvpZQLjkTU21gROs0qsBzEYKKKKxjk//9k=\",\"zp\":{\"gs_ssp\":\"eJzj4tVP1zc0rMwrMLQoTM8wYPTiKcssy1eoMDYwUEhLBQCC8gig\"},\"zi\":\"Vivo X300 Smartphone 16GB 512GB 6.31&#39; 5G — Mobile phone\",\"zh\":\"vivo x300 fe\"}]],\"1\":{\"av\":\"15038272478959580217\",\"ag\":{\"a\":{\"8\":[\"Trending searches\"]}}}}"
+      },
+      "sessionStorage": {
+        "hsb;;1777378315220": "p:*|l:2_[1777378315219]",
+        "hsb;;1777378315219": "p:*|l:3_{\"state\":null,\"url\":\"/\",\"metadata\":{\"entryId\":1777378315218,\"pushId\":1777378315219,\"stackId\":1777378315220,\"stackIndex\":0}}",
+        "_c;;i": "p:*|l:9007199254740991_4"
+      },
+      "scripts": [
+        "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIKAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAEQgAAIMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAg4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUECgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=1/ed=1/dg=4/rs=ACT90oHkzcSM7loaimPgCi6vPdNoy3FsnA/ee=ALeJib:B8gLwd;AfeaP:TkrAjf;BMxAGc:E5bFse;BgS6mb:fidj5d;BjwMce:cXX2Wb;CIZTGb:Kqhykb;CxXAWb:YyRLvc;DQEued:Fevhcf;DULqB:RKfG5c;Dkk6ge:JZmW9e;DpcR3d:zL72xf;Du7NI:C6zLgf;EABSZ:MXZt9d;ESrPQc:mNTJvc;EVNhjf:pw70Gc;EjXHpb:pSHqh;EmZ2Bf:zr1jrb;EnlcNd:WeHg4;F54IAe:ZgsFh;F9mqte:UoRcbe;FSxmUe:fiZR8b;Fkukfc:i8H2c;Fmv9Nc:O1Tzwc;G0KhTb:LIaoZ;GEkGdd:e1RzQd;GleZL:J1A7Od;HMDDWe:G8QUdb;HtPxrd:Gx8jAb;IBADCc:RYquRb;IoGlCf:b5lhvb;JXJSm:ii1RGf;JXS8fb:p4LrCe;JqSq7d:y9ePhe;JsbNhc:Xd8iUd;K5nYTd:ZDZcre;KA3P2:C3JnCe;KDb6nb:fE9n2;KOxcK:OZqGte;KQzWid:ZMKkN;KpRAue:Tia57b;LBgRLc:SdcwHb,XVMNvd;LBn8Cf:bJ9L0c;LEikZe:byfTOb,lsjVmc;LXA8b:q7OdKd;LsNahb:ucGLNb;NJ1rfe:qTnoBf;NPKaK:SdcwHb;NSEoX:lazG7b;NjIwef:YVgi7d;Np8Qkd:Dpx6qc;Nyt6ic:jn2sGd;OIfWUb:qfOYcd;OgagBe:cNTe0;OiqE2c:TFpEK;OoK5v:Sp69O;OohIYe:mpEAQb;Pjplud:PoEs9b;PpTLXd:pJYjx;Q1Ow7b:x5CSu;QE20Be:gIltO;QFOGlf:PQ2Aoe;QGR0gd:Mlhmy;QYLF2b:pAQYUd;Qw8Feb:jpavUe;R4IIIb:QWfeKf;R9Ulx:CR7Ufe;RCF5Sd:X1kBmd;SLtqO:Kh1xYe;SMDL4c:fTfGO;SNUn3:ZwDk9d,xD8Kp;SNk4Je:wWMhg;ScI3Yc:e7Hzgb,e7Hzgb;ShpF6e:N0pvGc;Snahre:mGCtob;SwCqAd:fXbCZc;SzQQ3e:dNhofb;TIUVQd:lWTJwd;TroZ1d:vVVzjb;U96pRd:FsR04;UBKJZ:LGDJGb;UDrY1c:N0F29d,W50NVd,eps46d,rw5jGd,wciyUe;UVmjEd:EesRsb;UVzb9c:IvPZ6d;UYRIEb:HzTAQc;UyG7Kb:wQd0G;V2HTTe:RolTY;VGRfx:VFqbr;VMuEm:pL7sBc;VN6jIc:ddQyuf;VOcgDe:YquhTb;VhA7bd:vAmQFf;VsAqSb:PGf2Re;W9QSQe:ynCWwc;WDGyFe:jcVOxd;WXtNeb:QU9BMd;Wfmdue:g3MJlb;Wl55ib:vgbiKb;Y3c5sd:FGbfLe;YIZmRd:A1yn5d;YV5bee:IvPZ6d;YnHUBf:sNsSob;ZSH6tc:QAvyLe;ZWEUA:afR4Cf;ZlOOMb:P0I0Ec;a56pNe:JEfCwb;aAJE9c:WHW6Ef;aCJ9tf:qKftvc;aVZq3e:EMeVIb;aZ61od:arTwJ;aci7y:Z5Tr6c;bDXwRe:UsyOtc;bUIkwb:WMwEHe;bcPXSc:gSZLJb;cEt90b:ws9Tlc;cFTWae:gT8qnd;dIoSBb:ZgGg9b;dLlj2:Qqt3Gf;dXdZV:a7QTqd;dowIGb:ebZ3mb,ebZ3mb;dtl0hd:lLQWFe;eBAeSb:Ck63tb;eBZ5Nd:audvde;eHDfl:ofjVkb;eJKchc:ATg1be;eO3lse:UefOmb;euOXY:OZjbQ;g8nkx:U4MzKc;gaub4:TN6bMe;gtVSi:ekUOYd;h3MYod:ws9Tlc;hK67qb:QWEO5b;hVic1b:Kqhykb;heHB1:sFczq;hjRo6e:F62sG;hlqGX:FWz1ic;hsLsYc:Vl118;hwoVHd:zw4U8c;iFQyKf:QIhFr;iySzae:a6xXfd;jJj2G:kF2o2b;k1O0rf:pnOULd;k2Qxcb:XY51pe;kbAm9d:MkHyGd;lOO0Vd:OTA3Ae;lbfkyf:MqGdUd;liAz7d:kF2o2b;mWzs9c:fz5ukf;nBZnZe:CvErjb;nJw4Gd:dPFZH;nrDcw:SuEoDe;oGtAuc:sOXFj;oSUNyd:fTfGO,fTfGO;oUlnpc:RagDlc;oiBhre:OuMkRd;okUaUd:wItadb;pKJiXd:VCenhc;pNsl2d:j9Yuyc;pXdRYb:JKoKVe;pj82le:ww04Df;qGV2uc:HHi04c;qQEoOc:KUM7Z,d7YSfd;qZx2Fc:j0xrE;qaS3gd:yiLg6e;qafBPd:sgY6Zb;qavrXe:I0C9u;qddgKe:d7YSfd,x4FYXe;rdexKf:FEkKD;rmWaj:PMS6Sd;ropkZ:hjoqoe;sTsDMc:JksfDf;sZmdvc:rdGEfc;tH4IIe:Ymry6;teSRSb:BMLai;tosKvd:ZCqP3;trZL0b:qY8PFe;uuQkY:u2V3ud;vEYCNb:FaqsVd;vRlMvf:Iw9Xo;vfVwPd:lcrkwe;w3bZCb:ZPGaIb;w4rSdf:XKiZ9;w9w86d:XwhUEb,dt4g2b,gKD90c,lWVZVe;wQlYve:aLUfP;wR5FRb:O1Gjze,TtcOte;wV5Pjc:L8KGxe;x9N9ie:KH4Qof;xBbsrc:NEW1Qc;ysNiMc:CpIBjd;yxTchf:KUM7Z;z97YGf:oug9te;zaIgPb:Sl0pxd/m=cdos,cr,hsm,jsa,mb4ZUb,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl,YV5bee,d,csi",
+        "https://www.gstatic.com/og/_/js/k=og.asy.en_US.87__AbjnoCc.2019.O/rt=j/m=_ac,_awd,ada,lldp,qads,abld/exm=/d=1/ed=1/rs=AA2YrTtNG5N43avyT80zo8yrmXHlg7VDtw",
+        "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/ck=xjs.hd.YJncLzT7MQo.L.W.O/am=AAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAQgAAACAAIjEEEACAAAAAAAIDQAwgANAAAAAAAAAAAAAAAAIKAAAAAAAIAAAAAAAAgAIAAACAAAAAQAAAAMABAAEAAEQgAAIMCAAAAAEAAAAAAAAAAAIAIAAAAQAAAgD8AAAwAAAAAAAyJMAAIAAIAABBGLAAAAAUAAAAIIAAAAAAAAAIkkAAABAwAAgAAQAAAAAAAQAAAIQQBAhRAAAAAEAAABAAAAAAAABAAAAAAQAAIAAQEQgABAAAACChAAAgACAQgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACQBAIAAAAATAg4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUECgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/ujg=1/rs=ACT90oFdAP_98jNae2js5UB-6h5jntX2HA/m=sy15k,sy15j,rtH1bd,ZgGg9b,dIoSBb,sy1vv,sy1w5,syzv,sy2ds,sy2dr,b6knsb,sy2do,sy2dn,syy8,sy1sg,sysw,syr6,syo7,sy13o,sy1w4,sy1nv,sy13m,syfs,sye1,sydz,syap,sye3,JKoKVe,pXdRYb,sy3hw,syaq,syan,sy9b,O1Gjze,TtcOte,wR5FRb,kQvlef,syfq,syfn,syfj,syfi,syc9,sycw,sybw,syfh,sydu,syfg,syff,syfe,syfd,syfc,syfb,syf9,syf8,syf7,syc3,syc4,syf5,sybk,sybm,sybi,sybg,sybj,syb7,syb9,syb8,sybe,syax,syav,syf6,syf4,syf2,sydq,sydm,sybt,sybs,sybp,sybr,syby,sycq,syd9,sybv,sycf,syce,syc7,sycd,sycc,syc0,syca,sycb,syd6,syf1,syf0,syep,syey,syef,syda,sydb,syd5,syd4,sycz,syct,sycj,syck,sycs,sycr,syci,sycu,syc2,syc5,syc1,sycl,syc6,syde,sybq,sybz,sye6,sye7,syex,sydo,sydj,sydi,syd1,syd0,sydl,sydg,sydh,sydp,sycp,syen,syew,syea,sycv,syeb,syeu,sye9,syet,sydr,syds,syec,sye4,syem,syer,syel,syeq,syek,syej,sye8,syeh,syeg,syee,syed,syeo,sye5,sydy,sydt,syau,sy8m,zbML3c,sy15z,sy15w,gskBEc,sy1k8,s980lf,U9EYge,syzh,loL8vb,syzu,syzm,syzp,sy10k,sy10h,sy10f,sy10i,sy10n,sygu,sygt,sygs,sy10j,sy10l,sy10o,sy10p,sy10m,syzt,sy102,syzy,syzx,syzw,syzj,sy10e,sy10c,sy10b,sy10a,sy104,sy109,sy105,sy101,sy100,syzz,syzl?xjs=s3",
+        "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/ck=xjs.hd.YJncLzT7MQo.L.W.O/am=AAARAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAQgAAACAAIjEEEACAAAAAAAIDQAwgANAAAAAAAAAAAAAAAAIKAAAAAAAIAAAAAAAAgAIAAACAAAAAQAAAAMABAAEAAEQgAAIMCAAAAAEAAAAAAAAAAAIAIAAAAQAAAgD8AAAwAAAAAAAyJMAAIAAIAABBGLAAAAAUAAAAIIAAAAAAAAAIkkAAABAwAAgAAQAAAAAAAQAAAIQQBAhRAAAAAEAAABAAAAAAAABAAAAAAQAAIAAQEQgABAAAACChAAAgACAQgIAAAjKABAEgUCAAAgg4QABAAAAAgAAAAAAAAAAAAAADACQBAIAAAAATAg4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUECgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/ujg=1/rs=ACT90oFdAP_98jNae2js5UB-6h5jntX2HA/m=syzd,syyq,syzn,ms4mZb,syxd,B2qlPe,sy13i,NzU6V,abd,sy3zi,TDFkye?xjs=s3",
+        "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIIAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAAQgAAAMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAA4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUEAgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/rs=ACT90oE7La3qCdgiWgMnNTJurzqVIJMbTg/m=sy14w,sy14z,sy14x,sy14v,sy14r,sy14q,sy14d,sy14c,SMquOb,sy8r,sy8q,syhf,syhe,syhb,syhc,syha,syho,syhl,syhj,syh9,syh1,syh8,syh6,syh5,syh4,sy99,sy95,sy98,syh3,syh7,syh2,syh0,sygx,sygv,sy9d,uxMpU,sygm,sy9x,sy9u,sy9t,sy9s,sy9r,sy9q,sy9p,Mlhmy,QGR0gd,PoEs9b,Pjplud,OTA3Ae,sy9m,sy9h,A1yn5d,YIZmRd,sy90,sy8y,sy8x,sy8v,sy8u,byfTOb,lsjVmc,LEikZe,sy8s,kWgXee,ovKuLd,sgY6Zb,qafBPd,ebZ3mb,dowIGb,sy15x,sy15t,d5EhJe,sy1nc,fCxEDd,sy1nb,sy1n9,sy1n8,sy1n5,sy167,sy1n7,sy1n6,sy1n4,sy196,sy195,sy194,sy14g,sy164,sy168,sy13k,T1HOxc,LFk59d,sy16d,sy165,sy162,sy163,sy160,syqy,zx30Y,sy1ne,sy1nd,sy16g,syye,Wo3n8,sy16n,sy16l,zGLm3b,sy1rj,sy1ri,sy1rh,sy1rf,sy1rg,sy1bb,sy1bc,DhPYme,sy3ys,sy3ow,sy3ou,syhp,sy3p1,sy3ov,sy3p3,sy3or,sy3yr,KHourd,sy3zo,sy12d,syyx,oQfbDd,sy3zu,sy1cb,sy18q,sy18m,syyp,syyn,syyo,syym,sy1or,sy3zt,sy3zr,sy1c0,syyw,sy3zs,qmjr3?xjs=s4",
+        "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIIAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAAQgAAAMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAA4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUEAgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/rs=ACT90oE7La3qCdgiWgMnNTJurzqVIJMbTg/m=qTnoBf,sya6,sOXFj,oGtAuc,NJ1rfe,syag,q0xTif,y05UD,PPhKqf,vECdaf,sy193,sy1m1,sy1ml,sy1m9,sy1au,sy191,sy190,sy18z,sy192,sygh,sy1m8,sy1mn,sy1hk,sy1ia,sy1mj,sy1i6,sy1mi,sy1hv,sy1ma,sy18t,sy18u,sy1m2,sy1cz,sy1ie,sy18v,sy1mb,sy1hn,sy1m7,sy1m5,sy1m3,syno,syp5,sy1m4,sy1md,sy1ih,sy1ii,sy18x,sy18o,sy18w,sy18n,sy18s,sy18p,sy18y,epYOx?xjs=s4",
+        "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIIAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAAQgAAAMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAA4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUEAgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/rs=ACT90oE7La3qCdgiWgMnNTJurzqVIJMbTg/m=sy1om,P10Owf,sy16i,gSZvdb,sy140,WlNQGd,syzc,syza,syz9,DPreE,sy142,sy141,nabPbb,sy13y,sy13w,sym2,sypa,CnSW2d,sy13s,sy13p,sy13r,nRwWne,sy13v,fXO0xe?xjs=s4",
+        "https://www.google.com/xjs/_/js/k=xjs.hd.en_GB.IwvkciKP7Lo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIBAAAAAAAAAAAAAAAAwgABAAAAAAAAAAAAAAAAIIAAAAAAAIAAAAAAAAgAIAAACAAAAAAAAAAMABAAEAAAQgAAAMAAAAAAAAAAAAAAAAAAIAIAAAAQAAAgD8AAAQAAAAAAAAJAAAAAAAAAAAALAAAAAUAAAAIIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAABQAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACCgAAAgAAAQAAAAAAAAAAAAAAAAAgA4AAAAAAAAAAAAAAAAAAAAAAADAAQBAIAAAAAAAA4SBAAAgAAAAAEAHgMADDCkoAAAAAAAAAAAAAAAAAAAAAAAAIEABzIUEAgIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAhDYHAAAAAABYDA/d=0/dg=0/rs=ACT90oE7La3qCdgiWgMnNTJurzqVIJMbTg/m=lOO0Vd,sy9n,P6sQOc?xjs=s4"
+      ],
+      "cookies": "__Secure-STRP=AEEP7gJg89WA8itH8mVih0XzQmo7eXs-hZ06sHpepQWzbTRhr_rbJf-loXfHYHFvavKJUhNA6LrvW5BNmjRxPuszvB3qvMpM-Q",
+      "hiddenInputs": [
+        {
+          "name": "q",
+          "value": ""
+        },
+        {
+          "name": "sca_esv",
+          "value": "8973cab98d98f2bf"
+        },
+        {
+          "name": "source",
+          "value": "hp"
+        },
+        {
+          "name": "ei",
+          "value": "DaTwabG0L6HV1sQPnv6c6QM"
+        },
+        {
+          "name": "iflsig",
+          "value": "AFdpzrgAAAAAafCyHSe14jasD9_ynSo3V7rmAQXhNHlw"
+        },
+        {
+          "name": "csi",
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

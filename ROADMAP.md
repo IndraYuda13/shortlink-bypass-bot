@@ -281,4 +281,10 @@
 - `exe.io` is now HTTP-only for sample `https://exe.io/vkRI1`.
 - Verified helper final: `https://www.google.com/?gws_rd=ssl` in `67.4s`.
 - Engine now tries `exe_http_fast.py` before the older CDP browser fallback.
-- `cuty.io` remains browser-first because HTTP reaches the final form but bounces back without VHit/ad lifecycle state.
+
+## 2026-04-28 cuty.io HTTP optimization checkpoint
+- `cuty.io` is now HTTP-first for sample `https://cuty.io/AfaX6jx`.
+- Verified helper final: `https://www.google.com/` in `70.2s`.
+- Verified engine final: `CUTY_HTTP_FAST_OK -> https://www.google.com/` in `74.5s`.
+- Engine now tries `cuty_http_fast.py` before the older CDP browser fallback.
+- Root cause update: the previous HTTP bounce was not a hard Turnstile/form blocker. A browser-shaped HTTP replay with `Origin: null`, HeadlessChrome-style UA, final wait, and best-effort VHit calls can clear `/go/AfaX6jx`.

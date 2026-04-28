@@ -25,7 +25,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | `oii.la` | Token bypass | Token-tail extraction returns sampled `onlyfaucet` target; live Turnstile/timer completion is not proven |
 | `tpi.li` | Token bypass | Same token-tail Turnstile family as `oii.la`; extracts sampled `99faucet` target |
 | `aii.sh` | Token bypass | ShrinkBixby token-tail extraction; sampled target is `coinadster.com/shortlink.php?...` |
-| `cuty.io` | Live bypass | Local Turnstile solver + same-browser timer/go-form flow returns sampled `google.com` target; solver pool now refreshes every 6h |
+| `cuty.io` | Live bypass | HTTP-only Cuttlinks form replay solves Turnstile, mirrors the final timer/go-form flow, and returns sampled `google.com` target; CDP browser remains fallback |
 | `lnbz.la` | Live bypass | Browserless article/survey chain through `avnsgames.com` reaches `/links/go` and returns sampled `cryptoearns.com` target |
 | `sfl.gl` | Live bypass | Direct VPS egress is Cloudflare-blocked, but WARP proxy fallback reaches SafelinkU API flow and returns sampled `google.com` target |
 | `gplinks.co` | Live bypass | Browser PowerGam lane completes the 3-step gate, solves final Turnstile through the page callback, and returns sampled `tesskibidixxx.com` target |
@@ -40,7 +40,8 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 - `engine.py` detects the target family and chooses the right handler
 - `adlink_live_browser.py` stays as Adlink fallback when the faster browserless lane is not enough
 - `xut_live_browser.py` drives the live autodime -> gamescrate -> xut Step 6 lane, including IconCaptcha retry capture and exact `Get Link` final-click handling
-- `cuty_live_browser.py` drives the Cuty/Cuttlinks Turnstile and final go-form flow through CDP Chrome plus the local Turnstile solver API
+- `cuty_http_fast.py` solves `cuty.io` over HTTP with curl_cffi plus the local Turnstile solver, keeping the CDP browser helper as fallback.
+- `cuty_live_browser.py` remains the Cuty/Cuttlinks fallback for same-browser Turnstile and final go-form flow.
 - `exe_http_fast.py` solves `exe.io` over HTTP with curl_cffi plus the local Turnstile solver, keeping the browser helper as fallback.
 - `gplinks_http_fast.py` runs a fast HTTP-first GPLinks preflight. Current live result is a quick `not_enough_steps`, so it falls back to browser.
 - `gplinks_live_browser.py` drives the PowerGam 3-step browser flow, scroll/verify handling, and final GPLinks Turnstile callback lane

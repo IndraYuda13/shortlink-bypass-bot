@@ -120,8 +120,8 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
         command_alias="cuty",
         sample_url="https://cuty.io/AfaX6jx",
         expected_final="https://google.com",
-        proof="Live engine recheck on 2026-04-28 returned google.com after Turnstile browser-pool refresh and token injection.",
-        notes=("Uses local Turnstile solver API plus same-browser timer and /go form submit.",),
+        proof="Live engine recheck on 2026-04-28 returned google.com through the HTTP fast helper after Turnstile solve and /go submit.",
+        notes=("HTTP helper is primary; CDP browser helper remains fallback if the HTTP lane does not return a downstream final URL.",),
     ),
     SupportedSite(
         host="gplinks.co",
