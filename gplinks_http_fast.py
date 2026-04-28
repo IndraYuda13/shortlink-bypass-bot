@@ -105,13 +105,14 @@ def build_powergam_step_payloads(pages: int, visitor_id: str, target_final: str,
     return payloads
 
 
-def _set_powergam_cookies(session, decoded: dict[str, str | None], host_url: str, step_count: int = 0, imps: int = 5) -> None:
+def _set_powergam_cookies(session, decoded: dict[str, str | None], host_url: str, step_count: int = 0, imps: int = 5, raw: dict[str, str | None] | None = None) -> None:
+    raw = raw or {}
     host = urlparse(host_url).hostname or "powergam.online"
     cookie_values = {
         "lid": decoded.get("lid") or "",
         "pid": decoded.get("pid") or "",
         "pages": decoded.get("pages") or "",
-        "vid": decoded.get("vid") or "",
+        "vid": raw.get("vid") or decoded.get("vid") or "",
         "step_count": str(step_count),
         "imps": str(imps),
         "adexp": "1",
@@ -209,12 +210,12 @@ def run(url: str, timeout: int = 90, solver_url: str = "http://127.0.0.1:5000") 
         if forms:
             base_form = dict(forms[0])
             for index, payload in enumerate(build_powergam_step_payloads(pages, visitor_id, target_final_candidate, "https://powergam.online", imps=5), start=1):
-                _set_powergam_cookies(session, decoded, power.url, step_count=index - 1, imps=5)
+                _set_powergam_cookies(session, decoded, power.url, step_count=index - 1, imps=5, raw=raw)
                 step_form = dict(base_form)
                 step_form["payload"] = payload
                 _submit_power_forms(session, [step_form], power.url, timeout, timeline)
         else:
-            _set_powergam_cookies(session, decoded, power.url, step_count=pages, imps=5)
+            _set_powergam_cookies(session, decoded, power.url, step_count=pages, imps=5, raw=raw)
 
         final_page = session.get(target_final_candidate, headers={**headers, "Referer": power.url}, timeout=timeout, allow_redirects=False)
         final_location = final_page.headers.get("location") or ""

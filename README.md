@@ -32,7 +32,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | `ez4short.com` | Live bypass | Fast `game5s.com` referer lane unlocks final go-link form and returns sampled `tesskibidixxx.com` target |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
 | `xut.io` -> `autodime cwsafelinkphp` | Live bypass | Live browser lane now reaches IconCaptcha Step 1, gamescrate Step 5, xut Step 6, and clicks `Get Link` to return sampled `tesskibidixxx.com` target |
-| `exe.io` | Live bypass | Follows `exe.io -> exeygo.com`, solves Turnstile, submits `go-link`, and returns sampled `google.com` target |
+| `exe.io` | Live bypass | HTTP-only `exe.io -> exeygo.com` lane solves Turnstile, submits CakePHP forms, and returns sampled `google.com` target |
 
 ## How it works
 
@@ -41,6 +41,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 - `adlink_live_browser.py` stays as Adlink fallback when the faster browserless lane is not enough
 - `xut_live_browser.py` drives the live autodime -> gamescrate -> xut Step 6 lane, including IconCaptcha retry capture and exact `Get Link` final-click handling
 - `cuty_live_browser.py` drives the Cuty/Cuttlinks Turnstile and final go-form flow through CDP Chrome plus the local Turnstile solver API
+- `exe_http_fast.py` solves `exe.io` over HTTP with curl_cffi plus the local Turnstile solver, keeping the browser helper as fallback.
 - `gplinks_http_fast.py` runs a fast HTTP-first GPLinks preflight. Current live result is a quick `not_enough_steps`, so it falls back to browser.
 - `gplinks_live_browser.py` drives the PowerGam 3-step browser flow, scroll/verify handling, and final GPLinks Turnstile callback lane
 - `references/` and `ROADMAP.md` keep technical notes and current implementation status

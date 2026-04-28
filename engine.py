@@ -45,6 +45,10 @@ EXE_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_EXE_HELPER", str(PROJECT_ROOT / "e
 EXE_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_EXE_HELPER_PYTHON", HELPER_PYTHON)
 EXE_HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_EXE_HELPER_PYTHONPATH", "")
 EXE_TURNSTILE_SOLVER_URL = os.getenv("SHORTLINK_BYPASS_EXE_TURNSTILE_SOLVER_URL", CUTY_TURNSTILE_SOLVER_URL)
+EXE_HTTP_FAST_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_EXE_HTTP_FAST_TIMEOUT", "160"))
+EXE_HTTP_FAST_HELPER = os.getenv("SHORTLINK_BYPASS_EXE_HTTP_FAST_HELPER", str(PROJECT_ROOT / "exe_http_fast.py"))
+EXE_HTTP_FAST_PYTHON = os.getenv("SHORTLINK_BYPASS_EXE_HTTP_FAST_PYTHON", HELPER_PYTHON)
+EXE_HTTP_FAST_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_EXE_HTTP_FAST_PYTHONPATH", "")
 GPLINKS_BROWSER_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_GPLINKS_BROWSER_TIMEOUT", "340"))
 GPLINKS_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_GPLINKS_HELPER", str(PROJECT_ROOT / "gplinks_live_browser.py"))
 GPLINKS_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_GPLINKS_HELPER_PYTHON", HELPER_PYTHON)
@@ -319,6 +323,22 @@ class ShortlinkBypassEngine:
         family = "exe.io"
         facts: dict[str, Any] = {}
         try:
+            http_fast = self._resolve_exe_http_fast(url)
+            if http_fast.get("status") == 1 and http_fast.get("bypass_url"):
+                facts["http_fast_helper"] = {k: v for k, v in http_fast.items() if k not in {"timeline", "bypass_url", "blockers", "notes"}}
+                return BypassResult(
+                    status=1,
+                    input_url=url,
+                    family=family,
+                    message="EXE_HTTP_FAST_OK",
+                    bypass_url=str(http_fast.get("bypass_url")),
+                    stage=str(http_fast.get("stage") or "http-final"),
+                    facts=facts,
+                    notes=["exe.io solved through curl_cffi + local Turnstile solver without launching Chrome"],
+                )
+            if http_fast:
+                facts["http_fast_helper"] = {k: v for k, v in http_fast.items() if k not in {"timeline", "blockers", "notes"}}
+
             session = self._new_impersonated_session()
             parsed = urlparse(url)
             if parsed.netloc.lower() == "exe.io" or parsed.netloc.lower().endswith(".exe.io"):
@@ -421,6 +441,49 @@ class ShortlinkBypassEngine:
                 facts=facts,
                 blockers=[str(exc)],
             )
+
+    def _resolve_exe_http_fast(self, url: str) -> dict[str, Any]:
+        if not (os.path.exists(EXE_HTTP_FAST_HELPER) and os.path.exists(EXE_HTTP_FAST_PYTHON)):
+            return {}
+
+        env = os.environ.copy()
+        helper_pythonpath_parts = [part for part in [EXE_HTTP_FAST_PYTHONPATH, HELPER_PYTHONPATH] if part]
+        if helper_pythonpath_parts:
+            existing = env.get("PYTHONPATH", "")
+            helper_pythonpath = ":".join(helper_pythonpath_parts)
+            env["PYTHONPATH"] = f"{helper_pythonpath}:{existing}" if existing else helper_pythonpath
+        try:
+            proc = subprocess.run(
+                [
+                    EXE_HTTP_FAST_PYTHON,
+                    EXE_HTTP_FAST_HELPER,
+                    url,
+                    "--timeout",
+                    str(EXE_HTTP_FAST_TIMEOUT),
+                    "--solver-url",
+                    EXE_TURNSTILE_SOLVER_URL,
+                ],
+                capture_output=True,
+                text=True,
+                timeout=EXE_HTTP_FAST_TIMEOUT + 30,
+                env=env,
+            )
+        except subprocess.TimeoutExpired:
+            return {"status": 0, "message": "exe HTTP fast timeout", "stage": "http-fast-timeout"}
+        except Exception as exc:
+            return {"status": 0, "message": str(exc), "stage": "http-fast-error"}
+
+        stdout = (proc.stdout or "").strip()
+        if not stdout:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper exit {proc.returncode}", "stage": "http-fast-no-output"}
+        last_line = stdout.splitlines()[-1]
+        try:
+            payload = json.loads(last_line)
+        except Exception:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper output tidak valid: {last_line[:240]}", "stage": "http-fast-invalid-output"}
+        if proc.returncode != 0 and not payload.get("message"):
+            payload["message"] = f"helper exit {proc.returncode}"
+        return payload
 
     def _handle_token_landing(self, url: str, family: str) -> BypassResult:
         try:

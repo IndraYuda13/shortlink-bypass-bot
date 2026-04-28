@@ -2,6 +2,11 @@
 
 ## 2026-04-28
 
+### exe.io HTTP-only fast lane
+- Added `exe_http_fast.py` for the `exe.io -> exeygo.com` CakePHP + Turnstile chain.
+- Wired `_handle_exe()` to try the HTTP helper before the older live browser helper.
+- Verified live sample `https://exe.io/vkRI1` returned `https://www.google.com/?gws_rd=ssl` in `67.4s` without launching Chrome.
+
 ### gplinks HTTP fast preflight
 - Added `gplinks_http_fast.py` and engine HTTP-first preflight before the live browser fallback.
 - The current HTTP replay finishes in about 2 seconds but still receives `not_enough_steps`, so it is kept as a diagnostic/fast-fail lane instead of replacing the proven browser helper.

@@ -277,3 +277,8 @@
 - Speed result: fast failure in about `2.1s`.
 - Current blocker: PowerGam still returns `not_enough_steps` even with decoded query, cookies, and three form POSTs, meaning the missing proof is server-side ledger state from browser/GPT activity, not simple form fields.
 - Production order is now HTTP preflight -> live browser fallback -> mapper fallback.
+## 2026-04-28 exe.io HTTP optimization checkpoint
+- `exe.io` is now HTTP-only for sample `https://exe.io/vkRI1`.
+- Verified helper final: `https://www.google.com/?gws_rd=ssl` in `67.4s`.
+- Engine now tries `exe_http_fast.py` before the older CDP browser fallback.
+- `cuty.io` remains browser-first because HTTP reaches the final form but bounces back without VHit/ad lifecycle state.

@@ -50,7 +50,9 @@ class ExeTests(unittest.TestCase):
         fake_session.post.return_value = second_page
         fake_session.cookies.jar = []
 
-        with patch.object(engine, '_new_impersonated_session', return_value=fake_session), patch.object(engine, '_resolve_exe_live', return_value={}):
+        with patch.object(engine, '_resolve_exe_http_fast', return_value={}), \
+             patch.object(engine, '_new_impersonated_session', return_value=fake_session), \
+             patch.object(engine, '_resolve_exe_live', return_value={}):
             result = engine.analyze('https://exe.io/vkRI1')
 
         self.assertEqual(result.family, 'exe.io')
@@ -61,6 +63,21 @@ class ExeTests(unittest.TestCase):
         self.assertEqual(result.facts['captcha_type'], 'turnstile')
         self.assertEqual(result.facts['sitekey'], '0x4AAAAAACPCPhXQQr5wP1VW')
         self.assertIn('valid Turnstile/reCAPTCHA token', result.blockers[0])
+
+    def test_exe_http_fast_result_returns_final_google(self):
+        engine = ShortlinkBypassEngine()
+        http_fast = {"status": 1, "stage": "http-final", "bypass_url": "https://www.google.com/?gws_rd=ssl", "final_url": "https://www.google.com/?gws_rd=ssl", "waited_seconds": 71.3}
+        with patch.object(engine, '_resolve_exe_http_fast', return_value=http_fast), \
+             patch.object(engine, '_new_impersonated_session') as new_session, \
+             patch.object(engine, '_resolve_exe_live') as live:
+            result = engine.analyze('https://exe.io/vkRI1')
+
+        new_session.assert_not_called()
+        live.assert_not_called()
+        self.assertEqual(result.status, 1)
+        self.assertEqual(result.message, 'EXE_HTTP_FAST_OK')
+        self.assertEqual(result.bypass_url, 'https://www.google.com/?gws_rd=ssl')
+        self.assertEqual(result.stage, 'http-final')
 
     def test_exe_live_helper_result_returns_final_google(self):
         engine = ShortlinkBypassEngine()
@@ -86,7 +103,9 @@ class ExeTests(unittest.TestCase):
         fake_session.cookies.jar = []
 
         live = {"status": 1, "stage": "live-browser-turnstile-go", "bypass_url": "https://www.google.com/", "final_url": "https://www.google.com/"}
-        with patch.object(engine, '_new_impersonated_session', return_value=fake_session), patch.object(engine, '_resolve_exe_live', return_value=live):
+        with patch.object(engine, '_resolve_exe_http_fast', return_value={}), \
+             patch.object(engine, '_new_impersonated_session', return_value=fake_session), \
+             patch.object(engine, '_resolve_exe_live', return_value=live):
             result = engine.analyze('https://exe.io/vkRI1')
 
         self.assertEqual(result.status, 1)
