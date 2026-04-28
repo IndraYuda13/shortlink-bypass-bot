@@ -1,5 +1,7 @@
 import unittest
 
+from pathlib import Path
+
 from cuty_http_fast import extract_form_payload, is_downstream_url, turnstile_sitekey
 
 
@@ -19,6 +21,11 @@ class CutyHttpFastTests(unittest.TestCase):
         self.assertFalse(is_downstream_url('https://cuttlinks.com/AfaX6jx'))
         self.assertFalse(is_downstream_url('https://cuty.io/AfaX6jx'))
         self.assertTrue(is_downstream_url('https://www.google.com/'))
+
+    def test_vhit_lifecycle_is_opt_in_after_ablation(self):
+        source = Path('cuty_http_fast.py').read_text()
+        self.assertIn('SHORTLINK_BYPASS_CUTY_HTTP_VHIT', source)
+        self.assertIn('vhit-skipped', source)
 
 
 if __name__ == '__main__':

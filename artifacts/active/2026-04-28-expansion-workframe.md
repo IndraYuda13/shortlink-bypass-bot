@@ -70,3 +70,15 @@ A family can be promoted to `live_bypass` only when `engine.py <sample> --pretty
 - Live engine oracle: `CUTY_HTTP_FAST_OK -> https://www.google.com/` in `74.5s`.
 - Root-cause correction: the previous HTTP bounce was not a permanent VHit-only blocker. Browser-shaped HTTP replay with `Origin: null`, HeadlessChrome-style UA, final wait, and best-effort VHit fetches can clear `/go/AfaX6jx`.
 - Browser fallback remains wired because production success is only promoted when the HTTP helper returns a downstream final URL.
+
+## 2026-04-28 cuty VHit ablation update
+- Parent checklist status:
+  - [done] 1. Re-read Cuty artifacts/state.
+  - [done] 2. Run VHit ablation proof.
+  - [in progress] 3. Update boundary note.
+  - [pending] 4. Decide code change or no-op.
+  - [pending] 5. Verify and report.
+- Fresh ablation command: `artifacts/active/cuty_http_vhit_replay_probe.py https://cuty.io/AfaX6jx --no-vhit`.
+- Result: final `https://www.google.com/` in `69.9s`.
+- Meaning: for the current sample, `fp.vhit.io` and `vhit.io/api/request` are observed in the browser lane but are not required for the server to accept `/go/AfaX6jx`.
+- Production decision: make VHit replay opt-in via `SHORTLINK_BYPASS_CUTY_HTTP_VHIT=1`; default skip is faster and avoids dependency on external VHit endpoints. Keep opt-in available for future Cuty variants.

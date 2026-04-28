@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import time
 from urllib.parse import urljoin, urlparse
 
@@ -12,6 +13,7 @@ from curl_cffi import requests as curl_requests
 from cuty_live_browser import detect_chrome_path, solve_turnstile
 
 CUTY_INTERNAL_HOSTS = {"cuty.io", "www.cuty.io", "cuttlinks.com", "www.cuttlinks.com"}
+CUTY_HTTP_FAST_VHIT = os.getenv("SHORTLINK_BYPASS_CUTY_HTTP_VHIT", "0").strip().lower() in {"1", "true", "yes", "on"}
 
 
 def _chrome_major() -> int:
@@ -93,9 +95,10 @@ def _cookies_list(session) -> list[dict]:
 def _best_effort_vhit(session, referer: str, timeline: list[dict]) -> None:
     """Mirror the server-visible VHit fetches seen in the browser lane.
 
-    A later live probe showed the final may already pass without these calls, but
-    keeping them is cheap and closer to the real browser lifecycle. Failures are
-    diagnostic-only because the success oracle is the downstream final URL.
+    Live ablation showed the current sample can pass without these calls. Keep
+    this opt-in for future variants where the server may require the VHit
+    lifecycle. Failures are diagnostic-only because the success oracle is the
+    downstream final URL.
     """
     try:
         fp = session.post(
@@ -153,7 +156,10 @@ def run(url: str, timeout: int = 160, solver_url: str = "http://127.0.0.1:5000")
         if not submit_form.get("found"):
             return {"status": 0, "stage": "last", "message": "SUBMIT_FORM_NOT_FOUND", "timeline": timeline, "sitekey": sitekey, "waited_seconds": round(time.time() - started, 1)}
 
-        _best_effort_vhit(session, last.url, timeline)
+        if CUTY_HTTP_FAST_VHIT:
+            _best_effort_vhit(session, last.url, timeline)
+        else:
+            timeline.append({"stage": "vhit-skipped", "reason": "no-vhit ablation live-proven for current sample"})
         time.sleep(9)
         final = _post_form(session, urljoin(last.url, str(submit_form.get("action") or "")), dict(submit_form.get("data") or {}), last.url, 60)
         timeline.append({"stage": "final", "status": final.status_code, "url": final.url, "location": final.headers.get("location"), "text": (final.text or "")[:160]})

@@ -7,6 +7,7 @@
 - Wired `_handle_cuty()` to try the HTTP helper before the older CDP browser helper.
 - Verified live sample `https://cuty.io/AfaX6jx` returned `https://www.google.com/` in `70.2s` through the helper and `74.5s` through `engine.py`.
 - Browser fallback remains active if the HTTP helper does not return a downstream final URL.
+- Follow-up VHit ablation proved the current sample still reaches Google without `fp.vhit.io` / `vhit.io/api/request`, so VHit replay is now opt-in through `SHORTLINK_BYPASS_CUTY_HTTP_VHIT=1`.
 
 ### exe.io HTTP-only fast lane
 - Added `exe_http_fast.py` for the `exe.io -> exeygo.com` CakePHP + Turnstile chain.

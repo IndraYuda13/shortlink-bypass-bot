@@ -121,7 +121,7 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
         sample_url="https://cuty.io/AfaX6jx",
         expected_final="https://google.com",
         proof="Live engine recheck on 2026-04-28 returned google.com through the HTTP fast helper after Turnstile solve and /go submit.",
-        notes=("HTTP helper is primary; CDP browser helper remains fallback if the HTTP lane does not return a downstream final URL.",),
+        notes=("HTTP helper is primary; VHit replay is opt-in; CDP browser helper remains fallback if the HTTP lane does not return a downstream final URL.",),
     ),
     SupportedSite(
         host="gplinks.co",

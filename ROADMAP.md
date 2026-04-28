@@ -287,4 +287,5 @@
 - Verified helper final: `https://www.google.com/` in `70.2s`.
 - Verified engine final: `CUTY_HTTP_FAST_OK -> https://www.google.com/` in `74.5s`.
 - Engine now tries `cuty_http_fast.py` before the older CDP browser fallback.
-- Root cause update: the previous HTTP bounce was not a hard Turnstile/form blocker. A browser-shaped HTTP replay with `Origin: null`, HeadlessChrome-style UA, final wait, and best-effort VHit calls can clear `/go/AfaX6jx`.
+- Root cause update: the previous HTTP bounce was not a hard Turnstile/form blocker. A browser-shaped HTTP replay with `Origin: null`, HeadlessChrome-style UA, final wait, and optional VHit calls can clear `/go/AfaX6jx`.
+- Follow-up ablation: `--no-vhit` also returned `https://www.google.com/` in `69.9s`, so VHit replay is now opt-in via `SHORTLINK_BYPASS_CUTY_HTTP_VHIT=1` instead of default.
