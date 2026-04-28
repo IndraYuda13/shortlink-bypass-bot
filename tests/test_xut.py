@@ -167,3 +167,9 @@ class XutHelperRuntimeTests(unittest.TestCase):
         self.assertIn('solve_iconcaptcha_data_url', source)
         self.assertIn('provider', source)
         self.assertIn('local-python', source)
+
+    def test_xut_helper_clicks_exact_get_link_not_download_ad(self):
+        source = Path('xut_live_browser.py').read_text()
+        self.assertIn('click_exact_visible(driver, "Get Link")', source)
+        self.assertIn('XUT_FINAL_HOST_BLOCKLIST', source)
+        self.assertNotIn('click_button_contains(driver, "download")', source.lower())

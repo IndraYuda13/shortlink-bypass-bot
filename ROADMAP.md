@@ -96,7 +96,7 @@
 - `xut.io` sekarang tidak lagi hanya berhenti di mapping Step 1 di level engine:
   - helper live `xut_live_browser.py` sudah dihubungkan ke `engine.py`
   - helper ini bisa melewati Step 1, maju ke `gamescrate`, lalu melakukan warm-browser handoff ke patched local FlareSolverr
-  - status jujur saat ini tetap **partial** karena final oracle `onlyfaucet.com/links/back/...` masih belum keluar stabil
+  - status terbaru **live_bypass** untuk sample `https://xut.io/hd7AOJ` karena helper sudah live-proven sampai exact `Get Link` -> `http://tesskibidixxx.com/`
   - lane yang lebih cepat sekarang sudah terbukti:
     1. lolos Cloudflare sampai browser mendarat di article `maqal360`
     2. langsung lompat ke `https://blog.adlink.click/<alias>` dalam browser session yang sama
@@ -254,3 +254,14 @@
 - xut runtime/dependency blockers are repaired. One live run reached `gamescrate.app` Cloudflare after Step 1-4, but a later repeat still failed at Step 1, so the active blocker is solver stability plus gamescrate final gate.
 - Added SFL WARP proxy fallback; `sfl.gl/18PZXXI9` now returns `https://google.com` again.
 - Turnstile root cause found: stale long-lived browser pool returned instant `CAPTCHA_FAIL` with `elapsed_time=0`. Service refresh + retry fixed cuty and raw solver tokens for cuty/exe; exe still needs final token submission integration.
+
+## 2026-04-28 xut.io final lane update
+- `xut.io` is now live-proven for sample `https://xut.io/hd7AOJ`.
+- Verified final oracle: `http://tesskibidixxx.com/` from xut Step 6 `Get Link` href.
+- Remaining improvement is stability, not unknown flow mapping: Step 1 IconCaptcha and ChromeDriver can still fail intermittently, so retries and structured failure reports stay important.
+- `gplinks.co` remains the last partial family, blocked by PowerGam/GPT enough-step proof.
+
+
+## 2026-04-28 xut.io final update
+- `xut.io` sample `https://xut.io/hd7AOJ` sekarang live-proven. Chain yang terbukti: IconCaptcha Step 1 -> Step 2/3/4 -> gamescrate Step 5 -> xut Step 6 -> exact visible `Get Link` -> `http://tesskibidixxx.com/`.
+- Catatan stabilitas: IconCaptcha masih flaky dan Chrome/driver kadang mati, jadi helper tetap harus mengembalikan structured failure facts saat run gagal. Tetapi status family boleh naik karena ada live engine/helper final oracle yang jelas.

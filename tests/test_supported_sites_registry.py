@@ -13,6 +13,7 @@ class SupportedSitesRegistryTests(unittest.TestCase):
             "ez4short.com",
             "lnbz.la",
             "sfl.gl",
+            "xut.io",
             "cuty.io",
             "exe.io",
         })
@@ -23,7 +24,7 @@ class SupportedSitesRegistryTests(unittest.TestCase):
         self.assertEqual(statuses["oii.la"], "token_bypass")
         self.assertEqual(statuses["tpi.li"], "token_bypass")
         self.assertEqual(statuses["aii.sh"], "token_bypass")
-        self.assertEqual(statuses["xut.io"], "partial")
+        self.assertEqual(statuses["xut.io"], "live_bypass")
         self.assertEqual(statuses["cuty.io"], "live_bypass")
         self.assertEqual(statuses["gplinks.co"], "partial")
         self.assertEqual(statuses["sfl.gl"], "live_bypass")
@@ -54,6 +55,7 @@ class SupportedSitesRegistryTests(unittest.TestCase):
         self.assertIn("Token bypass:", rendered)
         self.assertIn("oii.la", rendered)
         self.assertIn("Partial / needs more work:", rendered)
+        self.assertIn("gplinks.co", rendered)
         self.assertIn("xut.io", rendered)
         self.assertIn("exe.io", rendered)
 

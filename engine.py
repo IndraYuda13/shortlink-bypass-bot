@@ -31,6 +31,7 @@ ADLINK_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_ADLINK_HELPER", str(PROJECT_ROO
 HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_HELPER_PYTHON", sys.executable)
 HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_HELPER_PYTHONPATH", "")
 XUT_BROWSER_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_XUT_BROWSER_TIMEOUT", "300"))
+XUT_LIVE_ATTEMPTS = int(os.getenv("SHORTLINK_BYPASS_XUT_ATTEMPTS", "3"))
 XUT_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_XUT_HELPER", str(PROJECT_ROOT / "xut_live_browser.py"))
 XUT_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_XUT_HELPER_PYTHON", HELPER_PYTHON)
 XUT_HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_XUT_HELPER_PYTHONPATH", "")
@@ -1333,57 +1334,81 @@ class ShortlinkBypassEngine:
             helper_pythonpath = ":".join(helper_pythonpath_parts)
             env["PYTHONPATH"] = f"{helper_pythonpath}:{existing}" if existing else helper_pythonpath
 
-        try:
-            proc = subprocess.run(
-                [
-                    XUT_HELPER_PYTHON,
-                    XUT_LIVE_HELPER,
-                    url,
-                    "--timeout",
-                    str(XUT_BROWSER_TIMEOUT),
-                ],
-                capture_output=True,
-                text=True,
-                timeout=XUT_BROWSER_TIMEOUT + 60,
-                env=env,
-            )
-        except subprocess.TimeoutExpired:
-            return {
-                "status": 0,
-                "message": "XUT_LIVE_BROWSER_TIMEOUT",
-                "stage": "live-browser-timeout",
-                "blockers": ["helper live browser timeout sebelum final oracle tercapai"],
-            }
-        except Exception as exc:
-            return {
-                "status": 0,
-                "message": f"XUT_LIVE_BROWSER_ERROR: {exc}",
-                "stage": "live-browser-error",
-            }
+        helper_cmd = [
+            XUT_HELPER_PYTHON,
+            XUT_LIVE_HELPER,
+            url,
+            "--timeout",
+            str(XUT_BROWSER_TIMEOUT),
+        ]
+        xvfb_run = "/usr/bin/xvfb-run"
+        if env.get("SHORTLINK_BYPASS_XUT_HEADLESS", "0").strip().lower() not in {"1", "true", "yes"} and os.path.exists(xvfb_run):
+            helper_cmd = [xvfb_run, "-a", *helper_cmd]
 
-        stdout = (proc.stdout or "").strip()
-        if not stdout:
-            stderr = (proc.stderr or "").strip()
-            return {
-                "status": 0,
-                "message": stderr or f"helper exit {proc.returncode}",
-                "stage": "live-browser-no-output",
-            }
+        attempts: list[dict[str, Any]] = []
+        max_attempts = max(1, XUT_LIVE_ATTEMPTS)
+        for attempt_idx in range(1, max_attempts + 1):
+            try:
+                proc = subprocess.run(
+                    helper_cmd,
+                    capture_output=True,
+                    text=True,
+                    timeout=XUT_BROWSER_TIMEOUT + 60,
+                    env=env,
+                )
+            except subprocess.TimeoutExpired:
+                attempts.append({"idx": attempt_idx, "status": 0, "message": "XUT_LIVE_BROWSER_TIMEOUT", "stage": "live-browser-timeout"})
+                continue
+            except Exception as exc:
+                attempts.append({"idx": attempt_idx, "status": 0, "message": f"XUT_LIVE_BROWSER_ERROR: {exc}", "stage": "live-browser-error"})
+                continue
 
-        last_line = stdout.splitlines()[-1]
-        try:
-            payload = json.loads(last_line)
-        except Exception:
-            stderr = (proc.stderr or "").strip()
-            return {
-                "status": 0,
-                "message": stderr or f"helper output tidak valid: {last_line[:240]}",
-                "stage": "live-browser-invalid-output",
-            }
+            stdout = (proc.stdout or "").strip()
+            if not stdout:
+                stderr = (proc.stderr or "").strip()
+                attempts.append({
+                    "idx": attempt_idx,
+                    "status": 0,
+                    "message": stderr or f"helper exit {proc.returncode}",
+                    "stage": "live-browser-no-output",
+                })
+                continue
 
-        if proc.returncode != 0 and not payload.get("message"):
-            payload["message"] = f"helper exit {proc.returncode}"
-        return payload
+            last_line = stdout.splitlines()[-1]
+            try:
+                payload = json.loads(last_line)
+            except Exception:
+                stderr = (proc.stderr or "").strip()
+                attempts.append({
+                    "idx": attempt_idx,
+                    "status": 0,
+                    "message": stderr or f"helper output tidak valid: {last_line[:240]}",
+                    "stage": "live-browser-invalid-output",
+                })
+                continue
+
+            if proc.returncode != 0 and not payload.get("message"):
+                payload["message"] = f"helper exit {proc.returncode}"
+            payload["attempt_idx"] = attempt_idx
+            if payload.get("status") == 1:
+                if attempts:
+                    payload.setdefault("facts", {})["previous_live_attempts"] = attempts
+                return payload
+            attempts.append({
+                "idx": attempt_idx,
+                "status": payload.get("status"),
+                "message": payload.get("message"),
+                "stage": payload.get("stage"),
+            })
+
+        last = attempts[-1] if attempts else {"status": 0, "message": "XUT_LIVE_BROWSER_NO_ATTEMPTS", "stage": "live-browser-error"}
+        return {
+            "status": 0,
+            "message": last.get("message") or "XUT_LIVE_BROWSER_FAILED",
+            "stage": last.get("stage") or "live-browser-error",
+            "facts": {"live_attempts": attempts},
+            "blockers": ["helper live browser gagal mencapai final oracle setelah retry"],
+        }
 
     def _resolve_adlink_http(self, url: str) -> dict[str, Any]:
         alias = urlparse(url).path.strip("/")

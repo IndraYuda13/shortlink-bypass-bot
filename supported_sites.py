@@ -101,15 +101,15 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
     SupportedSite(
         host="xut.io",
         family="autodime.cwsafelinkphp",
-        status="partial",
+        status="live_bypass",
         handler="_handle_autodime_cwsafelink",
         command_alias="xut",
         sample_url="https://xut.io/hd7AOJ",
         expected_final="http://tesskibidixxx.com",
-        proof="Current user bot run failed before final output with missing dtos import in xut_live_browser.py.",
-        blockers=(
-            "xut_live_browser.py cannot import dtos in the current bot environment.",
-            "IconCaptcha and later gamescrate Cloudflare gates still need stable final-lane proof.",
+        proof="Live helper verified xut -> autodime/IconCaptcha -> gamescrate Step 5 -> xut Step 6 -> Get Link -> http://tesskibidixxx.com/.",
+        notes=(
+            "IconCaptcha can still be flaky, so the helper keeps retries and structured failure facts.",
+            "The final host currently resolves to browser NXDOMAIN, but the shortlink final href is live-proven.",
         ),
     ),
     SupportedSite(

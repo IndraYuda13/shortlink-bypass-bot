@@ -2,6 +2,13 @@
 
 ## 2026-04-28
 
+### xut.io live final lane
+- Promoted `xut.io` to `live_bypass` after a live helper run returned `http://tesskibidixxx.com/` from sample `https://xut.io/hd7AOJ`.
+- Replaced the old FlareSolverr-only gamescrate handoff with the proven direct browser chain: IconCaptcha Step 1 -> autodime steps -> gamescrate Step 5 -> xut Step 6 -> exact visible `Get Link`.
+- Added a 14s dwell before gamescrate `Open Final Page` to avoid `Error: too_fast`, and exact-text clicking so the helper does not hit the nearby `Download` ad link.
+- Engine now wraps the xut helper with `xvfb-run -a` when running non-headless, matching the proven live lane.
+
+
 ### supported sites registry and status correction
 
 ### remaining-family expansion pass
@@ -361,3 +368,9 @@
 - The helper submits `before-captcha`, extracts the Turnstile sitekey from `app_vars`, solves via the local Turnstile solver API, injects both `cf-turnstile-response` and `g-recaptcha-response`, submits `link-view`, waits for the `go-link` form, then submits it.
 - Verified `https://exe.io/vkRI1` through `ShortlinkBypassEngine` to final `https://www.google.com/`.
 - Promoted `exe.io` to `live_bypass`.
+
+### xut.io live bypass final proof
+- Promoted `xut.io` from partial to live bypass after a direct browser verification reached the final href.
+- Proven chain: `xut.io/hd7AOJ` -> autodime IconCaptcha Step 1 -> gamescrate Step 5 -> xut Step 6 -> exact `Get Link` click -> `http://tesskibidixxx.com/`.
+- Updated `xut_live_browser.py` to treat the direct gamescrate/xut Step 6 lane as the primary final path and return the visible `Get Link` href when it is ready.
+- Kept structured failure facts because IconCaptcha/browser runtime can still be flaky on some runs.

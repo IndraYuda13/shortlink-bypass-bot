@@ -38,7 +38,9 @@ from dtos import V1RequestBase  # type: ignore
 from flaresolverr_service import _controller_v1_handler  # type: ignore
 
 FINAL_PREFIX = "https://onlyfaucet.com/links/back/"
+FINAL_HOST_MARKERS = ("onlyfaucet.com", "tesskibidixxx.com")
 DEFAULT_TIMEOUT = 300
+XUT_FINAL_HOST_BLOCKLIST = {"xut.io", "gamescrate.app", "stiftais.top", "webtrafic.ru", "earnviv.com"}
 CHROME_PATH = "/usr/bin/google-chrome" if Path("/usr/bin/google-chrome").exists() else "/usr/bin/google-chrome-stable"
 
 
@@ -103,6 +105,141 @@ def click_button_contains(driver, text: str) -> str | None:
             time.sleep(0.2)
             el.click()
             return txt
+    return None
+
+
+def is_final_url(url: str | None) -> bool:
+    if not url:
+        return False
+    lowered = url.lower()
+    return lowered.startswith(FINAL_PREFIX) or any(marker in lowered for marker in FINAL_HOST_MARKERS)
+
+
+def click_ready_get_link(driver) -> dict:
+    return driver.execute_script(
+        """
+        const els=[...document.querySelectorAll('a,button,input[type=submit]')];
+        for (const el of els) {
+          const txt=(el.innerText||el.value||el.textContent||'').trim().toLowerCase();
+          const disabled=el.disabled||el.classList.contains('disabled')||txt.includes('please wait');
+          if (txt==='get link' && !disabled) {
+            el.scrollIntoView({block:'center'});
+            el.click();
+            return {clicked:true, text:txt, href:el.href||null, tag:el.tagName, id:el.id||null, className:el.className||null};
+          }
+        }
+        return {clicked:false, buttons:els.map(el=>({text:(el.innerText||el.value||el.textContent||'').trim(), href:el.href||null, tag:el.tagName, id:el.id||null, className:el.className||null, disabled:el.disabled||el.classList.contains('disabled')})).slice(0,20)};
+        """
+    )
+
+
+def wait_ready_get_link(driver, timeout: float = 150.0) -> dict:
+    end = time.time() + timeout
+    last = None
+    while time.time() < end:
+        last = driver.execute_script(
+            """
+            return [...document.querySelectorAll('a,button,input[type=submit]')]
+              .map(el=>({text:(el.innerText||el.value||el.textContent||'').trim(), href:el.href||null, className:el.className||'', disabled:el.disabled||el.classList.contains('disabled')}))
+              .filter(x=>x.text.toLowerCase().includes('get link')||x.text.toLowerCase().includes('please wait'));
+            """
+        )
+        for item in last or []:
+            if str(item.get('text', '')).strip().lower() == 'get link' and not item.get('disabled'):
+                return {"ready": True, "buttons": last}
+        time.sleep(1)
+    return {"ready": False, "buttons": last or []}
+
+
+def finish_gamescrate_and_xut(driver, result: dict) -> str | None:
+    wait_for(lambda: "Open Final Page" in body_text(driver), timeout=120, interval=1)
+    result["facts"]["gamescrate_open_final"] = snap(driver, "gamescrate-open-final")
+    time.sleep(15)
+    click_info = driver.execute_script(
+        """
+        const el=[...document.querySelectorAll('a,button')].find(e=>(e.innerText||'').trim().toLowerCase().includes('open final page'));
+        if (!el) return {clicked:false};
+        el.scrollIntoView({block:'center'});
+        el.click();
+        return {clicked:true, text:(el.innerText||'').trim(), id:el.id||null, className:el.className||null};
+        """
+    )
+    result["facts"]["gamescrate_open_final_click"] = click_info
+    time.sleep(3)
+    result["facts"]["xut_step6_after_open_final"] = snap(driver, "xut-step6-after-open-final")
+    ready = wait_ready_get_link(driver, timeout=160)
+    result["facts"]["xut_get_link_ready"] = ready
+    click_result = click_ready_get_link(driver)
+    result["facts"]["xut_get_link_click"] = click_result
+    final_url = click_result.get("href") if isinstance(click_result, dict) else None
+    if is_final_url(final_url):
+        return final_url
+    for _ in range(90):
+        if is_final_url(driver.current_url):
+            return driver.current_url
+        time.sleep(1)
+    if is_final_url(driver.current_url):
+        return driver.current_url
+    return final_url if is_final_url(final_url) else None
+
+
+def get_visible_exact_clickables(driver) -> list[dict]:
+    return driver.execute_script(
+        """
+        return Array.from(document.querySelectorAll('a,button,input[type=submit],input[type=button]')).map((el)=>{
+          const r=el.getBoundingClientRect(); const cs=getComputedStyle(el);
+          return {
+            tag: el.tagName,
+            id: el.id || '',
+            text: (el.innerText || el.value || '').trim(),
+            href: el.href || '',
+            visible: r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none',
+            rect: [r.x, r.y, r.width, r.height],
+          };
+        });
+        """
+    )
+
+
+def exact_visible_clickable_exists(driver, text: str) -> bool:
+    wanted = text.strip().lower()
+    return any(
+        item.get("visible") and str(item.get("text") or "").strip().lower() == wanted
+        for item in get_visible_exact_clickables(driver)
+    )
+
+
+def click_exact_visible(driver, text: str) -> str | None:
+    return driver.execute_script(
+        """
+        const wanted = arguments[0].trim().toLowerCase();
+        for (const el of Array.from(document.querySelectorAll('a,button,input[type=submit],input[type=button]'))) {
+          const txt = (el.innerText || el.value || '').trim().toLowerCase();
+          const r = el.getBoundingClientRect(); const cs = getComputedStyle(el);
+          if (txt === wanted && r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none') {
+            el.scrollIntoView({block:'center'});
+            el.click();
+            return txt;
+          }
+        }
+        return null;
+        """,
+        text,
+    )
+
+
+def final_url_from_current_state(driver) -> str | None:
+    current = driver.current_url
+    host = urlparse(current).netloc.lower()
+    if current.startswith("http") and host and not any(host == bad or host.endswith("." + bad) for bad in XUT_FINAL_HOST_BLOCKLIST):
+        return current
+    for item in get_visible_exact_clickables(driver):
+        text = str(item.get("text") or "").strip().lower()
+        href = str(item.get("href") or "").strip()
+        host = urlparse(href).netloc.lower()
+        if item.get("visible") and text == "get link" and href.startswith("http"):
+            if not any(host == bad or host.endswith("." + bad) for bad in XUT_FINAL_HOST_BLOCKLIST):
+                return href
     return None
 
 
@@ -249,10 +386,14 @@ def main() -> int:
     opts.add_argument("--window-size=1400,1000")
     opts.add_argument("--disable-blink-features=AutomationControlled")
     opts.add_argument("--lang=en-US")
-    opts.add_argument("--headless=new")
+    headless = os.getenv("SHORTLINK_BYPASS_XUT_HEADLESS", "0").strip().lower() in {"1", "true", "yes"}
+    if headless:
+        opts.add_argument("--headless=new")
+    opts.page_load_strategy = "eager"
 
     chrome_major = detect_chrome_major()
-    driver = uc.Chrome(options=opts, use_subprocess=True, headless=True, version_main=chrome_major)
+    driver = uc.Chrome(options=opts, use_subprocess=True, headless=headless, version_main=chrome_major)
+    driver.set_page_load_timeout(60)
     session_id = f"xut-live-{int(time.time())}"
     result: dict = {
         "status": 0,
@@ -276,83 +417,57 @@ def main() -> int:
             return 0
 
         continue_through_steps(driver)
-        wait_for(lambda: "gamescrate.app" in driver.current_url or "Just a moment" in driver.title, timeout=60, interval=1)
-        time.sleep(8)
-        result["facts"]["pre_handoff"] = snap(driver, "pre-handoff")
-        debugger_address = getattr(getattr(driver, "options", None), "debugger_address", None)
-        result["facts"]["debugger_address"] = debugger_address
+        wait_for(lambda: "gamescrate.app" in driver.current_url or "Step 5/6" in driver.title or "Open Final Page" in body_text(driver), timeout=90, interval=1)
+        result["facts"]["gamescrate_entry"] = snap(driver, "gamescrate-entry")
 
-        _controller_v1_handler(
-            V1RequestBase(
-                {
-                    "cmd": "sessions.create",
-                    "session": session_id,
-                    "debuggerAddress": debugger_address,
-                    "keepAttachedBrowserAlive": True,
-                }
-            )
-        )
+        wait_for(lambda: "Open Final Page" in body_text(driver), timeout=120, interval=1)
+        result["facts"]["open_final_visible"] = snap(driver, "open-final-visible")
+        time.sleep(14)
+        result["facts"]["open_final_after_dwell"] = snap(driver, "open-final-after-dwell")
+        result["facts"]["open_final_clicked"] = click_button_contains(driver, "open final page")
+        time.sleep(3)
+        result["facts"]["post_open_final"] = [snap(driver, "post-open-final")]
 
-        attempts: list[dict] = []
-        for idx, timeout_ms in enumerate([45000, 45000], start=1):
-            row = {"idx": idx, "timeout_ms": timeout_ms}
-            try:
-                row["request"] = fs_get(session_id, driver.current_url, timeout_ms)
-            except Exception as exc:
-                row["request_error"] = str(exc)
-            row["eval"] = fs_eval(session_id)
-            row["driver"] = snap(driver, f"after-fs-attempt-{idx}")
-            attempts.append(row)
-
-            final_url = row["eval"].get("url") or row.get("request", {}).get("url")
-            if final_url and final_url.startswith(FINAL_PREFIX):
+        for _ in range(80):
+            final_url = final_url_from_current_state(driver)
+            if final_url:
+                result["facts"]["step6_clickables"] = get_visible_exact_clickables(driver)
+                clicked = click_exact_visible(driver, "Get Link")
+                result["facts"]["get_link_clicked"] = clicked
+                if clicked:
+                    time.sleep(5)
+                    final_url = final_url_from_current_state(driver) or driver.current_url
                 result["status"] = 1
                 result["message"] = "XUT_FINAL_OK"
                 result["stage"] = "final-bypass"
                 result["bypass_url"] = final_url
-                result["facts"]["attempts"] = attempts
-                result["notes"].append("final oracle tercapai lewat warm browser handoff + FlareSolverr attach")
+                result["facts"]["final_state"] = snap(driver, "final-state")
+                result["notes"].append("final oracle tercapai lewat direct browser: gamescrate Step 5 -> xut Step 6 -> exact Get Link")
                 print(json.dumps(result, ensure_ascii=False))
                 return 0
+            time.sleep(1)
 
-        try:
-            _controller_v1_handler(
-                V1RequestBase(
-                    {
-                        "cmd": "request.evaluate",
-                        "session": session_id,
-                        "javaScript": "location.reload(); return true;",
-                    }
-                )
-            )
-        except Exception as exc:
-            result["facts"]["reload_error"] = str(exc)
-        time.sleep(10)
-        after_reload = fs_eval(session_id)
-        result["facts"]["attempts"] = attempts
-        result["facts"]["after_reload"] = after_reload
-        result["facts"]["after_reload_driver"] = snap(driver, "after-reload")
-
-        final_url = after_reload.get("url")
-        if final_url and final_url.startswith(FINAL_PREFIX):
-            result["status"] = 1
-            result["message"] = "XUT_FINAL_OK"
-            result["stage"] = "final-bypass"
-            result["bypass_url"] = final_url
-            result["notes"].append("final oracle tercapai sesudah refresh di session yang sama")
-            print(json.dumps(result, ensure_ascii=False))
-            return 0
-
-        result["message"] = "GAMESCRATE_HANDOFF_PROGRESS_ONLY"
-        result["stage"] = "gamescrate-cloudflare"
+        result["facts"]["step6_or_final_state"] = snap(driver, "step6-or-final-state")
+        result["facts"]["step6_clickables"] = get_visible_exact_clickables(driver)
+        result["message"] = "XUT_STEP6_GETLINK_NOT_READY"
+        result["stage"] = "xut-step6"
         result["blockers"] = [
-            "warm browser handoff sudah bekerja tetapi gamescrate belum redirect ke final oracle",
-            "Cloudflare/backend gamescrate masih berhenti setelah state verifying/waiting-for-response",
+            "gamescrate handoff sudah sampai xut Step 6 tetapi tombol final Get Link belum valid/terlihat pada run ini",
         ]
         result["notes"] = [
-            "helper sudah melewati Step 1 autodime dan berhasil handoff ke FlareSolverr attach mode",
-            "state verify berhasil bergerak, tetapi downstream final onlyfaucet belum keluar",
+            "Step 1 IconCaptcha dan gamescrate Step 5 sudah ditembus pada lane direct browser",
         ]
+        print(json.dumps(result, ensure_ascii=False))
+        return 0
+    except Exception as exc:
+        result["status"] = 0
+        result["message"] = f"XUT_HELPER_EXCEPTION: {exc}"
+        result["stage"] = result.get("stage") or "live-browser-exception"
+        try:
+            result["facts"]["exception_state"] = snap(driver, "exception-state")
+        except Exception as snap_exc:
+            result["facts"]["exception_snap_error"] = str(snap_exc)
+        result["blockers"].append("helper browser runtime exception before final oracle")
         print(json.dumps(result, ensure_ascii=False))
         return 0
     finally:

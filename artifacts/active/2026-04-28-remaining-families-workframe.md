@@ -55,3 +55,17 @@ Close the remaining partial families without adding extra bot commands. Keep `/b
 - [done] 3. Implement smallest proven patches.
 - [done] 4. Live verify sample URLs.
 - [pending] 5. Update registry/docs/tests, restart bot, push project, sync MyAiAgent.
+
+## 2026-04-28 11:xx continuation probes
+- Direct continuation resumed for remaining partials while subagents work in parallel.
+- `xut.io`:
+  - `artifacts/active/xut_icon_probe.py` showed Step 1 can pass again on attempt 1 with current solver (`selected_cell_number=4`, confidence around `0.70`).
+  - A full `xut_live_browser.py` run captured another Step 1 pass (`selected_cell_number=2`, confidence around `0.965`) but Chrome/UC died during later step navigation with localhost chromedriver connection refused. This is a runtime stability problem in addition to gamescrate final gate.
+- `gplinks.co`:
+  - Plain CDP from original `gplinks.co/YVTC` hit Cloudflare before PowerGam.
+  - Bootstrapping via curl_cffi to `powergam.online` avoided entry Cloudflare and advanced visible PowerGam steps, but GPT events stayed empty and `imps=0`.
+  - Headless PowerGam direct probe reached `gplinks.co/YVTC?pid=1224622&vid=<encoded>` but got Cloudflare in browser; separate curl replay of same candidate still returned `not_enough_steps`.
+  - Xvfb/non-headless Chrome also advanced steps but produced no GPT lifecycle events and reset to a new PowerGam `vid` after step 3 instead of reaching the final target. Forcing `imps=5` in browser did not help; PowerGam/server still reset.
+- Current strongest blockers remain:
+  - XUT: stabilize browser after Step 1 and solve gamescrate waiting response.
+  - GPLINKS: real GPT rewarded/interstitial lifecycle is still absent on VPS/browser runs, so server-side proof is not created.

@@ -31,7 +31,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | `gplinks.co` | Partial mapper | Browserless entry reaches PowerGam and decodes step contract, but final still fails server `not_enough_steps` validation |
 | `ez4short.com` | Live bypass | Fast `game5s.com` referer lane unlocks final go-link form and returns sampled `tesskibidixxx.com` target |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
-| `xut.io` -> `autodime cwsafelinkphp` | Partial live lane | Runtime repaired through FlareSolverr restore, ChromeDriver pin, and local IconCaptcha fallback; has reached `gamescrate.app` Cloudflare in one live run, but Step 1 remains flaky across repeated runs before final oracle |
+| `xut.io` -> `autodime cwsafelinkphp` | Live bypass | Live browser lane now reaches IconCaptcha Step 1, gamescrate Step 5, xut Step 6, and clicks `Get Link` to return sampled `tesskibidixxx.com` target |
 | `exe.io` | Live bypass | Follows `exe.io -> exeygo.com`, solves Turnstile, submits `go-link`, and returns sampled `google.com` target |
 
 ## How it works
@@ -39,7 +39,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 - `bot.py` receives Telegram commands, enforces the required join gate, and edits the same status message while work is running
 - `engine.py` detects the target family and chooses the right handler
 - `adlink_live_browser.py` stays as Adlink fallback when the faster browserless lane is not enough
-- `xut_live_browser.py` drives the live autodime -> gamescrate lane and hands off to the patched local FlareSolverr attach mode when the browser has already reached the hard boundary
+- `xut_live_browser.py` drives the live autodime -> gamescrate -> xut Step 6 lane, including IconCaptcha retry capture and exact `Get Link` final-click handling
 - `cuty_live_browser.py` drives the Cuty/Cuttlinks Turnstile and final go-form flow through CDP Chrome plus the local Turnstile solver API
 - `references/` and `ROADMAP.md` keep technical notes and current implementation status
 
