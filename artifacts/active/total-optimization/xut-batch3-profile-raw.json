@@ -1,0 +1,35 @@
+{
+  "status": 0,
+  "input_url": "https://xut.io/hd7AOJ",
+  "env_dwell": 4.0,
+  "marks": [
+    {
+      "name": "chrome_launch:start",
+      "t": 0.0
+    },
+    {
+      "name": "chrome_launch:end",
+      "t": 1.049,
+      "elapsed": 1.049,
+      "exc": null
+    },
+    {
+      "name": "initial_get:start",
+      "t": 1.049
+    },
+    {
+      "name": "initial_get:end",
+      "t": 2.905,
+      "elapsed": 1.855,
+      "exc": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+    }
+  ],
+  "facts": {
+    "exception_snap_error": "HTTPConnectionPool(host='localhost', port=55435): Max retries exceeded with url: /session/3d23b199ed490f311930b38f83a13a01/execute/sync (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=55435): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+  },
+  "blockers": [
+    "timing probe exception"
+  ],
+  "message": "EXCEPTION: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))",
+  "wall_seconds": 2.907
+}

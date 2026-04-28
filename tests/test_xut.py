@@ -167,6 +167,7 @@ class XutHelperRuntimeTests(unittest.TestCase):
         self.assertIn('solve_iconcaptcha_data_url', source)
         self.assertIn('provider', source)
         self.assertIn('local-python', source)
+        self.assertIn('SHORTLINK_BYPASS_ICONCAPTCHA_ENDPOINT', source)
 
     def test_xut_helper_clicks_exact_get_link_not_download_ad(self):
         source = Path('xut_live_browser.py').read_text()

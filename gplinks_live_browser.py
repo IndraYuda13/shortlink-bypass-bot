@@ -23,6 +23,7 @@ CHROME_PATH = "/usr/bin/google-chrome" if Path("/usr/bin/google-chrome").exists(
 GPLINKS_HOSTS = {"gplinks.co", "www.gplinks.co"}
 POWERGAM_HOSTS = {"powergam.online", "www.powergam.online"}
 GPLINKS_DIRECT_POWERGAM = os.getenv("SHORTLINK_BYPASS_GPLINKS_DIRECT_POWERGAM", "0").strip().lower() in {"1", "true", "yes", "on"}
+GPLINKS_NAVIGATE_FINAL = os.getenv("SHORTLINK_BYPASS_GPLINKS_NAVIGATE_FINAL", "0").strip().lower() in {"1", "true", "yes", "on"}
 
 
 def detect_chrome_major() -> int | None:
@@ -44,6 +45,9 @@ def build_driver():
         "--disable-blink-features=AutomationControlled",
         "--lang=en-US,en;q=0.9",
         "--disable-features=PrivacySandboxAdsAPIs,OptimizationHints,AutomationControlled",
+        "--disable-background-timer-throttling",
+        "--disable-renderer-backgrounding",
+        "--disable-backgrounding-occluded-windows",
         "--no-first-run",
         "--no-default-browser-check",
     ]:
@@ -260,12 +264,14 @@ def unlock_final_gate(driver, solver_url: str, timeout_left: int) -> dict:
             final_href = href
             actions.append(st)
             break
-    if final_href:
+    if final_href and GPLINKS_NAVIGATE_FINAL:
         try:
             driver.get(final_href)
             time.sleep(5)
         except Exception as exc:
             actions.append({"stage": "final-navigation-warning", "href": final_href, "reason": str(exc)[:300]})
+    elif final_href:
+        actions.append({"stage": "final-navigation-skipped", "href": final_href, "reason": "valid downstream href is already the final oracle"})
     close_extra_windows(driver)
     actions.append(state(driver, "after-unlock"))
     return {"actions": actions, "sitekey": sitekey, "token_used": bool(token), "final_href": final_href}
@@ -322,10 +328,12 @@ def run(url: str, timeout: int, solver_url: str) -> dict:
             last_click = click_next_powergam(driver)
             timeline.append({"stage": "power-click", **last_click})
             wait_left = last_click.get("waitLeft")
-            if isinstance(wait_left, (int, float)) and wait_left > 0:
-                time.sleep(min(float(wait_left) + 0.5, 9.0))
+            if isinstance(wait_left, (int, float)) and wait_left > 2:
+                time.sleep(min(float(wait_left) + 0.2, 6.0))
+            elif isinstance(wait_left, (int, float)) and wait_left > 0:
+                time.sleep(0.3)
             else:
-                wait_document_ready(driver, 6, interval=0.5)
+                wait_document_ready(driver, 4, interval=0.3)
         else:
             return {"status": 0, "stage": "powergam", "message": "POWERGAM_FINAL_CANDIDATE_TIMEOUT", "decoded_query": decoded, "last_click": last_click, "timeline": timeline}
 

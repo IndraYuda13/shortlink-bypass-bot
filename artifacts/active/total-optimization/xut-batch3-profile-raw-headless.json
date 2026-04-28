@@ -1,0 +1,149 @@
+{
+  "status": 0,
+  "input_url": "https://xut.io/hd7AOJ",
+  "env_dwell": 4.0,
+  "marks": [
+    {
+      "name": "chrome_launch:start",
+      "t": 0.0
+    },
+    {
+      "name": "chrome_launch:end",
+      "t": 0.873,
+      "elapsed": 0.873,
+      "exc": null
+    },
+    {
+      "name": "initial_get:start",
+      "t": 0.873
+    },
+    {
+      "name": "initial_get:end",
+      "t": 5.198,
+      "elapsed": 4.325,
+      "exc": null
+    },
+    {
+      "name": "step1_iconcaptcha_to_step2:start",
+      "t": 5.198
+    },
+    {
+      "name": "step1_iconcaptcha_to_step2:end",
+      "t": 52.707,
+      "elapsed": 47.509,
+      "exc": null
+    },
+    {
+      "name": "steps2_to_gamescrate:start",
+      "t": 52.767
+    },
+    {
+      "name": "steps2_to_gamescrate:end",
+      "t": 56.053,
+      "elapsed": 3.286,
+      "exc": "HTTPConnectionPool(host='localhost', port=44405): Max retries exceeded with url: /session/41a31abffbc133546c536a613dd5afdd/title (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=44405): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+    }
+  ],
+  "facts": {
+    "after_initial_get": {
+      "label": "after-initial-get",
+      "url": "https://autodime.com/",
+      "host": "autodime.com",
+      "title": "Step 1/6",
+      "body": "Step 1\nof 6\nSecure check\nPlease wait\nPreparing a secure redirect. When the timer ends, solve the captcha to continue.\n10\nSECONDS\nWe detected unusual traffic patterns for this visit, so ads may be limited on this page.",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "fexkomin"
+      ]
+    },
+    "solver_calls": [
+      {
+        "elapsed": 5.877,
+        "provider": "api",
+        "has_click": true,
+        "keys": [
+          "cell_count",
+          "centerX",
+          "centerY",
+          "click_x",
+          "click_y",
+          "confidence",
+          "end",
+          "groups",
+          "height",
+          "position",
+          "provider",
+          "selected_cell_index",
+          "selected_cell_number",
+          "start",
+          "success",
+          "width",
+          "x",
+          "y"
+        ]
+      }
+    ],
+    "step1_ok": true,
+    "step1_attempt": 1,
+    "step1_history": [
+      {
+        "attempt": 1,
+        "solver": {
+          "success": true,
+          "position": 4,
+          "x": 224,
+          "y": 25,
+          "centerX": 224,
+          "centerY": 25,
+          "start": 192,
+          "end": 256,
+          "confidence": 0.7,
+          "cell_count": 5,
+          "width": 320,
+          "height": 50,
+          "groups": [
+            [
+              0,
+              2,
+              4
+            ],
+            [
+              1
+            ],
+            [
+              3
+            ]
+          ],
+          "click_x": 224,
+          "click_y": 25,
+          "selected_cell_number": 4,
+          "selected_cell_index": 3,
+          "provider": "api"
+        },
+        "title": "Step 2/6",
+        "body": "Step 2\nof 6\nSecure check\nAlmost there\nStay on this page until the timer finishes. Then continue to the next step.\n2\nSECONDS\nWe detected unusual traffic patterns for this visit, so ads may be limited on this page.",
+        "capture_path": null,
+        "passed": true
+      }
+    ],
+    "after_step1": {
+      "label": "after-step1",
+      "url": "https://autodime.com/blog/autodime-indias-biggest-marketplace-for-auto-accessories-FgOPEu",
+      "host": "autodime.com",
+      "title": "Step 2/6",
+      "body": "Step 2\nof 6\nSecure check\nAlmost there\nStay on this page until the timer finishes. Then continue to the next step.\n1\nSECONDS\nWe detected unusual traffic patterns for this visit, so ads may be limited on this page.",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "fexkomin2"
+      ]
+    },
+    "exception_snap_error": "HTTPConnectionPool(host='localhost', port=44405): Max retries exceeded with url: /session/41a31abffbc133546c536a613dd5afdd/execute/sync (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=44405): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+  },
+  "blockers": [
+    "timing probe exception"
+  ],
+  "message": "EXCEPTION: HTTPConnectionPool(host='localhost', port=44405): Max retries exceeded with url: /session/41a31abffbc133546c536a613dd5afdd/title (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=44405): Failed to establish a new connection: [Errno 111] Connection refused\"))",
+  "wall_seconds": 56.055
+}

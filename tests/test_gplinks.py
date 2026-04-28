@@ -76,6 +76,8 @@ class GplinksTests(unittest.TestCase):
     def test_gplinks_helper_keeps_direct_powergam_flag(self):
         source = __import__('pathlib').Path('gplinks_live_browser.py').read_text()
         self.assertIn('SHORTLINK_BYPASS_GPLINKS_DIRECT_POWERGAM', source)
+        self.assertIn('SHORTLINK_BYPASS_GPLINKS_NAVIGATE_FINAL', source)
+        self.assertIn('--disable-background-timer-throttling', source)
         self.assertIn('import_session_cookies', source)
 
     def test_gplinks_promotes_live_helper_final_url(self):

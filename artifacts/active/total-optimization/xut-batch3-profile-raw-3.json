@@ -1,0 +1,226 @@
+{
+  "status": 0,
+  "input_url": "https://xut.io/hd7AOJ",
+  "env_dwell": 4.0,
+  "marks": [
+    {
+      "name": "chrome_launch:start",
+      "t": 0.0
+    },
+    {
+      "name": "chrome_launch:end",
+      "t": 0.854,
+      "elapsed": 0.854,
+      "exc": null
+    },
+    {
+      "name": "initial_get:start",
+      "t": 0.854
+    },
+    {
+      "name": "initial_get:end",
+      "t": 4.997,
+      "elapsed": 4.142,
+      "exc": null
+    },
+    {
+      "name": "step1_iconcaptcha_to_step2:start",
+      "t": 4.997
+    },
+    {
+      "name": "step1_iconcaptcha_to_step2:end",
+      "t": 57.435,
+      "elapsed": 52.438,
+      "exc": null
+    },
+    {
+      "name": "steps2_to_gamescrate:start",
+      "t": 57.821
+    },
+    {
+      "name": "steps2_to_gamescrate:end",
+      "t": 65.094,
+      "elapsed": 7.273,
+      "exc": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+    }
+  ],
+  "facts": {
+    "after_initial_get": {
+      "label": "after-initial-get",
+      "url": "https://autodime.com/",
+      "host": "autodime.com",
+      "title": "Step 1/6",
+      "body": "Step 1\nof 6\nSecure check\nPlease wait\nPreparing a secure redirect. When the timer ends, solve the captcha to continue.\n10\nSECONDS",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "_cc_id",
+        "cto_bidid",
+        "cto_bundle",
+        "fexkomin",
+        "panoramaId",
+        "panoramaId_expiry",
+        "sharedid",
+        "sharedid_cst",
+        "usprivacy"
+      ]
+    },
+    "solver_calls": [
+      {
+        "elapsed": 9.288,
+        "provider": "api",
+        "has_click": false,
+        "keys": [
+          "cell_count",
+          "centerX",
+          "centerY",
+          "confidence",
+          "end",
+          "groups",
+          "height",
+          "position",
+          "provider",
+          "start",
+          "success",
+          "width",
+          "x",
+          "y"
+        ],
+        "fallback_elapsed": 10.671,
+        "fallback_keys": [
+          "cell_count",
+          "click_x",
+          "click_y",
+          "confidence",
+          "distinctness",
+          "groups",
+          "height",
+          "pairwise_mad",
+          "selected_cell_index",
+          "selected_cell_number",
+          "similarity_threshold",
+          "width"
+        ],
+        "fallback_provider": "local-python-direct"
+      }
+    ],
+    "step1_ok": true,
+    "step1_attempt": 1,
+    "step1_history": [
+      {
+        "attempt": 1,
+        "solver": {
+          "cell_count": 5,
+          "selected_cell_index": 3,
+          "selected_cell_number": 4,
+          "click_x": 224,
+          "click_y": 25,
+          "similarity_threshold": 20.0,
+          "groups": [
+            [
+              0,
+              2
+            ],
+            [
+              1
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ],
+          "pairwise_mad": [
+            [
+              0.0,
+              33.6904,
+              11.8735,
+              36.8784,
+              28.2563
+            ],
+            [
+              33.6904,
+              0.0,
+              11.8442,
+              29.0454,
+              33.1084
+            ],
+            [
+              11.8735,
+              11.8442,
+              0.0,
+              34.1841,
+              26.5459
+            ],
+            [
+              36.8784,
+              29.0454,
+              34.1841,
+              0.0,
+              36.8042
+            ],
+            [
+              28.2563,
+              33.1084,
+              26.5459,
+              36.8042,
+              0.0
+            ]
+          ],
+          "distinctness": [
+            27.6747,
+            26.9221,
+            21.1119,
+            34.228,
+            31.1787
+          ],
+          "confidence": 0.822,
+          "width": 320,
+          "height": 50,
+          "provider": "local-python-direct-after-bad-api"
+        },
+        "title": "Step 2/6",
+        "body": "Step 2\nof 6\nSecure check\nAlmost there\nStay on this page until the timer finishes. Then continue to the next step.\n3\nSECONDS",
+        "capture_path": null,
+        "passed": true
+      }
+    ],
+    "after_step1": {
+      "label": "after-step1",
+      "url": "https://autodime.com/blog/tips-and-advice-for-buying-a-new-or-used-car-BZ6fdw",
+      "host": "autodime.com",
+      "title": "Step 2/6",
+      "body": "Step 2\nof 6\nSecure check\nAlmost there\nStay on this page until the timer finishes. Then continue to the next step.\n3\nSECONDS\nThis Bug Lives In Water, And Is Giant!\nBRAINBERRIES\nदुनिया की 6 इमारतें, जिन्हें देखकर आपको ताजमहल की याद आएगी!\nBRAINBERRIES\n7 Black Hole Facts That Will Change Your View Of The Universe\nBRAINBERRIES\nक्या आप ताजमहल से जुड़े ये 7 रहस्य जानते हैं?\nBRAINBERRIES\n6 Amazing Shows From The 90s That Need A Reboot Right Now\nBRAINBERRIES\nAt The State Of The Union, Dressing For Ukrainian Solidarity\nHERBEAUTY\n15 Photos Of Amazingly Beautiful Mutations\nBRAINBERRIES\nIf You Aren't A Girly Girl, You'll Totally Relate To This List!\nHERBEAUTY\nThe Most Influential Countries In The History Of The World\nBRAINBERRIES\nThese Tiny Actresses Prove Big Talent Comes In Small Sizes\nHERBEAUTY\n7 Most Visually Striking Horror Movies\nBRAINBERRIES\nYou Still Believe All That You See In Movies? Most Popular Cliché\nBRAINBERRIES\n7 Netflix Shows Cancelled Because They Don’t Get The Ratings\nBRAINBERRIES\nThe Adverse Psychological Effects Of Love\nBRAINBERRIES\nVampire Diaries' Hottest Moments That'll Leave You Breathless\nHERBEAUTY",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "__qca",
+        "_adplus_id",
+        "_cc_id",
+        "_sharedID",
+        "_sharedID_cst",
+        "adplusId",
+        "adplusId_cst",
+        "adplusId_last",
+        "cto_bidid",
+        "cto_bundle",
+        "fexkomin2",
+        "fidflexlastcheck",
+        "firstid",
+        "firstid_flex_type",
+        "panoramaId",
+        "panoramaId_expiry",
+        "sharedid",
+        "sharedid_cst",
+        "usprivacy"
+      ]
+    },
+    "exception_snap_error": "HTTPConnectionPool(host='localhost', port=34381): Max retries exceeded with url: /session/92104642ec81ac68b6663aaee9552bf1/execute/sync (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=34381): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+  },
+  "blockers": [
+    "timing probe exception"
+  ],
+  "message": "EXCEPTION: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))",
+  "wall_seconds": 65.126
+}

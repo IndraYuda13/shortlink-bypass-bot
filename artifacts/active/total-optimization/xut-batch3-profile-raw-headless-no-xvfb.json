@@ -1,0 +1,298 @@
+{
+  "status": 0,
+  "input_url": "https://xut.io/hd7AOJ",
+  "env_dwell": 4.0,
+  "marks": [
+    {
+      "name": "chrome_launch:start",
+      "t": 0.0
+    },
+    {
+      "name": "chrome_launch:end",
+      "t": 0.904,
+      "elapsed": 0.904,
+      "exc": null
+    },
+    {
+      "name": "initial_get:start",
+      "t": 0.904
+    },
+    {
+      "name": "initial_get:end",
+      "t": 4.609,
+      "elapsed": 3.705,
+      "exc": null
+    },
+    {
+      "name": "step1_iconcaptcha_to_step2:start",
+      "t": 4.609
+    },
+    {
+      "name": "step1_iconcaptcha_to_step2:end",
+      "t": 49.179,
+      "elapsed": 44.57,
+      "exc": null
+    },
+    {
+      "name": "steps2_to_gamescrate:start",
+      "t": 49.217
+    },
+    {
+      "name": "steps2_to_gamescrate:end",
+      "t": 70.762,
+      "elapsed": 21.545,
+      "exc": null
+    },
+    {
+      "name": "gamescrate_entry_wait:start",
+      "t": 70.859
+    },
+    {
+      "name": "gamescrate_entry_wait:end",
+      "t": 70.867,
+      "elapsed": 0.007,
+      "exc": null
+    },
+    {
+      "name": "open_final_visible_wait:start",
+      "t": 70.918
+    },
+    {
+      "name": "open_final_visible_wait:end",
+      "t": 191.131,
+      "elapsed": 120.212,
+      "exc": null
+    },
+    {
+      "name": "gamescrate_dwell:start",
+      "t": 191.172
+    },
+    {
+      "name": "gamescrate_dwell:end",
+      "t": 195.172,
+      "elapsed": 4.0,
+      "exc": null
+    },
+    {
+      "name": "open_final_click_plus_post_wait:start",
+      "t": 195.21
+    },
+    {
+      "name": "open_final_click_plus_post_wait:end",
+      "t": 198.238,
+      "elapsed": 3.028,
+      "exc": null
+    },
+    {
+      "name": "step6_final_wait:start",
+      "t": 198.274
+    },
+    {
+      "name": "step6_final_wait:end",
+      "t": 279.116,
+      "elapsed": 80.842,
+      "polls": 80,
+      "final_url": null
+    }
+  ],
+  "facts": {
+    "after_initial_get": {
+      "label": "after-initial-get",
+      "url": "https://autodime.com/",
+      "host": "autodime.com",
+      "title": "Step 1/6",
+      "body": "Step 1\nof 6\nSecure check\nPlease wait\nPreparing a secure redirect. When the timer ends, solve the captcha to continue.\n10\nSECONDS\nWe detected unusual traffic patterns for this visit, so ads may be limited on this page.",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "fexkomin"
+      ]
+    },
+    "solver_calls": [
+      {
+        "elapsed": 3.509,
+        "provider": "api",
+        "has_click": true,
+        "keys": [
+          "cell_count",
+          "centerX",
+          "centerY",
+          "click_x",
+          "click_y",
+          "confidence",
+          "end",
+          "groups",
+          "height",
+          "position",
+          "provider",
+          "selected_cell_index",
+          "selected_cell_number",
+          "start",
+          "success",
+          "width",
+          "x",
+          "y"
+        ]
+      }
+    ],
+    "step1_ok": true,
+    "step1_attempt": 1,
+    "step1_history": [
+      {
+        "attempt": 1,
+        "solver": {
+          "success": true,
+          "position": 2,
+          "x": 96,
+          "y": 25,
+          "centerX": 96,
+          "centerY": 25,
+          "start": 64,
+          "end": 128,
+          "confidence": 0.7901,
+          "cell_count": 5,
+          "width": 320,
+          "height": 50,
+          "groups": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "click_x": 96,
+          "click_y": 25,
+          "selected_cell_number": 2,
+          "selected_cell_index": 1,
+          "provider": "api"
+        },
+        "title": "Step 2/6",
+        "body": "Step 2\nof 6\nSecure check\nAlmost there\nStay on this page until the timer finishes. Then continue to the next step.\n2\nSECONDS\nWe detected unusual traffic patterns for this visit, so ads may be limited on this page.",
+        "capture_path": null,
+        "passed": true
+      }
+    ],
+    "after_step1": {
+      "label": "after-step1",
+      "url": "https://autodime.com/blog/7-high-tech-gadgets-to-upgrade-your-car-AlKl0K",
+      "host": "autodime.com",
+      "title": "Step 2/6",
+      "body": "Step 2\nof 6\nSecure check\nAlmost there\nStay on this page until the timer finishes. Then continue to the next step.\n2\nSECONDS\nWe detected unusual traffic patterns for this visit, so ads may be limited on this page.",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "fexkomin2"
+      ]
+    },
+    "after_steps2_4": {
+      "label": "after-steps2-4",
+      "url": "https://gamescrate.app/cwsafelinkphp/setcookie.php?t=eyJ2IjoxLCJzdGVwIjo2LCJzaWQiOiIvaGQ3QU9KIiwiaWF0IjoxNzc3Mzk1NzMxLCJleHAiOjE3NzczOTY2MzEsIm5vbmNlIjoiMFk5SGNwQjFMbDhieUtLaXF5d0c0dyIsImZwIjoiZjlhZDgyMzkwY2Q5YjY3NzAzMjRiNGE5NDJkY2E2ZThlYzhhMTA1OTJlNTIzNWQxMjYzZmMzNjMyODdjMmMxNSJ9.Y1HzB5vk9Qz4-3I71p5b69ZYh0YiWRNwr0qrpmh_wwQ",
+      "host": "gamescrate.app",
+      "title": "Just a moment...",
+      "body": "gamescrate.app\nPerforming security verification\nThis website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.\nRay ID: 9f37a2185f561710\nPerformance and Security by Cloudflare\nPrivacy",
+      "successText": "Verification successful. Waiting for gamescrate.app to respond",
+      "hiddenValue": "",
+      "cookies": []
+    },
+    "gamescrate_entry": {
+      "label": "gamescrate-entry",
+      "url": "https://gamescrate.app/cwsafelinkphp/setcookie.php?t=eyJ2IjoxLCJzdGVwIjo2LCJzaWQiOiIvaGQ3QU9KIiwiaWF0IjoxNzc3Mzk1NzMxLCJleHAiOjE3NzczOTY2MzEsIm5vbmNlIjoiMFk5SGNwQjFMbDhieUtLaXF5d0c0dyIsImZwIjoiZjlhZDgyMzkwY2Q5YjY3NzAzMjRiNGE5NDJkY2E2ZThlYzhhMTA1OTJlNTIzNWQxMjYzZmMzNjMyODdjMmMxNSJ9.Y1HzB5vk9Qz4-3I71p5b69ZYh0YiWRNwr0qrpmh_wwQ",
+      "host": "gamescrate.app",
+      "title": "Just a moment...",
+      "body": "gamescrate.app\nPerforming security verification\nThis website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.\nRay ID: 9f37a2185f561710\nPerformance and Security by Cloudflare\nPrivacy",
+      "successText": "Verification successful. Waiting for gamescrate.app to respond",
+      "hiddenValue": "",
+      "cookies": []
+    },
+    "open_final_visible": {
+      "label": "open-final-visible",
+      "url": "https://gamescrate.app/cwsafelinkphp/setcookie.php?t=eyJ2IjoxLCJzdGVwIjo2LCJzaWQiOiIvaGQ3QU9KIiwiaWF0IjoxNzc3Mzk1NzMxLCJleHAiOjE3NzczOTY2MzEsIm5vbmNlIjoiMFk5SGNwQjFMbDhieUtLaXF5d0c0dyIsImZwIjoiZjlhZDgyMzkwY2Q5YjY3NzAzMjRiNGE5NDJkY2E2ZThlYzhhMTA1OTJlNTIzNWQxMjYzZmMzNjMyODdjMmMxNSJ9.Y1HzB5vk9Qz4-3I71p5b69ZYh0YiWRNwr0qrpmh_wwQ",
+      "host": "gamescrate.app",
+      "title": "Just a moment...",
+      "body": "gamescrate.app\nPerforming security verification\nThis website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.\nRay ID: 9f37a2185f561710\nPerformance and Security by Cloudflare\nPrivacy",
+      "successText": "Verification successful. Waiting for gamescrate.app to respond",
+      "hiddenValue": "",
+      "cookies": [
+        "PHPSESSID"
+      ]
+    },
+    "open_final_after_dwell": {
+      "label": "open-final-after-dwell",
+      "url": "https://gamescrate.app/cwsafelinkphp/setcookie.php?t=eyJ2IjoxLCJzdGVwIjo2LCJzaWQiOiIvaGQ3QU9KIiwiaWF0IjoxNzc3Mzk1NzMxLCJleHAiOjE3NzczOTY2MzEsIm5vbmNlIjoiMFk5SGNwQjFMbDhieUtLaXF5d0c0dyIsImZwIjoiZjlhZDgyMzkwY2Q5YjY3NzAzMjRiNGE5NDJkY2E2ZThlYzhhMTA1OTJlNTIzNWQxMjYzZmMzNjMyODdjMmMxNSJ9.Y1HzB5vk9Qz4-3I71p5b69ZYh0YiWRNwr0qrpmh_wwQ",
+      "host": "gamescrate.app",
+      "title": "Just a moment...",
+      "body": "gamescrate.app\nPerforming security verification\nThis website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.\nRay ID: 9f37a2185f561710\nPerformance and Security by Cloudflare\nPrivacy",
+      "successText": "Verification successful. Waiting for gamescrate.app to respond",
+      "hiddenValue": "",
+      "cookies": [
+        "PHPSESSID"
+      ]
+    },
+    "open_final_clicked": null,
+    "post_open_final": {
+      "label": "post-open-final",
+      "url": "https://gamescrate.app/cwsafelinkphp/setcookie.php?t=eyJ2IjoxLCJzdGVwIjo2LCJzaWQiOiIvaGQ3QU9KIiwiaWF0IjoxNzc3Mzk1NzMxLCJleHAiOjE3NzczOTY2MzEsIm5vbmNlIjoiMFk5SGNwQjFMbDhieUtLaXF5d0c0dyIsImZwIjoiZjlhZDgyMzkwY2Q5YjY3NzAzMjRiNGE5NDJkY2E2ZThlYzhhMTA1OTJlNTIzNWQxMjYzZmMzNjMyODdjMmMxNSJ9.Y1HzB5vk9Qz4-3I71p5b69ZYh0YiWRNwr0qrpmh_wwQ",
+      "host": "gamescrate.app",
+      "title": "Just a moment...",
+      "body": "gamescrate.app\nPerforming security verification\nThis website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.\nRay ID: 9f37a2185f561710\nPerformance and Security by Cloudflare\nPrivacy",
+      "successText": "Verification successful. Waiting for gamescrate.app to respond",
+      "hiddenValue": "",
+      "cookies": [
+        "PHPSESSID"
+      ]
+    },
+    "step6_clickables": [
+      {
+        "href": "https://www.cloudflare.com/?utm_source=challenge&utm_campaign=m",
+        "id": "",
+        "rect": [
+          987.578125,
+          959,
+          61.25,
+          18
+        ],
+        "tag": "A",
+        "text": "Cloudflare",
+        "visible": true
+      },
+      {
+        "href": "https://www.cloudflare.com/privacypolicy/",
+        "id": "privacy-link",
+        "rect": [
+          1066.828125,
+          959,
+          43.453125,
+          18
+        ],
+        "tag": "A",
+        "text": "Privacy",
+        "visible": true
+      }
+    ],
+    "final_state": {
+      "label": "final-state",
+      "url": "https://gamescrate.app/cwsafelinkphp/setcookie.php?t=eyJ2IjoxLCJzdGVwIjo2LCJzaWQiOiIvaGQ3QU9KIiwiaWF0IjoxNzc3Mzk1NzMxLCJleHAiOjE3NzczOTY2MzEsIm5vbmNlIjoiMFk5SGNwQjFMbDhieUtLaXF5d0c0dyIsImZwIjoiZjlhZDgyMzkwY2Q5YjY3NzAzMjRiNGE5NDJkY2E2ZThlYzhhMTA1OTJlNTIzNWQxMjYzZmMzNjMyODdjMmMxNSJ9.Y1HzB5vk9Qz4-3I71p5b69ZYh0YiWRNwr0qrpmh_wwQ",
+      "host": "gamescrate.app",
+      "title": "Just a moment...",
+      "body": "gamescrate.app\nPerforming security verification\nThis website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.\nRay ID: 9f37a5598fd1a7b7\nPerformance and Security by Cloudflare\nPrivacy",
+      "successText": "Verification successful. Waiting for gamescrate.app to respond",
+      "hiddenValue": "",
+      "cookies": [
+        "PHPSESSID",
+        "cf_chl_rc_ni"
+      ]
+    }
+  },
+  "blockers": [],
+  "bypass_url": null,
+  "message": "XUT_FINAL_NOT_FOUND",
+  "wall_seconds": 279.186
+}

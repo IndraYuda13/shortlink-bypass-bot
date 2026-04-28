@@ -1,0 +1,637 @@
+{
+  "status": 1,
+  "input_url": "https://xut.io/hd7AOJ",
+  "env_dwell": 4.0,
+  "marks": [
+    {
+      "name": "chrome_launch:start",
+      "t": 0.0
+    },
+    {
+      "name": "chrome_launch:end",
+      "t": 0.895,
+      "elapsed": 0.895,
+      "exc": null
+    },
+    {
+      "name": "initial_get:start",
+      "t": 0.895
+    },
+    {
+      "name": "initial_get:end",
+      "t": 4.84,
+      "elapsed": 3.945,
+      "exc": null
+    },
+    {
+      "name": "step1_iconcaptcha_to_step2:start",
+      "t": 4.84
+    },
+    {
+      "name": "step1_iconcaptcha_to_step2:end",
+      "t": 50.966,
+      "elapsed": 46.126,
+      "exc": null
+    },
+    {
+      "name": "steps2_to_gamescrate:start",
+      "t": 51.031
+    },
+    {
+      "name": "steps2_to_gamescrate:end",
+      "t": 74.301,
+      "elapsed": 23.27,
+      "exc": null
+    },
+    {
+      "name": "gamescrate_entry_wait:start",
+      "t": 74.377
+    },
+    {
+      "name": "gamescrate_entry_wait:end",
+      "t": 74.383,
+      "elapsed": 0.006,
+      "exc": null
+    },
+    {
+      "name": "open_final_visible_wait:start",
+      "t": 74.429
+    },
+    {
+      "name": "open_final_visible_wait:end",
+      "t": 84.622,
+      "elapsed": 10.193,
+      "exc": null
+    },
+    {
+      "name": "gamescrate_dwell:start",
+      "t": 84.664
+    },
+    {
+      "name": "gamescrate_dwell:end",
+      "t": 88.664,
+      "elapsed": 4.0,
+      "exc": null
+    },
+    {
+      "name": "open_final_click_plus_post_wait:start",
+      "t": 88.719
+    },
+    {
+      "name": "open_final_click_plus_post_wait:end",
+      "t": 92.01,
+      "elapsed": 3.291,
+      "exc": null
+    },
+    {
+      "name": "step6_final_wait:start",
+      "t": 92.091
+    },
+    {
+      "name": "step6_final_wait:end",
+      "t": 98.177,
+      "elapsed": 6.085,
+      "polls": 7,
+      "final_url": "http://tesskibidixxx.com/"
+    }
+  ],
+  "facts": {
+    "after_initial_get": {
+      "label": "after-initial-get",
+      "url": "https://autodime.com/",
+      "host": "autodime.com",
+      "title": "Step 1/6",
+      "body": "Step 1\nof 6\nSecure check\nPlease wait\nPreparing a secure redirect. When the timer ends, solve the captcha to continue.\n10\nSECONDS",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "fexkomin",
+        "usprivacy"
+      ]
+    },
+    "solver_calls": [
+      {
+        "elapsed": 4.671,
+        "provider": "api",
+        "has_click": true,
+        "keys": [
+          "cell_count",
+          "centerX",
+          "centerY",
+          "click_x",
+          "click_y",
+          "confidence",
+          "end",
+          "groups",
+          "height",
+          "position",
+          "provider",
+          "selected_cell_index",
+          "selected_cell_number",
+          "start",
+          "success",
+          "width",
+          "x",
+          "y"
+        ]
+      }
+    ],
+    "step1_ok": true,
+    "step1_attempt": 1,
+    "step1_history": [
+      {
+        "attempt": 1,
+        "solver": {
+          "success": true,
+          "position": 2,
+          "x": 96,
+          "y": 25,
+          "centerX": 96,
+          "centerY": 25,
+          "start": 64,
+          "end": 128,
+          "confidence": 0.4501,
+          "cell_count": 5,
+          "width": 320,
+          "height": 50,
+          "groups": [
+            [
+              0,
+              2,
+              3
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          "click_x": 96,
+          "click_y": 25,
+          "selected_cell_number": 2,
+          "selected_cell_index": 1,
+          "provider": "api"
+        },
+        "title": "Step 2/6",
+        "body": "Step 2\nof 6\nSecure check\nAlmost there\nStay on this page until the timer finishes. Then continue to the next step.\n2\nSECONDS\nबॉलीवुड के ऑनस्क्रीन कपल्स जिनकी कमाल की केमिस्ट्री है\nBRAINBERRIES\n15 Photos of Airport Life You Won't Believe!\nBRAINBERRIES\nTop 10 TV Friends Who Used To Be Enemies\nBRAINBERRIES\nWhere Are They Now? The Cast Of 'Holes' 20 Years Later\nBRAINBERRIES\nThese 7 Celeb Couples Pulled Off Secret Weddings!\nHERBEAUTY\nAn Extremely Touching Story Of Someone Who Lost And Endured\nBRAINBERRIES\nWhat Does Your Little Finger Say About Your Personality?\nHERBEAUTY\nIt’s Time To Learn A Few Neat Facts About This Guy!\nBRAINBERRIES\nThe Upcoming Ms. Marvel Show Looks Very Promising\nBRAINBERRIES\nनरेन्द्र मोदी: 6 महत्वपूर्ण तथ्य\nBRAINBERRIES\nShe Had It All & Now She's Broke! How Did Britney Lose Her Money?\nHERBEAUTY\n20 \"The Big Bang Theory\" Moments Only A Few Fans Knew About\nBRAINBERRIES\nFans Will Be Surprised: 13 Facts About Jenna Ortega\nHERBEAUTY\nIt Has Made Morena Baccarin A Super-powered Hollywood Actress\nHERBEAUTY\n9 Worst Movie Remakes Of All Time\nBRAINBERRIES",
+        "capture_path": null,
+        "passed": true
+      }
+    ],
+    "after_step1": {
+      "label": "after-step1",
+      "url": "https://autodime.com/blog/7-high-tech-gadgets-to-upgrade-your-car-AlKl0K",
+      "host": "autodime.com",
+      "title": "Step 2/6",
+      "body": "Step 2\nof 6\nSecure check\nAlmost there\nStay on this page until the timer finishes. Then continue to the next step.\n2\nSECONDS\nबॉलीवुड के ऑनस्क्रीन कपल्स जिनकी कमाल की केमिस्ट्री है\nBRAINBERRIES\n15 Photos of Airport Life You Won't Believe!\nBRAINBERRIES\nTop 10 TV Friends Who Used To Be Enemies\nBRAINBERRIES\nWhere Are They Now? The Cast Of 'Holes' 20 Years Later\nBRAINBERRIES\nThese 7 Celeb Couples Pulled Off Secret Weddings!\nHERBEAUTY\nAn Extremely Touching Story Of Someone Who Lost And Endured\nBRAINBERRIES\nWhat Does Your Little Finger Say About Your Personality?\nHERBEAUTY\nIt’s Time To Learn A Few Neat Facts About This Guy!\nBRAINBERRIES\nThe Upcoming Ms. Marvel Show Looks Very Promising\nBRAINBERRIES\nनरेन्द्र मोदी: 6 महत्वपूर्ण तथ्य\nBRAINBERRIES\nShe Had It All & Now She's Broke! How Did Britney Lose Her Money?\nHERBEAUTY\n20 \"The Big Bang Theory\" Moments Only A Few Fans Knew About\nBRAINBERRIES\nFans Will Be Surprised: 13 Facts About Jenna Ortega\nHERBEAUTY\nIt Has Made Morena Baccarin A Super-powered Hollywood Actress\nHERBEAUTY\n9 Worst Movie Remakes Of All Time\nBRAINBERRIES",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "__qca",
+        "_adplus_id",
+        "_cc_id",
+        "_sharedID",
+        "_sharedID_cst",
+        "adplusId",
+        "adplusId_cst",
+        "adplusId_last",
+        "cto_bidid",
+        "cto_bundle",
+        "fexkomin2",
+        "fidflexlastcheck",
+        "firstid",
+        "firstid_flex_type",
+        "panoramaId",
+        "panoramaId_expiry",
+        "sharedid",
+        "sharedid_cst",
+        "usprivacy"
+      ]
+    },
+    "after_steps2_4": {
+      "label": "after-steps2-4",
+      "url": "https://gamescrate.app/game/pool-master",
+      "host": "gamescrate.app",
+      "title": "Step 5/6",
+      "body": "Step 5\nof 6\nSecure check\nFinal step\nWait for the timer, then open the final page to get your link.\n10\nSECONDS",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "PHPSESSID",
+        "cf_clearance",
+        "fexkomin6"
+      ]
+    },
+    "gamescrate_entry": {
+      "label": "gamescrate-entry",
+      "url": "https://gamescrate.app/game/pool-master",
+      "host": "gamescrate.app",
+      "title": "Step 5/6",
+      "body": "Step 5\nof 6\nSecure check\nFinal step\nWait for the timer, then open the final page to get your link.\n10\nSECONDS",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "PHPSESSID",
+        "cf_clearance",
+        "fexkomin6"
+      ]
+    },
+    "open_final_visible": {
+      "label": "open-final-visible",
+      "url": "https://gamescrate.app/game/pool-master",
+      "host": "gamescrate.app",
+      "title": "Step 5/6",
+      "body": "Step 5\nof 6\nSecure check\nFinal step\nWait for the timer, then open the final page to get your link.\n0\nSECONDS\nOpen Final Page",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "PHPSESSID",
+        "cf_clearance",
+        "fexkomin6"
+      ]
+    },
+    "open_final_after_dwell": {
+      "label": "open-final-after-dwell",
+      "url": "https://gamescrate.app/game/pool-master",
+      "host": "gamescrate.app",
+      "title": "Step 5/6",
+      "body": "Step 5\nof 6\nSecure check\nFinal step\nWait for the timer, then open the final page to get your link.\n0\nSECONDS\nOpen Final Page",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "PHPSESSID",
+        "cf_clearance",
+        "fexkomin6"
+      ]
+    },
+    "open_final_clicked": "open final page",
+    "post_open_final": {
+      "label": "post-open-final",
+      "url": "https://xut.io/hd7AOJ?sl=eyJ2IjoxLCJzdGVwIjo0LCJzaWQiOiIvaGQ3QU9KIiwiaWF0IjoxNzc3Mzk2MDM3LCJleHAiOjE3NzczOTY5MzcsIm5vbmNlIjoidUc1X1VqMl9rU3NpRnNnTm1mQWktZyIsImZwIjoiYzM5NDhlZDQ1NDNmZDJhYmJiZGNjNGZmMjg0MzA4YmMwZDVhMTcyMDc3ZTRmNDlhYjY0ZDRhNTgyZDMzNjk3NiJ9.VlIHxi2pDuVVnwMRyiUlWD8smuCgA37-vfPCNUQ5u0c",
+      "host": "xut.io",
+      "title": "xut.io",
+      "body": "Earn Money\nStep\n6\nof 6\nFinal check\nYOUR LINK IS ALMOST READY\n5\nSECONDS\nDownload\nPlease wait...\nWhat is xut.io?\nxut.io is a completely free tool where you can create short links, which apart from being free, you get paid! So, now you can make money from home, just by creating short URLs and sharing the links with your family and friends. Signup here\nWhy I am on this page?\nIt is because a xut.io user is using our website to shorten the link of your destination address.\nHow can I skip this page?\nYou have to wait 5 seconds on this page and after timer is completed click on \"Get Link\"\nHow to make money with xut.io?\nJoin xut.io, it take less than 1 minute. Once you are all set up just short links share them and start earning money. We pay for all legitimate visitors you bring to us not matter from where or what device. We pay upto 15$ per 1000 views!\n\nNavigation\nHome\nPublisher Rates\nAdvertise\nPolicies\nPrivacy Policy\nPayments Policy\nTerms Of Use\nSupport\nContact Us\nDMCA\nFAQ\nGet the latest updates\nSubscribe\nNo spam, ever.\n© 2018-2026 xut.io. All Rights Reserved.",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "AppSession",
+        "_ga",
+        "_ga_3D0YPS8ZXP",
+        "_ga_EJJGRE1H33",
+        "ab",
+        "app_visitor",
+        "csrfToken",
+        "refhd7AOJ"
+      ]
+    },
+    "step6_clickables": [
+      {
+        "href": "https://xut.io/",
+        "id": "",
+        "rect": [
+          344.5,
+          11,
+          125.15625,
+          42
+        ],
+        "tag": "A",
+        "text": "",
+        "visible": true
+      },
+      {
+        "href": "https://earnviv.com/",
+        "id": "",
+        "rect": [
+          1424.109375,
+          20.359375,
+          136.390625,
+          20
+        ],
+        "tag": "A",
+        "text": "Earn Money",
+        "visible": true
+      },
+      {
+        "href": "",
+        "id": "",
+        "rect": [
+          1424.109375,
+          12,
+          124.390625,
+          40
+        ],
+        "tag": "BUTTON",
+        "text": "Earn Money",
+        "visible": true
+      },
+      {
+        "href": "https://earnviv.com/",
+        "id": "",
+        "rect": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "tag": "A",
+        "text": "",
+        "visible": false
+      },
+      {
+        "href": "",
+        "id": "",
+        "rect": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "tag": "BUTTON",
+        "text": "",
+        "visible": false
+      },
+      {
+        "href": "https://webtrafic.ru/reklama?uid=15418",
+        "id": "",
+        "rect": [
+          718.5,
+          128,
+          468,
+          67
+        ],
+        "tag": "A",
+        "text": "",
+        "visible": true
+      },
+      {
+        "href": "https://stiftais.top/4/2457565",
+        "id": "",
+        "rect": [
+          910.1875,
+          416.015625,
+          84.609375,
+          36.5
+        ],
+        "tag": "A",
+        "text": "Download",
+        "visible": true
+      },
+      {
+        "href": "http://tesskibidixxx.com/",
+        "id": "",
+        "rect": [
+          889.90625,
+          462.515625,
+          125.171875,
+          45.59375
+        ],
+        "tag": "A",
+        "text": "Get Link",
+        "visible": true
+      },
+      {
+        "href": "",
+        "id": "go-submit",
+        "rect": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "tag": "BUTTON",
+        "text": "Submit",
+        "visible": false
+      },
+      {
+        "href": "https://xut.io/auth/signup",
+        "id": "",
+        "rect": [
+          521.890625,
+          585.609375,
+          82.203125,
+          17
+        ],
+        "tag": "A",
+        "text": "Signup here",
+        "visible": true
+      },
+      {
+        "href": "https://xut.io/",
+        "id": "",
+        "rect": [
+          547.15625,
+          1009.703125,
+          39.796875,
+          17
+        ],
+        "tag": "A",
+        "text": "Home",
+        "visible": true
+      },
+      {
+        "href": "https://xut.io/payout-rates",
+        "id": "",
+        "rect": [
+          547.15625,
+          1039.296875,
+          105.625,
+          17
+        ],
+        "tag": "A",
+        "text": "Publisher Rates",
+        "visible": true
+      },
+      {
+        "href": "https://xut.io/advertising-rates",
+        "id": "",
+        "rect": [
+          547.15625,
+          1068.890625,
+          65.75,
+          17
+        ],
+        "tag": "A",
+        "text": "Advertise",
+        "visible": true
+      },
+      {
+        "href": "https://xut.io/pages/privacy",
+        "id": "",
+        "rect": [
+          752.484375,
+          1009.703125,
+          94.578125,
+          17
+        ],
+        "tag": "A",
+        "text": "Privacy Policy",
+        "visible": true
+      },
+      {
+        "href": "https://xut.io/pages/payments-policy",
+        "id": "",
+        "rect": [
+          752.484375,
+          1039.296875,
+          111.328125,
+          17
+        ],
+        "tag": "A",
+        "text": "Payments Policy",
+        "visible": true
+      },
+      {
+        "href": "https://xut.io/pages/terms",
+        "id": "",
+        "rect": [
+          752.484375,
+          1068.890625,
+          91.5625,
+          17
+        ],
+        "tag": "A",
+        "text": "Terms Of Use",
+        "visible": true
+      },
+      {
+        "href": "https://xut.io/contact",
+        "id": "",
+        "rect": [
+          957.8125,
+          1009.703125,
+          75.671875,
+          17
+        ],
+        "tag": "A",
+        "text": "Contact Us",
+        "visible": true
+      },
+      {
+        "href": "https://xut.io/dmca",
+        "id": "",
+        "rect": [
+          957.8125,
+          1039.296875,
+          43.25,
+          17
+        ],
+        "tag": "A",
+        "text": "DMCA",
+        "visible": true
+      },
+      {
+        "href": "https://xut.io/faq",
+        "id": "",
+        "rect": [
+          957.8125,
+          1068.890625,
+          27.453125,
+          17
+        ],
+        "tag": "A",
+        "text": "FAQ",
+        "visible": true
+      },
+      {
+        "href": "",
+        "id": "",
+        "rect": [
+          1475.890625,
+          1015.859375,
+          70.59375,
+          36.5
+        ],
+        "tag": "BUTTON",
+        "text": "Subscribe",
+        "visible": true
+      },
+      {
+        "href": "https://www.x.com/xutweb",
+        "id": "",
+        "rect": [
+          1155.171875,
+          1175.484375,
+          24,
+          24
+        ],
+        "tag": "A",
+        "text": "",
+        "visible": true
+      },
+      {
+        "href": "https://www.youtube.com/",
+        "id": "",
+        "rect": [
+          1345.84375,
+          1175.484375,
+          24,
+          24
+        ],
+        "tag": "A",
+        "text": "",
+        "visible": true
+      },
+      {
+        "href": "https://www.facebook.com/xutweb",
+        "id": "",
+        "rect": [
+          1536.5,
+          1175.484375,
+          24,
+          24
+        ],
+        "tag": "A",
+        "text": "",
+        "visible": true
+      },
+      {
+        "href": "",
+        "id": "",
+        "rect": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "tag": "BUTTON",
+        "text": "",
+        "visible": false
+      },
+      {
+        "href": "",
+        "id": "",
+        "rect": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "tag": "BUTTON",
+        "text": "Subscribe now",
+        "visible": false
+      }
+    ],
+    "final_state": {
+      "label": "final-state",
+      "url": "https://xut.io/hd7AOJ?sl=eyJ2IjoxLCJzdGVwIjo0LCJzaWQiOiIvaGQ3QU9KIiwiaWF0IjoxNzc3Mzk2MDM3LCJleHAiOjE3NzczOTY5MzcsIm5vbmNlIjoidUc1X1VqMl9rU3NpRnNnTm1mQWktZyIsImZwIjoiYzM5NDhlZDQ1NDNmZDJhYmJiZGNjNGZmMjg0MzA4YmMwZDVhMTcyMDc3ZTRmNDlhYjY0ZDRhNTgyZDMzNjk3NiJ9.VlIHxi2pDuVVnwMRyiUlWD8smuCgA37-vfPCNUQ5u0c",
+      "host": "xut.io",
+      "title": "xut.io",
+      "body": "Earn Money\nStep\n6\nof 6\nFinal check\nYOUR LINK IS ALMOST READY\n0\nSECONDS\nDownload\nGet Link\nWhat is xut.io?\nxut.io is a completely free tool where you can create short links, which apart from being free, you get paid! So, now you can make money from home, just by creating short URLs and sharing the links with your family and friends. Signup here\nWhy I am on this page?\nIt is because a xut.io user is using our website to shorten the link of your destination address.\nHow can I skip this page?\nYou have to wait 5 seconds on this page and after timer is completed click on \"Get Link\"\nHow to make money with xut.io?\nJoin xut.io, it take less than 1 minute. Once you are all set up just short links share them and start earning money. We pay for all legitimate visitors you bring to us not matter from where or what device. We pay upto 15$ per 1000 views!\n\nNavigation\nHome\nPublisher Rates\nAdvertise\nPolicies\nPrivacy Policy\nPayments Policy\nTerms Of Use\nSupport\nContact Us\nDMCA\nFAQ\nGet the latest updates\nSubscribe\nNo spam, ever.\n© 2018-2026 xut.io. All Rights Reserved.",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "AppSession",
+        "_ga",
+        "_ga_3D0YPS8ZXP",
+        "_ga_EJJGRE1H33",
+        "ab",
+        "app_visitor",
+        "csrfToken",
+        "refhd7AOJ"
+      ]
+    }
+  },
+  "blockers": [],
+  "bypass_url": "http://tesskibidixxx.com/",
+  "message": "XUT_FINAL_OK",
+  "wall_seconds": 98.243
+}

@@ -1,0 +1,94 @@
+{
+  "status": 0,
+  "input_url": "https://xut.io/hd7AOJ",
+  "env_dwell": 4.0,
+  "marks": [
+    {
+      "name": "chrome_launch:start",
+      "t": 0.0
+    },
+    {
+      "name": "chrome_launch:end",
+      "t": 1.944,
+      "elapsed": 1.944,
+      "exc": null
+    },
+    {
+      "name": "initial_get:start",
+      "t": 1.944
+    },
+    {
+      "name": "initial_get:end",
+      "t": 7.268,
+      "elapsed": 5.325,
+      "exc": null
+    },
+    {
+      "name": "step1_iconcaptcha_to_step2:start",
+      "t": 7.268
+    },
+    {
+      "name": "step1_iconcaptcha_to_step2:end",
+      "t": 52.456,
+      "elapsed": 45.187,
+      "exc": "'click_x'"
+    }
+  ],
+  "facts": {
+    "after_initial_get": {
+      "label": "after-initial-get",
+      "url": "https://autodime.com/",
+      "host": "autodime.com",
+      "title": "Step 1/6",
+      "body": "Step 1\nof 6\nSecure check\nPlease wait\nPreparing a secure redirect. When the timer ends, solve the captcha to continue.\n9\nSECONDS",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "_cc_id",
+        "cto_bidid",
+        "cto_bundle",
+        "fexkomin",
+        "panoramaId",
+        "panoramaId_expiry",
+        "sharedid",
+        "sharedid_cst",
+        "usprivacy"
+      ]
+    },
+    "exception_state": {
+      "label": "exception-state",
+      "url": "https://autodime.com/",
+      "host": "autodime.com",
+      "title": "Step 1/6",
+      "body": "Step 1\nof 6\nSecure check\nPlease wait\nPreparing a secure redirect. When the timer ends, solve the captcha to continue.\n0\nSECONDS\nSelect the image displayed the least amount of times\nICONCAPTCHA ©\nIf you are not redirected automatically, click here.\nTop 10 Most Populated Cities In The World\nBRAINBERRIES\nDo You Remember 'Love Actually'? See How The Cast Looks Like Now!\nBRAINBERRIES\n7 Black Hole Facts That Will Change Your View Of The Universe\nBRAINBERRIES\nYou Won't Believe These Zouk Dance Routines\nHERBEAUTY\nThe Hottest Celebrities With Legs Everyone Talks About\nBRAINBERRIES\nJLo At 52 Looks Twice As Young, Thanks To These Little Secrets\nBRAINBERRIES\nक्या सच में शाही परिवार का भविष्य अब केट मिडलटन के हाथों में है?\nBRAINBERRIES\nमशहूर अभिनेता देव आनंद के बारे में ये बातें आप नहीं जानते होंगे\nBRAINBERRIES\n8 Times Demi Moore Took Us On An Unforgettable Ride\nBRAINBERRIES\nHe Doesn't Only Play Muslim In Movies But Practices Islam IRL\nBRAINBERRIES\n7 Netflix Shows Cancelled Because They Don’t Get The Ratings\nBRAINBERRIES\n\"Chronicles Of Narnia\" Fans Were Bemused To See How She Looks Now\nBRAINBERRIES\nAwesome Caricatures Of 23 Marvel Heroes\nBRAINBERRIES\nकैसे शुरू हुई थी देव आनंद और कल्पना कार्तिक की प्रेमकहानी\nBRAINBERRIES\nएनाकोंडा का हमला होता है बेहद घातक, दूर से खिसक जाना ही है बेहतर\nBRAINBERRIES",
+      "successText": null,
+      "hiddenValue": null,
+      "cookies": [
+        "__qca",
+        "_adplus_id",
+        "_cc_id",
+        "_sharedID",
+        "_sharedID_cst",
+        "adplusId",
+        "adplusId_cst",
+        "adplusId_last",
+        "cto_bidid",
+        "cto_bundle",
+        "fexkomin",
+        "fidflexlastcheck",
+        "firstid",
+        "firstid_flex_type",
+        "panoramaId",
+        "panoramaId_expiry",
+        "sharedid",
+        "sharedid_cst",
+        "usprivacy"
+      ]
+    }
+  },
+  "blockers": [
+    "timing probe exception"
+  ],
+  "message": "EXCEPTION: 'click_x'",
+  "wall_seconds": 52.578
+}

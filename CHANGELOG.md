@@ -2,6 +2,12 @@
 
 ## 2026-04-28
 
+### total optimization batch 3
+- Tuned Turnstile result polling from `5s` to `2s` via `SHORTLINK_BYPASS_TURNSTILE_POLL_INTERVAL`; live recheck showed `exe.io` at `65.98s` and `cuty.io` at `76.17s`.
+- XUT now prefers the standalone IconCaptcha solver API at `127.0.0.1:8091/solve` with local-python fallback and response-field normalization; live recheck returned `http://tesskibidixxx.com/` in `108.55s` after two IconCaptcha attempts.
+- GPLinks got anti-throttle Chrome flags and skips final navigation after a valid downstream href by default; live recheck returned `http://tesskibidixxx.com/` in `150.21s`.
+- A Step 1 polling experiment for XUT was rolled back after live failures, preserving the stable fixed-wait behavior.
+
 ### total optimization batch 2
 - XUT gamescrate dwell default is now `4s` after live probes kept the final oracle and reduced sample time to `97.10s`; this is `84.11s` faster than the previous `181.21s` batch-1 result (`46.4%` faster, `1.87x` speedup).
 - Added experimental `SHORTLINK_BYPASS_GPLINKS_DIRECT_POWERGAM=1` direct-PowerGam path, but live probe failed with `POWERGAM_FINAL_CANDIDATE_TIMEOUT`; it remains off by default and is not counted as a production speed win.

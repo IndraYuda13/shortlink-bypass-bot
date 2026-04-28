@@ -17,6 +17,7 @@ import requests
 from websocket import create_connection
 
 GOOGLE_HOSTS = {"google.com", "www.google.com"}
+TURNSTILE_POLL_INTERVAL = float(os.getenv("SHORTLINK_BYPASS_TURNSTILE_POLL_INTERVAL", "2"))
 
 
 def find_free_port() -> int:
@@ -163,7 +164,7 @@ def solve_turnstile(solver_url: str, page_url: str, sitekey: str, timeout: int) 
             if result.get("errorId"):
                 last_error = result
                 break
-            time.sleep(5)
+            time.sleep(max(0.5, TURNSTILE_POLL_INTERVAL))
         if time.time() >= deadline:
             break
         time.sleep(2 * task_attempt)

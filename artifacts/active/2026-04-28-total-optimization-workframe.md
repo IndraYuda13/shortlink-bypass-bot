@@ -86,3 +86,52 @@ Sebuah upgrade hanya boleh dianggap berhasil kalau:
 - Added experimental `SHORTLINK_BYPASS_GPLINKS_DIRECT_POWERGAM=1` path that imports GPLinks cookies and opens PowerGam directly.
 - Live probe with flag failed: wall `305.61s`, engine fell back to static mapper, live helper stage `powergam`, message `POWERGAM_FINAL_CANDIDATE_TIMEOUT`.
 - Decision: keep the direct-PowerGam path off by default. Do not promote it as an optimization.
+
+## 2026-04-28 batch 3 start
+- Parent checklist status:
+  - [in progress] 1. Add/collect timing telemetry for GPLinks, XUT, and Turnstile solver.
+  - [pending] 2. Identify biggest proven removable waits.
+  - [pending] 3. Patch only low-risk timing cuts or env-guarded experiments.
+  - [pending] 4. Run focused and full tests.
+  - [pending] 5. Run live timing verification.
+  - [pending] 6. Update docs/artifacts, restart service, commit/push, sync.
+- User approved continuing after batch 2.
+- Focus: profile before cutting more.
+
+### XUT batch 3 profile
+- Report saved: `artifacts/active/total-optimization/xut-batch3-profile.md`.
+- Raw success evidence: `artifacts/active/total-optimization/xut-batch3-profile-raw-4.json`.
+- Production code was not edited by the profiling subtask.
+- Live oracle preserved: `status=1`, final `http://tesskibidixxx.com/`, wall `98.243s`, default dwell observed `4.0s`.
+- Phase timing: Chrome launch `0.895s`, initial get `3.945s`, Step 1 IconCaptcha -> Step 2 `46.126s` with 1 attempt and solver API `4.671s`, Steps 2-4 -> gamescrate `23.270s`, gamescrate Open Final wait `10.193s`, dwell `4.000s`, open-final click + post wait `3.291s`, Step 6 final href wait `6.085s`.
+- Safe next cuts: remaining Step 1 fixed sleeps (`4s` canvas wait + `6s` post-click wait) -> DOM/state polling first; replace fixed `3s` post-gamescrate click wait with immediate Step 6 polling second; do not promote dwell below `4s` without a separate env-only ladder and repeated final-oracle proof.
+- Invalid probe note: headless reached gamescrate but failed final oracle by sticking on Cloudflare/security verification, so do not use headless as XUT timing basis.
+
+## 2026-04-28 batch 3 implementation result
+- Parent checklist status:
+  - [done] 1. Add/collect timing telemetry for GPLinks, XUT, and Turnstile solver.
+  - [done] 2. Identify biggest proven removable waits.
+  - [done] 3. Patch only low-risk timing cuts or env-guarded experiments.
+  - [done] 4. Run focused and full tests.
+  - [done] 5. Run live timing verification.
+  - [in progress] 6. Update docs/artifacts, restart service, commit/push, sync.
+
+### Turnstile polling
+- Turnstile profile showed task creation is cheap (`0.016-0.039s`) and browser challenge dominates (`48-54s`).
+- Changed `solve_turnstile()` poll interval default from `5s` to `2s`, tunable with `SHORTLINK_BYPASS_TURNSTILE_POLL_INTERVAL`.
+- Live after:
+  - `cuty.io/AfaX6jx`: `76.17s`, final `https://www.google.com/`.
+  - `exe.io/vkRI1`: `65.98s`, final `https://www.google.com/?gws_rd=ssl`.
+- Interpretation: exe improved vs baseline `72.2s`; cuty did not improve on this single run because solver challenge time variance dominated.
+
+### XUT IconCaptcha API + Step 1 rollback note
+- Switched XUT IconCaptcha API default to standalone `http://127.0.0.1:8091/solve`, while keeping fallback to local Python solver.
+- Normalized standalone API fields (`x/y/position`) into legacy fields (`click_x/click_y/selected_cell_number`) for compatibility.
+- Tried replacing Step 1 fixed sleeps with polling, but live verification failed with canvas lookup exceptions / `ICONCAPTCHA_STEP1_FAILED`; that risky change was rolled back.
+- Stable live after rollback and API normalization: `108.55s`, final `http://tesskibidixxx.com/`, provider `api`, Step 1 passed on attempt `2`.
+- This is slightly slower than the best batch-2 `97.10s` because this run needed 2 IconCaptcha attempts. The API switch is a reliability/maintenance improvement, not a proven speed win yet.
+
+### GPLinks batch3 profile + patch
+- Profile reported total `151.3s`: PowerGam ledger `~95-96s`, Turnstile solve `50.07s`, final submit/href `1.34s`.
+- Added anti-throttle Chrome flags and `SHORTLINK_BYPASS_GPLINKS_NAVIGATE_FINAL=1` opt-in for old final navigation behavior; default skips navigation after valid final href.
+- Live after patch: `150.21s`, final `http://tesskibidixxx.com/`, effectively same as batch-1/2 optimized GPLinks. No major GPLinks speed win from anti-throttle on this run.

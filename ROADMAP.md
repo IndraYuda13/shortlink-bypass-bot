@@ -295,3 +295,8 @@
 - GPLinks improved from `183.3s` to `148.6s` by skipping the diagnostic HTTP preflight by default and replacing several fixed waits with state-driven browser polling. Delta: saved `34.7s`, `18.9%` faster, `1.23x` speedup.
 - XUT batch-1 improved from `187.0s` to `181.21s` by treating the visible exact `Get Link` href as final oracle and skipping the final click/navigation wait. Batch-2 then lowered gamescrate dwell to `4s` after live proof, reaching `97.10s`. Delta vs original local baseline: saved `89.9s`, `48.1%` faster, `1.93x` speedup.
 - Token families remain intentionally `token_bypass` because current extraction is already ~`0.9-1.8s`; full live Turnstile/timer gate is not proven and would be slower for the current objective.
+
+## 2026-04-28 total optimization batch 3
+- Turnstile solver profile showed task creation is negligible (`0.016-0.039s`) while browser challenge solving dominates (`48-54s`). Result polling is now `2s` by default via `SHORTLINK_BYPASS_TURNSTILE_POLL_INTERVAL`; live recheck: `exe.io` `65.98s`, `cuty.io` `76.17s`.
+- XUT now prefers standalone IconCaptcha API `http://127.0.0.1:8091/solve` via `SHORTLINK_BYPASS_ICONCAPTCHA_ENDPOINT`, normalizing API fields back to legacy `click_x/click_y` shape. Live recheck after rollback of unsafe Step 1 polling: `108.55s`, final `http://tesskibidixxx.com/`, provider `api`, Step 1 needed 2 attempts.
+- GPLinks profiling showed remaining bottlenecks are PowerGam ledger `~95-96s` and Turnstile solve `~50s`. Added anti-throttle Chrome flags and skipped final navigation by default after final href is exposed; live recheck `150.21s`, effectively similar to prior optimized run.

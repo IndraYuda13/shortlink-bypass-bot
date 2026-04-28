@@ -127,6 +127,7 @@ class CutyHelperBehaviorTests(unittest.TestCase):
         self.assertNotIn('self.port = 9240', source)
         self.assertIn('solver_error', source)
         self.assertIn('timeline', source)
+        self.assertIn('SHORTLINK_BYPASS_TURNSTILE_POLL_INTERVAL', source)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,1581 @@
+{
+  "solver": "http://127.0.0.1:5000",
+  "cases": [
+    {
+      "label": "cuty",
+      "url": "https://cuttlinks.com/AfaX6jx",
+      "sitekey": "0x4AAAAAAABnHbN4cNchLhd_"
+    },
+    {
+      "label": "exe",
+      "url": "https://exeygo.com/vkRI1",
+      "sitekey": "0x4AAAAAACPCPhXQQr5wP1VW"
+    }
+  ],
+  "sequential": [
+    {
+      "label": "cuty",
+      "url": "https://cuttlinks.com/AfaX6jx",
+      "sitekey": "0x4AAAAAAABnHbN4cNchLhd_",
+      "started_at": "2026-04-28T23:56:32+0700",
+      "create_http_status": 200,
+      "create_elapsed_sec": 0.022,
+      "create_body": {
+        "errorId": 0,
+        "taskId": "0bc2f5cd-d232-4ad0-b57e-72df8ea7fd9f"
+      },
+      "task_id": "0bc2f5cd-d232-4ad0-b57e-72df8ea7fd9f",
+      "final_body_summary": {
+        "errorId": 0,
+        "solution": {
+          "token_len": 773,
+          "prefix": "1.7bUjg71c-K"
+        },
+        "status": "ready"
+      },
+      "polls": [
+        {
+          "at_sec": 0.039,
+          "http_status": 200,
+          "elapsed_sec": 0.017,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 1.07,
+          "http_status": 200,
+          "elapsed_sec": 0.029,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 2.149,
+          "http_status": 200,
+          "elapsed_sec": 0.077,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 3.157,
+          "http_status": 200,
+          "elapsed_sec": 0.007,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 4.162,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 5.263,
+          "http_status": 200,
+          "elapsed_sec": 0.098,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 6.35,
+          "http_status": 200,
+          "elapsed_sec": 0.034,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 8.036,
+          "http_status": 200,
+          "elapsed_sec": 0.686,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 9.07,
+          "http_status": 200,
+          "elapsed_sec": 0.03,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 10.076,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 11.094,
+          "http_status": 200,
+          "elapsed_sec": 0.018,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 12.102,
+          "http_status": 200,
+          "elapsed_sec": 0.007,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 13.106,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 14.117,
+          "http_status": 200,
+          "elapsed_sec": 0.01,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 15.132,
+          "http_status": 200,
+          "elapsed_sec": 0.012,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 16.137,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 17.166,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 18.173,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 19.214,
+          "http_status": 200,
+          "elapsed_sec": 0.01,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 20.219,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 21.224,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 22.23,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 23.237,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 24.245,
+          "http_status": 200,
+          "elapsed_sec": 0.007,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 25.259,
+          "http_status": 200,
+          "elapsed_sec": 0.013,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 26.311,
+          "http_status": 200,
+          "elapsed_sec": 0.051,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 27.374,
+          "http_status": 200,
+          "elapsed_sec": 0.062,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 28.379,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 29.406,
+          "http_status": 200,
+          "elapsed_sec": 0.012,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 30.415,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 31.423,
+          "http_status": 200,
+          "elapsed_sec": 0.008,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 32.43,
+          "http_status": 200,
+          "elapsed_sec": 0.007,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 33.441,
+          "http_status": 200,
+          "elapsed_sec": 0.009,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 34.449,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 35.46,
+          "http_status": 200,
+          "elapsed_sec": 0.01,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 36.47,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 37.481,
+          "http_status": 200,
+          "elapsed_sec": 0.011,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 38.487,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 39.496,
+          "http_status": 200,
+          "elapsed_sec": 0.008,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 40.535,
+          "http_status": 200,
+          "elapsed_sec": 0.015,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 41.544,
+          "http_status": 200,
+          "elapsed_sec": 0.009,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 42.557,
+          "http_status": 200,
+          "elapsed_sec": 0.009,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 43.582,
+          "http_status": 200,
+          "elapsed_sec": 0.019,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 44.701,
+          "http_status": 200,
+          "elapsed_sec": 0.118,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 45.714,
+          "http_status": 200,
+          "elapsed_sec": 0.013,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 46.744,
+          "http_status": 200,
+          "elapsed_sec": 0.029,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 47.783,
+          "http_status": 200,
+          "elapsed_sec": 0.036,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 48.926,
+          "http_status": 200,
+          "elapsed_sec": 0.143,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 50.04,
+          "http_status": 200,
+          "elapsed_sec": 0.112,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 51.059,
+          "http_status": 200,
+          "elapsed_sec": 0.019,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 52.073,
+          "http_status": 200,
+          "elapsed_sec": 0.014,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 53.093,
+          "http_status": 200,
+          "elapsed_sec": 0.015,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 54.119,
+          "http_status": 200,
+          "elapsed_sec": 0.024,
+          "status": "ready",
+          "errorId": 0,
+          "token_len": 773,
+          "solution_keys": [
+            "token"
+          ]
+        }
+      ],
+      "total_elapsed_sec": 54.119
+    },
+    {
+      "label": "exe",
+      "url": "https://exeygo.com/vkRI1",
+      "sitekey": "0x4AAAAAACPCPhXQQr5wP1VW",
+      "started_at": "2026-04-28T23:57:26+0700",
+      "create_http_status": 200,
+      "create_elapsed_sec": 0.039,
+      "create_body": {
+        "errorId": 0,
+        "taskId": "24d13aad-37f0-4003-a0b6-c33b9010ac08"
+      },
+      "task_id": "24d13aad-37f0-4003-a0b6-c33b9010ac08",
+      "final_body_summary": {
+        "errorId": 0,
+        "solution": {
+          "token_len": 752,
+          "prefix": "1.n8byvPZcE3"
+        },
+        "status": "ready"
+      },
+      "polls": [
+        {
+          "at_sec": 0.166,
+          "http_status": 200,
+          "elapsed_sec": 0.127,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 1.196,
+          "http_status": 200,
+          "elapsed_sec": 0.03,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 2.228,
+          "http_status": 200,
+          "elapsed_sec": 0.031,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 3.415,
+          "http_status": 200,
+          "elapsed_sec": 0.028,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 4.539,
+          "http_status": 200,
+          "elapsed_sec": 0.124,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 5.55,
+          "http_status": 200,
+          "elapsed_sec": 0.01,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 6.586,
+          "http_status": 200,
+          "elapsed_sec": 0.034,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 7.6,
+          "http_status": 200,
+          "elapsed_sec": 0.012,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 8.619,
+          "http_status": 200,
+          "elapsed_sec": 0.018,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 9.628,
+          "http_status": 200,
+          "elapsed_sec": 0.007,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 10.65,
+          "http_status": 200,
+          "elapsed_sec": 0.013,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 11.662,
+          "http_status": 200,
+          "elapsed_sec": 0.011,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 12.679,
+          "http_status": 200,
+          "elapsed_sec": 0.015,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 13.693,
+          "http_status": 200,
+          "elapsed_sec": 0.014,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 14.769,
+          "http_status": 200,
+          "elapsed_sec": 0.076,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 15.802,
+          "http_status": 200,
+          "elapsed_sec": 0.032,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 16.82,
+          "http_status": 200,
+          "elapsed_sec": 0.01,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 17.836,
+          "http_status": 200,
+          "elapsed_sec": 0.014,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 18.841,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 19.848,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 20.854,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 21.881,
+          "http_status": 200,
+          "elapsed_sec": 0.026,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 23.002,
+          "http_status": 200,
+          "elapsed_sec": 0.12,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 24.007,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 25.066,
+          "http_status": 200,
+          "elapsed_sec": 0.058,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 26.101,
+          "http_status": 200,
+          "elapsed_sec": 0.029,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 27.106,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 28.12,
+          "http_status": 200,
+          "elapsed_sec": 0.007,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 29.124,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 30.129,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 31.133,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 32.137,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 33.142,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 34.147,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 35.151,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 36.156,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 37.161,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 38.165,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 39.169,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 40.173,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 41.178,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 42.183,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 43.187,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 44.191,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 45.195,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 46.199,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 47.203,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 48.208,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "ready",
+          "errorId": 0,
+          "token_len": 752,
+          "solution_keys": [
+            "token"
+          ]
+        }
+      ],
+      "total_elapsed_sec": 48.208
+    }
+  ],
+  "concurrent": [
+    {
+      "label": "exe",
+      "url": "https://exeygo.com/vkRI1",
+      "sitekey": "0x4AAAAAACPCPhXQQr5wP1VW",
+      "started_at": "2026-04-28T23:58:14+0700",
+      "create_http_status": 200,
+      "create_elapsed_sec": 0.029,
+      "create_body": {
+        "errorId": 0,
+        "taskId": "f3e25479-bde7-4db0-85a5-3ba17a0acee3"
+      },
+      "task_id": "f3e25479-bde7-4db0-85a5-3ba17a0acee3",
+      "final_body_summary": {
+        "errorId": 0,
+        "solution": {
+          "token_len": 752,
+          "prefix": "1.jnKc5bn75J"
+        },
+        "status": "ready"
+      },
+      "polls": [
+        {
+          "at_sec": 0.033,
+          "http_status": 200,
+          "elapsed_sec": 0.003,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 1.039,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 2.043,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 3.051,
+          "http_status": 200,
+          "elapsed_sec": 0.007,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 4.057,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 5.062,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 6.188,
+          "http_status": 200,
+          "elapsed_sec": 0.117,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 7.207,
+          "http_status": 200,
+          "elapsed_sec": 0.015,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 8.229,
+          "http_status": 200,
+          "elapsed_sec": 0.015,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 9.253,
+          "http_status": 200,
+          "elapsed_sec": 0.024,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 10.263,
+          "http_status": 200,
+          "elapsed_sec": 0.009,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 11.276,
+          "http_status": 200,
+          "elapsed_sec": 0.012,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 12.292,
+          "http_status": 200,
+          "elapsed_sec": 0.013,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 13.315,
+          "http_status": 200,
+          "elapsed_sec": 0.02,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 14.329,
+          "http_status": 200,
+          "elapsed_sec": 0.013,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 15.344,
+          "http_status": 200,
+          "elapsed_sec": 0.013,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 16.364,
+          "http_status": 200,
+          "elapsed_sec": 0.02,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 17.523,
+          "http_status": 200,
+          "elapsed_sec": 0.158,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 18.538,
+          "http_status": 200,
+          "elapsed_sec": 0.015,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 19.563,
+          "http_status": 200,
+          "elapsed_sec": 0.024,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 20.582,
+          "http_status": 200,
+          "elapsed_sec": 0.019,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 21.594,
+          "http_status": 200,
+          "elapsed_sec": 0.012,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 22.614,
+          "http_status": 200,
+          "elapsed_sec": 0.017,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 23.632,
+          "http_status": 200,
+          "elapsed_sec": 0.018,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 24.646,
+          "http_status": 200,
+          "elapsed_sec": 0.014,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 25.652,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 26.682,
+          "http_status": 200,
+          "elapsed_sec": 0.03,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 27.726,
+          "http_status": 200,
+          "elapsed_sec": 0.043,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 28.838,
+          "http_status": 200,
+          "elapsed_sec": 0.018,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 29.85,
+          "http_status": 200,
+          "elapsed_sec": 0.01,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 30.884,
+          "http_status": 200,
+          "elapsed_sec": 0.031,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 31.901,
+          "http_status": 200,
+          "elapsed_sec": 0.016,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 32.924,
+          "http_status": 200,
+          "elapsed_sec": 0.023,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 33.981,
+          "http_status": 200,
+          "elapsed_sec": 0.035,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 34.99,
+          "http_status": 200,
+          "elapsed_sec": 0.009,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 36.032,
+          "http_status": 200,
+          "elapsed_sec": 0.042,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 37.041,
+          "http_status": 200,
+          "elapsed_sec": 0.009,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 38.09,
+          "http_status": 200,
+          "elapsed_sec": 0.049,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 39.16,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 40.179,
+          "http_status": 200,
+          "elapsed_sec": 0.013,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 41.399,
+          "http_status": 200,
+          "elapsed_sec": 0.01,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 42.667,
+          "http_status": 200,
+          "elapsed_sec": 0.085,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 43.785,
+          "http_status": 200,
+          "elapsed_sec": 0.007,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 44.789,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 45.814,
+          "http_status": 200,
+          "elapsed_sec": 0.025,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 46.921,
+          "http_status": 200,
+          "elapsed_sec": 0.107,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 47.933,
+          "http_status": 200,
+          "elapsed_sec": 0.01,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 48.944,
+          "http_status": 200,
+          "elapsed_sec": 0.009,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 49.961,
+          "http_status": 200,
+          "elapsed_sec": 0.011,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 50.989,
+          "http_status": 200,
+          "elapsed_sec": 0.014,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 52.023,
+          "http_status": 200,
+          "elapsed_sec": 0.014,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 53.078,
+          "http_status": 200,
+          "elapsed_sec": 0.05,
+          "status": "ready",
+          "errorId": 0,
+          "token_len": 752,
+          "solution_keys": [
+            "token"
+          ]
+        }
+      ],
+      "total_elapsed_sec": 53.078
+    },
+    {
+      "label": "cuty",
+      "url": "https://cuttlinks.com/AfaX6jx",
+      "sitekey": "0x4AAAAAAABnHbN4cNchLhd_",
+      "started_at": "2026-04-28T23:58:14+0700",
+      "create_http_status": 200,
+      "create_elapsed_sec": 0.016,
+      "create_body": {
+        "errorId": 0,
+        "taskId": "82eb4df2-6beb-46db-8dc5-c7fd40ec3ef1"
+      },
+      "task_id": "82eb4df2-6beb-46db-8dc5-c7fd40ec3ef1",
+      "final_body_summary": {
+        "errorId": 0,
+        "solution": {
+          "token_len": 752,
+          "prefix": "1.TQYCvfE_qV"
+        },
+        "status": "ready"
+      },
+      "polls": [
+        {
+          "at_sec": 0.019,
+          "http_status": 200,
+          "elapsed_sec": 0.003,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 1.026,
+          "http_status": 200,
+          "elapsed_sec": 0.007,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 2.031,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 3.044,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 4.055,
+          "http_status": 200,
+          "elapsed_sec": 0.011,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 5.059,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 6.189,
+          "http_status": 200,
+          "elapsed_sec": 0.13,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 7.212,
+          "http_status": 200,
+          "elapsed_sec": 0.02,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 8.23,
+          "http_status": 200,
+          "elapsed_sec": 0.019,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 9.254,
+          "http_status": 200,
+          "elapsed_sec": 0.023,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 10.262,
+          "http_status": 200,
+          "elapsed_sec": 0.007,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 11.275,
+          "http_status": 200,
+          "elapsed_sec": 0.013,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 12.29,
+          "http_status": 200,
+          "elapsed_sec": 0.012,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 13.316,
+          "http_status": 200,
+          "elapsed_sec": 0.022,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 14.328,
+          "http_status": 200,
+          "elapsed_sec": 0.009,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 15.346,
+          "http_status": 200,
+          "elapsed_sec": 0.009,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 16.361,
+          "http_status": 200,
+          "elapsed_sec": 0.008,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 17.786,
+          "http_status": 200,
+          "elapsed_sec": 0.425,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 18.809,
+          "http_status": 200,
+          "elapsed_sec": 0.023,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 19.905,
+          "http_status": 200,
+          "elapsed_sec": 0.095,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 20.944,
+          "http_status": 200,
+          "elapsed_sec": 0.038,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 22.038,
+          "http_status": 200,
+          "elapsed_sec": 0.091,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 23.064,
+          "http_status": 200,
+          "elapsed_sec": 0.019,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 24.077,
+          "http_status": 200,
+          "elapsed_sec": 0.013,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 25.091,
+          "http_status": 200,
+          "elapsed_sec": 0.004,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 26.112,
+          "http_status": 200,
+          "elapsed_sec": 0.017,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 27.153,
+          "http_status": 200,
+          "elapsed_sec": 0.031,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 28.161,
+          "http_status": 200,
+          "elapsed_sec": 0.008,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 29.4,
+          "http_status": 200,
+          "elapsed_sec": 0.238,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 30.427,
+          "http_status": 200,
+          "elapsed_sec": 0.015,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 31.435,
+          "http_status": 200,
+          "elapsed_sec": 0.008,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 32.444,
+          "http_status": 200,
+          "elapsed_sec": 0.008,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 33.888,
+          "http_status": 200,
+          "elapsed_sec": 0.403,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 35.011,
+          "http_status": 200,
+          "elapsed_sec": 0.071,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 36.025,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 37.055,
+          "http_status": 200,
+          "elapsed_sec": 0.025,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 38.069,
+          "http_status": 200,
+          "elapsed_sec": 0.011,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 39.152,
+          "http_status": 200,
+          "elapsed_sec": 0.075,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 40.18,
+          "http_status": 200,
+          "elapsed_sec": 0.028,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 41.19,
+          "http_status": 200,
+          "elapsed_sec": 0.01,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 42.207,
+          "http_status": 200,
+          "elapsed_sec": 0.015,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 43.229,
+          "http_status": 200,
+          "elapsed_sec": 0.016,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 44.243,
+          "http_status": 200,
+          "elapsed_sec": 0.011,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 45.264,
+          "http_status": 200,
+          "elapsed_sec": 0.005,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 46.283,
+          "http_status": 200,
+          "elapsed_sec": 0.014,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 47.306,
+          "http_status": 200,
+          "elapsed_sec": 0.01,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 48.315,
+          "http_status": 200,
+          "elapsed_sec": 0.009,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 49.345,
+          "http_status": 200,
+          "elapsed_sec": 0.015,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 50.412,
+          "http_status": 200,
+          "elapsed_sec": 0.008,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 51.42,
+          "http_status": 200,
+          "elapsed_sec": 0.007,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 52.455,
+          "http_status": 200,
+          "elapsed_sec": 0.034,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 53.485,
+          "http_status": 200,
+          "elapsed_sec": 0.029,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 54.51,
+          "http_status": 200,
+          "elapsed_sec": 0.017,
+          "status": "processing",
+          "errorId": null
+        },
+        {
+          "at_sec": 55.518,
+          "http_status": 200,
+          "elapsed_sec": 0.006,
+          "status": "ready",
+          "errorId": 0,
+          "token_len": 752,
+          "solution_keys": [
+            "token"
+          ]
+        }
+      ],
+      "total_elapsed_sec": 55.518
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,3525 @@
+{
+  "url": "https://gplinks.co/YVTC",
+  "events": [
+    {
+      "t": 0.0,
+      "kind": "run_start",
+      "url": "https://gplinks.co/YVTC",
+      "direct_powergam": false
+    },
+    {
+      "t": 0.561,
+      "kind": "build_driver_start"
+    },
+    {
+      "t": 3.766,
+      "kind": "build_driver_end",
+      "duration": 3.205
+    },
+    {
+      "t": 5.847,
+      "kind": "wait_document_ready_start",
+      "timeout": 25,
+      "interval": 0.5,
+      "href": "https://powergam.online/"
+    },
+    {
+      "t": 6.057,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.21,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 6.228,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.171,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 6.232,
+      "kind": "wait_document_ready_end",
+      "duration": 0.731,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 6.51,
+      "kind": "state",
+      "stage": "entry",
+      "duration": 0.278,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 6.534,
+      "kind": "state",
+      "stage": "power-entry",
+      "duration": 0.016,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 6.543,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.009,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 6.543,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 6.58,
+      "kind": "click_next_powergam_end",
+      "duration": 0.036,
+      "result": {
+        "clicked": true,
+        "cls": "VerifyBtn",
+        "disabled": false,
+        "id": "VerifyBtn",
+        "idx": 0,
+        "tag": "BUTTON",
+        "text": "VERIFY"
+      }
+    },
+    {
+      "t": 6.599,
+      "kind": "wait_document_ready_start",
+      "timeout": 6,
+      "interval": 0.5,
+      "href": "https://powergam.online/"
+    },
+    {
+      "t": 6.708,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.109,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "href": "",
+            "id": "",
+            "tag": "BUTTON",
+            "text": "Reload Page"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 1 of 3"
+      }
+    },
+    {
+      "t": 6.716,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.008,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "href": "",
+            "id": "",
+            "tag": "BUTTON",
+            "text": "Reload Page"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 1 of 3"
+      }
+    },
+    {
+      "t": 6.716,
+      "kind": "wait_document_ready_end",
+      "duration": 0.137,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "href": "",
+            "id": "",
+            "tag": "BUTTON",
+            "text": "Reload Page"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 1 of 3"
+      }
+    },
+    {
+      "t": 6.725,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.009,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "href": "",
+            "id": "",
+            "tag": "BUTTON",
+            "text": "Reload Page"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 1 of 3"
+      }
+    },
+    {
+      "t": 6.726,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 6.734,
+      "kind": "click_next_powergam_end",
+      "duration": 0.008,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 1,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 15
+      }
+    },
+    {
+      "t": 15.753,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.019,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "11",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=18&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 11 Seconds...\nCONTINUE\n\nStep 1 of 3"
+      }
+    },
+    {
+      "t": 15.753,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 15.775,
+      "kind": "click_next_powergam_end",
+      "duration": 0.022,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 11
+      }
+    },
+    {
+      "t": 24.782,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.006,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "6",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=18&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 6 Seconds...\nCONTINUE\n\nStep 1 of 3"
+      }
+    },
+    {
+      "t": 24.782,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 24.789,
+      "kind": "click_next_powergam_end",
+      "duration": 0.007,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 6
+      }
+    },
+    {
+      "t": 31.296,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.006,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "3",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=18&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 3 Seconds...\nCONTINUE\n\nStep 1 of 3"
+      }
+    },
+    {
+      "t": 31.296,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 31.303,
+      "kind": "click_next_powergam_end",
+      "duration": 0.007,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 3
+      }
+    },
+    {
+      "t": 34.809,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.006,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "1",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=18&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 1 Seconds...\nCONTINUE\n\nStep 1 of 3"
+      }
+    },
+    {
+      "t": 34.809,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 34.816,
+      "kind": "click_next_powergam_end",
+      "duration": 0.007,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 1
+      }
+    },
+    {
+      "t": 36.321,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.006,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "0",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=18&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please Wait...\nVerify & Scroll down to Continue\nCONTINUE\n\nStep 1 of 3"
+      }
+    },
+    {
+      "t": 36.322,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 37.493,
+      "kind": "click_next_powergam_end",
+      "duration": 1.171,
+      "result": {
+        "clicked": true,
+        "cls": "NextBtn",
+        "disabled": false,
+        "id": "NextBtn",
+        "idx": 5,
+        "tag": "A",
+        "text": "CONTINUE"
+      }
+    },
+    {
+      "t": 37.586,
+      "kind": "wait_document_ready_start",
+      "timeout": 6,
+      "interval": 0.5,
+      "href": "https://powergam.online/"
+    },
+    {
+      "t": 37.647,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.06,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 37.651,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.004,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 37.652,
+      "kind": "wait_document_ready_end",
+      "duration": 0.159,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 37.655,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.004,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 37.655,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 37.667,
+      "kind": "click_next_powergam_end",
+      "duration": 0.012,
+      "result": {
+        "clicked": true,
+        "cls": "VerifyBtn",
+        "disabled": false,
+        "id": "VerifyBtn",
+        "idx": 0,
+        "tag": "BUTTON",
+        "text": "VERIFY"
+      }
+    },
+    {
+      "t": 37.67,
+      "kind": "wait_document_ready_start",
+      "timeout": 6,
+      "interval": 0.5,
+      "href": "https://powergam.online/"
+    },
+    {
+      "t": 37.674,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.004,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 2 of 3"
+      }
+    },
+    {
+      "t": 37.679,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.004,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 2 of 3"
+      }
+    },
+    {
+      "t": 37.679,
+      "kind": "wait_document_ready_end",
+      "duration": 0.012,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 2 of 3"
+      }
+    },
+    {
+      "t": 37.683,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.004,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 2 of 3"
+      }
+    },
+    {
+      "t": 37.683,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 37.689,
+      "kind": "click_next_powergam_end",
+      "duration": 0.006,
+      "result": {
+        "candidates": [
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 0,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 1,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 15
+      }
+    },
+    {
+      "t": 46.697,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.008,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "11",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=16&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=9&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 11 Seconds...\nCONTINUE\n\nStep 2 of 3"
+      }
+    },
+    {
+      "t": 46.697,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 46.705,
+      "kind": "click_next_powergam_end",
+      "duration": 0.008,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 11
+      }
+    },
+    {
+      "t": 55.728,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.023,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "6",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=16&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=9&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 6 Seconds...\nCONTINUE\n\nStep 2 of 3"
+      }
+    },
+    {
+      "t": 55.728,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 55.779,
+      "kind": "click_next_powergam_end",
+      "duration": 0.051,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 6
+      }
+    },
+    {
+      "t": 62.308,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.028,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "3",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=16&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=9&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 3 Seconds...\nCONTINUE\n\nStep 2 of 3"
+      }
+    },
+    {
+      "t": 62.308,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 62.351,
+      "kind": "click_next_powergam_end",
+      "duration": 0.044,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 3
+      }
+    },
+    {
+      "t": 65.862,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.01,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "1",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=16&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=9&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 1 Seconds...\nCONTINUE\n\nStep 2 of 3"
+      }
+    },
+    {
+      "t": 65.862,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 65.87,
+      "kind": "click_next_powergam_end",
+      "duration": 0.008,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 1
+      }
+    },
+    {
+      "t": 67.378,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.007,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "1",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=16&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=9&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 1 Seconds...\nCONTINUE\n\nStep 2 of 3"
+      }
+    },
+    {
+      "t": 67.378,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 67.386,
+      "kind": "click_next_powergam_end",
+      "duration": 0.009,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 1
+      }
+    },
+    {
+      "t": 68.893,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.006,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "0",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=16&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=9&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please Wait...\nVerify & Scroll down to Continue\nCONTINUE\n\nStep 2 of 3"
+      }
+    },
+    {
+      "t": 68.895,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 70.076,
+      "kind": "click_next_powergam_end",
+      "duration": 1.181,
+      "result": {
+        "clicked": true,
+        "cls": "NextBtn",
+        "disabled": false,
+        "id": "NextBtn",
+        "idx": 5,
+        "tag": "A",
+        "text": "CONTINUE"
+      }
+    },
+    {
+      "t": 70.27,
+      "kind": "wait_document_ready_start",
+      "timeout": 6,
+      "interval": 0.5,
+      "href": "https://powergam.online/"
+    },
+    {
+      "t": 70.436,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.165,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 70.69,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.254,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 70.691,
+      "kind": "wait_document_ready_end",
+      "duration": 0.615,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 70.781,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.09,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=14&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "VERIFY"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds..."
+      }
+    },
+    {
+      "t": 70.782,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 70.831,
+      "kind": "click_next_powergam_end",
+      "duration": 0.049,
+      "result": {
+        "clicked": true,
+        "cls": "VerifyBtn",
+        "disabled": false,
+        "id": "VerifyBtn",
+        "idx": 2,
+        "tag": "BUTTON",
+        "text": "VERIFY"
+      }
+    },
+    {
+      "t": 70.909,
+      "kind": "wait_document_ready_start",
+      "timeout": 6,
+      "interval": 0.5,
+      "href": "https://powergam.online/"
+    },
+    {
+      "t": 70.92,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.011,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=14&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 3 of 3"
+      }
+    },
+    {
+      "t": 70.927,
+      "kind": "state",
+      "stage": "ready-wait",
+      "duration": 0.007,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=14&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 3 of 3"
+      }
+    },
+    {
+      "t": 70.927,
+      "kind": "wait_document_ready_end",
+      "duration": 0.092,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=14&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 3 of 3"
+      }
+    },
+    {
+      "t": 70.932,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.004,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "15",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=14&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 15 Seconds...\nCONTINUE\n\nStep 3 of 3"
+      }
+    },
+    {
+      "t": 70.932,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 70.946,
+      "kind": "click_next_powergam_end",
+      "duration": 0.014,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 15
+      }
+    },
+    {
+      "t": 80.013,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.058,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "10",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=14&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 10 Seconds...\nCONTINUE\n\nStep 3 of 3"
+      }
+    },
+    {
+      "t": 80.013,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 80.095,
+      "kind": "click_next_powergam_end",
+      "duration": 0.082,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 10
+      }
+    },
+    {
+      "t": 89.489,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.331,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "6",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=14&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 6 Seconds...\nCONTINUE\n\nStep 3 of 3"
+      }
+    },
+    {
+      "t": 89.489,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 89.506,
+      "kind": "click_next_powergam_end",
+      "duration": 0.017,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 6
+      }
+    },
+    {
+      "t": 96.106,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.098,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "2",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=14&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 2 Seconds...\nCONTINUE\n\nStep 3 of 3"
+      }
+    },
+    {
+      "t": 96.122,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 96.259,
+      "kind": "click_next_powergam_end",
+      "duration": 0.137,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 2
+      }
+    },
+    {
+      "t": 98.806,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.044,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "1",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=14&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please wait 1 Seconds...\nCONTINUE\n\nStep 3 of 3"
+      }
+    },
+    {
+      "t": 98.806,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 98.87,
+      "kind": "click_next_powergam_end",
+      "duration": 0.064,
+      "result": {
+        "candidates": [
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 0,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 1,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "i": 2,
+            "id": "VerifyBtn",
+            "t": "Please Wait...",
+            "tag": "BUTTON"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 3,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 4,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "i": 5,
+            "id": "NextBtn",
+            "t": "CONTINUE",
+            "tag": "A"
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "i": 6,
+            "id": "",
+            "t": "",
+            "tag": "A"
+          },
+          {
+            "cls": "button-adb-refresh",
+            "disabled": false,
+            "i": 7,
+            "id": "",
+            "t": "Reload Page",
+            "tag": "BUTTON"
+          }
+        ],
+        "clicked": false,
+        "waitLeft": 1
+      }
+    },
+    {
+      "t": 100.414,
+      "kind": "state",
+      "stage": "loop",
+      "duration": 0.041,
+      "state": {
+        "href": "https://powergam.online/",
+        "title": "Please Wait... | PowerGam",
+        "timerText": "0",
+        "sitekey": null,
+        "captchaInput": false,
+        "captchaButton": null,
+        "forms_count": 1,
+        "buttons": [
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=8&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=14&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "VerifyBtn",
+            "disabled": false,
+            "href": "",
+            "id": "VerifyBtn",
+            "tag": "BUTTON",
+            "text": "Please Wait..."
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=15&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "",
+            "disabled": false,
+            "href": "https://tracki.click/ads/api/click.php?cid=10&r=aHR0cHM6Ly9wb3dlcmdhbS5vbmxpbmUv&vid=1019554664&pid=1224622",
+            "id": "",
+            "tag": "A",
+            "text": ""
+          },
+          {
+            "cls": "NextBtn",
+            "disabled": false,
+            "href": "https://powergam.online/#",
+            "id": "NextBtn",
+            "tag": "A",
+            "text": "CONTINUE"
+          }
+        ],
+        "text_head": "Please Wait...\nVerify & Scroll down to Continue\nCONTINUE\n\nStep 3 of 3"
+      }
+    },
+    {
+      "t": 100.414,
+      "kind": "click_next_powergam_start"
+    },
+    {
+      "t": 102.288,
+      "kind": "run_exception",
+      "duration": 102.288,
+      "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+    }
+  ],
+  "result": {
+    "status": 0,
+    "stage": "profile-exception",
+    "message": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  }
+}

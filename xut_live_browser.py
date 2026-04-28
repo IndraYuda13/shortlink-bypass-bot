@@ -55,22 +55,39 @@ def detect_chrome_major() -> int | None:
     return int(match.group(1)) if match else None
 
 
-ENV_TEXT = Path("/etc/indra-api-hub.env").read_text()
+ICONCAPTCHA_ENDPOINT = os.getenv("SHORTLINK_BYPASS_ICONCAPTCHA_ENDPOINT", "http://127.0.0.1:8091/solve")
+try:
+    ENV_TEXT = Path("/etc/indra-api-hub.env").read_text()
+except Exception:
+    ENV_TEXT = ""
 ENV_MATCH = re.search(r"^INDRA_API_KEYS=(.*)$", ENV_TEXT, re.M)
 RAW_KEYS = ENV_MATCH.group(1).strip().strip('"').strip("'") if ENV_MATCH else ""
-FIRST_KEY = [p.strip() for p in re.split(r"[\n,]+", RAW_KEYS) if p.strip()][0]
+KEY_PARTS = [p.strip() for p in re.split(r"[\n,]+", RAW_KEYS) if p.strip()]
+FIRST_KEY = KEY_PARTS[0] if KEY_PARTS else ""
 API_KEY = FIRST_KEY.split(":", 1)[1] if ":" in FIRST_KEY else FIRST_KEY
 
 
 def solve_canvas_via_local_api(canvas_data_url: str) -> dict:
     try:
+        headers = {"Content-Type": "application/json", "Accept": "application/json"}
+        if API_KEY:
+            headers["X-API-Key"] = API_KEY
         req = urllib.request.Request(
-            "http://127.0.0.1:5001/api/v1/iconcaptcha/solve",
+            ICONCAPTCHA_ENDPOINT,
             data=json.dumps({"canvas_data_url": canvas_data_url}).encode(),
-            headers={"Content-Type": "application/json", "X-API-Key": API_KEY, "Accept": "application/json"},
+            headers=headers,
         )
         with urllib.request.urlopen(req, timeout=20) as resp:
-            data = json.loads(resp.read().decode())["result"]
+            payload = json.loads(resp.read().decode())
+            data = payload.get("result") if isinstance(payload, dict) and "result" in payload else payload
+            if "click_x" not in data and "x" in data:
+                data["click_x"] = data["x"]
+            if "click_y" not in data and "y" in data:
+                data["click_y"] = data["y"]
+            if "selected_cell_number" not in data and "position" in data:
+                data["selected_cell_number"] = data["position"]
+            if "selected_cell_index" not in data and data.get("selected_cell_number"):
+                data["selected_cell_index"] = int(data["selected_cell_number"]) - 1
             data.setdefault("provider", "api")
             return data
     except Exception as api_exc:
@@ -310,6 +327,10 @@ def solve_step1_until_step2(driver, max_attempts: int = 6, capture_dir: Path | N
             time.sleep(2)
             continue
         solver = solve_canvas_via_local_api(canvas_data)
+        if "click_x" not in solver or "click_y" not in solver:
+            history.append({"attempt": attempt, "message": "solver missing click coordinates", "solver": solver})
+            time.sleep(2)
+            continue
         canvas = driver.find_element(By.CSS_SELECTOR, "canvas")
         rect = canvas.rect
         ox = solver["click_x"] - rect["width"] / 2
@@ -427,7 +448,7 @@ def main() -> int:
         time.sleep(max(0.0, XUT_GAMESCRATE_DWELL_SECONDS))
         result["facts"]["open_final_after_dwell"] = snap(driver, "open-final-after-dwell")
         result["facts"]["open_final_clicked"] = click_button_contains(driver, "open final page")
-        time.sleep(3)
+        wait_for(lambda: "xut.io" in driver.current_url or "Step 6" in body_text(driver) or final_url_from_current_state(driver), timeout=6, interval=0.5)
         result["facts"]["post_open_final"] = [snap(driver, "post-open-final")]
 
         for _ in range(80):
