@@ -115,13 +115,13 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
     SupportedSite(
         host="cuty.io",
         family="cuty.io",
-        status="partial",
+        status="live_bypass",
         handler="_handle_cuty",
         command_alias="cuty",
         sample_url="https://cuty.io/AfaX6jx",
         expected_final="https://google.com",
-        proof="Current user bot run reached CUTY_LIVE_CHAIN_FAILED with ERROR_CAPTCHA_UNSOLVABLE.",
-        blockers=("Turnstile solver can fail with ERROR_CAPTCHA_UNSOLVABLE, so live success is not stable enough to mark supported.",),
+        proof="Live engine recheck on 2026-04-28 returned google.com after Turnstile browser-pool refresh and token injection.",
+        notes=("Uses local Turnstile solver API plus same-browser timer and /go form submit.",),
     ),
     SupportedSite(
         host="gplinks.co",

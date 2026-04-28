@@ -137,26 +137,38 @@ class CdpPage:
 
 
 def solve_turnstile(solver_url: str, page_url: str, sitekey: str, timeout: int) -> str:
-    task = requests.get(
-        f"{solver_url.rstrip('/')}/turnstile",
-        params={"url": page_url, "sitekey": sitekey},
-        timeout=20,
-    ).json()
-    task_id = task.get("taskId")
-    if not task_id:
-        raise RuntimeError(f"solver did not return taskId: {task}")
-
     deadline = time.time() + timeout
-    while time.time() < deadline:
-        result = requests.get(f"{solver_url.rstrip('/')}/result", params={"id": task_id}, timeout=20).json()
-        if result.get("status") == "ready":
-            token = (result.get("solution") or {}).get("token")
-            if token:
-                return token
-            raise RuntimeError(f"solver ready without token: {result}")
-        if result.get("errorId"):
-            raise RuntimeError(f"solver error: {result}")
-        time.sleep(5)
+    last_error: dict | None = None
+    # The local solver can occasionally return an instant CAPTCHA_FAIL when its
+    # long-lived browser pool is stale. A fresh task usually works after the
+    # service/browser pool has been refreshed, so give it one clean retry before
+    # returning a hard failure to the bypass engine.
+    for task_attempt in range(1, 3):
+        task = requests.get(
+            f"{solver_url.rstrip('/')}/turnstile",
+            params={"url": page_url, "sitekey": sitekey},
+            timeout=20,
+        ).json()
+        task_id = task.get("taskId")
+        if not task_id:
+            raise RuntimeError(f"solver did not return taskId: {task}")
+
+        while time.time() < deadline:
+            result = requests.get(f"{solver_url.rstrip('/')}/result", params={"id": task_id}, timeout=20).json()
+            if result.get("status") == "ready":
+                token = (result.get("solution") or {}).get("token")
+                if token:
+                    return token
+                raise RuntimeError(f"solver ready without token: {result}")
+            if result.get("errorId"):
+                last_error = result
+                break
+            time.sleep(5)
+        if time.time() >= deadline:
+            break
+        time.sleep(2 * task_attempt)
+    if last_error:
+        raise RuntimeError(f"solver error after retry: {last_error}")
     raise TimeoutError("solver timeout")
 
 

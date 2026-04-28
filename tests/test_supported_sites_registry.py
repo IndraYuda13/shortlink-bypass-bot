@@ -13,6 +13,7 @@ class SupportedSitesRegistryTests(unittest.TestCase):
             "ez4short.com",
             "lnbz.la",
             "sfl.gl",
+            "cuty.io",
         })
         self.assertEqual(LIVE_BYPASS_HOSTS, live_hosts)
 
@@ -22,7 +23,7 @@ class SupportedSitesRegistryTests(unittest.TestCase):
         self.assertEqual(statuses["tpi.li"], "token_bypass")
         self.assertEqual(statuses["aii.sh"], "token_bypass")
         self.assertEqual(statuses["xut.io"], "partial")
-        self.assertEqual(statuses["cuty.io"], "partial")
+        self.assertEqual(statuses["cuty.io"], "live_bypass")
         self.assertEqual(statuses["gplinks.co"], "partial")
         self.assertEqual(statuses["sfl.gl"], "live_bypass")
         self.assertEqual(statuses["exe.io"], "partial")

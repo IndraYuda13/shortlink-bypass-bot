@@ -22,7 +22,7 @@ This document mirrors `supported_sites.py`, which is the canonical machine-reada
 | `tpi.li` | `token_bypass` | `tpi` | `_handle_token_landing` | `https://tpi.li/Dd5xka` | `https://99faucet.com/links/back/haBKjYrugRxDIVCpGqMo` | Token extraction works, full Turnstile/timer lane not proven. |
 | `aii.sh` | `token_bypass` | `aii` | `_handle_token_landing` | `https://aii.sh/CBygg8fn2s3` | `https://coinadster.com/shortlink.php?short_key=1cnd9h...h9a` | Token extraction only. Fresh full oracle should be captured before marking live. |
 | `xut.io` | `partial` | `xut` | `_handle_autodime_cwsafelink` | `https://xut.io/hd7AOJ` | `http://tesskibidixxx.com` | Runtime has reached gamescrate Cloudflare after Step 1-4 in one live run; later repeat still failed at Step 1, so final target is still not proven. |
-| `cuty.io` | `partial` | `cuty` | `_handle_cuty` | `https://cuty.io/AfaX6jx` | `https://google.com` | Current bot run can fail with `ERROR_CAPTCHA_UNSOLVABLE`. |
+| `cuty.io` | `live_bypass` | `cuty` | `_handle_cuty` | `https://cuty.io/AfaX6jx` | `https://google.com` | Live engine recheck on 2026-04-28 returned the final URL after Turnstile browser-pool refresh. |
 | `gplinks.co` | `partial` | `gplinks` | `_handle_gplinks` | `https://gplinks.co/YVTC` | `http://tesskibidixxx.com` | PowerGam flow mapped, but final still fails `not_enough_steps`. |
 | `sfl.gl` | `live_bypass` | `sfl` | `_handle_sfl` | `https://sfl.gl/18PZXXI9` | `https://google.com` | WARP proxy fallback reaches SafelinkU API flow and returns the expected final target. |
 | `exe.io` | `partial` | `exe` | `_handle_exe` | `https://exe.io/vkRI1` | `https://google.com` | Two-stage exeygo CakePHP gate is mapped; valid Turnstile/reCAPTCHA token is still required before final can be proven. |

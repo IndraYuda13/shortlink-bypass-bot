@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import os
 import re
@@ -120,7 +121,36 @@ def snap(driver, label: str) -> dict:
     }
 
 
-def solve_step1_until_step2(driver, max_attempts: int = 6) -> tuple[bool, int | None, list[dict]]:
+def save_iconcaptcha_capture(capture_dir: Path | None, canvas_data_url: str, solver: dict, attempt: int, passed: bool, title: str, body: str) -> str | None:
+    if not capture_dir:
+        return None
+    capture_dir.mkdir(parents=True, exist_ok=True)
+    ts = int(time.time() * 1000)
+    stem = f"xut_autodime_{ts}_attempt{attempt}_{'pass' if passed else 'fail'}"
+    image_path = capture_dir / f"{stem}.png"
+    label_path = capture_dir / "labels.jsonl"
+    payload = canvas_data_url.split(",", 1)[1]
+    image_path.write_bytes(base64.b64decode(payload))
+    row = {
+        "image": image_path.name,
+        "attempt": attempt,
+        "passed": passed,
+        "selected_cell_number": solver.get("selected_cell_number"),
+        "selected_cell_index": solver.get("selected_cell_index"),
+        "click_x": solver.get("click_x"),
+        "click_y": solver.get("click_y"),
+        "confidence": solver.get("confidence"),
+        "groups": solver.get("groups"),
+        "pairwise_mad": solver.get("pairwise_mad"),
+        "title": title,
+        "body_excerpt": body[:500],
+    }
+    with label_path.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+    return str(image_path)
+
+
+def solve_step1_until_step2(driver, max_attempts: int = 6, capture_dir: Path | None = None) -> tuple[bool, int | None, list[dict]]:
     history: list[dict] = []
     wait_for(lambda: "Step 1/6" in driver.title or "Step 1/6" in driver.page_source, timeout=120)
     time.sleep(12)
@@ -147,8 +177,11 @@ def solve_step1_until_step2(driver, max_attempts: int = 6) -> tuple[bool, int | 
         oy = solver["click_y"] - rect["height"] / 2
         ActionChains(driver).move_to_element_with_offset(canvas, ox, oy).click().perform()
         time.sleep(6)
-        history.append({"attempt": attempt, "solver": solver, "title": driver.title, "body": body_text(driver)})
-        if "Step 2/6" in driver.title or "Step 2" in body_text(driver):
+        current_body = body_text(driver)
+        passed = "Step 2/6" in driver.title or "Step 2" in current_body
+        capture_path = save_iconcaptcha_capture(capture_dir, canvas_data, solver, attempt, passed, driver.title, current_body)
+        history.append({"attempt": attempt, "solver": solver, "title": driver.title, "body": current_body, "capture_path": capture_path, "passed": passed})
+        if passed:
             return True, attempt, history
     return False, None, history
 
@@ -206,6 +239,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("url")
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT)
+    parser.add_argument("--iconcaptcha-capture-dir", type=Path, default=None)
     args = parser.parse_args()
 
     opts = uc.ChromeOptions()
@@ -231,7 +265,7 @@ def main() -> int:
 
     try:
         driver.get(args.url)
-        ok, step1_attempt, step1_history = solve_step1_until_step2(driver)
+        ok, step1_attempt, step1_history = solve_step1_until_step2(driver, capture_dir=args.iconcaptcha_capture_dir)
         result["facts"]["step1_success_attempt"] = step1_attempt
         result["facts"]["step1_history"] = step1_history[-3:]
         if not ok:

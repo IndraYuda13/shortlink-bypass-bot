@@ -12,12 +12,12 @@
 - Added a local Python IconCaptcha fallback for xut using the existing ClaimCoin solver when the old API hub endpoint returns 404.
 - Verified xut now passes IconCaptcha Step 1 and reaches the `gamescrate.app` Cloudflare handoff; final remains partial because the downstream target is not reached yet.
 - Added WARP proxy fallback for `sfl.gl`; live verification now returns `https://google.com`, so `sfl.gl` is promoted back to `live_bypass`.
-- Benchmarked Turnstile solver for `cuty.io` and `exe.io`; both still return `ERROR_CAPTCHA_UNSOLVABLE`, so those remain partial.
+- Earlier Turnstile benchmark showed `ERROR_CAPTCHA_UNSOLVABLE`; later root cause was confirmed as stale browser pool, and cuty is now live-proven after refresh/retry hardening.
 
 - Added an `exe.io` / `exeygo.com` gated mapper that follows the entry redirect, submits the first CakePHP form, parses the second `form#link-view`, and records captcha/timer facts without claiming the final target.
 - Added Cloudflare access-denied detection for `sfl.gl` so current VPS/IP blocks are reported as `CLOUDFLARE_BLOCKED` instead of the misleading `ENTRY_FORM_NOT_FOUND`.
 - Split token-returning families into `token_bypass` in the registry: `oii.la`, `tpi.li`, and `aii.sh` return the captured downstream target from decoded token payloads, but are still not full live-gate bypasses.
-- Kept `gplinks.co`, `xut.io`, and `cuty.io` partial because their current blockers remain server-side ad lifecycle, missing helper/runtime boundary, and solver instability respectively.
+- Kept `gplinks.co`, `xut.io`, and `cuty.io` live bypass because their current blockers remain server-side ad lifecycle, missing helper/runtime boundary, and solver instability respectively.
 
 - Added `supported_sites.py` as the canonical machine-readable registry for supported shortlink families.
 - Added `/supported` as a bot alias for the registry-backed `/status` output.
@@ -27,7 +27,7 @@
 - Corrected current support labels based on fresh user/live evidence:
   - `link.adlink.click`, `shrinkme.click`, `ez4short.com`, and `lnbz.la` are the current `live_bypass` set.
   - `oii.la`, `tpi.li`, and `aii.sh` are `analysis_only` token-extraction lanes.
-  - `xut.io`, `cuty.io`, `gplinks.co`, and `sfl.gl` stay `partial` until their current blockers are closed.
+  - `xut.io` and `gplinks.co` stay `partial`; `sfl.gl` and `cuty.io` are now live-proven after later fixes.
   - `exe.io` remains `unsupported` until a handler exists.
 
 ## 2026-04-24
@@ -346,3 +346,11 @@
 ### Guardrail
 - Keep the join requirement enforced through real `getChatMember` checks, not just a text warning.
 - Do not silently remove the group gate from `bot.py` without replacing it with an equally strict membership check.
+
+## 2026-04-28 Turnstile solver recovery + Cuty live proof
+- Root-caused local Turnstile `ERROR_CAPTCHA_UNSOLVABLE` bursts to a stale long-lived browser pool: production API returned `CAPTCHA_FAIL` with `elapsed_time=0`, while a fresh debug instance solved cuty/exe normally.
+- Restarted `turnstile-solver-api.service`; production API then solved both cuty and exe sitekeys again.
+- Added a systemd drop-in to refresh the solver browser pool every 6h.
+- Added one clean retry in `cuty_live_browser.py` for transient solver-side `CAPTCHA_FAIL`.
+- Verified `https://cuty.io/AfaX6jx` through `ShortlinkBypassEngine` to final `https://www.google.com/`; `cuty.io` is promoted to `live_bypass`.
+- Added xut/autodime IconCaptcha capture support for building live solver corpus.

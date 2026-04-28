@@ -253,4 +253,4 @@
 - Added a local Python IconCaptcha fallback for xut using the proven ClaimCoin solver when the old API hub endpoint returns 404.
 - xut runtime/dependency blockers are repaired. One live run reached `gamescrate.app` Cloudflare after Step 1-4, but a later repeat still failed at Step 1, so the active blocker is solver stability plus gamescrate final gate.
 - Added SFL WARP proxy fallback; `sfl.gl/18PZXXI9` now returns `https://google.com` again.
-- Turnstile benchmark for cuty/exe still returns `ERROR_CAPTCHA_UNSOLVABLE`; solver/provider lane remains the blocker.
+- Turnstile root cause found: stale long-lived browser pool returned instant `CAPTCHA_FAIL` with `elapsed_time=0`. Service refresh + retry fixed cuty and raw solver tokens for cuty/exe; exe still needs final token submission integration.
