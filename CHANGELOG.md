@@ -2,6 +2,10 @@
 
 ## 2026-04-28
 
+### total optimization batch 2
+- XUT gamescrate dwell default is now `4s` after live probes kept the final oracle and reduced sample time to `97.10s`; this is `84.11s` faster than the previous `181.21s` batch-1 result (`46.4%` faster, `1.87x` speedup).
+- Added experimental `SHORTLINK_BYPASS_GPLINKS_DIRECT_POWERGAM=1` direct-PowerGam path, but live probe failed with `POWERGAM_FINAL_CANDIDATE_TIMEOUT`; it remains off by default and is not counted as a production speed win.
+
 ### total optimization batch 1
 - GPLinks now skips the diagnostic HTTP-fast preflight by default and uses more state-driven browser waits; live sample improved from `183.3s` to `148.6s` while preserving `http://tesskibidixxx.com/`.
 - XUT now treats the visible exact `Get Link` href as the final oracle by default, skipping the final click/navigation wait; live sample improved from `187.0s` to `181.21s` while preserving `http://tesskibidixxx.com/`.

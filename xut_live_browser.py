@@ -42,7 +42,7 @@ FINAL_HOST_MARKERS = ("onlyfaucet.com", "tesskibidixxx.com")
 DEFAULT_TIMEOUT = 300
 XUT_FINAL_HOST_BLOCKLIST = {"xut.io", "gamescrate.app", "stiftais.top", "webtrafic.ru", "earnviv.com"}
 CHROME_PATH = "/usr/bin/google-chrome" if Path("/usr/bin/google-chrome").exists() else "/usr/bin/google-chrome-stable"
-XUT_GAMESCRATE_DWELL_SECONDS = float(os.getenv("SHORTLINK_BYPASS_XUT_GAMESCRATE_DWELL", "8"))
+XUT_GAMESCRATE_DWELL_SECONDS = float(os.getenv("SHORTLINK_BYPASS_XUT_GAMESCRATE_DWELL", "4"))
 XUT_CLICK_FINAL_LINK = os.getenv("SHORTLINK_BYPASS_XUT_CLICK_FINAL", "0").strip().lower() in {"1", "true", "yes", "on"}
 
 

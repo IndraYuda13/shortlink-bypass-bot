@@ -73,6 +73,11 @@ class GplinksTests(unittest.TestCase):
         self.assertEqual(result.bypass_url, 'http://tesskibidixxx.com/')
         self.assertTrue(result.facts['token_used'])
 
+    def test_gplinks_helper_keeps_direct_powergam_flag(self):
+        source = __import__('pathlib').Path('gplinks_live_browser.py').read_text()
+        self.assertIn('SHORTLINK_BYPASS_GPLINKS_DIRECT_POWERGAM', source)
+        self.assertIn('import_session_cookies', source)
+
     def test_gplinks_promotes_live_helper_final_url(self):
         engine = ShortlinkBypassEngine()
         with patch.object(engine, '_resolve_gplinks_http_fast') as http_fast, \

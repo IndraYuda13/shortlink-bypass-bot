@@ -22,6 +22,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 CHROME_PATH = "/usr/bin/google-chrome" if Path("/usr/bin/google-chrome").exists() else "/usr/bin/google-chrome-stable"
 GPLINKS_HOSTS = {"gplinks.co", "www.gplinks.co"}
 POWERGAM_HOSTS = {"powergam.online", "www.powergam.online"}
+GPLINKS_DIRECT_POWERGAM = os.getenv("SHORTLINK_BYPASS_GPLINKS_DIRECT_POWERGAM", "0").strip().lower() in {"1", "true", "yes", "on"}
 
 
 def detect_chrome_major() -> int | None:
@@ -104,6 +105,28 @@ def close_extra_windows(driver):
         driver.switch_to.window(keep)
     except Exception:
         pass
+
+
+def import_session_cookies(driver, session, base_url: str) -> list[dict]:
+    imported: list[dict] = []
+    try:
+        driver.get(base_url)
+        wait_document_ready(driver, 8)
+        for cookie in getattr(session.cookies, "jar", []):
+            domain = (cookie.domain or "").lstrip(".")
+            if "gplinks.co" not in domain:
+                continue
+            item = {"name": cookie.name, "value": cookie.value, "path": cookie.path or "/"}
+            if domain:
+                item["domain"] = domain
+            try:
+                driver.add_cookie(item)
+                imported.append({"name": cookie.name, "domain": domain, "path": cookie.path or "/"})
+            except Exception as exc:
+                imported.append({"name": cookie.name, "domain": domain, "error": str(exc)[:160]})
+    except Exception as exc:
+        imported.append({"error": str(exc)[:240]})
+    return imported
 
 
 def click_next_powergam(driver) -> dict:
@@ -258,9 +281,21 @@ def run(url: str, timeout: int, solver_url: str) -> dict:
 
     driver = build_driver()
     try:
-        driver.get(url)
-        wait_document_ready(driver, 25)
-        timeline.append(state(driver, "entry"))
+        if GPLINKS_DIRECT_POWERGAM and power_url:
+            timeline.append({"stage": "direct-powergam-requested", "imported_cookies": import_session_cookies(driver, session, "https://gplinks.co/")})
+            try:
+                driver.execute_cdp_cmd("Network.enable", {})
+                driver.execute_cdp_cmd("Network.setExtraHTTPHeaders", {"headers": {"Referer": url}})
+            except Exception:
+                pass
+            driver.get(power_url)
+            wait_document_ready(driver, 25)
+            timeline.append(state(driver, "entry-direct-powergam"))
+        else:
+            driver.get(url)
+            wait_document_ready(driver, 25)
+            timeline.append(state(driver, "entry"))
+
         if urlparse(driver.current_url).netloc.lower() not in POWERGAM_HOSTS:
             if not power_url:
                 return {"status": 0, "stage": "entry", "message": "POWERGAM_REDIRECT_NOT_FOUND", "entry_status": entry.status_code, "timeline": timeline}

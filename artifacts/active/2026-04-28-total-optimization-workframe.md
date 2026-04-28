@@ -64,3 +64,25 @@ Sebuah upgrade hanya boleh dianggap berhasil kalau:
 ### Research decisions
 - Token family stays `token_bypass`: current extraction is already the fastest useful lane for returning final URL; live Turnstile/timer gate is not proven and would be slower.
 - XUT simple HTTP hybrid remains rejected because gamescrate signed token rejects browser context switch with `Forbidden`.
+
+## 2026-04-28 batch 2 follow-up
+- Parent checklist status:
+  - [done] 1. Probe GPLinks timing bottleneck with current optimized lane.
+  - [done] 2. Try smaller GPLinks wait values under env/tunable guard.
+  - [done] 3. Probe XUT gamescrate dwell values under env/tunable guard.
+  - [in progress] 4. Implement only values that keep final oracle live.
+  - [in progress] 5. Run focused tests + full tests.
+  - [pending] 6. Live before/after timing table, restart service, commit/push, sync.
+
+### XUT dwell probe
+- `SHORTLINK_BYPASS_XUT_GAMESCRATE_DWELL=4`: final `http://tesskibidixxx.com/`, wall `101.63s`.
+- `SHORTLINK_BYPASS_XUT_GAMESCRATE_DWELL=6`: final `http://tesskibidixxx.com/`, wall `153.80s`.
+- Default changed to `4s` because it preserved the final oracle and was much faster in the live probe.
+- Post-default verification: final `http://tesskibidixxx.com/`, wall `97.10s`.
+- Compared with batch-1 baseline `181.21s`, this saves `84.11s`, `46.4%` faster, `1.87x` speedup.
+- Compared with original total-optimization baseline `187.0s`, this saves `89.9s`, `48.1%` faster, `1.93x` speedup.
+
+### GPLinks direct-PowerGam probe
+- Added experimental `SHORTLINK_BYPASS_GPLINKS_DIRECT_POWERGAM=1` path that imports GPLinks cookies and opens PowerGam directly.
+- Live probe with flag failed: wall `305.61s`, engine fell back to static mapper, live helper stage `powergam`, message `POWERGAM_FINAL_CANDIDATE_TIMEOUT`.
+- Decision: keep the direct-PowerGam path off by default. Do not promote it as an optimization.

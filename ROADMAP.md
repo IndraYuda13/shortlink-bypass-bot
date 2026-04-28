@@ -293,5 +293,5 @@
 ## 2026-04-28 total optimization batch 1
 - Baseline matrix captured for all current samples under `artifacts/active/total-optimization/`.
 - GPLinks improved from `183.3s` to `148.6s` by skipping the diagnostic HTTP preflight by default and replacing several fixed waits with state-driven browser polling. Delta: saved `34.7s`, `18.9%` faster, `1.23x` speedup.
-- XUT improved from `187.0s` to `181.21s` by treating the visible exact `Get Link` href as final oracle and skipping the final click/navigation wait. Delta: saved `5.8s`, `3.1%` faster, `1.03x` speedup.
+- XUT batch-1 improved from `187.0s` to `181.21s` by treating the visible exact `Get Link` href as final oracle and skipping the final click/navigation wait. Batch-2 then lowered gamescrate dwell to `4s` after live proof, reaching `97.10s`. Delta vs original local baseline: saved `89.9s`, `48.1%` faster, `1.93x` speedup.
 - Token families remain intentionally `token_bypass` because current extraction is already ~`0.9-1.8s`; full live Turnstile/timer gate is not proven and would be slower for the current objective.
