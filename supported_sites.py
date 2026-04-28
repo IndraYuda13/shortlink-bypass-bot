@@ -148,13 +148,13 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
     SupportedSite(
         host="exe.io",
         family="exe.io",
-        status="partial",
+        status="live_bypass",
         handler="_handle_exe",
         command_alias="exe",
         sample_url="https://exe.io/vkRI1",
         expected_final="https://google.com",
-        proof="Engine now maps exe.io -> exeygo.com through the second captcha gate without claiming final target.",
-        blockers=("Valid Turnstile/reCAPTCHA token is required before final target can be proven.",),
+        proof="Live engine recheck on 2026-04-28 followed exe.io -> exeygo.com, solved Turnstile, submitted go-link, and returned google.com.",
+        notes=("Uses the same local Turnstile solver API as cuty, then submits the exeygo go-link form in the same browser context.",),
     ),
 )
 

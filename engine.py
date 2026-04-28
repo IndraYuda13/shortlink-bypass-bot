@@ -39,6 +39,11 @@ CUTY_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_CUTY_HELPER", str(PROJECT_ROOT / 
 CUTY_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_CUTY_HELPER_PYTHON", HELPER_PYTHON)
 CUTY_HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_CUTY_HELPER_PYTHONPATH", "")
 CUTY_TURNSTILE_SOLVER_URL = os.getenv("SHORTLINK_BYPASS_CUTY_TURNSTILE_SOLVER_URL", "http://127.0.0.1:5000")
+EXE_BROWSER_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_EXE_BROWSER_TIMEOUT", "240"))
+EXE_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_EXE_HELPER", str(PROJECT_ROOT / "exe_live_browser.py"))
+EXE_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_EXE_HELPER_PYTHON", HELPER_PYTHON)
+EXE_HELPER_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_EXE_HELPER_PYTHONPATH", "")
+EXE_TURNSTILE_SOLVER_URL = os.getenv("SHORTLINK_BYPASS_EXE_TURNSTILE_SOLVER_URL", CUTY_TURNSTILE_SOLVER_URL)
 DEFAULT_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -368,6 +373,21 @@ class ShortlinkBypassEngine:
             link_hidden = self._extract_hidden_inputs(link_form)
             facts["link_form_action"] = urljoin(second.url, link_form.get("action") or "")
             facts["link_hidden_names"] = sorted(link_hidden)
+
+            live = self._resolve_exe_live(url)
+            if live:
+                facts["live_helper"] = {k: v for k, v in live.items() if k not in {"timeline", "bypass_url", "blockers", "notes"}}
+                if live.get("status") == 1 and live.get("bypass_url"):
+                    return BypassResult(
+                        status=1,
+                        input_url=url,
+                        family=family,
+                        message=str(live.get("message") or "EXE_LIVE_TURNSTILE_CHAIN_OK"),
+                        bypass_url=str(live.get("bypass_url")),
+                        stage=str(live.get("stage") or "live-browser-turnstile-go"),
+                        facts=facts,
+                        notes=["dua tahap CakePHP form + Turnstile + go-link submit live-proven"],
+                    )
 
             return BypassResult(
                 status=0,
@@ -1215,6 +1235,49 @@ class ShortlinkBypassEngine:
             payload["message"] = f"helper exit {proc.returncode}"
         return payload
 
+
+    def _resolve_exe_live(self, url: str) -> dict[str, Any]:
+        if not (os.path.exists(EXE_LIVE_HELPER) and os.path.exists(EXE_HELPER_PYTHON)):
+            return {}
+
+        env = os.environ.copy()
+        helper_pythonpath_parts = [part for part in [EXE_HELPER_PYTHONPATH, HELPER_PYTHONPATH] if part]
+        if helper_pythonpath_parts:
+            existing = env.get("PYTHONPATH", "")
+            helper_pythonpath = ":".join(helper_pythonpath_parts)
+            env["PYTHONPATH"] = f"{helper_pythonpath}:{existing}" if existing else helper_pythonpath
+        try:
+            proc = subprocess.run(
+                [
+                    EXE_HELPER_PYTHON,
+                    EXE_LIVE_HELPER,
+                    url,
+                    "--timeout",
+                    str(EXE_BROWSER_TIMEOUT),
+                    "--solver-url",
+                    EXE_TURNSTILE_SOLVER_URL,
+                ],
+                capture_output=True,
+                text=True,
+                timeout=EXE_BROWSER_TIMEOUT + 30,
+                env=env,
+            )
+        except subprocess.TimeoutExpired:
+            return {"status": 0, "message": "exe live browser timeout", "stage": "live-browser-timeout"}
+        except Exception as exc:
+            return {"status": 0, "message": str(exc), "stage": "live-browser-error"}
+
+        stdout = (proc.stdout or "").strip()
+        if not stdout:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper exit {proc.returncode}", "stage": "live-browser-no-output"}
+        last_line = stdout.splitlines()[-1]
+        try:
+            payload = json.loads(last_line)
+        except Exception:
+            return {"status": 0, "message": (proc.stderr or "").strip() or f"helper output tidak valid: {last_line[:240]}", "stage": "live-browser-invalid-output"}
+        if proc.returncode != 0 and not payload.get("message"):
+            payload["message"] = f"helper exit {proc.returncode}"
+        return payload
 
     def _resolve_cuty_live(self, url: str) -> dict[str, Any]:
         if not (os.path.exists(CUTY_LIVE_HELPER) and os.path.exists(CUTY_HELPER_PYTHON)):

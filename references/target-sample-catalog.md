@@ -13,7 +13,7 @@ Purpose: durable mapping of Boskuu-provided shortlink samples to their expected 
 | `https://cuty.io/AfaX6jx` | `cuty.io` | `https://google.com` | live bypass supported for sample | CDP Chrome helper solves Turnstile through local solver, reaches `last.js`/`/go`, and lands on Google. |
 | `https://gplinks.co/YVTC` | `gplinks.co` | `http://tesskibidixxx.com` | partial mapper | PowerGam entry and JS target candidate are mapped; non-headless/Xvfb GPT probe still leaves `ad_impressions=0` and no rewarded/impression lifecycle events, so final remains unproven. |
 | `https://sfl.gl/18PZXXI9` | `sfl.gl` | `https://google.com` | live bypass supported for sample | Direct VPS egress is Cloudflare-blocked, but WARP proxy fallback reaches SafelinkU API flow and extracts `window.location.href`. |
-| `https://exe.io/vkRI1` | `exe.io` | `https://google.com` | partial mapper | Exeygo two-stage CakePHP gate is mapped; final remains blocked until a valid captcha token is submitted. |
+| `https://exe.io/vkRI1` | `exe.io` | `https://google.com` | live bypass | Exeygo two-stage CakePHP gate, Turnstile token, `go-link` form, and final google.com redirect are live-proven. |
 | `https://lnbz.la/Hmvp6` | `lnbz.la` | `https://cryptoearns.com/links/back/AaDZLgKQsnhy423EIS9c` | live bypass supported for sample | Browserless same-session chain through `avnsgames.com` article steps and final `/links/go` returns the oracle. |
 | `https://aii.sh/CBygg8fn2s3` | `aii.sh` | `https://coinadster.com/shortlink.php?short_key=1cnd9hq0nfbem5dr8vrmaz17f44pvh9a` | analysis-only supported | Final candidate discovered from ShrinkBixby hidden token. Still label as token extraction, not live Turnstile completion. |
 

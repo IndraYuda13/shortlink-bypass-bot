@@ -28,7 +28,7 @@
   - `link.adlink.click`, `shrinkme.click`, `ez4short.com`, and `lnbz.la` are the current `live_bypass` set.
   - `oii.la`, `tpi.li`, and `aii.sh` are `analysis_only` token-extraction lanes.
   - `xut.io` and `gplinks.co` stay `partial`; `sfl.gl` and `cuty.io` are now live-proven after later fixes.
-  - `exe.io` remains `unsupported` until a handler exists.
+  - `exe.io` is now live-proven through the browser helper lane.
 
 ## 2026-04-24
 
@@ -354,3 +354,10 @@
 - Added one clean retry in `cuty_live_browser.py` for transient solver-side `CAPTCHA_FAIL`.
 - Verified `https://cuty.io/AfaX6jx` through `ShortlinkBypassEngine` to final `https://www.google.com/`; `cuty.io` is promoted to `live_bypass`.
 - Added xut/autodime IconCaptcha capture support for building live solver corpus.
+
+
+## 2026-04-28 Exe live bypass proof
+- Added `exe_live_browser.py` for the `exe.io -> exeygo.com` two-stage CakePHP lane.
+- The helper submits `before-captcha`, extracts the Turnstile sitekey from `app_vars`, solves via the local Turnstile solver API, injects both `cf-turnstile-response` and `g-recaptcha-response`, submits `link-view`, waits for the `go-link` form, then submits it.
+- Verified `https://exe.io/vkRI1` through `ShortlinkBypassEngine` to final `https://www.google.com/`.
+- Promoted `exe.io` to `live_bypass`.

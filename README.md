@@ -32,7 +32,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | `ez4short.com` | Live bypass | Fast `game5s.com` referer lane unlocks final go-link form and returns sampled `tesskibidixxx.com` target |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
 | `xut.io` -> `autodime cwsafelinkphp` | Partial live lane | Runtime repaired through FlareSolverr restore, ChromeDriver pin, and local IconCaptcha fallback; has reached `gamescrate.app` Cloudflare in one live run, but Step 1 remains flaky across repeated runs before final oracle |
-| `exe.io` | Partial mapper | Maps `exe.io -> exeygo.com` through captcha gate; final still needs integrated valid token submission |
+| `exe.io` | Live bypass | Follows `exe.io -> exeygo.com`, solves Turnstile, submits `go-link`, and returns sampled `google.com` target |
 
 ## How it works
 

@@ -50,7 +50,7 @@ class ExeTests(unittest.TestCase):
         fake_session.post.return_value = second_page
         fake_session.cookies.jar = []
 
-        with patch.object(engine, '_new_impersonated_session', return_value=fake_session):
+        with patch.object(engine, '_new_impersonated_session', return_value=fake_session), patch.object(engine, '_resolve_exe_live', return_value={}):
             result = engine.analyze('https://exe.io/vkRI1')
 
         self.assertEqual(result.family, 'exe.io')
@@ -61,6 +61,38 @@ class ExeTests(unittest.TestCase):
         self.assertEqual(result.facts['captcha_type'], 'turnstile')
         self.assertEqual(result.facts['sitekey'], '0x4AAAAAACPCPhXQQr5wP1VW')
         self.assertIn('valid Turnstile/reCAPTCHA token', result.blockers[0])
+
+    def test_exe_live_helper_result_returns_final_google(self):
+        engine = ShortlinkBypassEngine()
+
+        def response(url, text='', status_code=200, headers=None):
+            item = Mock()
+            item.url = url
+            item.text = text
+            item.status_code = status_code
+            item.headers = headers or {}
+            return item
+
+        entry = response('https://exe.io/vkRI1', '', 302, {'location': 'https://exeygo.com/vkRI1'})
+        first_page = response('https://exeygo.com/vkRI1', '<form id="before-captcha" action="/vkRI1"><input name="f_n" value="sle"></form>')
+        second_page = response(
+            'https://exeygo.com/vkRI1',
+            '<script>var app_vars = {captcha_type: "turnstile", turnstile_site_key: "0x4AAAAAACPCPhXQQr5wP1VW"};</script><form id="link-view" action="/vkRI1"><input name="f_n" value="slc"></form>',
+        )
+
+        fake_session = Mock()
+        fake_session.get.side_effect = [entry, first_page]
+        fake_session.post.return_value = second_page
+        fake_session.cookies.jar = []
+
+        live = {"status": 1, "stage": "live-browser-turnstile-go", "bypass_url": "https://www.google.com/", "final_url": "https://www.google.com/"}
+        with patch.object(engine, '_new_impersonated_session', return_value=fake_session), patch.object(engine, '_resolve_exe_live', return_value=live):
+            result = engine.analyze('https://exe.io/vkRI1')
+
+        self.assertEqual(result.status, 1)
+        self.assertEqual(result.message, 'EXE_LIVE_TURNSTILE_CHAIN_OK')
+        self.assertEqual(result.bypass_url, 'https://www.google.com/')
+        self.assertEqual(result.stage, 'live-browser-turnstile-go')
 
 
 if __name__ == '__main__':
