@@ -59,7 +59,7 @@ class SupportedSitesRegistryTests(unittest.TestCase):
         self.assertTrue(any(
             item["host"] == "exe.io"
             and item["handler"] == "_handle_exe"
-            and item["solve_time_label"] == "±69s"
+            and item["solve_time_label"] == "±61-72s"
             and "Turnstile" in item["method_summary"]
             for item in data
         ))
@@ -81,7 +81,8 @@ class SupportedSitesRegistryTests(unittest.TestCase):
         self.assertIn("Supported sites + estimasi waktu:", rendered)
         self.assertIn("1. aii.sh ±0.9s", rendered)
         self.assertIn("2. oii.la / tpi.li ±1.8s", rendered)
-        self.assertIn("8. exe.io ±69s", rendered)
+        self.assertIn("8. cuty.io ±54-76s", rendered)
+        self.assertIn("9. exe.io ±61-72s", rendered)
         self.assertIn("10. xut.io ±97-109s", rendered)
         self.assertIn("11. gplinks.co ±149-150s", rendered)
 

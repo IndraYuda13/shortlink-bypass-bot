@@ -43,7 +43,7 @@ class CutyTests(unittest.TestCase):
             'timeline': [{'stage': 'final', 'href': 'https://www.google.com/'}],
         }
 
-        with patch.object(engine, '_resolve_cuty_http_fast', return_value=http_result), patch.object(engine, '_resolve_cuty_live', return_value=helper_result):
+        with patch.object(engine, '_resolve_cuty_http_fast', return_value=http_result), patch.object(engine, '_resolve_cuty_live', return_value=helper_result), patch('engine.CUTY_BROWSER_FALLBACK_ENABLED', True):
             result = engine.analyze('https://cuty.io/AfaX6jx')
 
         self.assertEqual(result.family, 'cuty.io')
@@ -52,6 +52,20 @@ class CutyTests(unittest.TestCase):
         self.assertEqual(result.stage, 'live-browser-turnstile-go')
         self.assertEqual(result.bypass_url, 'https://www.google.com/')
         self.assertEqual(result.facts['sitekey'], '0x4AAAAAAABnHbN4cNchLhd_')
+
+    def test_cuty_can_disable_browser_fallback_for_http_only_deployments(self):
+        engine = ShortlinkBypassEngine()
+        http_result = {'status': 0, 'stage': 'http-final', 'message': 'FINAL_DID_NOT_LEAVE_CUTTLINKS'}
+
+        with patch.object(engine, '_resolve_cuty_http_fast', return_value=http_result), patch.object(engine, '_resolve_cuty_live') as live, patch('engine.CUTY_BROWSER_FALLBACK_ENABLED', False):
+            result = engine.analyze('https://cuty.io/AfaX6jx')
+
+        self.assertEqual(result.family, 'cuty.io')
+        self.assertEqual(result.status, 0)
+        self.assertEqual(result.message, 'CUTY_HTTP_FAST_FAILED')
+        self.assertEqual(result.stage, 'http-final')
+        self.assertIn('browser fallback disabled', result.blockers[0])
+        live.assert_not_called()
 
 
 class LnbzTests(unittest.TestCase):

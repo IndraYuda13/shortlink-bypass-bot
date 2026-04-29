@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 from curl_cffi import requests as curl_requests
 
 from cuty_live_browser import detect_chrome_path, solve_turnstile
+from final_url_validator import choose_downstream_final_url, is_downstream_url as _validator_is_downstream_url
 
 CUTY_INTERNAL_HOSTS = {"cuty.io", "www.cuty.io", "cuttlinks.com", "www.cuttlinks.com"}
 CUTY_HTTP_FAST_VHIT = os.getenv("SHORTLINK_BYPASS_CUTY_HTTP_VHIT", "0").strip().lower() in {"1", "true", "yes", "on"}
@@ -56,21 +57,15 @@ def turnstile_sitekey(html: str) -> str | None:
 
 
 def is_downstream_url(url: str | None) -> bool:
-    if not url:
-        return False
-    parsed = urlparse(url)
-    if parsed.scheme not in {"http", "https"}:
-        return False
-    host = parsed.netloc.lower()
-    return bool(host and host not in CUTY_INTERNAL_HOSTS)
+    return _validator_is_downstream_url(url, CUTY_INTERNAL_HOSTS)
 
 
-def _post_form(session, action: str, data: dict[str, str], referer: str, timeout: int = 40):
+def _post_form(session, action: str, data: dict[str, str], referer: str, timeout: int = 40, allow_redirects: bool = True):
     return session.post(
         action,
         data=data,
         headers={**BASE_HEADERS, "Origin": "null", "Referer": referer, "Content-Type": "application/x-www-form-urlencoded"},
-        allow_redirects=True,
+        allow_redirects=allow_redirects,
         timeout=timeout,
     )
 
@@ -161,10 +156,12 @@ def run(url: str, timeout: int = 160, solver_url: str = "http://127.0.0.1:5000")
         else:
             timeline.append({"stage": "vhit-skipped", "reason": "no-vhit ablation live-proven for current sample"})
         time.sleep(9)
-        final = _post_form(session, urljoin(last.url, str(submit_form.get("action") or "")), dict(submit_form.get("data") or {}), last.url, 60)
-        timeline.append({"stage": "final", "status": final.status_code, "url": final.url, "location": final.headers.get("location"), "text": (final.text or "")[:160]})
-        if is_downstream_url(final.url):
-            return {"status": 1, "stage": "http-final", "bypass_url": final.url, "final_url": final.url, "sitekey": sitekey, "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
+        final_action = urljoin(last.url, str(submit_form.get("action") or ""))
+        final = _post_form(session, final_action, dict(submit_form.get("data") or {}), last.url, 60, allow_redirects=False)
+        downstream = choose_downstream_final_url(response_url=final.url, location=final.headers.get("location"), action_url=final_action, internal_hosts=CUTY_INTERNAL_HOSTS)
+        timeline.append({"stage": "final", "status": final.status_code, "url": final.url, "location": final.headers.get("location"), "downstream": downstream, "text": (final.text or "")[:160]})
+        if downstream:
+            return {"status": 1, "stage": "http-final", "bypass_url": downstream, "final_url": downstream, "sitekey": sitekey, "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
         return {"status": 0, "stage": "http-final", "message": "FINAL_DID_NOT_LEAVE_CUTTLINKS", "final_url": final.url, "sitekey": sitekey, "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
     except Exception as exc:
         return {"status": 0, "stage": "exception", "message": str(exc), "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}

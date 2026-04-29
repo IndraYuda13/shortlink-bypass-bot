@@ -2,6 +2,14 @@
 
 ## 2026-04-30
 
+### final URL validator and Cuty HTTP-first hardening
+- Added `final_url_validator.py` as a shared final-oracle helper that prefers the first downstream `Location` header from final submit responses before falling back to the response URL.
+- Wired the validator into `exe_http_fast.py` and `cuty_http_fast.py` so downstream `/links/back/...` reward paths are preserved instead of being truncated by target-site homepage redirects.
+- Updated `cuty_http_fast.py` final submit to disable redirects, matching the fixed Exe behavior.
+- Changed Cuty browser fallback default to off through `SHORTLINK_BYPASS_CUTY_BROWSER_FALLBACK=0` behavior; set `SHORTLINK_BYPASS_CUTY_BROWSER_FALLBACK=1` only when an operator explicitly wants the older CDP fallback.
+- Added regression tests for the shared validator, Exe full-redirect preservation, Cuty full-redirect preservation, and Cuty HTTP-only deployment mode.
+- Live verification: `exe.io/labNYA` returned the complete `satoshifaucet.io/links/back/.../XRP` URL in `60.6s`; `cuty.io/AfaX6jx` returned `https://google.com` through HTTP-only mode in `53.8s` with browser fallback disabled.
+
 ### exe.io full redirect target fix
 - Fixed `exe.io` HTTP fast final extraction for links where the downstream service redirects from a full `/links/back/...` reward URL to its homepage.
 - Root cause: the final `/links/go` POST followed redirects automatically, so the helper reported the post-redirect homepage, for example `https://satoshifaucet.io/`, instead of the first `Location` header `https://satoshifaucet.io/links/back/0IXOFkwis5HjxoZ6CbL1/XRP`.

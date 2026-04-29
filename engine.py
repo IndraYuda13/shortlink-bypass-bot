@@ -44,6 +44,7 @@ CUTY_HTTP_FAST_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_CUTY_HTTP_FAST_TIMEOUT"
 CUTY_HTTP_FAST_HELPER = os.getenv("SHORTLINK_BYPASS_CUTY_HTTP_FAST_HELPER", str(PROJECT_ROOT / "cuty_http_fast.py"))
 CUTY_HTTP_FAST_PYTHON = os.getenv("SHORTLINK_BYPASS_CUTY_HTTP_FAST_PYTHON", HELPER_PYTHON)
 CUTY_HTTP_FAST_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_CUTY_HTTP_FAST_PYTHONPATH", "")
+CUTY_BROWSER_FALLBACK_ENABLED = os.getenv("SHORTLINK_BYPASS_CUTY_BROWSER_FALLBACK", "0").strip().lower() not in {"0", "false", "no", "off"}
 EXE_BROWSER_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_EXE_BROWSER_TIMEOUT", "240"))
 EXE_LIVE_HELPER = os.getenv("SHORTLINK_BYPASS_EXE_HELPER", str(PROJECT_ROOT / "exe_live_browser.py"))
 EXE_HELPER_PYTHON = os.getenv("SHORTLINK_BYPASS_EXE_HELPER_PYTHON", HELPER_PYTHON)
@@ -1023,6 +1024,17 @@ class ShortlinkBypassEngine:
                     "HTTP helper replays the cuttlinks forms, local Turnstile solver token, timer, optional VHit lifecycle calls, and final /go submit",
                     "browser helper remains the fallback if the HTTP lane does not return a downstream final URL",
                 ],
+            )
+        if not CUTY_BROWSER_FALLBACK_ENABLED:
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="CUTY_HTTP_FAST_FAILED",
+                stage=http_fast.get("stage") or "http-final",
+                facts=facts,
+                blockers=[f"browser fallback disabled; HTTP fast lane failed: {http_fast.get('message') or 'unknown error'}"],
+                notes=["set SHORTLINK_BYPASS_CUTY_BROWSER_FALLBACK=1 to allow the older browser fallback"],
             )
 
         live = self._resolve_cuty_live(url)

@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 from curl_cffi import requests as curl_requests
 
 from cuty_live_browser import solve_turnstile
+from final_url_validator import choose_downstream_final_url, is_downstream_url as _validator_is_downstream_url
 
 EXE_INTERNAL_HOSTS = {"exe.io", "www.exe.io", "exeygo.com", "www.exeygo.com"}
 BASE_HEADERS = {
@@ -56,13 +57,7 @@ def extract_form_payload(html: str, form_selector: str = "form") -> dict:
 
 
 def is_downstream_url(url: str | None) -> bool:
-    if not url:
-        return False
-    parsed = urlparse(url)
-    if parsed.scheme not in {"http", "https"}:
-        return False
-    host = parsed.netloc.lower()
-    return bool(host and host not in EXE_INTERNAL_HOSTS)
+    return _validator_is_downstream_url(url, EXE_INTERNAL_HOSTS)
 
 
 def _sitekey_from(html: str) -> str | None:
@@ -153,8 +148,7 @@ def run(url: str, timeout: int = 160, solver_url: str = "http://127.0.0.1:5000")
         time.sleep(max(0, counter) + 1)
         go_action = urljoin(go_page.url, str(go_form.get("action") or ""))
         final = _post_form(session, go_action, dict(go_form.get("data") or {}), go_page.url, timeout=40, allow_redirects=False)
-        redirect_target = urljoin(go_action, final.headers.get("location") or "") if final.headers.get("location") else None
-        downstream = redirect_target if is_downstream_url(redirect_target) else final.url
+        downstream = choose_downstream_final_url(response_url=final.url, location=final.headers.get("location"), action_url=go_action, internal_hosts=EXE_INTERNAL_HOSTS)
         timeline.append({"stage": "final-post", "status": final.status_code, "url": final.url, "location": final.headers.get("location"), "downstream": downstream, "text": (final.text or "")[:200]})
         if is_downstream_url(downstream):
             return {"status": 1, "stage": "http-final", "bypass_url": downstream, "final_url": downstream, "sitekey": sitekey, "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
