@@ -43,6 +43,22 @@ class ExeHttpFastTests(unittest.TestCase):
         self.assertEqual(result['bypass_url'], 'https://www.google.com/?gws_rd=ssl')
         self.assertEqual(result['stage'], 'http-final')
 
+    def test_run_prefers_full_redirect_location_before_following_to_homepage(self):
+        entry = Mock(status_code=302, url='https://exe.io/labNYA', headers={'location': 'https://exeygo.com/labNYA'}, text='')
+        first = Mock(status_code=200, url='https://exeygo.com/labNYA', headers={}, text='''<script>var app_vars = {captcha_type:"turnstile", counter_value:"0", turnstile_site_key:"0xSITE"};</script><form id="before-captcha" action="/labNYA" method="post"><input name="_csrfToken" value="csrf"><input name="f_n" value="sle"></form>''')
+        second = Mock(status_code=200, url='https://exeygo.com/labNYA', headers={}, text='''<script>var app_vars = {captcha_type:"turnstile", counter_value:"0", turnstile_site_key:"0xSITE"};</script><form id="link-view" action="/labNYA" method="post"><input name="_csrfToken" value="csrf"><input name="f_n" value="slc"><input name="ref" value="https://exeygo.com/labNYA"></form>''')
+        go_page = Mock(status_code=200, url='https://exeygo.com/labNYA', headers={}, text='''<form id="go-link" action="/links/go" method="post"><input name="_csrfToken" value="csrf"><input name="ad_form_data" value="encrypted"></form>''')
+        final = Mock(status_code=302, url='https://exeygo.com/links/go', headers={'location': 'https://satoshifaucet.io/links/back/0IXOFkwis5HjxoZ6CbL1/XRP'}, text='')
+        session = Mock()
+        session.get.side_effect = [entry, first]
+        session.post.side_effect = [second, go_page, final]
+        session.cookies.jar = []
+        with patch('exe_http_fast.curl_requests.Session', return_value=session), patch('exe_http_fast.solve_turnstile', return_value='TOKEN'), patch('exe_http_fast.time.sleep'):
+            result = run('https://exe.io/labNYA', timeout=30, solver_url='http://127.0.0.1:5000')
+        self.assertEqual(result['status'], 1)
+        self.assertEqual(result['bypass_url'], 'https://satoshifaucet.io/links/back/0IXOFkwis5HjxoZ6CbL1/XRP')
+        self.assertEqual(result['timeline'][-1]['downstream'], 'https://satoshifaucet.io/links/back/0IXOFkwis5HjxoZ6CbL1/XRP')
+
 
 if __name__ == '__main__':
     unittest.main()

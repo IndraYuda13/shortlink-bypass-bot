@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-04-30
+
+### exe.io full redirect target fix
+- Fixed `exe.io` HTTP fast final extraction for links where the downstream service redirects from a full `/links/back/...` reward URL to its homepage.
+- Root cause: the final `/links/go` POST followed redirects automatically, so the helper reported the post-redirect homepage, for example `https://satoshifaucet.io/`, instead of the first `Location` header `https://satoshifaucet.io/links/back/0IXOFkwis5HjxoZ6CbL1/XRP`.
+- Patch: final go-link POST now runs with redirects disabled and promotes the downstream `Location` header as the canonical `bypass_url` before any target-site redirect can truncate the reward path.
+- Regression: added `test_run_prefers_full_redirect_location_before_following_to_homepage` for sample class `https://exe.io/labNYA`.
+- Live verification: `engine.py https://exe.io/labNYA --pretty` returned the complete `satoshifaucet.io/links/back/.../XRP` URL.
+
 ## 2026-04-28
 
 ### total optimization batch 3

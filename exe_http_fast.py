@@ -152,11 +152,13 @@ def run(url: str, timeout: int = 160, solver_url: str = "http://127.0.0.1:5000")
 
         time.sleep(max(0, counter) + 1)
         go_action = urljoin(go_page.url, str(go_form.get("action") or ""))
-        final = _post_form(session, go_action, dict(go_form.get("data") or {}), go_page.url, timeout=40)
-        timeline.append({"stage": "final-post", "status": final.status_code, "url": final.url, "location": final.headers.get("location"), "text": (final.text or "")[:200]})
-        if is_downstream_url(final.url):
-            return {"status": 1, "stage": "http-final", "bypass_url": final.url, "final_url": final.url, "sitekey": sitekey, "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
-        return {"status": 0, "stage": "http-final", "message": "FINAL_DID_NOT_LEAVE_EXEYGO", "final_url": final.url, "sitekey": sitekey, "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
+        final = _post_form(session, go_action, dict(go_form.get("data") or {}), go_page.url, timeout=40, allow_redirects=False)
+        redirect_target = urljoin(go_action, final.headers.get("location") or "") if final.headers.get("location") else None
+        downstream = redirect_target if is_downstream_url(redirect_target) else final.url
+        timeline.append({"stage": "final-post", "status": final.status_code, "url": final.url, "location": final.headers.get("location"), "downstream": downstream, "text": (final.text or "")[:200]})
+        if is_downstream_url(downstream):
+            return {"status": 1, "stage": "http-final", "bypass_url": downstream, "final_url": downstream, "sitekey": sitekey, "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
+        return {"status": 0, "stage": "http-final", "message": "FINAL_DID_NOT_LEAVE_EXEYGO", "final_url": downstream, "sitekey": sitekey, "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
     except Exception as exc:
         return {"status": 0, "stage": "exception", "message": str(exc), "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
 
