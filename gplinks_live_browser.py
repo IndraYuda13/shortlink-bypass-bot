@@ -74,6 +74,75 @@ def js(driver, script: str, *args):
     return driver.execute_script(script, *args)
 
 
+def install_gpt_lifecycle_probe(driver) -> dict:
+    return js(
+        driver,
+        r"""
+        window.__gplinks_gpt_lifecycle = window.__gplinks_gpt_lifecycle || [];
+        window.__gplinks_gpt_probe_installed = window.__gplinks_gpt_probe_installed || false;
+        const eventNames = ['slotRequested','slotResponseReceived','slotRenderEnded','impressionViewable','rewardedSlotReady','rewardedSlotClosed','rewardedSlotGranted','rewardedSlotVideoCompleted'];
+        function safeSlotId(ev){ try { return ev && ev.slot && ev.slot.getSlotElementId ? ev.slot.getSlotElementId() : null; } catch(e) { return null; } }
+        function record(name, ev){
+          try {
+            window.__gplinks_gpt_lifecycle.push({
+              name,
+              ts: Date.now(),
+              href: location.href,
+              slot: safeSlotId(ev),
+              size: ev && ev.size ? String(ev.size) : null,
+              isEmpty: ev && typeof ev.isEmpty !== 'undefined' ? !!ev.isEmpty : null,
+              payloadKeys: ev ? Object.keys(ev).slice(0, 12) : []
+            });
+          } catch(e) {}
+        }
+        window.__gplinks_gpt_record = record;
+        if (!window.__gplinks_gpt_probe_installed) {
+          window.__gplinks_gpt_probe_installed = true;
+          const install = () => {
+            try {
+              if (!window.googletag || !googletag.pubads) return false;
+              const pubads = googletag.pubads();
+              eventNames.forEach(name => { try { pubads.addEventListener(name, ev => record(name, ev)); } catch(e) {} });
+              record('probe-installed', null);
+              return true;
+            } catch(e) { return false; }
+          };
+          window.googletag = window.googletag || {cmd: []};
+          try { window.googletag.cmd = window.googletag.cmd || []; window.googletag.cmd.push(install); } catch(e) {}
+          install();
+        }
+        return {installed: !!window.__gplinks_gpt_probe_installed, count: window.__gplinks_gpt_lifecycle.length};
+        """,
+    ) or {}
+
+
+def collect_gpt_lifecycle_events(driver, stage: str) -> dict:
+    try:
+        payload = js(
+            driver,
+            r"""
+            const events = (window.__gplinks_gpt_lifecycle || []).slice(-80);
+            const counts = {};
+            for (const ev of events) counts[ev.name] = (counts[ev.name] || 0) + 1;
+            const resources = performance.getEntriesByType('resource').map(r => r.name).filter(name =>
+              name.includes('securepubads.g.doubleclick.net') || name.includes('googlesyndication.com') || name.includes('doubleclick.net') || name.includes('pagead2.googlesyndication.com')
+            ).slice(-40);
+            return {
+              stage: arguments[0],
+              gpt_lifecycle: events,
+              gpt_lifecycle_counts: counts,
+              gpt_resource_hints: resources,
+              googletag_present: !!window.googletag,
+              installed: !!window.__gplinks_gpt_probe_installed
+            };
+            """,
+            stage,
+        )
+        return payload or {"stage": stage, "gpt_lifecycle": [], "gpt_lifecycle_counts": {}, "gpt_resource_hints": []}
+    except Exception as exc:
+        return {"stage": stage, "gpt_lifecycle_error": str(exc)[:240], "gpt_lifecycle": [], "gpt_lifecycle_counts": {}, "gpt_resource_hints": []}
+
+
 def state(driver, stage: str) -> dict:
     data = js(
         driver,
@@ -96,7 +165,17 @@ def state(driver, stage: str) -> dict:
         """,
         stage,
     )
-    return data or {"stage": stage}
+    data = data or {"stage": stage}
+    try:
+        gpt = collect_gpt_lifecycle_events(driver, stage)
+        data["gpt_lifecycle_counts"] = gpt.get("gpt_lifecycle_counts") or {}
+        data["gpt_resource_hints"] = gpt.get("gpt_resource_hints") or []
+        data["googletag_present"] = gpt.get("googletag_present")
+        if gpt.get("gpt_lifecycle"):
+            data["gpt_lifecycle_tail"] = gpt.get("gpt_lifecycle")[-8:]
+    except Exception:
+        pass
+    return data
 
 
 def close_extra_windows(driver):
@@ -295,10 +374,12 @@ def run(url: str, timeout: int, solver_url: str) -> dict:
             except Exception:
                 pass
             driver.get(power_url)
+            install_gpt_lifecycle_probe(driver)
             wait_document_ready(driver, 25)
             timeline.append(state(driver, "entry-direct-powergam"))
         else:
             driver.get(url)
+            install_gpt_lifecycle_probe(driver)
             wait_document_ready(driver, 25)
             timeline.append(state(driver, "entry"))
 
@@ -311,7 +392,9 @@ def run(url: str, timeout: int, solver_url: str) -> dict:
             except Exception:
                 pass
             driver.get(power_url)
+            install_gpt_lifecycle_probe(driver)
             wait_document_ready(driver, 25)
+        install_gpt_lifecycle_probe(driver)
         timeline.append(state(driver, "power-entry"))
 
         deadline = time.time() + max(90, timeout - 45)
@@ -340,12 +423,14 @@ def run(url: str, timeout: int, solver_url: str) -> dict:
         candidate = wait_not_cloudflare(driver, 35)
         candidate["stage"] = "candidate"
         timeline.append(candidate)
+        timeline.append(collect_gpt_lifecycle_events(driver, "powergam-gpt-lifecycle"))
         candidate_url = candidate.get("href") or driver.current_url
         if is_final_url(candidate_url):
             return {"status": 1, "stage": "live-browser-powergam", "bypass_url": candidate_url, "final_url": candidate_url, "decoded_query": decoded, "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
 
         unlock = unlock_final_gate(driver, solver_url, max(60, timeout - int(time.time() - started)))
         timeline.extend(unlock.get("actions") or [])
+        timeline.append(collect_gpt_lifecycle_events(driver, "final-gpt-lifecycle"))
         final_state = state(driver, "final")
         timeline.append(final_state)
         final_url = final_state.get("href") or driver.current_url

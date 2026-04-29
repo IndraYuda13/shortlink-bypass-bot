@@ -224,3 +224,13 @@ Each record includes wall time, engine result, `bypass_url`, and a profiler summ
 ### XUT speed note
 
 The `xut.io` helper now polls readiness for IconCaptcha and final href states instead of sleeping through large fixed waits. Keep `SHORTLINK_BYPASS_XUT_GAMESCRATE_DWELL=4` as the safe default until repeated benchmark rows prove a lower dwell still preserves the final `Get Link` oracle.
+
+### GPLinks investigation note
+
+`gplinks_live_browser.py` records GPT/ad lifecycle evidence while keeping the browser lane as the production path. Use direct helper output when investigating PowerGam HTTP replay:
+
+```bash
+python3 gplinks_live_browser.py https://gplinks.co/YVTC --timeout 340 > artifacts/active/benchmark-matrix/gplinks-live-helper.json
+```
+
+Do not promote GPLinks HTTP replay until the ledger proof is reproduced and the final URL oracle still returns a non-GPLinks downstream target.

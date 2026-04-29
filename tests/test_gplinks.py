@@ -80,6 +80,17 @@ class GplinksTests(unittest.TestCase):
         self.assertIn('--disable-background-timer-throttling', source)
         self.assertIn('import_session_cookies', source)
 
+    def test_gplinks_helper_installs_gpt_lifecycle_probe(self):
+        source = __import__('pathlib').Path('gplinks_live_browser.py').read_text()
+        self.assertIn('install_gpt_lifecycle_probe', source)
+        self.assertIn('collect_gpt_lifecycle_events', source)
+        self.assertIn('impressionViewable', source)
+        self.assertIn('rewardedSlotReady', source)
+        self.assertIn('rewardedSlotGranted', source)
+        self.assertIn('gpt_lifecycle', source)
+        self.assertIn('gpt_resource_hints', source)
+        self.assertIn('securepubads.g.doubleclick.net', source)
+
     def test_gplinks_promotes_live_helper_final_url(self):
         engine = ShortlinkBypassEngine()
         with patch.object(engine, '_resolve_gplinks_http_fast') as http_fast, \

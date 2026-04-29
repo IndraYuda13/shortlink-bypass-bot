@@ -452,3 +452,9 @@
 - Replaced XUT Step 1 large fixed sleeps with readiness polling for visible IconCaptcha widget, canvas data, Step 2 transition, and final Get Link href.
 - Fixed two polling regressions found during live benchmark: hidden/zero-size IconCaptcha widgets now wait for a visible widget, and disappearing canvas nodes now wait for a visible canvas before click-coordinate replay.
 - Live benchmark after fixes: `https://xut.io/hd7AOJ` returned `http://tesskibidixxx.com/` in `95.72s` wall time with strict final href oracle preserved. Earlier failed benchmark rows are kept in the JSONL artifact as regression evidence.
+
+### gplinks GPT lifecycle instrumentation
+- Added GPT/ad lifecycle instrumentation to `gplinks_live_browser.py` for PowerGam investigation. The helper now installs a browser-side probe for `googletag.pubads()` events including `impressionViewable`, `rewardedSlotReady`, `rewardedSlotGranted`, `rewardedSlotClosed`, and `rewardedSlotVideoCompleted`.
+- Timeline snapshots now include `gpt_lifecycle_counts`, recent GPT event tails, and resource hints for Google ad/GPT endpoints. This preserves the strict final URL oracle while collecting evidence for the future HTTP ledger replay work.
+- Live engine benchmark for `https://gplinks.co/YVTC` returned `http://tesskibidixxx.com/` in `138.7s` helper time / `140.026s` wall time.
+- Direct helper probe returned the same final URL in `130.0s`; the installed GPT probe only observed `probe-installed` and no rewarded/impression events. That means the current PowerGam success is not yet explained by captured GPT lifecycle events, so HTTP replay should not be promoted yet.
