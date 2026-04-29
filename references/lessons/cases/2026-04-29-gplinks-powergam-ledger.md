@@ -45,3 +45,24 @@ Use a browser-to-HTTP extraction probe, not another pure HTTP replay:
 2. Capture CDP request/response headers for the three native PowerGam POSTs and the final `GET /YVTC?pid=...&vid=...`.
 3. Compare those against `gplinks-delay16-imps0.json` to find the exact missing browser-bound request/header/storage/resource side effect.
 4. If a minimal transferable state is found, patch an env-guarded hybrid lane: browser only for PowerGam ledger, then HTTP for final Turnstile `/links/go` if cookies and CSRF can be transferred. Otherwise keep current live-browser lane.
+
+## 2026-04-30 browser vs HTTP diff update
+
+Fresh diff artifact: `artifacts/active/2026-04-30-gplinks-browser-http-diff.md`.
+
+New evidence:
+
+- Browser CDP capture reached candidate `https://gplinks.co/YVTC?pid=1224622&vid=MTAyMDAwODIyNg` with `200 text/html`.
+- Browser native PowerGam posts are root-action posts to `https://powergam.online/`, with raw encoded `visitor_id`, `step_count=1/2/3` in cookies, and `ad_impressions=0`.
+- Focused HTTP root-action replay with 16.2s waits still returned `not_enough_steps`.
+- Additional HTTP tests also failed: final `Origin` header, redirect-chain follow, domain vs host-only cookies, and fake GA/FCCDCF/FCNEC cookies.
+
+Updated narrowed root cause:
+
+- The blocker is no longer likely to be visible form endpoint, payload, raw vid, simple cookies, final Origin header, or timing.
+- Remaining concrete delta is browser/Cloudflare navigation context around PowerGam, especially Chrome transport context and same-origin `POST /cdn-cgi/rum?` Browser Insights beacons after each PowerGam page load.
+- Next best HTTP-only experiment is a controlled RUM replay around each PowerGam step. Success oracle remains strict: candidate GET must become `200` final gate, not `302 not_enough_steps`.
+
+### RUM replay result
+
+Synthetic `POST https://powergam.online/cdn-cgi/rum?` after PowerGam page loads returned `204` but final candidate still returned `not_enough_steps` (`artifacts/active/gplinks-rum-replay-test.json`). Treat RUM as falsified as a standalone ledger proof. The remaining delta is full browser transport/runtime context or another browser-only side effect not yet isolated to one replayable endpoint.

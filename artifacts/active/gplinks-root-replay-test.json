@@ -1,0 +1,177 @@
+{
+  "raw": {
+    "lid": "WVZUQw",
+    "pid": "MTIyNDYyMg",
+    "vid": "MTAyMDAwNzUwNQ",
+    "pages": "Mw"
+  },
+  "decoded": {
+    "lid": "YVTC",
+    "pid": "1224622",
+    "vid": "1020007505",
+    "pages": "3"
+  },
+  "timeline": [
+    {
+      "stage": "entry",
+      "status": 302,
+      "loc": "https://powergam.online?lid=WVZUQw&pid=MTIyNDYyMg&vid=MTAyMDAwNzUwNQ&pages=Mw",
+      "cookies": {
+        "AppSession": "dbef94d00a00b94bc117230b186394ea",
+        "csrfToken": "1910c1c04e69925271f68ea6c8bad47f5c4a0e5e5a275a029a7600e89a34630274005d7001c51f7d43ae45777ba663d86e882d77d5c656d17319cbe47c53a268"
+      }
+    },
+    {
+      "stage": "power-query-get",
+      "status": 200,
+      "url": "https://powergam.online/?lid=WVZUQw&pid=MTIyNDYyMg&vid=MTAyMDAwNzUwNQ&pages=Mw",
+      "cookies": {
+        "AppSession": "dbef94d00a00b94bc117230b186394ea",
+        "csrfToken": "1910c1c04e69925271f68ea6c8bad47f5c4a0e5e5a275a029a7600e89a34630274005d7001c51f7d43ae45777ba663d86e882d77d5c656d17319cbe47c53a268"
+      }
+    },
+    {
+      "stage": "root-get",
+      "status": 200,
+      "url": "https://powergam.online/",
+      "cookies": {
+        "AppSession": "dbef94d00a00b94bc117230b186394ea",
+        "csrfToken": "1910c1c04e69925271f68ea6c8bad47f5c4a0e5e5a275a029a7600e89a34630274005d7001c51f7d43ae45777ba663d86e882d77d5c656d17319cbe47c53a268",
+        "lid": "YVTC",
+        "pid": "1224622",
+        "pages": "3",
+        "vid": "MTAyMDAwNzUwNQ",
+        "step_count": "0",
+        "imps": "0",
+        "adexp": "1"
+      },
+      "text": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta nam"
+    },
+    {
+      "stage": "post-root-1",
+      "status": 302,
+      "url": "https://powergam.online/",
+      "loc": "https://powergam.online/",
+      "payload": {
+        "form_name": "ads-track-data",
+        "step_id": "1",
+        "ad_impressions": "0",
+        "visitor_id": "MTAyMDAwNzUwNQ",
+        "next_target": "https://powergam.online/"
+      },
+      "cookies": {
+        "AppSession": "dbef94d00a00b94bc117230b186394ea",
+        "csrfToken": "1910c1c04e69925271f68ea6c8bad47f5c4a0e5e5a275a029a7600e89a34630274005d7001c51f7d43ae45777ba663d86e882d77d5c656d17319cbe47c53a268",
+        "lid": "YVTC",
+        "pid": "1224622",
+        "pages": "3",
+        "vid": "MTAyMDAwNzUwNQ",
+        "step_count": "0",
+        "imps": "0",
+        "adexp": "1"
+      }
+    },
+    {
+      "stage": "follow-1",
+      "status": 200,
+      "url": "https://powergam.online/",
+      "loc": null,
+      "text": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width",
+      "cookies": {
+        "AppSession": "dbef94d00a00b94bc117230b186394ea",
+        "csrfToken": "1910c1c04e69925271f68ea6c8bad47f5c4a0e5e5a275a029a7600e89a34630274005d7001c51f7d43ae45777ba663d86e882d77d5c656d17319cbe47c53a268",
+        "lid": "YVTC",
+        "pid": "1224622",
+        "pages": "3",
+        "vid": "MTAyMDAwNzUwNQ",
+        "step_count": "0",
+        "imps": "0",
+        "adexp": "1"
+      }
+    },
+    {
+      "stage": "post-root-2",
+      "status": 302,
+      "url": "https://powergam.online/",
+      "loc": "https://powergam.online/",
+      "payload": {
+        "form_name": "ads-track-data",
+        "step_id": "2",
+        "ad_impressions": "0",
+        "visitor_id": "MTAyMDAwNzUwNQ",
+        "next_target": "https://powergam.online/"
+      },
+      "cookies": {
+        "AppSession": "dbef94d00a00b94bc117230b186394ea",
+        "csrfToken": "1910c1c04e69925271f68ea6c8bad47f5c4a0e5e5a275a029a7600e89a34630274005d7001c51f7d43ae45777ba663d86e882d77d5c656d17319cbe47c53a268",
+        "lid": "YVTC",
+        "pid": "1224622",
+        "pages": "3",
+        "vid": "MTAyMDAwNzUwNQ",
+        "step_count": "0",
+        "imps": "0",
+        "adexp": "1"
+      }
+    },
+    {
+      "stage": "follow-2",
+      "status": 200,
+      "url": "https://powergam.online/",
+      "loc": null,
+      "text": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width",
+      "cookies": {
+        "AppSession": "dbef94d00a00b94bc117230b186394ea",
+        "csrfToken": "1910c1c04e69925271f68ea6c8bad47f5c4a0e5e5a275a029a7600e89a34630274005d7001c51f7d43ae45777ba663d86e882d77d5c656d17319cbe47c53a268",
+        "lid": "YVTC",
+        "pid": "1224622",
+        "pages": "3",
+        "vid": "MTAyMDAwNzUwNQ",
+        "step_count": "0",
+        "imps": "0",
+        "adexp": "1"
+      }
+    },
+    {
+      "stage": "post-root-3",
+      "status": 302,
+      "url": "https://powergam.online/",
+      "loc": "https://gplinks.co/YVTC?pid=1224622&vid=MTAyMDAwNzUwNQ",
+      "payload": {
+        "form_name": "ads-track-data",
+        "step_id": "3",
+        "ad_impressions": "0",
+        "visitor_id": "MTAyMDAwNzUwNQ",
+        "next_target": "https://gplinks.co/YVTC?pid=1224622&vid=MTAyMDAwNzUwNQ"
+      },
+      "cookies": {
+        "AppSession": "dbef94d00a00b94bc117230b186394ea",
+        "csrfToken": "1910c1c04e69925271f68ea6c8bad47f5c4a0e5e5a275a029a7600e89a34630274005d7001c51f7d43ae45777ba663d86e882d77d5c656d17319cbe47c53a268",
+        "lid": "YVTC",
+        "pid": "1224622",
+        "pages": "3",
+        "vid": "MTAyMDAwNzUwNQ",
+        "step_count": "0",
+        "imps": "0",
+        "adexp": "1"
+      }
+    },
+    {
+      "stage": "follow-3",
+      "status": 302,
+      "url": "https://gplinks.co/YVTC?pid=1224622&vid=MTAyMDAwNzUwNQ",
+      "loc": "https://gplinks.co/link-error?alias=YVTC&error_code=not_enough_steps",
+      "text": "",
+      "cookies": {
+        "AppSession": "dbef94d00a00b94bc117230b186394ea",
+        "csrfToken": "1910c1c04e69925271f68ea6c8bad47f5c4a0e5e5a275a029a7600e89a34630274005d7001c51f7d43ae45777ba663d86e882d77d5c656d17319cbe47c53a268",
+        "lid": "YVTC",
+        "pid": "1224622",
+        "pages": "3",
+        "vid": "MTAyMDAwNzUwNQ",
+        "step_count": "0",
+        "imps": "0",
+        "adexp": "1"
+      }
+    }
+  ]
+}
