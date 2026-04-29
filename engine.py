@@ -63,7 +63,7 @@ GPLINKS_HTTP_FAST_TIMEOUT = int(os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FAST_TI
 GPLINKS_HTTP_FAST_HELPER = os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FAST_HELPER", str(PROJECT_ROOT / "gplinks_http_fast.py"))
 GPLINKS_HTTP_FAST_PYTHON = os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FAST_PYTHON", HELPER_PYTHON)
 GPLINKS_HTTP_FAST_PYTHONPATH = os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FAST_PYTHONPATH", "")
-GPLINKS_HTTP_FAST_ENABLED = os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FAST", "0").strip().lower() in {"1", "true", "yes", "on"}
+GPLINKS_HTTP_FAST_ENABLED = os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FAST", "1").strip().lower() in {"1", "true", "yes", "on"}
 DEFAULT_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -724,12 +724,13 @@ class ShortlinkBypassEngine:
         family = "gplinks.co"
         facts: dict[str, Any] = {}
         try:
-            http_fast = self._resolve_gplinks_http_fast(url) if GPLINKS_HTTP_FAST_ENABLED else {"status": 0, "stage": "http-fast-skipped", "message": "disabled by default after live optimization benchmark"}
+            http_fast = self._resolve_gplinks_http_fast(url) if GPLINKS_HTTP_FAST_ENABLED else {"status": 0, "stage": "http-fast-skipped", "message": "disabled by env"}
             if http_fast.get("status") == 1 and http_fast.get("bypass_url"):
                 facts["live_stage"] = http_fast.get("stage")
                 facts["decoded_query"] = http_fast.get("decoded_query")
                 facts["sitekey"] = http_fast.get("sitekey")
                 facts["token_used"] = http_fast.get("token_used")
+                facts["token_source"] = http_fast.get("token_source")
                 facts["waited_seconds"] = http_fast.get("waited_seconds")
                 return BypassResult(
                     status=1,

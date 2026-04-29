@@ -4,6 +4,8 @@ from __future__ import annotations
 import argparse
 import base64
 import json
+import os
+import threading
 import time
 from urllib.parse import parse_qs, urljoin, urlparse
 
@@ -19,6 +21,49 @@ DEFAULT_HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
 }
+GPLINKS_TURNSTILE_SITEKEY = os.getenv("SHORTLINK_BYPASS_GPLINKS_TURNSTILE_SITEKEY", "0x4AAAAAAAynCEcs0RV-UleY")
+GPLINKS_TURNSTILE_PAGE_URL = os.getenv("SHORTLINK_BYPASS_GPLINKS_TURNSTILE_PAGE_URL", "https://gplinks.co/")
+GPLINKS_TURNSTILE_TOKEN_TTL_SECONDS = int(os.getenv("SHORTLINK_BYPASS_GPLINKS_TURNSTILE_TOKEN_TTL_SECONDS", "90") or "90")
+GPLINKS_TURNSTILE_PREWARM_WAIT_SECONDS = float(os.getenv("SHORTLINK_BYPASS_GPLINKS_TURNSTILE_PREWARM_WAIT_SECONDS", "8") or "8")
+
+
+class TurnstilePrewarmer:
+    def __init__(self, solver_url: str, page_url: str, sitekey: str, timeout: int, ttl_seconds: int = 90) -> None:
+        self.solver_url = solver_url
+        self.page_url = page_url
+        self.sitekey = sitekey
+        self.timeout = timeout
+        self.ttl_seconds = ttl_seconds
+        self.token: str | None = None
+        self.created_at: float | None = None
+        self.error: str | None = None
+        self._done = threading.Event()
+        self._thread: threading.Thread | None = None
+
+    def start(self) -> None:
+        if self._thread is not None:
+            return
+        self._thread = threading.Thread(target=self._solve, name="gplinks-turnstile-prewarm", daemon=True)
+        self._thread.start()
+
+    def token_for(self, sitekey: str, wait_seconds: float = 0) -> str | None:
+        if sitekey != self.sitekey:
+            return None
+        self._done.wait(max(0, wait_seconds))
+        if not self.token or self.created_at is None:
+            return None
+        if time.time() - self.created_at >= self.ttl_seconds:
+            return None
+        return self.token
+
+    def _solve(self) -> None:
+        try:
+            self.token = solve_turnstile(self.solver_url, self.page_url, self.sitekey, self.timeout)
+            self.created_at = time.time()
+        except Exception as exc:
+            self.error = str(exc)
+        finally:
+            self._done.set()
 
 
 def _b64_decode(value: str) -> str:
@@ -142,7 +187,7 @@ def _submit_power_forms(session, forms: list[dict], referer: str, timeout: int, 
             timeline.append({"stage": "power-form-submit", "form_id": form.get("id"), "error": str(exc)})
 
 
-def _post_final_gate(session, page_url: str, html: str, solver_url: str, timeout: int, timeline: list[dict]) -> dict:
+def _post_final_gate(session, page_url: str, html: str, solver_url: str, timeout: int, timeline: list[dict], prewarmer: TurnstilePrewarmer | None = None) -> dict:
     gate = extract_final_gate(html, page_url)
     timeline.append({"stage": "final-gate", "action": gate.get("action"), "sitekey": gate.get("sitekey"), "has_form": gate.get("has_form")})
     if not gate.get("has_form") or not gate.get("action"):
@@ -150,11 +195,20 @@ def _post_final_gate(session, page_url: str, html: str, solver_url: str, timeout
     payload = dict(gate.get("payload") or {})
     sitekey = gate.get("sitekey")
     token = None
+    token_source = None
     if sitekey:
-        token = solve_turnstile(solver_url, "https://gplinks.co/", sitekey, max(60, timeout))
+        token_source = "sync"
+        if prewarmer:
+            token = prewarmer.token_for(sitekey, wait_seconds=GPLINKS_TURNSTILE_PREWARM_WAIT_SECONDS)
+            if token:
+                token_source = "prewarm"
+            else:
+                timeline.append({"stage": "turnstile-prewarm-miss", "sitekey": sitekey, "error": prewarmer.error, "matched_sitekey": sitekey == prewarmer.sitekey})
+        if not token:
+            token = solve_turnstile(solver_url, "https://gplinks.co/", sitekey, max(60, timeout))
         payload["cf-turnstile-response"] = token
         payload["g-recaptcha-response"] = token
-        timeline.append({"stage": "turnstile-token", "sitekey": sitekey, "token_len": len(token)})
+        timeline.append({"stage": "turnstile-token", "sitekey": sitekey, "token_len": len(token), "source": token_source})
     headers = {
         **DEFAULT_HEADERS,
         "Referer": page_url,
@@ -171,13 +225,22 @@ def _post_final_gate(session, page_url: str, html: str, solver_url: str, timeout
     timeline.append({"stage": "links-go", "status": response.status_code, "url": response.url, "json": data, "text": text[:300]})
     final = data.get("url") if isinstance(data, dict) else None
     if is_final_url(final):
-        return {"status": 1, "stage": "http-fast", "bypass_url": final, "final_url": final, "sitekey": sitekey, "token_used": bool(token)}
-    return {"status": 0, "stage": "links-go", "message": (data or {}).get("message") if isinstance(data, dict) else "LINKS_GO_NO_FINAL_URL", "sitekey": sitekey, "token_used": bool(token)}
+        return {"status": 1, "stage": "http-fast", "bypass_url": final, "final_url": final, "sitekey": sitekey, "token_used": bool(token), "token_source": token_source}
+    return {"status": 0, "stage": "links-go", "message": (data or {}).get("message") if isinstance(data, dict) else "LINKS_GO_NO_FINAL_URL", "sitekey": sitekey, "token_used": bool(token), "token_source": token_source}
 
 
 def run(url: str, timeout: int = 90, solver_url: str = "http://127.0.0.1:5000") -> dict:
     started = time.time()
     timeline: list[dict] = []
+    prewarmer = TurnstilePrewarmer(
+        solver_url=solver_url,
+        page_url=GPLINKS_TURNSTILE_PAGE_URL,
+        sitekey=GPLINKS_TURNSTILE_SITEKEY,
+        timeout=max(60, timeout),
+        ttl_seconds=GPLINKS_TURNSTILE_TOKEN_TTL_SECONDS,
+    )
+    prewarmer.start()
+    timeline.append({"stage": "turnstile-prewarm-start", "sitekey": GPLINKS_TURNSTILE_SITEKEY, "page_url": GPLINKS_TURNSTILE_PAGE_URL})
     session = curl_requests.Session(impersonate="chrome136")
     headers = dict(DEFAULT_HEADERS)
     try:
@@ -236,7 +299,7 @@ def run(url: str, timeout: int = 90, solver_url: str = "http://127.0.0.1:5000") 
             final_page = session.get(final_location, headers={**headers, "Referer": power.url}, timeout=timeout, allow_redirects=True)
             timeline.append({"stage": "candidate-follow", "status": final_page.status_code, "url": final_page.url, "text": (final_page.text or "")[:180]})
 
-        gate_result = _post_final_gate(session, final_page.url or target_final_candidate, final_page.text or "", solver_url, timeout, timeline)
+        gate_result = _post_final_gate(session, final_page.url or target_final_candidate, final_page.text or "", solver_url, timeout, timeline, prewarmer=prewarmer)
         gate_result.update({
             "decoded_query": decoded,
             "target_final_candidate": target_final_candidate,

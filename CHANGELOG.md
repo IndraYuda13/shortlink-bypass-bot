@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+### GPLinks HTTP-core Turnstile prewarm
+- Promoted the GPLinks HTTP fast lane to default-on (`SHORTLINK_BYPASS_GPLINKS_HTTP_FAST=1`) so the engine tries the HTTP-core path before the browser fallback.
+- Added `TurnstilePrewarmer` in `gplinks_http_fast.py`; it starts the local Turnstile solver at engine start, caches a short-lived token by sitekey/page URL, and lets the final `/links/go` post reuse the ready token instead of solving only after the gate appears.
+- Added strict fallback rules: mismatched sitekey, expired token, solver error, or not-ready token falls back to synchronous solve, while `not_enough_steps` still remains a hard failure instead of a fake success.
+- Exposed `token_source` in GPLinks HTTP success facts so future live runs show whether `/links/go` used `prewarm` or `sync` solving.
+- Added unit coverage for token reuse, sitekey mismatch, expiry rejection, and final-gate prewarm submission.
+
 ### GPLinks PowerGam network ledger and timer experiments
 - Added a pre-navigation PowerGam/GPLinks network ledger recorder in `gplinks_live_browser.py` using `Page.addScriptToEvaluateOnNewDocument`, plus runtime snapshots for fetch/XHR/sendBeacon/form submits, cookie changes, local/session storage, and relevant resource hints.
 - Added `tests/test_gplinks_network_ledger.py` to lock recorder wiring and keep the GPLinks final URL oracle strict. Internal GPLinks/PowerGam URLs, link-error pages, and browser error URLs remain rejected as final results.

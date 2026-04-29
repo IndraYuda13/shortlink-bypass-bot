@@ -37,7 +37,8 @@ class GplinksTests(unittest.TestCase):
         fake_session.get.side_effect = [entry, power]
         fake_session.cookies.jar = []
 
-        with patch.object(engine, '_resolve_gplinks_live', return_value={}), \
+        with patch.object(engine, '_resolve_gplinks_http_fast', return_value={'status': 0, 'stage': 'powergam-ledger', 'message': 'HTTP_FAST_POWERGAM_LEDGER_REJECTED'}), \
+             patch.object(engine, '_resolve_gplinks_live', return_value={}), \
              patch.object(engine, '_new_impersonated_session', return_value=fake_session):
             result = engine.analyze('https://gplinks.co/YVTC')
 
@@ -61,6 +62,7 @@ class GplinksTests(unittest.TestCase):
             'decoded_query': {'lid': 'YVTC', 'pid': '1224622', 'vid': '1019365269'},
             'sitekey': '0x4AAAAAAAynCEcs0RV-UleY',
             'token_used': True,
+            'token_source': 'prewarm',
             'waited_seconds': 31.2,
         }), patch.object(engine, '_resolve_gplinks_live') as live:
             result = engine.analyze('https://gplinks.co/YVTC')
@@ -72,6 +74,7 @@ class GplinksTests(unittest.TestCase):
         self.assertEqual(result.stage, 'http-fast')
         self.assertEqual(result.bypass_url, 'http://tesskibidixxx.com/')
         self.assertTrue(result.facts['token_used'])
+        self.assertEqual(result.facts['token_source'], 'prewarm')
 
     def test_gplinks_helper_keeps_direct_powergam_flag(self):
         source = __import__('pathlib').Path('gplinks_live_browser.py').read_text()
@@ -104,7 +107,7 @@ class GplinksTests(unittest.TestCase):
 
     def test_gplinks_promotes_live_helper_final_url(self):
         engine = ShortlinkBypassEngine()
-        with patch.object(engine, '_resolve_gplinks_http_fast') as http_fast, \
+        with patch.object(engine, '_resolve_gplinks_http_fast', return_value={'status': 0, 'stage': 'powergam-ledger', 'message': 'HTTP_FAST_POWERGAM_LEDGER_REJECTED'}) as http_fast, \
              patch.object(engine, '_resolve_gplinks_live', return_value={
             'status': 1,
             'stage': 'live-browser-final-gate',
@@ -116,7 +119,7 @@ class GplinksTests(unittest.TestCase):
         }):
             result = engine.analyze('https://gplinks.co/YVTC')
 
-        http_fast.assert_not_called()
+        http_fast.assert_called_once()
         self.assertEqual(result.family, 'gplinks.co')
         self.assertEqual(result.status, 1)
         self.assertEqual(result.message, 'GPLINKS_FINAL_OK')
