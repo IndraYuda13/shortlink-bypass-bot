@@ -91,6 +91,17 @@ class GplinksTests(unittest.TestCase):
         self.assertIn('gpt_resource_hints', source)
         self.assertIn('securepubads.g.doubleclick.net', source)
 
+    def test_gplinks_helper_installs_network_ledger_recorder(self):
+        source = __import__('pathlib').Path('gplinks_live_browser.py').read_text()
+        self.assertIn('install_network_ledger_recorder', source)
+        self.assertIn('collect_network_ledger_events', source)
+        self.assertIn('navigator.sendBeacon', source)
+        self.assertIn('XMLHttpRequest.prototype.open', source)
+        self.assertIn('window.fetch', source)
+        self.assertIn('HTMLFormElement.prototype.submit', source)
+        self.assertIn('network_ledger', source)
+        self.assertIn('cookie_snapshot', source)
+
     def test_gplinks_promotes_live_helper_final_url(self):
         engine = ShortlinkBypassEngine()
         with patch.object(engine, '_resolve_gplinks_http_fast') as http_fast, \

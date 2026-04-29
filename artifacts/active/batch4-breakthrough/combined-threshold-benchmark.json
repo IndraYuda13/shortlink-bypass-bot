@@ -1,0 +1,267 @@
+{
+  "status": 1,
+  "labels": "/root/.openclaw/workspace/projects/shortlink-bypass-bot/artifacts/active/batch4-breakthrough/combined-xut-fixtures/labels.jsonl",
+  "sample_count": 2,
+  "accepted_count": 2,
+  "threshold_sweep": [
+    {
+      "threshold": 3.0,
+      "sample_count": 2,
+      "usable_count": 2,
+      "evaluated_count": 2,
+      "accepted_count": 2,
+      "correct_count": 2,
+      "success_rate": 1.0,
+      "average_confidence": 0.7251,
+      "confidence_buckets": {
+        "0.60-0.74": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "failed_sample_ids": [],
+      "failures": [],
+      "errors": [],
+      "skipped_unlabeled_ids": []
+    },
+    {
+      "threshold": 5.0,
+      "sample_count": 2,
+      "usable_count": 2,
+      "evaluated_count": 2,
+      "accepted_count": 2,
+      "correct_count": 2,
+      "success_rate": 1.0,
+      "average_confidence": 0.7251,
+      "confidence_buckets": {
+        "0.60-0.74": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "failed_sample_ids": [],
+      "failures": [],
+      "errors": [],
+      "skipped_unlabeled_ids": []
+    },
+    {
+      "threshold": 8.0,
+      "sample_count": 2,
+      "usable_count": 2,
+      "evaluated_count": 2,
+      "accepted_count": 2,
+      "correct_count": 2,
+      "success_rate": 1.0,
+      "average_confidence": 0.7251,
+      "confidence_buckets": {
+        "0.60-0.74": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "failed_sample_ids": [],
+      "failures": [],
+      "errors": [],
+      "skipped_unlabeled_ids": []
+    },
+    {
+      "threshold": 12.0,
+      "sample_count": 2,
+      "usable_count": 2,
+      "evaluated_count": 2,
+      "accepted_count": 2,
+      "correct_count": 2,
+      "success_rate": 1.0,
+      "average_confidence": 0.7251,
+      "confidence_buckets": {
+        "0.60-0.74": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "failed_sample_ids": [],
+      "failures": [],
+      "errors": [],
+      "skipped_unlabeled_ids": []
+    },
+    {
+      "threshold": 16.0,
+      "sample_count": 2,
+      "usable_count": 2,
+      "evaluated_count": 2,
+      "accepted_count": 2,
+      "correct_count": 2,
+      "success_rate": 1.0,
+      "average_confidence": 0.7251,
+      "confidence_buckets": {
+        "0.60-0.74": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "failed_sample_ids": [],
+      "failures": [],
+      "errors": [],
+      "skipped_unlabeled_ids": []
+    },
+    {
+      "threshold": 20.0,
+      "sample_count": 2,
+      "usable_count": 2,
+      "evaluated_count": 2,
+      "accepted_count": 2,
+      "correct_count": 2,
+      "success_rate": 1.0,
+      "average_confidence": 0.7251,
+      "confidence_buckets": {
+        "0.60-0.74": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "failed_sample_ids": [],
+      "failures": [],
+      "errors": [],
+      "skipped_unlabeled_ids": []
+    },
+    {
+      "threshold": 22.0,
+      "sample_count": 2,
+      "usable_count": 2,
+      "evaluated_count": 2,
+      "accepted_count": 2,
+      "correct_count": 2,
+      "success_rate": 1.0,
+      "average_confidence": 0.7251,
+      "confidence_buckets": {
+        "0.60-0.74": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "failed_sample_ids": [],
+      "failures": [],
+      "errors": [],
+      "skipped_unlabeled_ids": []
+    },
+    {
+      "threshold": 24.0,
+      "sample_count": 2,
+      "usable_count": 2,
+      "evaluated_count": 2,
+      "accepted_count": 2,
+      "correct_count": 2,
+      "success_rate": 1.0,
+      "average_confidence": 0.6001,
+      "confidence_buckets": {
+        "0.00-0.59": {
+          "total": 1,
+          "correct": 1
+        },
+        "0.60-0.74": {
+          "total": 1,
+          "correct": 1
+        }
+      },
+      "failed_sample_ids": [],
+      "failures": [],
+      "errors": [],
+      "skipped_unlabeled_ids": []
+    },
+    {
+      "threshold": 28.0,
+      "sample_count": 2,
+      "usable_count": 2,
+      "evaluated_count": 2,
+      "accepted_count": 2,
+      "correct_count": 2,
+      "success_rate": 1.0,
+      "average_confidence": 0.4751,
+      "confidence_buckets": {
+        "0.00-0.59": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "failed_sample_ids": [],
+      "failures": [],
+      "errors": [],
+      "skipped_unlabeled_ids": []
+    },
+    {
+      "threshold": 32.0,
+      "sample_count": 2,
+      "usable_count": 2,
+      "evaluated_count": 2,
+      "accepted_count": 2,
+      "correct_count": 1,
+      "success_rate": 0.5,
+      "average_confidence": 0.5897,
+      "confidence_buckets": {
+        "0.00-0.59": {
+          "total": 1,
+          "correct": 1
+        },
+        "0.60-0.74": {
+          "total": 1,
+          "correct": 0
+        }
+      },
+      "failed_sample_ids": [
+        "line-2"
+      ],
+      "failures": [
+        {
+          "id": "line-2",
+          "image": "xut_autodime_1777398873404_attempt1_pass.png",
+          "expected": 4,
+          "got": 2,
+          "confidence": 0.7,
+          "groups": [
+            [
+              0,
+              2,
+              3,
+              4
+            ],
+            [
+              1
+            ]
+          ],
+          "distinctness": [
+            29.1654,
+            28.7555,
+            26.9088,
+            29.6877,
+            27.0045
+          ]
+        }
+      ],
+      "errors": [],
+      "skipped_unlabeled_ids": []
+    },
+    {
+      "threshold": 40.0,
+      "sample_count": 2,
+      "usable_count": 2,
+      "evaluated_count": 2,
+      "accepted_count": 2,
+      "correct_count": 2,
+      "success_rate": 1.0,
+      "average_confidence": 0.4751,
+      "confidence_buckets": {
+        "0.00-0.59": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "failed_sample_ids": [],
+      "failures": [],
+      "errors": [],
+      "skipped_unlabeled_ids": []
+    }
+  ],
+  "best_threshold": 3.0,
+  "best_success_rate": 1.0,
+  "claim_ready_95pct": false
+}

@@ -300,3 +300,18 @@
 - Turnstile solver profile showed task creation is negligible (`0.016-0.039s`) while browser challenge solving dominates (`48-54s`). Result polling is now `2s` by default via `SHORTLINK_BYPASS_TURNSTILE_POLL_INTERVAL`; live recheck: `exe.io` `65.98s`, `cuty.io` `76.17s`.
 - XUT now prefers standalone IconCaptcha API `http://127.0.0.1:8091/solve` via `SHORTLINK_BYPASS_ICONCAPTCHA_ENDPOINT`, normalizing API fields back to legacy `click_x/click_y` shape. Live recheck after rollback of unsafe Step 1 polling: `108.55s`, final `http://tesskibidixxx.com/`, provider `api`, Step 1 needed 2 attempts.
 - GPLinks profiling showed remaining bottlenecks are PowerGam ledger `~95-96s` and Turnstile solve `~50s`. Added anti-throttle Chrome flags and skipped final navigation by default after final href is exposed; live recheck `150.21s`, effectively similar to prior optimized run.
+
+## 2026-04-29 supported timing registry
+- `/supported` now displays a speed-ranked supported-sites list with solve-time estimates.
+- API-style consumers should use `registry_as_dicts()` for per-host fields and `display_groups_as_dicts()` for the grouped speed-ranked list.
+
+## 2026-04-30 GPLinks PowerGam ledger checkpoint
+- Parent status: GPLinks browser lane remains live-proven; HTTP replay is still not promoted because the server ledger rejects incomplete proof with `not_enough_steps` / `not_enough_time`.
+- Implemented pre-navigation network ledger recording in `gplinks_live_browser.py` so browser-side evidence is captured before page scripts run.
+- Live proof artifacts:
+  - `artifacts/active/benchmark-matrix/2026-04-30-gplinks-network-ledger-cdp-prenav.json` -> success, final `http://tesskibidixxx.com/`, `138.6s`.
+  - `artifacts/active/benchmark-matrix/2026-04-30-gplinks-network-ledger-polling.json` -> success, final `http://tesskibidixxx.com/`, `127.9s`.
+  - `artifacts/active/benchmark-matrix/2026-04-30-gplinks-early-continue-1.json` -> success, final `http://tesskibidixxx.com/`, `121.6s`.
+  - `artifacts/active/benchmark-matrix/2026-04-30-gplinks-early-continue-2.json` -> failed with `not_enough_time`.
+- Ledger candidates seen in successful browser runs: PowerGam cookies `lid/pid/pages/vid/step_count/imps`, `tracki.click/ads/api/get-banner.php`, `tracki.click/ads/api/imp.php`, `tracki.click/ads/api/pop.php`, `b7510.com`/`bvtpk.com` ad calls, `api.gplinks.com`, `api.pubnotify.com`, Cloudflare RUM, and final GPLinks `POST /links/go`.
+- Timer finding: `window.readyToGo` can become true before the visible countdown ends, but the server still enforces dwell. Clicking Continue at `1s` early worked once; clicking at `2s` early produced `not_enough_time`. Default behavior therefore remains timer-zero safe, with `SHORTLINK_BYPASS_GPLINKS_EARLY_CONTINUE_SECONDS=1` available as an aggressive opt-in.

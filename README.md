@@ -44,7 +44,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 - `cuty_live_browser.py` remains the Cuty/Cuttlinks fallback for same-browser Turnstile and final go-form flow.
 - `exe_http_fast.py` solves `exe.io` over HTTP with curl_cffi plus the local Turnstile solver, keeping the browser helper as fallback. Final submit redirects are not auto-followed so `/links/back/...` reward paths are preserved before target homepages can truncate them.
 - `gplinks_http_fast.py` is kept as opt-in research with `SHORTLINK_BYPASS_GPLINKS_HTTP_FAST=1`; default skips it because the current live result is a quick `not_enough_steps` before browser fallback.
-- `gplinks_live_browser.py` drives the PowerGam 3-step browser flow, scroll/verify handling, and final GPLinks Turnstile callback lane; `SHORTLINK_BYPASS_GPLINKS_NAVIGATE_FINAL=1` restores old final navigation after a valid final href is exposed.
+- `gplinks_live_browser.py` drives the PowerGam 3-step browser flow, scroll/verify handling, pre-navigation network ledger recorder, and final GPLinks Turnstile callback lane; `SHORTLINK_BYPASS_GPLINKS_NAVIGATE_FINAL=1` restores old final navigation after a valid final href is exposed. `SHORTLINK_BYPASS_GPLINKS_EARLY_CONTINUE_SECONDS=1` enables the current aggressive PowerGam timer experiment; `2` is known to fail with `not_enough_time` on sample `YVTC`.
 - `references/` and `ROADMAP.md` keep technical notes and current implementation status
 
 Flow and target docs:
@@ -227,7 +227,7 @@ The `xut.io` helper now polls readiness for IconCaptcha and final href states in
 
 ### GPLinks investigation note
 
-`gplinks_live_browser.py` records GPT/ad lifecycle evidence while keeping the browser lane as the production path. Use direct helper output when investigating PowerGam HTTP replay:
+`gplinks_live_browser.py` records GPT/ad lifecycle evidence and a pre-navigation network ledger while keeping the browser lane as the production path. The current recorder captures fetch/XHR/sendBeacon/form submits, cookie/storage mutations, and resource hints such as `tracki.click/ads/api/get-banner.php`, `tracki.click/ads/api/imp.php`, `tracki.click/ads/api/pop.php`, `b7510.com`/`bvtpk.com`, and final `POST /links/go`. Use direct helper output when investigating PowerGam HTTP replay:
 
 ```bash
 python3 gplinks_live_browser.py https://gplinks.co/YVTC --timeout 340 > artifacts/active/benchmark-matrix/gplinks-live-helper.json

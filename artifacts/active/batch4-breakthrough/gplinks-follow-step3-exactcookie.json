@@ -1,0 +1,100 @@
+{
+  "target": "https://gplinks.co/YVTC?pid=1224622&vid=MTAxOTU3NTMyMg",
+  "raw": {
+    "lid": "WVZUQw",
+    "pid": "MTIyNDYyMg",
+    "vid": "MTAxOTU3NTMyMg",
+    "pages": "Mw"
+  },
+  "decoded": {
+    "lid": "YVTC",
+    "pid": "1224622",
+    "vid": "1019575322",
+    "pages": "3"
+  },
+  "timeline": [
+    {
+      "stage": "entry",
+      "status": 302,
+      "loc": "https://powergam.online?lid=WVZUQw&pid=MTIyNDYyMg&vid=MTAxOTU3NTMyMg&pages=Mw",
+      "cookies": {
+        "AppSession": "ba94d0403c1b83b30bc8b58e0b31021c",
+        "csrfToken": "d67f3727180ce75c4507223bda2e75d59d71ad7568f484760a5aecee5095f1d51cb216c5d1fd3836be1dd5cbaf66cd2ad9d018397bae629a12112cd3792236c2"
+      }
+    },
+    {
+      "stage": "power",
+      "status": 200,
+      "url": "https://powergam.online/?lid=WVZUQw&pid=MTIyNDYyMg&vid=MTAxOTU3NTMyMg&pages=Mw",
+      "action": "https://powergam.online?lid=WVZUQw&pid=MTIyNDYyMg&vid=MTAxOTU3NTMyMg&pages=Mw"
+    },
+    {
+      "stage": "post1",
+      "status": 302,
+      "url": "https://powergam.online/?lid=WVZUQw&pid=MTIyNDYyMg&vid=MTAxOTU3NTMyMg&pages=Mw",
+      "history": [],
+      "loc": "https://powergam.online",
+      "text": "",
+      "cookies": {
+        "AppSession": "ba94d0403c1b83b30bc8b58e0b31021c",
+        "csrfToken": "d67f3727180ce75c4507223bda2e75d59d71ad7568f484760a5aecee5095f1d51cb216c5d1fd3836be1dd5cbaf66cd2ad9d018397bae629a12112cd3792236c2",
+        "lid": "YVTC",
+        "pid": "1224622",
+        "pages": "3",
+        "vid": "MTAxOTU3NTMyMg",
+        "step_count": "1",
+        "imps": "0",
+        "adexp": "1"
+      }
+    },
+    {
+      "stage": "follow1",
+      "status": 200,
+      "url": "https://powergam.online/"
+    },
+    {
+      "stage": "post2",
+      "status": 302,
+      "url": "https://powergam.online/?lid=WVZUQw&pid=MTIyNDYyMg&vid=MTAxOTU3NTMyMg&pages=Mw",
+      "history": [],
+      "loc": "https://powergam.online",
+      "text": "",
+      "cookies": {
+        "AppSession": "ba94d0403c1b83b30bc8b58e0b31021c",
+        "csrfToken": "d67f3727180ce75c4507223bda2e75d59d71ad7568f484760a5aecee5095f1d51cb216c5d1fd3836be1dd5cbaf66cd2ad9d018397bae629a12112cd3792236c2",
+        "lid": "YVTC",
+        "pid": "1224622",
+        "pages": "3",
+        "vid": "MTAxOTU3NTMyMg",
+        "step_count": "1",
+        "imps": "0",
+        "adexp": "1"
+      }
+    },
+    {
+      "stage": "follow2",
+      "status": 200,
+      "url": "https://powergam.online/"
+    },
+    {
+      "stage": "post3",
+      "status": 200,
+      "url": "https://powergam.online/?lid=WVZUQw&pid=MTIyNDYyMg&vid=MTAxOTU3NTMyMg&pages=Mw",
+      "history": [],
+      "loc": null,
+      "text": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Please Wait... | PowerGam</title>\n    \n    <link href=\"https://cdn.",
+      "cookies": {
+        "AppSession": "ba94d0403c1b83b30bc8b58e0b31021c",
+        "csrfToken": "d67f3727180ce75c4507223bda2e75d59d71ad7568f484760a5aecee5095f1d51cb216c5d1fd3836be1dd5cbaf66cd2ad9d018397bae629a12112cd3792236c2",
+        "lid": "YVTC",
+        "pid": "1224622",
+        "pages": "3",
+        "vid": "MTAxOTU3NTMyMg",
+        "step_count": "1",
+        "imps": "0",
+        "adexp": "1"
+      }
+    }
+  ],
+  "elapsed": 7.61
+}

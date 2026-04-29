@@ -2,6 +2,13 @@
 
 ## 2026-04-30
 
+### GPLinks PowerGam network ledger and timer experiments
+- Added a pre-navigation PowerGam/GPLinks network ledger recorder in `gplinks_live_browser.py` using `Page.addScriptToEvaluateOnNewDocument`, plus runtime snapshots for fetch/XHR/sendBeacon/form submits, cookie changes, local/session storage, and relevant resource hints.
+- Added `tests/test_gplinks_network_ledger.py` to lock recorder wiring and keep the GPLinks final URL oracle strict. Internal GPLinks/PowerGam URLs, link-error pages, and browser error URLs remain rejected as final results.
+- Live recorder proof for `https://gplinks.co/YVTC` still returned `http://tesskibidixxx.com/` and captured browser ledger candidates including `tracki.click/ads/api/get-banner.php`, `tracki.click/ads/api/imp.php`, `tracki.click/ads/api/pop.php`, `b7510.com`/`bvtpk.com`, `api.gplinks.com`, and final `POST https://gplinks.co/links/go`.
+- Replaced coarse PowerGam wait chunks with tighter readiness polling while still gating production Continue clicks on the visible timer reaching zero. Live timing improved to `127.9s` with the final oracle preserved.
+- Added env-gated aggressive timer cut `SHORTLINK_BYPASS_GPLINKS_EARLY_CONTINUE_SECONDS`. Live `=1` succeeded in `121.6s`; live `=2` failed with `not_enough_time`, so the default remains safe.
+
 ### final URL validator and Cuty HTTP-first hardening
 - Added `final_url_validator.py` as a shared final-oracle helper that prefers the first downstream `Location` header from final submit responses before falling back to the response URL.
 - Wired the validator into `exe_http_fast.py` and `cuty_http_fast.py` so downstream `/links/back/...` reward paths are preserved instead of being truncated by target-site homepage redirects.
