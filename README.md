@@ -208,3 +208,15 @@ A sample systemd unit is included at:
 ## License
 
 MIT
+
+## Benchmarking speed
+
+Use the benchmark matrix runner to capture comparable JSONL records for supported sample URLs:
+
+```bash
+source .venv/bin/activate
+python3 benchmark_matrix.py --family cuty.io --output artifacts/active/benchmark-matrix/latest.jsonl --print
+python3 benchmark_matrix.py --family exe.io --output artifacts/active/benchmark-matrix/latest.jsonl --print
+```
+
+Each record includes wall time, engine result, `bypass_url`, and a profiler summary. Keep final URL validation strict: benchmark wins count only when the returned URL is the real downstream target, not an intermediate page or a truncated homepage.

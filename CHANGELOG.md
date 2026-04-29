@@ -441,3 +441,9 @@
 - Root cause: `_extract_oii_token_target()` only promoted `/links/back/`, `/member/shortlinks/verify/`, and `/shortlink.php?` markers, so Bitcotasks `/shortlink/result/...` payloads were ignored and fallback embedded URL selection returned `https://shrinkearn.com/`.
 - Changed `engine.py` to recognize `/shortlink/result/` token targets and trim Bitcotasks result URLs to the real `.../<id>/<id>` oracle instead of keeping suffix-decoding garbage.
 - Added regression test for `https://tpi.li/OWgbl0wy35w`, expected final `https://bitcotasks.com//shortlink/result/a4sbiirc1jcip4r9yncggus5nw8u1xwz-.-.-620efc44d2206adb53c603a787ee9770f78400d74b14a49bc0c1980fefd77678/843/194`.
+
+### speed profiler and benchmark matrix
+- Added `timeline_profiler.py` to summarize helper timelines and extract comparable `waited_seconds` from both full HTTP timeline payloads and compact helper summaries.
+- Added `benchmark_matrix.py` to run registry sample URLs by family/host and write JSONL benchmark records under `artifacts/active/benchmark-matrix/`.
+- Initial benchmark records captured Cuty HTTP-only at `49.9s` helper time and Exe HTTP-only at `56.8-60.7s` helper time while preserving strict final URL validation.
+- Added unit coverage for profiler summaries, compact Exe helper timing extraction, benchmark job selection, and JSONL output shaping.
