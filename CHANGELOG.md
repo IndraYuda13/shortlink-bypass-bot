@@ -447,3 +447,8 @@
 - Added `benchmark_matrix.py` to run registry sample URLs by family/host and write JSONL benchmark records under `artifacts/active/benchmark-matrix/`.
 - Initial benchmark records captured Cuty HTTP-only at `49.9s` helper time and Exe HTTP-only at `56.8-60.7s` helper time while preserving strict final URL validation.
 - Added unit coverage for profiler summaries, compact Exe helper timing extraction, benchmark job selection, and JSONL output shaping.
+
+### xut polling speed pass
+- Replaced XUT Step 1 large fixed sleeps with readiness polling for visible IconCaptcha widget, canvas data, Step 2 transition, and final Get Link href.
+- Fixed two polling regressions found during live benchmark: hidden/zero-size IconCaptcha widgets now wait for a visible widget, and disappearing canvas nodes now wait for a visible canvas before click-coordinate replay.
+- Live benchmark after fixes: `https://xut.io/hd7AOJ` returned `http://tesskibidixxx.com/` in `95.72s` wall time with strict final href oracle preserved. Earlier failed benchmark rows are kept in the JSONL artifact as regression evidence.

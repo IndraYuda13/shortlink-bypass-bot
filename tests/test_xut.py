@@ -176,3 +176,21 @@ class XutHelperRuntimeTests(unittest.TestCase):
         self.assertIn('SHORTLINK_BYPASS_XUT_GAMESCRATE_DWELL', source)
         self.assertIn('XUT_FINAL_HOST_BLOCKLIST', source)
         self.assertNotIn('click_button_contains(driver, "download")', source.lower())
+
+    def test_xut_helper_uses_polling_instead_of_large_fixed_step1_sleeps(self):
+        source = Path('xut_live_browser.py').read_text()
+        solve_body = source.split('def solve_step1_until_step2', 1)[1].split('def continue_through_steps', 1)[0]
+        self.assertIn('wait_for_visible_iconcaptcha_widget', source)
+        self.assertIn('wait_for_iconcaptcha_canvas_data_url', source)
+        self.assertIn('wait_for_visible_iconcaptcha_canvas', source)
+        self.assertIn('wait_for_step2', source)
+        self.assertNotIn('driver.find_element(By.CSS_SELECTOR, ".iconcaptcha-widget")', solve_body)
+        self.assertNotIn('driver.find_element(By.CSS_SELECTOR, "canvas")', solve_body)
+        self.assertNotIn('time.sleep(12)', solve_body)
+        self.assertNotIn('time.sleep(6)', solve_body)
+        self.assertNotIn('time.sleep(4)', solve_body)
+
+    def test_xut_helper_uses_fast_final_href_polling(self):
+        source = Path('xut_live_browser.py').read_text()
+        self.assertIn('wait_for_final_url_from_state', source)
+        self.assertNotIn('for _ in range(80):', source)

@@ -262,6 +262,54 @@ def final_url_from_current_state(driver) -> str | None:
     return None
 
 
+def wait_for_final_url_from_state(driver, timeout: float = 80.0, interval: float = 0.25) -> str | None:
+    return wait_for(lambda: final_url_from_current_state(driver), timeout=timeout, interval=interval)
+
+
+def wait_for_step2(driver, timeout: float = 8.0) -> bool:
+    return bool(wait_for(lambda: "Step 2/6" in driver.title or "Step 2" in body_text(driver), timeout=timeout, interval=0.25))
+
+
+def wait_for_visible_iconcaptcha_widget(driver, timeout: float = 12.0):
+    return wait_for(
+        lambda: driver.execute_script(
+            """
+            return Array.from(document.querySelectorAll('.iconcaptcha-widget')).find(el => {
+              const r = el.getBoundingClientRect();
+              const cs = getComputedStyle(el);
+              return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none';
+            }) || null;
+            """
+        ),
+        timeout=timeout,
+        interval=0.25,
+    )
+
+
+def wait_for_iconcaptcha_canvas_data_url(driver, timeout: float = 8.0) -> str | None:
+    return wait_for(
+        lambda: driver.execute_script("const c=document.querySelector('canvas'); return c ? c.toDataURL('image/png') : null;"),
+        timeout=timeout,
+        interval=0.25,
+    )
+
+
+def wait_for_visible_iconcaptcha_canvas(driver, timeout: float = 4.0):
+    return wait_for(
+        lambda: driver.execute_script(
+            """
+            return Array.from(document.querySelectorAll('canvas')).find(el => {
+              const r = el.getBoundingClientRect();
+              const cs = getComputedStyle(el);
+              return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none';
+            }) || null;
+            """
+        ),
+        timeout=timeout,
+        interval=0.25,
+    )
+
+
 def snap(driver, label: str) -> dict:
     success = driver.execute_script("const el=document.querySelector('#challenge-success-text'); return el ? el.innerText : null;")
     hidden = driver.execute_script("const el=document.querySelector('input[name=\"cf-turnstile-response\"]'); return el ? el.value : null;")
@@ -309,36 +357,37 @@ def save_iconcaptcha_capture(capture_dir: Path | None, canvas_data_url: str, sol
 def solve_step1_until_step2(driver, max_attempts: int = 6, capture_dir: Path | None = None) -> tuple[bool, int | None, list[dict]]:
     history: list[dict] = []
     wait_for(lambda: "Step 1/6" in driver.title or "Step 1/6" in driver.page_source, timeout=120)
-    time.sleep(12)
     for attempt in range(1, max_attempts + 1):
-        if "Step 2/6" in driver.title or "Step 2" in body_text(driver):
+        if wait_for_step2(driver, timeout=0.5):
             return True, attempt - 1 if attempt > 1 else 1, history
-        widget = driver.find_element(By.CSS_SELECTOR, ".iconcaptcha-widget")
+        widget = wait_for_visible_iconcaptcha_widget(driver, timeout=12.0)
+        if not widget:
+            history.append({"attempt": attempt, "message": "visible widget missing"})
+            continue
         driver.execute_script('arguments[0].scrollIntoView({block:"center"});', widget)
-        time.sleep(0.5)
+        time.sleep(0.2)
         try:
             widget.click()
         except Exception:
-            ActionChains(driver).move_to_element(widget).click().perform()
-        time.sleep(4)
-        canvas_data = driver.execute_script("const c=document.querySelector('canvas'); return c ? c.toDataURL('image/png') : null;")
+            driver.execute_script("arguments[0].click();", widget)
+        canvas_data = wait_for_iconcaptcha_canvas_data_url(driver, timeout=8.0)
         if not canvas_data:
             history.append({"attempt": attempt, "message": "canvas missing"})
-            time.sleep(2)
             continue
         solver = solve_canvas_via_local_api(canvas_data)
         if "click_x" not in solver or "click_y" not in solver:
             history.append({"attempt": attempt, "message": "solver missing click coordinates", "solver": solver})
-            time.sleep(2)
             continue
-        canvas = driver.find_element(By.CSS_SELECTOR, "canvas")
+        canvas = wait_for_visible_iconcaptcha_canvas(driver, timeout=4.0)
+        if not canvas:
+            history.append({"attempt": attempt, "message": "visible canvas missing", "solver": solver})
+            continue
         rect = canvas.rect
         ox = solver["click_x"] - rect["width"] / 2
         oy = solver["click_y"] - rect["height"] / 2
         ActionChains(driver).move_to_element_with_offset(canvas, ox, oy).click().perform()
-        time.sleep(6)
+        passed = wait_for_step2(driver, timeout=8.0)
         current_body = body_text(driver)
-        passed = "Step 2/6" in driver.title or "Step 2" in current_body
         capture_path = save_iconcaptcha_capture(capture_dir, canvas_data, solver, attempt, passed, driver.title, current_body)
         history.append({"attempt": attempt, "solver": solver, "title": driver.title, "body": current_body, "capture_path": capture_path, "passed": passed})
         if passed:
@@ -451,27 +500,25 @@ def main() -> int:
         wait_for(lambda: "xut.io" in driver.current_url or "Step 6" in body_text(driver) or final_url_from_current_state(driver), timeout=6, interval=0.5)
         result["facts"]["post_open_final"] = [snap(driver, "post-open-final")]
 
-        for _ in range(80):
-            final_url = final_url_from_current_state(driver)
-            if final_url:
-                result["facts"]["step6_clickables"] = get_visible_exact_clickables(driver)
-                if XUT_CLICK_FINAL_LINK:
-                    clicked = click_exact_visible(driver, "Get Link")
-                    result["facts"]["get_link_clicked"] = clicked
-                    if clicked:
-                        time.sleep(5)
-                        final_url = final_url_from_current_state(driver) or driver.current_url
-                else:
-                    result["facts"]["get_link_clicked"] = {"skipped": True, "reason": "visible Get Link href is already the downstream final oracle"}
-                result["status"] = 1
-                result["message"] = "XUT_FINAL_OK"
-                result["stage"] = "final-bypass"
-                result["bypass_url"] = final_url
-                result["facts"]["final_state"] = snap(driver, "final-state")
-                result["notes"].append("final oracle tercapai lewat direct browser: gamescrate Step 5 -> xut Step 6 -> exact Get Link")
-                print(json.dumps(result, ensure_ascii=False))
-                return 0
-            time.sleep(1)
+        final_url = wait_for_final_url_from_state(driver, timeout=80, interval=0.25)
+        if final_url:
+            result["facts"]["step6_clickables"] = get_visible_exact_clickables(driver)
+            if XUT_CLICK_FINAL_LINK:
+                clicked = click_exact_visible(driver, "Get Link")
+                result["facts"]["get_link_clicked"] = clicked
+                if clicked:
+                    wait_for_final_url_from_state(driver, timeout=5, interval=0.25)
+                    final_url = final_url_from_current_state(driver) or driver.current_url
+            else:
+                result["facts"]["get_link_clicked"] = {"skipped": True, "reason": "visible Get Link href is already the downstream final oracle"}
+            result["status"] = 1
+            result["message"] = "XUT_FINAL_OK"
+            result["stage"] = "final-bypass"
+            result["bypass_url"] = final_url
+            result["facts"]["final_state"] = snap(driver, "final-state")
+            result["notes"].append("final oracle tercapai lewat direct browser: gamescrate Step 5 -> xut Step 6 -> exact Get Link")
+            print(json.dumps(result, ensure_ascii=False))
+            return 0
 
         result["facts"]["step6_or_final_state"] = snap(driver, "step6-or-final-state")
         result["facts"]["step6_clickables"] = get_visible_exact_clickables(driver)

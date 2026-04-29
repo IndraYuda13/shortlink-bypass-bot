@@ -220,3 +220,7 @@ python3 benchmark_matrix.py --family exe.io --output artifacts/active/benchmark-
 ```
 
 Each record includes wall time, engine result, `bypass_url`, and a profiler summary. Keep final URL validation strict: benchmark wins count only when the returned URL is the real downstream target, not an intermediate page or a truncated homepage.
+
+### XUT speed note
+
+The `xut.io` helper now polls readiness for IconCaptcha and final href states instead of sleeping through large fixed waits. Keep `SHORTLINK_BYPASS_XUT_GAMESCRATE_DWELL=4` as the safe default until repeated benchmark rows prove a lower dwell still preserves the final `Get Link` oracle.
