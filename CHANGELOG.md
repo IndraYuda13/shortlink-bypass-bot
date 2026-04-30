@@ -484,3 +484,10 @@
 - Timeline snapshots now include `gpt_lifecycle_counts`, recent GPT event tails, and resource hints for Google ad/GPT endpoints. This preserves the strict final URL oracle while collecting evidence for the future HTTP ledger replay work.
 - Live engine benchmark for `https://gplinks.co/YVTC` returned `http://tesskibidixxx.com/` in `138.7s` helper time / `140.026s` wall time.
 - Direct helper probe returned the same final URL in `130.0s`; the installed GPT probe only observed `probe-installed` and no rewarded/impression events. That means the current PowerGam success is not yet explained by captured GPT lifecycle events, so HTTP replay should not be promoted yet.
+
+## 2026-05-01 - ClaimCoin Shortano / Shortino partial support
+- Added `shortano.link` and `shortino.link` to the engine dispatch and supported-site registry.
+- Added `_handle_shortano_family` as a dedicated boundary instead of leaving ClaimCoin-discovered hosts as `unknown`.
+- Current live status is intentionally `partial`: `https://shortano.link/sOxx` is reached from ClaimCoin `/links/go/72`, but direct HTTP, curl_cffi, and local FlareSolverr all hit Cloudflare before the downstream timer/form can be mapped.
+- Added regression tests so these hosts stay classified as partial `CLOUDFLARE_BLOCKED`, not unsupported.
+- Guardrail: do not promote Shortano/Shortino to `live_bypass` until a ClaimCoin `/links/back/...` callback is verified inside an authenticated ClaimCoin session and the wall quota/reward mutates.

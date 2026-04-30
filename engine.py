@@ -109,6 +109,8 @@ class ShortlinkBypassEngine:
             return self._handle_token_landing(url, family)
         if host == "shrinkme.click" or host.endswith(".shrinkme.click"):
             return self._handle_shrinkme(url)
+        if host in {"shortano.link", "shortino.link"} or host.endswith(".shortano.link") or host.endswith(".shortino.link"):
+            return self._handle_shortano_family(url)
         if host == "link.adlink.click" or host.endswith(".adlink.click"):
             return self._handle_adlink_click(url)
         if host == "sfl.gl" or host.endswith(".sfl.gl"):
@@ -1299,6 +1301,70 @@ class ShortlinkBypassEngine:
                 "reCAPTCHA flow belum diselesaikan",
                 "continue URL belum bisa dipastikan dari HTML statis saja",
             ],
+        )
+
+    def _handle_shortano_family(self, url: str) -> BypassResult:
+        host = urlparse(url).netloc.lower()
+        family = "shortino.link" if host == "shortino.link" or host.endswith(".shortino.link") else "shortano.link"
+        try:
+            response = self._get(url)
+        except Exception as exc:
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="REQUEST_FAILED",
+                stage="entry",
+                blockers=[str(exc)],
+            )
+
+        soup = BeautifulSoup(response.text, "html.parser")
+        facts = self._common_facts(response, soup)
+        facts.update(self._extract_runtime_config(response.text))
+        hidden = self._extract_hidden_inputs(soup)
+        facts["hidden_inputs"] = hidden
+        facts["embedded_urls"] = self._collect_embedded_urls(response.text, hidden)
+        facts["forms"] = [str(form)[:500] for form in soup.find_all("form")[:5]]
+
+        if self._is_cloudflare_block(response, soup):
+            return BypassResult(
+                status=0,
+                input_url=url,
+                family=family,
+                message="CLOUDFLARE_BLOCKED",
+                stage="entry-cloudflare",
+                facts=facts,
+                blockers=[
+                    "entry page is behind Cloudflare from this VPS/runtime",
+                    "need a reusable clearance/helper lane before the downstream timer/form can be mapped",
+                ],
+                notes=[
+                    "ClaimCoin live probe reached this host from /links/go, so the family is registered as partial rather than unknown",
+                    "do not treat this as a reward-capable bypass until ClaimCoin /links/back callback mutates the authenticated wall",
+                ],
+            )
+
+        final_candidate = self._select_final_url(facts["embedded_urls"], url)
+        if final_candidate and "/links/back/" in final_candidate:
+            return BypassResult(
+                status=1,
+                input_url=url,
+                family=family,
+                message="CLAIMCOIN_CALLBACK_EXTRACTED",
+                bypass_url=final_candidate,
+                stage="entry-static-callback",
+                facts=facts,
+                notes=["static page exposed a ClaimCoin callback candidate; caller must still verify authenticated reward mutation"],
+            )
+
+        return BypassResult(
+            status=0,
+            input_url=url,
+            family=family,
+            message="ENTRY_MAPPED_NO_FINAL_CALLBACK",
+            stage="entry-mapped",
+            facts=facts,
+            blockers=["no ClaimCoin /links/back callback found in mapped page yet"],
         )
 
     def _handle_adlink_click(self, url: str) -> BypassResult:

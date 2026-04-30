@@ -31,6 +31,7 @@ Some shortlink families are cheap to inspect with plain HTTP. Others hide the re
 | `gplinks.co` | Live bypass | Browser PowerGam lane completes the 3-step gate, solves final Turnstile through the page callback, and returns sampled `tesskibidixxx.com` target |
 | `ez4short.com` | Live bypass | Fast `game5s.com` referer lane unlocks final go-link form and returns sampled `tesskibidixxx.com` target |
 | `shrinkme.click` | Live bypass | Uses a direct `MrProBlogger -> /links/go` shortcut with ThemeZon-style referer spoof over plain HTTP |
+| `shortano.link` / `shortino.link` | Partial | ClaimCoin-discovered shortlink hosts are routed to a dedicated handler, but current VPS probes hit Cloudflare before the timer/form can be mapped. |
 | `xut.io` -> `autodime cwsafelinkphp` | Live bypass | Live browser lane now reaches IconCaptcha Step 1, gamescrate Step 5, xut Step 6, and clicks `Get Link` to return sampled `tesskibidixxx.com` target |
 | `exe.io` | Live bypass | HTTP-only `exe.io -> exeygo.com` lane solves Turnstile, submits CakePHP forms, and returns sampled `google.com` target |
 
