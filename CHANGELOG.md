@@ -488,6 +488,6 @@
 ## 2026-05-01 - ClaimCoin Shortano / Shortino partial support
 - Added `shortano.link` and `shortino.link` to the engine dispatch and supported-site registry.
 - Added `_handle_shortano_family` as a dedicated boundary instead of leaving ClaimCoin-discovered hosts as `unknown`.
-- Current live status is intentionally `partial`: `https://shortano.link/sOxx` is reached from ClaimCoin `/links/go/72`, but direct HTTP, curl_cffi, and local FlareSolverr all hit Cloudflare before the downstream timer/form can be mapped.
+- Current live status is intentionally `partial`: `https://shortano.link/sOxx` is reached from ClaimCoin `/links/go/72`. Direct HTTP and curl_cffi hit Cloudflare. A corrected FlareSolverr session probe solves Cloudflare but the page returns `Proxy/VPN Detected.`, so downstream timer/form mapping still needs an accepted egress or profile/proxy lane.
 - Added regression tests so these hosts stay classified as partial `CLOUDFLARE_BLOCKED`, not unsupported.
 - Guardrail: do not promote Shortano/Shortino to `live_bypass` until a ClaimCoin `/links/back/...` callback is verified inside an authenticated ClaimCoin session and the wall quota/reward mutates.

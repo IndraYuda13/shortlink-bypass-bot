@@ -62,11 +62,11 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
         handler="_handle_shortano_family",
         command_alias="shortano",
         sample_url="https://shortano.link/sOxx",
-        method_summary="ClaimCoin-discovered family; entry is Cloudflare-blocked from current VPS.",
+        method_summary="ClaimCoin-discovered family; direct HTTP is Cloudflare-blocked and solved helper session returns Proxy/VPN.",
         solve_time_label="blocked",
         expected_final=None,
-        proof="ClaimCoin /links/go/72 redirected to shortano.link/sOxx on 2026-05-01; direct HTTP/curl_cffi/FlareSolverr probes hit Cloudflare before the downstream form could be mapped.",
-        blockers=("Cloudflare entry challenge blocks current VPS/runtime before timer/form mapping.",),
+        proof="ClaimCoin /links/go/72 redirected to shortano.link/sOxx on 2026-05-01; direct HTTP/curl_cffi hit Cloudflare, while corrected FlareSolverr session mode solves Cloudflare and reaches Proxy/VPN Detected before downstream form mapping.",
+        blockers=("Current VPS/helper egress is rejected by the site as Proxy/VPN after Cloudflare is solved.",),
         notes=("Registered as partial so ClaimCoin can route this family to the shortlink project instead of treating it as unknown.",),
     ),
     SupportedSite(
@@ -80,7 +80,7 @@ SUPPORTED_SITES: tuple[SupportedSite, ...] = (
         solve_time_label="blocked",
         expected_final=None,
         proof="Registered from ClaimCoin Shortino wall discovery on 2026-05-01; exact external alias still needs a live /links/go sample.",
-        blockers=("Need a live Shortino alias and the same Cloudflare/helper mapping work as shortano.link.",),
+        blockers=("Need a live Shortino alias and the same accepted-egress/helper mapping work as shortano.link.",),
         notes=("Uses the same handler boundary as shortano.link until evidence proves a different flow.",),
     ),
     SupportedSite(
