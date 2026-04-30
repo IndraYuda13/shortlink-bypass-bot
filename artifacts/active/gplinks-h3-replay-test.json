@@ -1,0 +1,38 @@
+{
+  "raw": {
+    "lid": "WVZUQw",
+    "pid": "MTIyNDYyMg",
+    "vid": "MTAyMDA0MDg5OQ",
+    "pages": "Mw"
+  },
+  "decoded": {
+    "lid": "YVTC",
+    "pid": "1224622",
+    "vid": "1020040899",
+    "pages": "3"
+  },
+  "timeline": [
+    {
+      "stage": "post1",
+      "status": 302,
+      "loc": "https://powergam.online"
+    },
+    {
+      "stage": "post2",
+      "status": 302,
+      "loc": "https://powergam.online"
+    },
+    {
+      "stage": "post3",
+      "status": 302,
+      "loc": "https://gplinks.co/YVTC?pid=1224622&vid=MTAyMDA0MDg5OQ"
+    },
+    {
+      "stage": "candidate",
+      "status": 302,
+      "url": "https://gplinks.co/YVTC?pid=1224622&vid=MTAyMDA0MDg5OQ",
+      "loc": "https://gplinks.co/link-error?alias=YVTC&error_code=not_enough_steps",
+      "text": ""
+    }
+  ]
+}

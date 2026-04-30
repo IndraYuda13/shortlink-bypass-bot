@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 from engine import ShortlinkBypassEngine
+from gplinks_live_browser import import_driver_cookies_to_session, try_http_final_gate_from_browser
 
 
 class GplinksTests(unittest.TestCase):
@@ -93,6 +94,45 @@ class GplinksTests(unittest.TestCase):
         self.assertIn('gpt_lifecycle', source)
         self.assertIn('gpt_resource_hints', source)
         self.assertIn('securepubads.g.doubleclick.net', source)
+
+    def test_gplinks_live_helper_has_http_final_handoff(self):
+        source = __import__('pathlib').Path('gplinks_live_browser.py').read_text()
+        self.assertIn('try_http_final_gate_from_browser', source)
+        self.assertIn('http-final-gate', source)
+        self.assertIn('import_driver_cookies_to_session', source)
+
+    def test_import_driver_cookies_to_session_filters_gplinks_cookies(self):
+        driver = Mock()
+        driver.get_cookies.return_value = [
+            {'name': 'AppSession', 'value': 'sess', 'domain': '.gplinks.co', 'path': '/'},
+            {'name': 'csrfToken', 'value': 'csrf', 'domain': 'gplinks.co', 'path': '/'},
+            {'name': 'lid', 'value': 'YVTC', 'domain': 'powergam.online', 'path': '/'},
+        ]
+        session = Mock()
+        session.cookies.set = Mock()
+
+        imported = import_driver_cookies_to_session(driver, session, allowed_hosts={'gplinks.co'})
+
+        self.assertEqual([item['name'] for item in imported], ['AppSession', 'csrfToken'])
+        self.assertEqual(session.cookies.set.call_count, 2)
+
+    def test_try_http_final_gate_from_browser_posts_with_imported_cookies(self):
+        driver = Mock()
+        driver.current_url = 'https://gplinks.co/YVTC?pid=1&vid=2'
+        driver.page_source = '<form id="go-link" action="/links/go"><input name="_csrfToken" value="abc"></form>'
+        driver.get_cookies.return_value = [{'name': 'AppSession', 'value': 'sess', 'domain': 'gplinks.co', 'path': '/'}]
+        timeline = []
+        fake_session = Mock()
+
+        with patch('gplinks_live_browser.curl_requests.Session', return_value=fake_session), \
+             patch('gplinks_live_browser.post_gplinks_final_gate_http', return_value={'status': 1, 'bypass_url': 'https://target.example/final'}):
+            result = try_http_final_gate_from_browser(driver, 'http://127.0.0.1:5000', 60, timeline)
+
+        self.assertEqual(result['status'], 1)
+        self.assertEqual(result['bypass_url'], 'https://target.example/final')
+        self.assertEqual(result['stage'], 'http-final-gate')
+        self.assertEqual(timeline[0]['stage'], 'http-final-gate-start')
+        self.assertEqual(timeline[-1]['stage'], 'http-final-gate-result')
 
     def test_gplinks_helper_installs_network_ledger_recorder(self):
         source = __import__('pathlib').Path('gplinks_live_browser.py').read_text()

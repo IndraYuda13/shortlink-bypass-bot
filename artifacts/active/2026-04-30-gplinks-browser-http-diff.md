@@ -146,3 +146,46 @@ Updated next best action:
 
 1. Try a true browser-to-HTTP split after PowerGam candidate acceptance: browser only until final gate page is accepted, then transfer form/cookies into HTTP `/links/go` with prewarmed Turnstile.
 2. In parallel, investigate whether an HTTP/3-capable client can reproduce Chrome's accepted PowerGam navigation without Selenium.
+
+## Browser-to-HTTP final handoff probe
+
+Patch added `SHORTLINK_BYPASS_GPLINKS_HTTP_FINAL_HANDOFF=1` in `gplinks_live_browser.py`.
+
+Live artifact: `artifacts/active/gplinks-hybrid-http-final-live.json`.
+
+Result:
+
+```text
+browser reached accepted final GPLinks page
+http-final-gate-start imported GPLinks cookies: AppSession, csrfToken, app_visitor, cf_clearance, ab, analytics cookies
+HTTP /links/go result: {"status":"error","message":"Bad Request.","url":""}
+browser fallback then submitted the same page path and reached http://tesskibidixxx.com/
+```
+
+Meaning:
+
+- Browser-to-HTTP split after PowerGam acceptance is wired, but not accepted by GPLinks final submit yet.
+- The failure is after the PowerGam ledger, at the CakePHP/GPLinks final form boundary.
+- Because it adds a second Turnstile solve and slows the successful browser fallback, the lane remains disabled by default.
+
+Likely next delta at this final boundary:
+
+- Browser submit may rely on exact in-page callback/runtime state, not just copied cookies and hidden form fields.
+- Need a CDP performance-log capture of browser `/links/go` request headers/cookies/body from the same run and compare to the curl_cffi handoff request.
+
+## curl_cffi HTTP/3 replay test
+
+Artifact: `artifacts/active/gplinks-h3-replay-test.json`.
+
+Result:
+
+```text
+curl_cffi CurlHttpVersion.V3
+PowerGam root POST steps 1/2/3 -> expected redirects
+candidate -> 302 /link-error?error_code=not_enough_steps
+```
+
+Meaning:
+
+- HTTP/3 alone does not reproduce the accepted browser PowerGam ledger.
+- Transport may still matter in combination with browser runtime state, but `CurlHttpVersion.V3` by itself is falsified as the missing single switch.

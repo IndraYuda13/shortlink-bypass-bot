@@ -2,6 +2,12 @@
 
 ## 2026-04-30
 
+### GPLinks browser-to-HTTP final handoff probe
+- Added an env-gated `SHORTLINK_BYPASS_GPLINKS_HTTP_FINAL_HANDOFF=1` lane in `gplinks_live_browser.py` that imports accepted GPLinks browser cookies into a curl_cffi session and tries final `/links/go` through the HTTP core before falling back to the proven browser submit.
+- Added unit coverage for cookie import and HTTP final handoff wiring.
+- Live probe reached the accepted GPLinks final page but HTTP `/links/go` returned JSON `Bad Request.`, then browser fallback still returned `http://tesskibidixxx.com/`; the lane stays disabled by default to avoid slowing production runs.
+- Tested curl_cffi HTTP/3 (`CurlHttpVersion.V3`) for the PowerGam visible replay; it still returned `not_enough_steps`, so HTTP/3 alone is not the missing ledger proof.
+
 ### GPLinks HTTP-core Turnstile prewarm
 - Promoted the GPLinks HTTP fast lane to default-on (`SHORTLINK_BYPASS_GPLINKS_HTTP_FAST=1`) so the engine tries the HTTP-core path before the browser fallback.
 - Added `TurnstilePrewarmer` in `gplinks_http_fast.py`; it starts the local Turnstile solver at engine start, caches a short-lived token by sitekey/page URL, and lets the final `/links/go` post reuse the ready token instead of solving only after the gate appears.

@@ -17,6 +17,7 @@ from curl_cffi import requests as curl_requests
 import undetected_chromedriver as uc
 
 from cuty_live_browser import solve_turnstile
+from gplinks_http_fast import _post_final_gate as post_gplinks_final_gate_http
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 CHROME_PATH = "/usr/bin/google-chrome" if Path("/usr/bin/google-chrome").exists() else "/usr/bin/google-chrome-stable"
@@ -25,6 +26,7 @@ POWERGAM_HOSTS = {"powergam.online", "www.powergam.online"}
 GPLINKS_DIRECT_POWERGAM = os.getenv("SHORTLINK_BYPASS_GPLINKS_DIRECT_POWERGAM", "0").strip().lower() in {"1", "true", "yes", "on"}
 GPLINKS_NAVIGATE_FINAL = os.getenv("SHORTLINK_BYPASS_GPLINKS_NAVIGATE_FINAL", "0").strip().lower() in {"1", "true", "yes", "on"}
 GPLINKS_EARLY_CONTINUE_SECONDS = max(0, int(os.getenv("SHORTLINK_BYPASS_GPLINKS_EARLY_CONTINUE_SECONDS", "0") or "0"))
+GPLINKS_HTTP_FINAL_HANDOFF = os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FINAL_HANDOFF", "0").strip().lower() in {"1", "true", "yes", "on"}
 
 
 def detect_chrome_major() -> int | None:
@@ -483,6 +485,50 @@ def wait_document_ready(driver, timeout: float = 20, interval: float = 0.5) -> d
     return last
 
 
+def import_driver_cookies_to_session(driver, session, allowed_hosts: set[str] | None = None) -> list[dict]:
+    allowed_hosts = allowed_hosts or GPLINKS_HOSTS
+    imported: list[dict] = []
+    for cookie in driver.get_cookies():
+        name = cookie.get("name")
+        value = cookie.get("value")
+        domain = str(cookie.get("domain") or "").lstrip(".")
+        if not name or value is None or domain not in allowed_hosts:
+            continue
+        path = cookie.get("path") or "/"
+        try:
+            session.cookies.set(name, value, domain=domain, path=path)
+            imported.append({"name": name, "domain": domain, "path": path})
+        except Exception as exc:
+            imported.append({"name": name, "domain": domain, "path": path, "error": str(exc)[:160]})
+    return imported
+
+
+def try_http_final_gate_from_browser(driver, solver_url: str, timeout_left: int, timeline: list[dict]) -> dict:
+    session = curl_requests.Session(impersonate="chrome136")
+    try:
+        ua = js(driver, "return navigator.userAgent") or DEFAULT_HEADERS.get("User-Agent") if "DEFAULT_HEADERS" in globals() else None
+    except Exception:
+        ua = None
+    if ua:
+        try:
+            session.headers.update({"User-Agent": ua})
+        except Exception:
+            pass
+    imported = import_driver_cookies_to_session(driver, session, allowed_hosts=GPLINKS_HOSTS)
+    page_url = driver.current_url
+    html = driver.page_source or ""
+    local_timeline: list[dict] = []
+    timeline.append({"stage": "http-final-gate-start", "page_url": page_url, "imported_cookies": imported})
+    try:
+        result = post_gplinks_final_gate_http(session, page_url, html, solver_url, max(60, timeout_left), local_timeline)
+    except Exception as exc:
+        result = {"status": 0, "stage": "http-final-gate", "message": str(exc)}
+    result = dict(result)
+    result["stage"] = "http-final-gate"
+    timeline.append({"stage": "http-final-gate-result", "status": result.get("status"), "message": result.get("message"), "bypass_url": result.get("bypass_url"), "timeline": local_timeline})
+    return result
+
+
 def unlock_final_gate(driver, solver_url: str, timeout_left: int) -> dict:
     actions: list[dict] = []
     before = wait_not_cloudflare(driver, 35)
@@ -632,6 +678,13 @@ def run(url: str, timeout: int, solver_url: str) -> dict:
         candidate_url = candidate.get("href") or driver.current_url
         if is_final_url(candidate_url):
             return {"status": 1, "stage": "live-browser-powergam", "bypass_url": candidate_url, "final_url": candidate_url, "decoded_query": decoded, "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
+
+        if GPLINKS_HTTP_FINAL_HANDOFF:
+            http_final = try_http_final_gate_from_browser(driver, solver_url, max(60, timeout - int(time.time() - started)), timeline)
+            if http_final.get("status") == 1 and http_final.get("bypass_url"):
+                return {"status": 1, "stage": "live-browser-http-final", "bypass_url": http_final.get("bypass_url"), "final_url": http_final.get("final_url") or http_final.get("bypass_url"), "decoded_query": decoded, "sitekey": http_final.get("sitekey"), "token_used": http_final.get("token_used"), "token_source": http_final.get("token_source"), "timeline": timeline, "waited_seconds": round(time.time() - started, 1)}
+        else:
+            timeline.append({"stage": "http-final-gate-skipped", "reason": "disabled by SHORTLINK_BYPASS_GPLINKS_HTTP_FINAL_HANDOFF"})
 
         unlock = unlock_final_gate(driver, solver_url, max(60, timeout - int(time.time() - started)))
         timeline.extend(unlock.get("actions") or [])

@@ -66,3 +66,10 @@ Updated narrowed root cause:
 ### RUM replay result
 
 Synthetic `POST https://powergam.online/cdn-cgi/rum?` after PowerGam page loads returned `204` but final candidate still returned `not_enough_steps` (`artifacts/active/gplinks-rum-replay-test.json`). Treat RUM as falsified as a standalone ledger proof. The remaining delta is full browser transport/runtime context or another browser-only side effect not yet isolated to one replayable endpoint.
+
+### 2026-04-30 final handoff and HTTP/3 probes
+
+- Added env-gated `SHORTLINK_BYPASS_GPLINKS_HTTP_FINAL_HANDOFF=1` browser-to-HTTP final handoff in `gplinks_live_browser.py`.
+- Live artifact `artifacts/active/gplinks-hybrid-http-final-live.json`: browser reached the accepted final page, HTTP `/links/go` returned `Bad Request.`, then browser fallback still reached `http://tesskibidixxx.com/`.
+- The handoff is disabled by default because it slows the proven lane and is not yet successful.
+- Artifact `artifacts/active/gplinks-h3-replay-test.json`: curl_cffi `CurlHttpVersion.V3` replay still returned `not_enough_steps`, so HTTP/3 alone is falsified as the missing PowerGam ledger proof.
