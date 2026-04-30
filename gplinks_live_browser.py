@@ -17,7 +17,7 @@ from curl_cffi import requests as curl_requests
 import undetected_chromedriver as uc
 
 from cuty_live_browser import solve_turnstile
-from gplinks_http_fast import _post_final_gate as post_gplinks_final_gate_http
+from gplinks_http_fast import GPLINKS_TURNSTILE_SITEKEY, TurnstilePrewarmer, _post_final_gate as post_gplinks_final_gate_http
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 CHROME_PATH = "/usr/bin/google-chrome" if Path("/usr/bin/google-chrome").exists() else "/usr/bin/google-chrome-stable"
@@ -27,6 +27,8 @@ GPLINKS_DIRECT_POWERGAM = os.getenv("SHORTLINK_BYPASS_GPLINKS_DIRECT_POWERGAM", 
 GPLINKS_NAVIGATE_FINAL = os.getenv("SHORTLINK_BYPASS_GPLINKS_NAVIGATE_FINAL", "0").strip().lower() in {"1", "true", "yes", "on"}
 GPLINKS_EARLY_CONTINUE_SECONDS = max(0, int(os.getenv("SHORTLINK_BYPASS_GPLINKS_EARLY_CONTINUE_SECONDS", "0") or "0"))
 GPLINKS_HTTP_FINAL_HANDOFF = os.getenv("SHORTLINK_BYPASS_GPLINKS_HTTP_FINAL_HANDOFF", "0").strip().lower() in {"1", "true", "yes", "on"}
+GPLINKS_LIVE_TURNSTILE_PREWARM = os.getenv("SHORTLINK_BYPASS_GPLINKS_LIVE_TURNSTILE_PREWARM", "1").strip().lower() in {"1", "true", "yes", "on"}
+GPLINKS_LIVE_TURNSTILE_PREWARM_WAIT_SECONDS = float(os.getenv("SHORTLINK_BYPASS_GPLINKS_LIVE_TURNSTILE_PREWARM_WAIT_SECONDS", "3") or "3")
 
 
 def detect_chrome_major() -> int | None:
@@ -505,11 +507,13 @@ def import_driver_cookies_to_session(driver, session, allowed_hosts: set[str] | 
 
 def try_http_final_gate_from_browser(driver, solver_url: str, timeout_left: int, timeline: list[dict]) -> dict:
     session = curl_requests.Session(impersonate="chrome136")
+    browser_headers: dict[str, str] = {}
     try:
-        ua = js(driver, "return navigator.userAgent") or DEFAULT_HEADERS.get("User-Agent") if "DEFAULT_HEADERS" in globals() else None
+        ua = js(driver, "return navigator.userAgent")
     except Exception:
         ua = None
     if ua:
+        browser_headers["User-Agent"] = ua
         try:
             session.headers.update({"User-Agent": ua})
         except Exception:
@@ -520,7 +524,7 @@ def try_http_final_gate_from_browser(driver, solver_url: str, timeout_left: int,
     local_timeline: list[dict] = []
     timeline.append({"stage": "http-final-gate-start", "page_url": page_url, "imported_cookies": imported})
     try:
-        result = post_gplinks_final_gate_http(session, page_url, html, solver_url, max(60, timeout_left), local_timeline)
+        result = post_gplinks_final_gate_http(session, page_url, html, solver_url, max(60, timeout_left), local_timeline, browser_headers=browser_headers)
     except Exception as exc:
         result = {"status": 0, "stage": "http-final-gate", "message": str(exc)}
     result = dict(result)
@@ -529,7 +533,7 @@ def try_http_final_gate_from_browser(driver, solver_url: str, timeout_left: int,
     return result
 
 
-def unlock_final_gate(driver, solver_url: str, timeout_left: int) -> dict:
+def unlock_final_gate(driver, solver_url: str, timeout_left: int, prewarmer: TurnstilePrewarmer | None = None) -> dict:
     actions: list[dict] = []
     before = wait_not_cloudflare(driver, 35)
     before["stage"] = "before-unlock"
@@ -546,8 +550,16 @@ def unlock_final_gate(driver, solver_url: str, timeout_left: int) -> dict:
     sitekey = before.get("sitekey")
     token = None
     if sitekey and str(app_vars.get("cloudflare_turnstile_on", "")).lower() != "no":
-        token = solve_turnstile(solver_url, "https://gplinks.co/", sitekey, max(60, timeout_left))
-        actions.append({"stage": "turnstile-token", "sitekey": sitekey, "token_len": len(token)})
+        token_source = "sync"
+        if prewarmer:
+            token = prewarmer.token_for(sitekey, wait_seconds=GPLINKS_LIVE_TURNSTILE_PREWARM_WAIT_SECONDS)
+            if token:
+                token_source = "prewarm"
+            else:
+                actions.append({"stage": "turnstile-prewarm-miss", "sitekey": sitekey, "error": prewarmer.error, "matched_sitekey": sitekey == prewarmer.sitekey})
+        if not token:
+            token = solve_turnstile(solver_url, "https://gplinks.co/", sitekey, max(60, timeout_left))
+        actions.append({"stage": "turnstile-token", "sitekey": sitekey, "token_len": len(token), "source": token_source})
     if before.get("captchaInput") and not token:
         actions.append({"stage": "captcha-required", "reason": "captchaShortlink_captcha input present and no solver value available"})
         return {"actions": actions, "sitekey": sitekey, "token_used": False, "captcha_required": True}
@@ -606,6 +618,17 @@ def unlock_final_gate(driver, solver_url: str, timeout_left: int) -> dict:
 def run(url: str, timeout: int, solver_url: str) -> dict:
     started = time.time()
     timeline: list[dict] = []
+    prewarmer: TurnstilePrewarmer | None = None
+    if GPLINKS_LIVE_TURNSTILE_PREWARM:
+        prewarmer = TurnstilePrewarmer(
+            solver_url=solver_url,
+            page_url="https://gplinks.co/",
+            sitekey=GPLINKS_TURNSTILE_SITEKEY,
+            timeout=max(60, timeout),
+            ttl_seconds=max(180, timeout + 60),
+        )
+        prewarmer.start()
+        timeline.append({"stage": "live-turnstile-prewarm-start", "sitekey": GPLINKS_TURNSTILE_SITEKEY})
     session = curl_requests.Session(impersonate="chrome136")
     entry = session.get(url, timeout=40, allow_redirects=False)
     power_url = entry.headers.get("location") or ""
@@ -686,7 +709,7 @@ def run(url: str, timeout: int, solver_url: str) -> dict:
         else:
             timeline.append({"stage": "http-final-gate-skipped", "reason": "disabled by SHORTLINK_BYPASS_GPLINKS_HTTP_FINAL_HANDOFF"})
 
-        unlock = unlock_final_gate(driver, solver_url, max(60, timeout - int(time.time() - started)))
+        unlock = unlock_final_gate(driver, solver_url, max(60, timeout - int(time.time() - started)), prewarmer=prewarmer)
         timeline.extend(unlock.get("actions") or [])
         timeline.append(collect_gpt_lifecycle_events(driver, "final-gpt-lifecycle"))
         timeline.append(collect_network_ledger_events(driver, "final-network-ledger"))

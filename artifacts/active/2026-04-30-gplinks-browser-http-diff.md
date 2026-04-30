@@ -189,3 +189,40 @@ Meaning:
 
 - HTTP/3 alone does not reproduce the accepted browser PowerGam ledger.
 - Transport may still matter in combination with browser runtime state, but `CurlHttpVersion.V3` by itself is falsified as the missing single switch.
+
+## Live Turnstile prewarm speedup
+
+Patch: default-on `SHORTLINK_BYPASS_GPLINKS_LIVE_TURNSTILE_PREWARM=1` in `gplinks_live_browser.py`.
+
+Live artifact: `artifacts/active/gplinks-live-prewarm-run.json`.
+
+Result:
+
+```text
+status=1
+stage=live-browser-final-gate
+final_url=http://tesskibidixxx.com/
+waited_seconds=103.2
+turnstile-token source=prewarm
+```
+
+Meaning:
+
+- The major final-stage wait was the Turnstile solve after PowerGam candidate acceptance.
+- Starting the solver at engine start lets the final gate reuse a ready token.
+- This does not solve the full HTTP-only PowerGam ledger, but it is a production-safe speedup for the currently proven browser fallback.
+
+## Browser `/links/go` CDP capture
+
+Artifact: `artifacts/active/gplinks-links-go-cdp-latest.json`.
+
+Key browser `/links/go` request facts:
+
+- `POST https://gplinks.co/links/go`
+- `Accept: application/json, text/javascript, */*; q=0.01`
+- `Content-Type: application/x-www-form-urlencoded; charset=UTF-8`
+- `X-Requested-With: XMLHttpRequest`
+- Browser UA: `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 ... Chrome/147...`
+- Cookie includes `AppSession`, `csrfToken`, `app_visitor`, `ab`, `cf_clearance`, and analytics cookies.
+
+A follow-up patch made the HTTP handoff use the browser UA and browser-like content type. Live handoff still returned `Bad Request.`, so this header delta is falsified as a standalone fix.

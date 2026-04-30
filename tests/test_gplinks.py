@@ -101,6 +101,13 @@ class GplinksTests(unittest.TestCase):
         self.assertIn('http-final-gate', source)
         self.assertIn('import_driver_cookies_to_session', source)
 
+    def test_gplinks_live_helper_has_turnstile_prewarm(self):
+        source = __import__('pathlib').Path('gplinks_live_browser.py').read_text()
+        self.assertIn('GPLINKS_LIVE_TURNSTILE_PREWARM', source)
+        self.assertIn('live-turnstile-prewarm-start', source)
+        self.assertIn('turnstile-prewarm-miss', source)
+        self.assertIn('source": token_source', source)
+
     def test_import_driver_cookies_to_session_filters_gplinks_cookies(self):
         driver = Mock()
         driver.get_cookies.return_value = [

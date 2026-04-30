@@ -2,6 +2,12 @@
 
 ## 2026-04-30
 
+### GPLinks live Turnstile prewarm speedup
+- Added default-on `SHORTLINK_BYPASS_GPLINKS_LIVE_TURNSTILE_PREWARM=1` in `gplinks_live_browser.py` so the final Turnstile token starts solving while the browser is still working through the PowerGam ledger.
+- `unlock_final_gate()` now reuses a matching prewarmed token and records `source=prewarm|sync`; it falls back to synchronous solving if the token is missing, mismatched, expired, or the solver failed.
+- Live verification for `https://gplinks.co/YVTC` returned `http://tesskibidixxx.com/` in `103.2s` with `source=prewarm`, down from the observed ~136s bot run and prior 150s-class runs.
+- Added a CDP `/links/go` capture artifact and confirmed the browser request uses Chrome Linux 147 headers/cookies; matching HTTP handoff headers alone still returned `Bad Request.`, so the handoff remains research-only.
+
 ### GPLinks browser-to-HTTP final handoff probe
 - Added an env-gated `SHORTLINK_BYPASS_GPLINKS_HTTP_FINAL_HANDOFF=1` lane in `gplinks_live_browser.py` that imports accepted GPLinks browser cookies into a curl_cffi session and tries final `/links/go` through the HTTP core before falling back to the proven browser submit.
 - Added unit coverage for cookie import and HTTP final handoff wiring.

@@ -187,7 +187,7 @@ def _submit_power_forms(session, forms: list[dict], referer: str, timeout: int, 
             timeline.append({"stage": "power-form-submit", "form_id": form.get("id"), "error": str(exc)})
 
 
-def _post_final_gate(session, page_url: str, html: str, solver_url: str, timeout: int, timeline: list[dict], prewarmer: TurnstilePrewarmer | None = None) -> dict:
+def _post_final_gate(session, page_url: str, html: str, solver_url: str, timeout: int, timeline: list[dict], prewarmer: TurnstilePrewarmer | None = None, browser_headers: dict[str, str] | None = None) -> dict:
     gate = extract_final_gate(html, page_url)
     timeline.append({"stage": "final-gate", "action": gate.get("action"), "sitekey": gate.get("sitekey"), "has_form": gate.get("has_form")})
     if not gate.get("has_form") or not gate.get("action"):
@@ -211,10 +211,12 @@ def _post_final_gate(session, page_url: str, html: str, solver_url: str, timeout
         timeline.append({"stage": "turnstile-token", "sitekey": sitekey, "token_len": len(token), "source": token_source})
     headers = {
         **DEFAULT_HEADERS,
+        **(browser_headers or {}),
         "Referer": page_url,
         "Origin": "https://gplinks.co",
         "X-Requested-With": "XMLHttpRequest",
         "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     }
     response = session.post(gate["action"], data=payload, headers=headers, timeout=timeout, allow_redirects=False)
     text = response.text or ""

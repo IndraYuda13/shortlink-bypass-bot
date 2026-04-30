@@ -104,6 +104,31 @@ class GplinksHttpFastTests(unittest.TestCase):
         self.assertEqual([event['source'] for event in timeline if event.get('stage') == 'turnstile-token'], ['prewarm'])
         solver.assert_called_once()
 
+    def test_post_final_gate_can_use_browser_headers(self):
+        html = '''<form id="go-link" action="/links/go" method="post">
+            <input type="hidden" name="_csrfToken" value="abc123">
+        </form>'''
+        response = Mock(status_code=200, url='https://gplinks.co/links/go', text='{"url":"https://target.example/final"}')
+        response.json.return_value = {'url': 'https://target.example/final'}
+        session = Mock()
+        session.post.return_value = response
+        timeline = []
+
+        result = _post_final_gate(
+            session,
+            'https://gplinks.co/YVTC',
+            html,
+            'http://127.0.0.1:5000',
+            30,
+            timeline,
+            browser_headers={'User-Agent': 'BrowserUA'},
+        )
+
+        self.assertEqual(result['status'], 1)
+        headers = session.post.call_args.kwargs['headers']
+        self.assertEqual(headers['User-Agent'], 'BrowserUA')
+        self.assertEqual(headers['Content-Type'], 'application/x-www-form-urlencoded; charset=UTF-8')
+
     def test_run_builds_candidate_from_entry_redirect(self):
         entry = Mock(status_code=302, headers={'location': 'https://powergam.online?lid=WVZUQw&pid=MTIyNDYyMg&vid=MTAxOTM2NTI2OQ&pages=Mw'}, text='', url='https://gplinks.co/YVTC')
         power = Mock(status_code=200, headers={}, text='<html><body>PowerGam</body></html>', url='https://powergam.online/')

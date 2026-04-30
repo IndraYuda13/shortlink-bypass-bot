@@ -73,3 +73,10 @@ Synthetic `POST https://powergam.online/cdn-cgi/rum?` after PowerGam page loads 
 - Live artifact `artifacts/active/gplinks-hybrid-http-final-live.json`: browser reached the accepted final page, HTTP `/links/go` returned `Bad Request.`, then browser fallback still reached `http://tesskibidixxx.com/`.
 - The handoff is disabled by default because it slows the proven lane and is not yet successful.
 - Artifact `artifacts/active/gplinks-h3-replay-test.json`: curl_cffi `CurlHttpVersion.V3` replay still returned `not_enough_steps`, so HTTP/3 alone is falsified as the missing PowerGam ledger proof.
+
+### 2026-04-30 live Turnstile prewarm speedup
+
+- Added default-on `SHORTLINK_BYPASS_GPLINKS_LIVE_TURNSTILE_PREWARM=1` to `gplinks_live_browser.py`.
+- Live artifact `artifacts/active/gplinks-live-prewarm-run.json`: `status=1`, final `http://tesskibidixxx.com/`, `waited_seconds=103.2`, `turnstile-token source=prewarm`.
+- This is a safe production speedup for the browser fallback. It does not close the full HTTP-only PowerGam ledger.
+- CDP capture artifact `artifacts/active/gplinks-links-go-cdp-latest.json` showed exact browser `/links/go` headers/body. Matching browser UA and `Content-Type: application/x-www-form-urlencoded; charset=UTF-8` in HTTP handoff still returned `Bad Request.`, so that header mismatch is falsified as standalone root cause.
