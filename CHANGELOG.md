@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-05-01
+
+### TPI token target recognition for Cutw wrappers
+- Fixed `tpi.li` token extraction for aliases whose decoded hidden token points to `https://cutw.in/st?...`.
+- Root cause: the noisy-token decoder successfully found the decoded `cutw.in/st` URL, but `_extract_oii_token_target()` only promoted known reward markers like `/links/back/`, `/shortlink.php?`, and `/shortlink/result/`. Because `cutw.in/st?` was not recognized as a strong target marker, the fallback embedded URL picker returned the generic `https://shrinkearn.com/` homepage.
+- Added `cutw.in/st?` to the token-target marker list and added regression coverage for `https://tpi.li/xP8OTKz`.
+- Verification: `python -m unittest tests.test_token_landing`, full `python -m unittest discover -s tests -q`, and live `engine.py https://tpi.li/xP8OTKz --pretty` now return the expected full `cutw.in/st?...` URL.
+
 ## 2026-04-30
 
 ### GPLinks live Turnstile prewarm speedup

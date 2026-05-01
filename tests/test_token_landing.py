@@ -63,6 +63,36 @@ class TokenLandingTests(unittest.TestCase):
         self.assertEqual(result.stage, 'token-target')
         self.assertEqual(result.bypass_url, expected)
 
+    def test_tpi_token_landing_prefers_cutw_st_target_from_noisy_token(self):
+        engine = ShortlinkBypassEngine()
+        expected = 'https://cutw.in/st?api=dea80667e642a633b7048c643f0e80e062d729ea&url=https://dlgamingvn.com/an-denique-dissentiet-suscipiantur-eos-41?fbclid2=X%2BTJgwmYuvPVS1jCpXnHupCKQMd3aXHyiIAzgpJxge8WDh7ppiMtOOURXT88fkhUdpr60zC5qWdh9O6kbX9H3aG67qddAT2U287QQdeyVbevtW9SJ5oiUhPhAw%2BVXLb5svdNVelqqrwo1qsR03lcXzo6yNgbW9uUeXHT4LS55Cvhqjo6FiFLAc7rSlHM64LoerPR8uFTvEwTAMYPbwkraw9gV3Q%3D'
+        html = f'''
+        <html><head><title>ShrinkEarn</title></head><body>
+        <form action="https://vpzserver.com/how-to-choose-a-web-hosting-plan-for-high-traffic-websites/" method="POST">
+          <input type="hidden" name="url" value="https://fithelptipz.com/xP8OTKz">
+          <input type="hidden" name="token" value="cb62eca841cd318d99b6da204c056fffdcf0e29d2026xP8OTKz0105aHR0cHM6Ly9jdXR3LmluL3N0P2FwaT1kZWE4MDY2N2U2NDJhNjMzYjcwNDhjNjQzZjBlODBlMDYyZDcyOWVhJnVybD1odHRwczovL2RsZ2FtaW5ndm4uY29tL2FuLWRlbmlxdWUtZGlzc2VudGlldC1zdXNjaXBpYW50dXItZW9zLTQxP2ZiY2xpZDI9WCUyQlRKZ3dtWXV2UFZTMWpDcFhuSHVwQ0tRTWQzYVhIeWlJQXpncEp4Z2U4V0RoN3BwaU10T09VUlhUODhma2hVZHByNjB6QzVxV2RoOU82a2JYOUgzYUc2N3FkZEFUMlUyODdRUWRleVZiZXZ0VzlTSjVvaVVoUGhBdyUyQlZYTGI1c3ZkTlZlbHFxcndvMXFzUjAzbGNYem82eU5nYlc5dVVlWEhUNExTNTVDdmhxam82RmlGTEFjN3JTbEhNNjRMb2VyUFI4dUZUdkV3VEFNWVBid2tyYXc5Z1YzUSUzRA==shrinkbixby.com">
+          <input type="hidden" name="mysite" value="shrinkbixby.com">
+          <input type="hidden" name="alias" value="xP8OTKz">
+          <a href="https://shrinkearn.com/">home</a>
+        </form>
+        </body></html>
+        '''
+        with patch.object(engine, '_get') as mock_get:
+            mock_get.return_value = type('Resp', (), {
+                'text': html,
+                'url': 'https://tpi.li/xP8OTKz',
+                'status_code': 200,
+                'headers': {},
+            })()
+
+            result = engine.analyze('https://tpi.li/xP8OTKz')
+
+        self.assertEqual(result.family, 'tpi.li')
+        self.assertEqual(result.status, 1)
+        self.assertEqual(result.message, 'TOKEN_TARGET_EXTRACTED')
+        self.assertEqual(result.stage, 'token-target')
+        self.assertEqual(result.bypass_url, expected)
+
     def test_aii_token_landing_extracts_base64_url_with_suffix_noise(self):
         engine = ShortlinkBypassEngine()
         html = '''
